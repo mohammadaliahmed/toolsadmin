@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context="com.appsinventiv.toolsbazzaradmin.Activities.AddVendors">
+    tools:context="com.appsinventiv.toolsbazzaradmin.Activities.Vendors.AddVendors">
 
     <LinearLayout
         android:layout_width="match_parent"

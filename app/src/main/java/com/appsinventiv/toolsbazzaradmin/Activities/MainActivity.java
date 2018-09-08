@@ -2,7 +2,6 @@ package com.appsinventiv.toolsbazzaradmin.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,13 +13,18 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.Settings;
+import com.appsinventiv.toolsbazzaradmin.Activities.Chat.Chats;
+import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice;
+import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
+import com.appsinventiv.toolsbazzaradmin.Activities.Products.ListOfProducts;
+import com.appsinventiv.toolsbazzaradmin.Activities.Purchases.Purchases;
+import com.appsinventiv.toolsbazzaradmin.Activities.Vendors.Vendors;
 import com.appsinventiv.toolsbazzaradmin.Models.AdminModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.SharedPrefs;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity
     private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
     private long mBackPressed;
 
-    LinearLayout chats, customers, sales, orders, products, notifications,vendors,settings;
+    LinearLayout chats, customers, sales, orders, products, notifications,vendors,settings,purchases,invoices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,9 @@ public class MainActivity extends AppCompatActivity
         vendors = findViewById(R.id.vendors);
         notifications = findViewById(R.id.notifications);
         settings=findViewById(R.id.settings);
+        purchases=findViewById(R.id.purchases);
+        invoices=findViewById(R.id.invoices);
+
 
 
         chats.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +99,22 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, Settings.class);
+                startActivity(i);
+            }
+        });
+        purchases.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, Purchases.class);
+                startActivity(i);
+            }
+        });
+
+        invoices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ViewInvoice.class);
+                i.putExtra("invoiceNumber",10001l);
                 startActivity(i);
             }
         });

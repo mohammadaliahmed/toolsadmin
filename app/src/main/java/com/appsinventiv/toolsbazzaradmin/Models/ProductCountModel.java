@@ -1,5 +1,8 @@
 package com.appsinventiv.toolsbazzaradmin.Models;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by AliAh on 20/06/2018.
  */
@@ -8,6 +11,7 @@ public class ProductCountModel {
     Product product;
     int quantity;
     long time;
+    private HashMap<String,String> OrderId;
 
     public ProductCountModel() {
     }
@@ -28,10 +32,19 @@ public class ProductCountModel {
         return result;
     }
 
-    public ProductCountModel(Product product, int quantity, long time) {
+    public ProductCountModel(Product product, int quantity, long time, HashMap<String, String> orderId) {
         this.product = product;
         this.quantity = quantity;
         this.time = time;
+        OrderId = orderId;
+    }
+
+    public HashMap<String, String> getOrderId() {
+        return OrderId;
+    }
+
+    public void setOrderId(HashMap<String, String> orderId) {
+        OrderId = orderId;
     }
 
     public Product getProduct() {

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.appsinventiv.toolsbazzaradmin.Activities.EditProduct;
+import com.appsinventiv.toolsbazzaradmin.Activities.Products.EditProduct;
 import com.appsinventiv.toolsbazzaradmin.Models.Product;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.bumptech.glide.Glide;

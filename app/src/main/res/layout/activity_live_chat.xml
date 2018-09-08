@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:padding="10dp"
-    tools:context="com.appsinventiv.toolsbazzaradmin.Activities.LiveChat">
+    tools:context="com.appsinventiv.toolsbazzaradmin.Activities.Chat.LiveChat">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/chats"

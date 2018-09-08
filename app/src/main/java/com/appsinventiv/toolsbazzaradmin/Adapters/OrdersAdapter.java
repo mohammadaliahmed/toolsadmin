@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.appsinventiv.toolsbazzaradmin.Activities.ViewOrder;
+import com.appsinventiv.toolsbazzaradmin.Activities.Orders.ViewOrder;
 import com.appsinventiv.toolsbazzaradmin.Models.OrderModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;

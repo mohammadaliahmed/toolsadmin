@@ -10,9 +10,9 @@ import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.appsinventiv.toolsbazzaradmin.Activities.LiveChat;
+import com.appsinventiv.toolsbazzaradmin.Activities.Chat.LiveChat;
 
-import com.appsinventiv.toolsbazzaradmin.Activities.Orders;
+import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
 import com.appsinventiv.toolsbazzaradmin.Models.NotificationModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.google.firebase.database.DatabaseReference;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.appsinventiv.toolsbazzaradmin.Activities.ViewInvoice">
+    tools:context="com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/invoiceNumber"
+                android:id="@+id/poNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -30,7 +30,7 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/invoiceNumber"
+                android:layout_below="@id/poNumber"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp" />
 

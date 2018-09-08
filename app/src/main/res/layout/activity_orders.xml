@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.appsinventiv.toolsbazzaradmin.Activities.Orders">
+    tools:context="com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/sliding_tabs"
