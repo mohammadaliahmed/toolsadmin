@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".ApplicationClass"
+        android:name=".Utils.ApplicationClass"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,13 +16,7 @@
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".Utils.MyFirebaseInstanceIDService">
             <intent-filter>
@@ -55,10 +49,39 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Activities.AppSettings.Terms" />
         <activity android:name=".Activities.Products.AddCategories" />
-        <activity android:name=".Activities.Invoicing.ViewInvoice" />
+        <activity
+            android:name=".Activities.Invoicing.ViewInvoice"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.Purchases.Purchases" />
         <activity android:name=".Activities.Purchases.PendingPurchases" />
-        <activity android:name=".Activities.Purchases.ViewPurchaseOrder"></activity>
+        <activity
+            android:name=".Activities.Purchases.ViewPurchaseOrder"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.Purchases.ListOfPOs" />
+        <activity
+            android:name=".Activities.Login.Login"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".Activities.Login.Register"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".Activities.Login.Splash"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activities.Employees.ListOfEmployees" />
+        <activity android:name=".Activities.Employees.ViewEmployee" />
+        <activity android:name=".Activities.AppSettings.BannerSettings" />
+        <activity android:name=".Activities.Purchases.EditPurchase" />
+        <activity android:name=".Activities.Invoicing.ListOfInvoices" />
+        <activity android:name=".Activities.AppSettings.AddLocationAndCharges" />
+        <activity android:name=".Activities.AppSettings.ListOfLocationAndCharges"></activity>
     </application>
 
 </manifest>

@@ -7,8 +7,6 @@ import android.text.format.DateFormat;
 import android.widget.Toast;
 
 
-import com.appsinventiv.toolsbazzaradmin.ApplicationClass;
-
 import java.util.Calendar;
 
 /**

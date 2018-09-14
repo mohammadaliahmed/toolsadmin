@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     tools:context="com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/abc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="10dp">
+        android:layout_below="@id/abc"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="60dp">
 
         <RelativeLayout
+            android:id="@+id/ll_linear"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#fff">
 
             <ImageView
                 android:layout_width="70dp"
@@ -63,12 +81,13 @@
                 android:textSize="10sp" />
 
             <TextView
+                android:id="@+id/employee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/address"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:text="Purchase Order"
+                android:text=""
                 android:textStyle="bold" />
 
             <View
@@ -121,10 +140,10 @@
                 android:layout_alignParentBottom="true"
                 android:layout_below="@id/total"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="Address"
+                android:text=""
                 android:textSize="10sp" />
         </RelativeLayout>
     </ScrollView>
@@ -144,4 +163,4 @@
 
     </RelativeLayout>
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

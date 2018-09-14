@@ -13,6 +13,12 @@ public class ProductCountModel {
     long time;
     private HashMap<String,String> OrderId;
 
+    int quantityPurchased;
+    int outOfStock;
+    float newCostPrice;
+
+    float purchaseTotal;
+
     public ProductCountModel() {
     }
 
@@ -30,6 +36,40 @@ public class ProductCountModel {
         int result = product != null ? product.hashCode() : 0;
 
         return result;
+    }
+
+
+
+    public int getQuantityPurchased() {
+        return quantityPurchased;
+    }
+
+    public void setQuantityPurchased(int quantityPurchased) {
+        this.quantityPurchased = quantityPurchased;
+    }
+
+    public int getOutOfStock() {
+        return outOfStock;
+    }
+
+    public void setOutOfStock(int outOfStock) {
+        this.outOfStock = outOfStock;
+    }
+
+    public float getNewCostPrice() {
+        return newCostPrice;
+    }
+
+    public void setNewCostPrice(float newCostPrice) {
+        this.newCostPrice = newCostPrice;
+    }
+
+    public float getPurchaseTotal() {
+        return purchaseTotal;
+    }
+
+    public void setPurchaseTotal(float purchaseTotal) {
+        this.purchaseTotal = purchaseTotal;
     }
 
     public ProductCountModel(Product product, int quantity, long time, HashMap<String, String> orderId) {

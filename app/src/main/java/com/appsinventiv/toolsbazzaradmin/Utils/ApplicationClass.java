@@ -1,8 +1,6 @@
-package com.appsinventiv.toolsbazzaradmin;
+package com.appsinventiv.toolsbazzaradmin.Utils;
 
 import android.app.Application;
-
-import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by AliAh on 11/04/2018.

@@ -3,8 +3,6 @@ package com.appsinventiv.toolsbazzaradmin.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.appsinventiv.toolsbazzaradmin.ApplicationClass;
-
 
 /**
  * Created by AliAh on 20/02/2018.
@@ -17,9 +15,15 @@ public class SharedPrefs {
 
     }
 
-    public static String getUsername() {
-        return preferenceGetter("username");
+
+    public static void setRole(String count) {
+        preferenceSetter("userRole", count);
     }
+
+    public static String getRole() {
+        return preferenceGetter("userRole");
+    }
+
 
     public static void setCartCount(String count) {
         preferenceSetter("cartCount", count);
@@ -33,6 +37,18 @@ public class SharedPrefs {
         preferenceSetter("username", username);
     }
 
+    public static String getUsername() {
+        return preferenceGetter("username");
+    }
+
+
+    public static void setFullName(String username) {
+        preferenceSetter("name", username);
+    }
+
+    public static String getFullName() {
+        return preferenceGetter("name");
+    }
 
 
     public static void setIsLoggedIn(String value) {

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appsinventiv.toolsbazzaradmin.Models.ProductCountModel;
@@ -43,8 +44,17 @@ public class PurchaseOrderAdapter extends RecyclerView.Adapter<PurchaseOrderAdap
         holder.subtitle.setText(
                 "Description: " + model.getProduct().getMeasurement() +
                         "\nQty: " + model.getQuantity() +
-                        "\nCost price: Rs " + model.getProduct().getCostPrice());
-        holder.price.setText("Rs: " + (model.getQuantity() * model.getProduct().getCostPrice()));
+                        "\nCost price: Rs." + model.getProduct().getCostPrice());
+        holder.price.setText("Rs." + (model.getQuantity() * model.getProduct().getCostPrice()));
+
+        if (model.getQuantityPurchased() != 0) {
+            holder.edited.setVisibility(View.VISIBLE);
+            holder.quantityPurchased.setText("Qty purchased: " + model.getQuantityPurchased() + "");
+            holder.outOfStockQty.setText("Out of stock: " + model.getOutOfStock() + "");
+            holder.newCostPrice.setText("New / Old cost price: Rs." + model.getNewCostPrice() + "");
+            holder.puchaseTotal.setText("Purchase Total: Rs." + model.getPurchaseTotal() + "");
+
+        }
 
     }
 
@@ -56,12 +66,20 @@ public class PurchaseOrderAdapter extends RecyclerView.Adapter<PurchaseOrderAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView serial, title, price, subtitle;
 
+        RelativeLayout edited;
+        TextView quantityPurchased, outOfStockQty, newCostPrice, puchaseTotal;
+
         public ViewHolder(View itemView) {
             super(itemView);
             serial = itemView.findViewById(R.id.serial);
             title = itemView.findViewById(R.id.title);
             price = itemView.findViewById(R.id.price);
             subtitle = itemView.findViewById(R.id.subtitle);
+            edited = itemView.findViewById(R.id.edited);
+            quantityPurchased = itemView.findViewById(R.id.quantityPurchased);
+            outOfStockQty = itemView.findViewById(R.id.outOfStockQty);
+            newCostPrice = itemView.findViewById(R.id.newCostPrice);
+            puchaseTotal = itemView.findViewById(R.id.puchaseTotal);
 
         }
     }

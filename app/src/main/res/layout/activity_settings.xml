@@ -38,4 +38,26 @@
         android:text="Terms"
         android:textColor="#fff" />
 
+    <Button
+        android:id="@+id/banner"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categories"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:background="@color/colorPrimary"
+        android:text="Banner"
+        android:textColor="#fff" />
+
+    <Button
+        android:id="@+id/deliveryCharges"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/banner"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:background="@color/colorPrimary"
+        android:text="Delivery Charges"
+        android:textColor="#fff" />
+
 </RelativeLayout>

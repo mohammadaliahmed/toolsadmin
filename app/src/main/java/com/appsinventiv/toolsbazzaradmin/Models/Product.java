@@ -12,7 +12,7 @@ public class Product {
     String measurement;
     VendorModel vendor;
     int sku;
-
+    String sellingTo;
 
     public Product() {
     }
@@ -41,7 +41,10 @@ public class Product {
         return id != null ? id.hashCode() : 0;
     }
 
-    public Product(String id, String title, String subtitle, String isActive, int sku, String thumbnailUrl, String mainCategory, String subCategory, long time, float costPrice, float wholeSalePrice, float retailPrice, long minOrderQuantity, String measurement, VendorModel vendor) {
+    public Product(String id, String title, String subtitle, String isActive,
+                   int sku, String thumbnailUrl, String mainCategory, String subCategory,
+                   long time, float costPrice, float wholeSalePrice, float retailPrice,
+                   long minOrderQuantity, String measurement, VendorModel vendor,String sellingTo) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -57,6 +60,15 @@ public class Product {
         this.minOrderQuantity = minOrderQuantity;
         this.measurement = measurement;
         this.vendor = vendor;
+        this.sellingTo=sellingTo;
+    }
+
+    public String getSellingTo() {
+        return sellingTo;
+    }
+
+    public void setSellingTo(String sellingTo) {
+        this.sellingTo = sellingTo;
     }
 
     public VendorModel getVendor() {

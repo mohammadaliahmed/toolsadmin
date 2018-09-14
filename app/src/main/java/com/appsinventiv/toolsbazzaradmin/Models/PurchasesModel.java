@@ -12,6 +12,9 @@ public class PurchasesModel {
     int quantity;
     long time;
 
+
+
+
     public PurchasesModel(String id, String orderIds, long totalQuantity, Product product, int quantity, long time) {
         this.id = id;
         this.orderIds = orderIds;
@@ -23,6 +26,8 @@ public class PurchasesModel {
 
     public PurchasesModel() {
     }
+
+
 
     public String getId() {
         return id;

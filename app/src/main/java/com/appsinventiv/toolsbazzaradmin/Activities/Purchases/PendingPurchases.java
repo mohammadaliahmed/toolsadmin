@@ -1,8 +1,10 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Purchases;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
@@ -21,6 +24,7 @@ import com.appsinventiv.toolsbazzaradmin.Models.PurchaseOrderModel;
 import com.appsinventiv.toolsbazzaradmin.Models.VendorModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
+import com.appsinventiv.toolsbazzaradmin.Utils.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +45,7 @@ public class PendingPurchases extends AppCompatActivity {
     PendingProductsAdapter adapter;
     ProgressBar progress;
     long purchaseOrder = 10001;
-    FloatingActionButton fab;
+    Button fab;
     ArrayList<String> productIds = new ArrayList<>();
 
     @Override
@@ -74,8 +78,9 @@ public class PendingPurchases extends AppCompatActivity {
             public void addToArray(String id) {
                 if (!productIds.contains(id)) {
                     productIds.add(id);
+                    removePendingOrderFromDb(id);
                 }
-                removePendingOrderFromDb(id);
+
             }
 
             @Override
@@ -92,22 +97,44 @@ public class PendingPurchases extends AppCompatActivity {
         getPurchaseOrdersFromDb();
     }
 
-    private void removePendingOrderFromDb(String id) {
-        mDatabase.child("Purchases").child("PurchaseOrders").child(id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                CommonUtils.showToast("Item marked as purchased");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
+    private void removePendingOrderFromDb(final String productId) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(PendingPurchases.this);
+        builder1.setMessage("Mark as purchased?");
+        builder1.setCancelable(true);
 
-            }
-        });
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        mDatabase.child("Purchases").child("PendingPurchases").child(productId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                CommonUtils.showToast("Item marked as purchased");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
     }
 
     private void getPurchaseOrdersFromDb() {
-        mDatabase.child("Purchases").child("PurchaseOrders").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Purchases").child("PurchaseOrders").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
@@ -131,12 +158,15 @@ public class PendingPurchases extends AppCompatActivity {
                         itemList,
                         vendor,
                         calculateTotal()
-                        , System.currentTimeMillis()
+                        , System.currentTimeMillis(),
+                        false,
+                        SharedPrefs.getFullName()
+
                 )).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Intent i = new Intent(PendingPurchases.this, ViewPurchaseOrder.class);
-                i.putExtra("po",purchaseOrder);
+                i.putExtra("po", purchaseOrder);
                 startActivity(i);
 
 
@@ -155,7 +185,6 @@ public class PendingPurchases extends AppCompatActivity {
         for (ProductCountModel model : itemList) {
             total += model.getQuantity() * model.getProduct().getCostPrice();
         }
-        CommonUtils.showToast("" + total);
         return total;
     }
 
@@ -216,7 +245,7 @@ public class PendingPurchases extends AppCompatActivity {
     private void getDataFromDb(final String vendorId) {
         progress.setVisibility(View.VISIBLE);
 
-        mDatabase.child("Purchases").child("PendingPurchases").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Purchases").child("PendingPurchases").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
@@ -262,4 +291,8 @@ public class PendingPurchases extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

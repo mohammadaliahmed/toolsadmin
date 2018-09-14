@@ -1,6 +1,8 @@
 package com.appsinventiv.toolsbazzaradmin.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -10,11 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.Settings;
 import com.appsinventiv.toolsbazzaradmin.Activities.Chat.Chats;
+import com.appsinventiv.toolsbazzaradmin.Activities.Employees.ListOfEmployees;
+import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ListOfInvoices;
 import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
 import com.appsinventiv.toolsbazzaradmin.Activities.Products.ListOfProducts;
@@ -33,16 +39,24 @@ public class MainActivity extends AppCompatActivity
     private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
     private long mBackPressed;
 
-    LinearLayout chats, customers, sales, orders, products, notifications,vendors,settings,purchases,invoices;
+    LinearLayout chats, customers, sales, orders, products, notifications, vendors, settings, purchases, invoices, employees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.content_main);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
-        SharedPrefs.setUsername("admin1");
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
+
         chats = findViewById(R.id.chats);
         customers = findViewById(R.id.customers);
         sales = findViewById(R.id.sales);
@@ -51,10 +65,19 @@ public class MainActivity extends AppCompatActivity
         notifications = findViewById(R.id.notifications);
         vendors = findViewById(R.id.vendors);
         notifications = findViewById(R.id.notifications);
-        settings=findViewById(R.id.settings);
-        purchases=findViewById(R.id.purchases);
-        invoices=findViewById(R.id.invoices);
+        settings = findViewById(R.id.settings);
+        purchases = findViewById(R.id.purchases);
+        invoices = findViewById(R.id.invoices);
+        employees = findViewById(R.id.employees);
 
+
+        employees.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ListOfEmployees.class);
+                startActivity(i);
+            }
+        });
 
 
         chats.setOnClickListener(new View.OnClickListener() {
@@ -113,8 +136,8 @@ public class MainActivity extends AppCompatActivity
         invoices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ViewInvoice.class);
-                i.putExtra("invoiceNumber",10001l);
+                Intent i = new Intent(MainActivity.this, ListOfInvoices.class);
+                i.putExtra("invoiceNumber", 10001l);
                 startActivity(i);
             }
         });
@@ -131,7 +154,6 @@ public class MainActivity extends AppCompatActivity
                     .setValue(new AdminModel("admin", "Name", "admin", "admin", "", "online", SharedPrefs.getFcmKey()));
 
         }
-
 
 
 //

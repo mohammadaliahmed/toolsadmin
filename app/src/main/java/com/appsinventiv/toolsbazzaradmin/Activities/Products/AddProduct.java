@@ -20,6 +20,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -73,6 +75,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
     ProductObserver observer;
     ArrayList<Integer> skuList = new ArrayList<>();
     int newSku = 10001;
+    RadioGroup radioGroup;
+    RadioButton selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +112,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         e_sku = findViewById(R.id.productSku);
         progressBar = findViewById(R.id.prgress);
         spinner = findViewById(R.id.chooseVendor);
+        radioGroup=findViewById(R.id.radioGroup);
         showPickedPictures();
 
         getSKUFromDb();
@@ -148,7 +153,9 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                     e_costPrice.setError("Enter price");
                 } else {
                     progressBar.setVisibility(View.VISIBLE);
+                    int selectedId = radioGroup.getCheckedRadioButtonId();
 
+                    selected = findViewById(selectedId);
                     productId = mDatabase.push().getKey();
                     mDatabase.child("Products").child(productId).setValue(new Product(
                             productId,
@@ -165,7 +172,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                             Float.parseFloat(e_retailPrice.getText().toString()),
                             Long.parseLong(e_minOrderQty.getText().toString()),
                             e_measurement.getText().toString(),
-                            vendor
+                            vendor,
+                            selected.getText().toString()
 
 
                     )).addOnSuccessListener(new OnSuccessListener<Void>() {

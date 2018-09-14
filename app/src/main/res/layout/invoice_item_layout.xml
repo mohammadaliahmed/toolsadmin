@@ -8,8 +8,7 @@
         android:id="@+id/position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:hint="1 "
         android:textColor="#000"
         android:textSize="13sp" />
@@ -18,30 +17,31 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
         android:hint="jgjhgjhjg "
         android:textColor="#000"
         android:textSize="13sp" />
 
     <TextView
         android:id="@+id/outOfStock"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/title"
         android:text="(Out of Stock)"
         android:textColor="@color/colorRed"
-        android:textSize="13sp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
-        android:layout_marginLeft="25dp"
-        android:hint=""
+        android:layout_marginLeft="15dp"
+        android:hint="hshshs"
         android:textSize="11sp" />
 
 
@@ -51,7 +51,7 @@
         android:layout_below="@id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="15dp"
         android:hint="Rs 200 "
         android:textSize="11sp" />
     <TextView
@@ -59,8 +59,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
         android:hint="Rs 200 "
         android:textColor="#000"
         android:textSize="13sp" />

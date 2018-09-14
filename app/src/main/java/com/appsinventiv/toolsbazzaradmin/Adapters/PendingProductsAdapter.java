@@ -1,6 +1,7 @@
 package com.appsinventiv.toolsbazzaradmin.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Purchases.EditPurchase;
 import com.appsinventiv.toolsbazzaradmin.Models.ProductCountModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
@@ -48,7 +51,8 @@ public class PendingProductsAdapter extends RecyclerView.Adapter<PendingProducts
         Glide.with(context).load(model.getProduct().getThumbnailUrl()).into(holder.image);
         holder.title.setText(model.getProduct().getTitle());
         holder.quantity.setText("Total Quantity: " + model.getQuantity());
-        holder.costPrice.setText("Cost Price: " + model.getProduct().getCostPrice());
+        holder.costPrice.setText("Cost Price: Rs." + model.getProduct().getCostPrice());
+        holder.totalPrice.setText("Order Total: Rs." + (model.getProduct().getCostPrice() * model.getQuantity()));
         ArrayList<String> abc = new ArrayList<>();
         for (int i = 0; i < model.getOrderId().size(); i++) {
             abc.add("" + model.getOrderId().keySet().toArray()[i]);
@@ -64,6 +68,25 @@ public class PendingProductsAdapter extends RecyclerView.Adapter<PendingProducts
                 }
             }
         });
+
+        if (model.getQuantityPurchased() != 0) {
+            holder.edited.setVisibility(View.VISIBLE);
+            holder.quantityPurchased.setText("Qty purchased: " + model.getQuantityPurchased() + "");
+            holder.outOfStockQty.setText("Out of stock: " + model.getOutOfStock() + "");
+            holder.newCostPrice.setText("New / Old cost price: Rs." + model.getNewCostPrice() + "");
+            holder.puchaseTotal.setText("Purchase Total: Rs." + model.getPurchaseTotal() + "");
+
+        }
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, EditPurchase.class);
+                i.putExtra("id", model.getProduct().getId());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -72,9 +95,12 @@ public class PendingProductsAdapter extends RecyclerView.Adapter<PendingProducts
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title, quantity, orderIds, costPrice;
+        TextView title, quantity, orderIds, costPrice, totalPrice;
         ImageView image;
         Switch purchased;
+
+        RelativeLayout edited;
+        TextView quantityPurchased, outOfStockQty, newCostPrice, puchaseTotal;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -85,6 +111,13 @@ public class PendingProductsAdapter extends RecyclerView.Adapter<PendingProducts
             costPrice = itemView.findViewById(R.id.costPrice);
             image = itemView.findViewById(R.id.image);
             purchased = itemView.findViewById(R.id.purchased);
+            totalPrice = itemView.findViewById(R.id.totalPrice);
+            edited = itemView.findViewById(R.id.edited);
+            quantityPurchased = itemView.findViewById(R.id.quantityPurchased);
+            outOfStockQty = itemView.findViewById(R.id.outOfStockQty);
+            newCostPrice = itemView.findViewById(R.id.newCostPrice);
+            puchaseTotal = itemView.findViewById(R.id.puchaseTotal);
+
 
         }
     }

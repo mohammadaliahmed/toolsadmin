@@ -1,15 +1,20 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Invoicing;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
 import com.appsinventiv.toolsbazzaradmin.Adapters.InvoiceAdapter;
@@ -23,6 +28,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ViewInvoice extends AppCompatActivity {
@@ -35,15 +44,20 @@ public class ViewInvoice extends AppCompatActivity {
     InvoiceAdapter adapter;
     RelativeLayout wholeLayout;
     InvoiceModel model;
+    RelativeLayout ll_linear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_invoice);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        ll_linear=findViewById(R.id.ll_linear);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -71,6 +85,8 @@ public class ViewInvoice extends AppCompatActivity {
 
 
     }
+
+
 
     private void getAddressFromDb() {
         mDatabase.child("Settings").child("AboutUs").child("contact").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -107,10 +123,10 @@ public class ViewInvoice extends AppCompatActivity {
                         availableProductsInOneOrderList = model.getNewCountModelArrayList();
                         invoiceNumberText.setText("Invoice # " + model.getId());
                         date.setText("" + CommonUtils.getFormattedDatee(model.getTime()));
-                        delivery.setText("Delivery:        " + "Rs 40");
-                        total.setText("Total:        Rs: " + model.getTotalPrice());
+                        delivery.setText("Delivery:             " + "Rs 40");
+                        total.setText("Total:        Rs " + model.getTotalPrice());
                         orderNumber.setText("Order number: " + model.getOrderId());
-                        grandTotal.setText("Grand Total:        Rs: "+model.getGrandTotal());
+                        grandTotal.setText("Grand Total:        Rs "+model.getGrandTotal());
                         address.setText("Name:  " + model.getCustomer().getName() + "\nPhone: " + model.getCustomer().getPhone() + "\nAddress:  " + model.getCustomer().getAddress() + ", " + model.getCustomer().getCity());
                         adapter = new InvoiceAdapter(ViewInvoice.this,
                                 allProductsInOneOrderList,
@@ -141,25 +157,54 @@ public class ViewInvoice extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(ViewInvoice.this, Orders.class);
-        startActivity(i);
+
         finish();
     }
+    public static Bitmap loadBitmapFromView(View v, int width, int height) {
+        Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(b);
+        v.draw(c);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        return b;
     }
-
+    public void saveBitmap(Bitmap bitmap) {
+        String imgName = Long.toHexString(Double.doubleToLongBits(Math.random()));
+        File imagePath = new File("/sdcard/"+"Invoice_Number_"+".jpg");
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(imagePath);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+            CommonUtils.showToast("Invoice saved in gallery\nKindly view it");
+            Log.e("ImageSave", "Saveimage");
+        } catch (FileNotFoundException e) {
+            Log.e("GREC", e.getMessage(), e);
+        } catch (IOException e) {
+            Log.e("GREC", e.getMessage(), e);
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
         if (item.getItemId() == android.R.id.home) {
-            Intent i = new Intent(ViewInvoice.this, Orders.class);
-            startActivity(i);
+
             finish();
+        }
+        if (id == R.id.action_print) {
+            Bitmap bitmap1 = loadBitmapFromView(ll_linear, ll_linear.getWidth(), ll_linear.getHeight());
+            saveBitmap(bitmap1);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.print_menu, menu);
+        return true;
     }
 
 

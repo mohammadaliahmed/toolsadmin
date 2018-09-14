@@ -45,18 +45,20 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
         ProductCountModel model = list1.get(position);
         holder.position.setText("" + (position + 1) + ".");
         holder.title.setText(model.getProduct().getTitle());
-        holder.subtitle.setText("Description: " + model.getProduct().getMeasurement() + "\nQty: " + model.getQuantity());
+        holder.subtitle.setText("Description: " + model.getProduct().getMeasurement() + "\nQuantity: " + model.getQuantity());
         if (customerType.equalsIgnoreCase("wholesale")) {
-            holder.price.setText("Unit price: " + model.getProduct().getWholeSalePrice());
-            if (list2.contains(model)) {
-                holder.outOfStockText.setVisibility(View.GONE);
-                holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorBlack));
-                holder.totalItemPrice.setText("Rs " + (model.getProduct().getWholeSalePrice() * model.getQuantity()));
+            holder.price.setText("Unit price: Rs " + model.getProduct().getWholeSalePrice());
+            if (list2 != null) {
+                if (list2.contains(model)) {
+                    holder.outOfStockText.setVisibility(View.GONE);
+                    holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorBlack));
+                    holder.totalItemPrice.setText("Rs " + (model.getProduct().getWholeSalePrice() * model.getQuantity()));
 
-            } else {
-                holder.outOfStockText.setVisibility(View.VISIBLE);
-                holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
-                holder.totalItemPrice.setText("-Rs " + (model.getProduct().getWholeSalePrice() * model.getQuantity()));
+                } else {
+                    holder.outOfStockText.setVisibility(View.VISIBLE);
+                    holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
+                    holder.totalItemPrice.setText("-Rs " + (model.getProduct().getWholeSalePrice() * model.getQuantity()));
+                }
             }
 
 
