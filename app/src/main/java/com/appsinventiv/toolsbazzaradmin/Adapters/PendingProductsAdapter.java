@@ -46,7 +46,7 @@ public class PendingProductsAdapter extends RecyclerView.Adapter<PendingProducts
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final ProductCountModel model = itemList.get(position);
         Glide.with(context).load(model.getProduct().getThumbnailUrl()).into(holder.image);
         holder.title.setText(model.getProduct().getTitle());
@@ -62,9 +62,9 @@ public class PendingProductsAdapter extends RecyclerView.Adapter<PendingProducts
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    isPurchased.addToArray(model.getProduct().getId());
+                    isPurchased.addToArray(model.getProduct().getId(),position);
                 } else {
-                    isPurchased.removeFromArray(model.getProduct().getId());
+                    isPurchased.removeFromArray(model.getProduct().getId(),position);
                 }
             }
         });
@@ -123,8 +123,8 @@ public class PendingProductsAdapter extends RecyclerView.Adapter<PendingProducts
     }
 
     public interface IsPurchased {
-        public void addToArray(String id);
+        public void addToArray(String id,int position);
 
-        public void removeFromArray(String id);
+        public void removeFromArray(String id,int position);
     }
 }

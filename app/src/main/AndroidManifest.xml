@@ -53,18 +53,16 @@
             android:name=".Activities.Invoicing.ViewInvoice"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.Purchases.Purchases" />
-        <activity android:name=".Activities.Purchases.PendingPurchases" />
         <activity
             android:name=".Activities.Purchases.ViewPurchaseOrder"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.Purchases.ListOfPOs" />
         <activity
             android:name=".Activities.Login.Login"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.NoActionBar1"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".Activities.Login.Register"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.NoActionBar1"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".Activities.Login.Splash"

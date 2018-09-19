@@ -1,6 +1,8 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Purchases;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,11 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.appsinventiv.toolsbazzaradmin.Adapters.PurchasesFragmentAdapter;
+import com.appsinventiv.toolsbazzaradmin.Adapters.SimpleFragmentPagerAdapter;
 import com.appsinventiv.toolsbazzaradmin.R;
 
 public class Purchases extends AppCompatActivity {
-    Button pendingPurchases, purchaseOrders;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,25 +24,15 @@ public class Purchases extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         this.setTitle("Purchases");
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        PurchasesFragmentAdapter adapter = new PurchasesFragmentAdapter(this, getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
 
-        purchaseOrders = findViewById(R.id.purchaseOrders);
-        pendingPurchases = findViewById(R.id.pendingPurchases);
-
-        pendingPurchases.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Purchases.this, PendingPurchases.class);
-                startActivity(i);
-            }
-        });
-
-        purchaseOrders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Purchases.this, ListOfPOs.class);
-                startActivity(i);
-            }
-        });
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorRed));
 
     }
 

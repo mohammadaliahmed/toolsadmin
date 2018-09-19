@@ -30,6 +30,7 @@ public class Orders extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorRed));
 
     }
 

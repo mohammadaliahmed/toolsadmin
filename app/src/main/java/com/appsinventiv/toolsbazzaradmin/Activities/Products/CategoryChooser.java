@@ -2,10 +2,13 @@ package com.appsinventiv.toolsbazzaradmin.Activities.Products;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ExpandableListView;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.Settings;
 import com.appsinventiv.toolsbazzaradmin.Adapters.ExpandableListAdapter;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
@@ -26,6 +29,7 @@ public class CategoryChooser extends AppCompatActivity {
     List<String> listDataHeader = new ArrayList<String>();
     HashMap<String, List<String>> listDataChild = new HashMap<String, List<String>>();
     DatabaseReference mDatabase;
+    FloatingActionButton fab;
 
 
     @Override
@@ -33,13 +37,24 @@ public class CategoryChooser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_chooser);
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
+        fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CategoryChooser.this, AddCategories.class);
+                startActivity(i);
+            }
+        });
+
         this.setTitle("Choose category");
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Settings").child("Categories");
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
+                    listDataHeader.clear();
                     for (DataSnapshot header : dataSnapshot.getChildren()) {
                         listDataHeader.add(header.getKey());
                     }
@@ -82,7 +97,7 @@ public class CategoryChooser extends AppCompatActivity {
         for (String head : listDataHeader) {
 
             final int finalIjk = ijk;
-            mDatabase.child(head).addListenerForSingleValueEvent(new ValueEventListener() {
+            mDatabase.child(head).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.getValue() != null) {

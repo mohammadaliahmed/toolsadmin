@@ -60,7 +60,11 @@ public class PurchaseOrderAdapter extends RecyclerView.Adapter<PurchaseOrderAdap
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        if(itemList.size()==0){
+            return 0;
+        }else {
+            return itemList.size();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
     private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
     private long mBackPressed;
 
-    LinearLayout chats, customers, sales, orders, products, notifications, vendors, settings, purchases, invoices, employees;
+    LinearLayout chats, customers, sales, orders, products, notifications, signout,vendors, settings, purchases, invoices, employees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity
 
         chats = findViewById(R.id.chats);
         customers = findViewById(R.id.customers);
+        signout = findViewById(R.id.signout);
         sales = findViewById(R.id.sales);
         orders = findViewById(R.id.orders);
         products = findViewById(R.id.products);
@@ -69,6 +70,21 @@ public class MainActivity extends AppCompatActivity
         purchases = findViewById(R.id.purchases);
         invoices = findViewById(R.id.invoices);
         employees = findViewById(R.id.employees);
+
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    // clearing app data
+                    String packageName = getApplicationContext().getPackageName();
+                    Runtime runtime = Runtime.getRuntime();
+                    runtime.exec("pm clear " + packageName);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 
         employees.setOnClickListener(new View.OnClickListener() {
@@ -169,10 +185,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
             if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
                 super.onBackPressed();
                 return;
@@ -181,7 +197,7 @@ public class MainActivity extends AppCompatActivity
             }
 
             mBackPressed = System.currentTimeMillis();
-        }
+//        }
     }
 
     @Override

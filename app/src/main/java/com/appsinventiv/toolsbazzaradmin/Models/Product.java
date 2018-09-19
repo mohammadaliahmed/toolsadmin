@@ -1,5 +1,8 @@
 package com.appsinventiv.toolsbazzaradmin.Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by AliAh on 20/06/2018.
  */
@@ -13,6 +16,12 @@ public class Product {
     VendorModel vendor;
     int sku;
     String sellingTo;
+    String description;
+    List<String> attributesList;
+    float oldWholeSalePrice, oldRetailPrice;
+    float rating;
+    ArrayList<String> pictures;
+
 
     public Product() {
     }
@@ -44,7 +53,11 @@ public class Product {
     public Product(String id, String title, String subtitle, String isActive,
                    int sku, String thumbnailUrl, String mainCategory, String subCategory,
                    long time, float costPrice, float wholeSalePrice, float retailPrice,
-                   long minOrderQuantity, String measurement, VendorModel vendor,String sellingTo) {
+                   long minOrderQuantity, String measurement, VendorModel vendor, String sellingTo,
+                   String description, List<String> attributesList,
+                   float oldWholeSalePrice, float oldRetailPrice
+                   ,float rating
+    ) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -60,7 +73,60 @@ public class Product {
         this.minOrderQuantity = minOrderQuantity;
         this.measurement = measurement;
         this.vendor = vendor;
-        this.sellingTo=sellingTo;
+        this.sellingTo = sellingTo;
+        this.description = description;
+        this.attributesList = attributesList;
+        this.oldRetailPrice = oldRetailPrice;
+        this.oldWholeSalePrice = oldWholeSalePrice;
+        this.rating=rating;
+    }
+
+    public ArrayList<String> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(ArrayList<String> pictures) {
+        this.pictures = pictures;
+    }
+
+    public float getOldWholeSalePrice() {
+        return oldWholeSalePrice;
+    }
+
+    public void setOldWholeSalePrice(float oldWholeSalePrice) {
+        this.oldWholeSalePrice = oldWholeSalePrice;
+    }
+
+    public float getOldRetailPrice() {
+        return oldRetailPrice;
+    }
+
+    public void setOldRetailPrice(float oldRetailPrice) {
+        this.oldRetailPrice = oldRetailPrice;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<String> getAttributesList() {
+        return attributesList;
+    }
+
+    public void setAttributesList(List<String> attributesList) {
+        this.attributesList = attributesList;
     }
 
     public String getSellingTo() {

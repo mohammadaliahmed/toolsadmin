@@ -61,7 +61,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
-        android:hint="Rs 200 "
+        android:hint="Rs 0 "
         android:textColor="#000"
         android:textSize="13sp" />
 </RelativeLayout>

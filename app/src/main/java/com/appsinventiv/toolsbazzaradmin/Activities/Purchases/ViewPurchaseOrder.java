@@ -110,7 +110,7 @@ public class ViewPurchaseOrder extends AppCompatActivity {
                         poNumber.setText("PO number: " + model.getId());
                         date.setText("" + CommonUtils.getFormattedDatee(model.getTime()));
                         total.setText("Total        Rs: " + model.getTotal());
-                        employee.setText("Staff name: "+model.getEmployeeName());
+                        employee.setText("Staff name: " + model.getEmployeeName());
                         orderList = model.getProductsList();
                         address.setText("Name: " + model.getVendor().getVendorName()
                                 + "\nPhone: " + model.getVendor().getVendorPhone() + "\nAddress: " + model.getVendor().getVendorAddress());
@@ -157,8 +157,7 @@ public class ViewPurchaseOrder extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(ViewPurchaseOrder.this, ListOfPOs.class);
-        startActivity(i);
+
         finish();
     }
 
@@ -173,8 +172,7 @@ public class ViewPurchaseOrder extends AppCompatActivity {
         int id = item.getItemId();
 
         if (item.getItemId() == android.R.id.home) {
-            Intent i = new Intent(ViewPurchaseOrder.this, ListOfPOs.class);
-            startActivity(i);
+
             finish();
         }
         if (id == R.id.action_print) {

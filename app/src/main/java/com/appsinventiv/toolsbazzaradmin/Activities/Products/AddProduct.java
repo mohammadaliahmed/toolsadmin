@@ -49,6 +49,7 @@ import com.zhihu.matisse.engine.impl.GlideEngine;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AddProduct extends AppCompatActivity implements ProductObserver {
@@ -66,7 +67,9 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
     ArrayList<String> imageUrl = new ArrayList<>();
 
     String imagePath;
-    EditText e_title, e_sku, e_subtitle, e_costPrice, e_wholesalePrice, e_retailPrice, e_minOrderQty, e_measurement;
+    EditText e_title, e_sku, e_subtitle, e_costPrice, e_wholesalePrice,
+            e_retailPrice, e_minOrderQty, e_measurement, e_attributes, e_description,
+            e_oldRetailPrice, e_oldWholesalePrice;
     String productId;
     ProgressBar progressBar;
     Spinner spinner;
@@ -112,7 +115,11 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         e_sku = findViewById(R.id.productSku);
         progressBar = findViewById(R.id.prgress);
         spinner = findViewById(R.id.chooseVendor);
-        radioGroup=findViewById(R.id.radioGroup);
+        radioGroup = findViewById(R.id.radioGroup);
+        e_description = findViewById(R.id.description);
+        e_attributes = findViewById(R.id.attribute);
+        e_oldWholesalePrice = findViewById(R.id.oldWholeSalePrice);
+        e_oldRetailPrice = findViewById(R.id.oldRetailPrice);
         showPickedPictures();
 
         getSKUFromDb();
@@ -152,6 +159,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                 } else if (e_costPrice.getText().length() == 0) {
                     e_costPrice.setError("Enter price");
                 } else {
+                    String[] items = e_attributes.getText().toString().split(",");
+                    List<String> container = Arrays.asList(items);
                     progressBar.setVisibility(View.VISIBLE);
                     int selectedId = radioGroup.getCheckedRadioButtonId();
 
@@ -173,7 +182,12 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                             Long.parseLong(e_minOrderQty.getText().toString()),
                             e_measurement.getText().toString(),
                             vendor,
-                            selected.getText().toString()
+                            selected.getText().toString(),
+                            e_description.getText().toString(),
+                            container,
+                            Float.parseFloat(e_oldWholesalePrice.getText().toString()),
+                            Float.parseFloat(e_oldRetailPrice.getText().toString()),
+                            0
 
 
                     )).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -209,19 +223,23 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Product product = snapshot.getValue(Product.class);
-                        if (product != null) {
-                            skuList.add(product.getSku());
-                        }
-                    }
-                    newSku = (skuList.get(skuList.size() - 1) + 1);
-                    if (skuList.contains(newSku)) {
-                        newSku += 1;
-                    }
+                    newSku = Integer.parseInt("" + dataSnapshot.getChildrenCount());
+//                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                        Product product = snapshot.getValue(Product.class);
+//                        if (product != null) {
+//                            skuList.add(product.getSku());
+//                        }
+//                    }
+//                    newSku = (skuList.get(skuList.size() - 1) + 1);
+//                    if (skuList.contains(newSku)) {
+//                        newSku += 1;
+//                    }
+                    newSku = newSku + 1;
 
                     e_sku.setText("" + newSku);
 
+                } else {
+                    e_sku.setText("" + newSku);
                 }
             }
 
@@ -275,8 +293,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.simple_spinner_dropdown, items);
+//        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

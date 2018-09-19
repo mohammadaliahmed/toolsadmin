@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_brick"
     tools:context="com.appsinventiv.toolsbazzaradmin.Activities.Products.AddProduct">
 
     <LinearLayout
@@ -21,10 +22,10 @@
         <Button
             android:id="@+id/pick"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
 
-            android:layout_margin="10dp"
-            android:background="@color/colorPrimary"
+            android:layout_margin="15dp"
+            android:background="@drawable/btn_bg"
             android:text="Select pictures"
             android:textColor="#fff" />
 
@@ -32,29 +33,36 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            android:textColorHint="@color/default_grey">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/default_grey"
                 android:hint="Title"
-                android:inputType="textCapWords" />
+                android:inputType="textCapWords"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/default_grey" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
 
-            android:layout_margin="10dp">
+            android:textColorHint="@color/default_grey">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/default_grey"
                 android:hint="Sub Title"
-                android:inputType="textCapSentences" />
+                android:inputType="textCapSentences"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/default_grey" />
         </android.support.design.widget.TextInputLayout>
 
         <ProgressBar
@@ -63,89 +71,206 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="gone" />
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
 
-            android:layout_margin="10dp">
+            android:textColorHint="@color/default_grey">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/productSku"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="SKU"
-                android:focusable="false"
+                android:backgroundTint="@color/default_grey"
                 android:editable="false"
-                android:inputType="numberDecimal" />
+                android:focusable="false"
+                android:hint="SKU"
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/default_grey" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
 
-            android:layout_margin="10dp">
+            android:textColorHint="@color/default_grey">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/costPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/default_grey"
                 android:hint="Cost Price"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/default_grey" />
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-            android:layout_margin="10dp">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/wholeSalePrice"
+                android:textColorHint="@color/default_grey">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/wholeSalePrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/default_grey"
+                    android:hint="Wholesale Price"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="@color/default_grey" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+
+                android:textColorHint="@color/default_grey">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/oldWholeSalePrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/default_grey"
+                    android:hint="Old Wholesale Price"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="@color/default_grey" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Wholesale Price"
-                android:inputType="numberDecimal" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_margin="10dp"
+                android:layout_weight="1"
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                android:textColorHint="@color/default_grey">
 
-            android:layout_margin="10dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/retailPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/default_grey"
+                    android:hint="Retail  Price"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="@color/default_grey" />
+            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/retailPrice"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Retail  Price"
-                android:inputType="numberDecimal" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+
+                android:textColorHint="@color/default_grey">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/oldRetailPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/default_grey"
+                    android:hint="Old Retail  Price"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="@color/default_grey" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
 
-            android:layout_margin="10dp">
+            android:textColorHint="@color/default_grey">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/minOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/default_grey"
                 android:hint="Min Qty Wholesale"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/default_grey" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
 
-            android:layout_margin="10dp">
+            android:textColorHint="@color/default_grey">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/measurement"
                 android:layout_width="match_parent"
+                android:inputType="text"
                 android:layout_height="wrap_content"
-                android:hint="Measurement eg. 100m or 1kg" />
+                android:backgroundTint="@color/default_grey"
+                android:hint="Measurement eg. 100m or 1kg"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/default_grey" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            android:textColorHint="@color/default_grey">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/default_grey"
+                android:hint="Product Description"
+                android:inputType="textMultiLine|textCapSentences"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/default_grey" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            android:textColorHint="@color/default_grey">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/attribute"
+                android:layout_width="match_parent"
+                android:inputType="text"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/default_grey"
+                android:hint="Attributes e.g 4GB,8Gb,16GB.."
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/default_grey" />
         </android.support.design.widget.TextInputLayout>
 
         <TextView
@@ -153,16 +278,49 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Choose Vendor"
+            android:textColor="#fff"
             android:textSize="16sp" />
 
-        <Spinner
-            android:id="@+id/chooseVendor"
+        <RelativeLayout
+            android:id="@+id/sp1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_spinner"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"></Spinner>
+            android:layout_marginBottom="20dp"
+
+            android:padding="1dp">
+
+            <Spinner
+                android:id="@+id/chooseVendor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:spinnerMode="dropdown" />
+
+
+            <ImageView
+
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@color/default_grey"
+                android:padding="5dp"
+
+                android:src="@drawable/dropdown_arrow_spinner" />
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -176,7 +334,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Choose Category"
-
+                android:textColor="#fff"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -187,45 +345,56 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:text=">"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textSize="20dp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <TextView
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="Selling to"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+
+            android:text="Selling to"
+            android:textColor="#fff" />
+
         <RadioGroup
             android:id="@+id/radioGroup"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <RadioButton
-                android:text="Both"
-
+                android:buttonTint="@color/colorPrimary"
                 android:id="@+id/both"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:checked="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:checked="true"
+                android:text="Both"
+                android:textColor="#fff" />
+
             <RadioButton
-                android:text="Wholeale"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
+                android:buttonTint="@color/colorPrimary"
+
                 android:id="@+id/wholesale"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Wholeale"
+
+                android:textColor="#fff" />
+
             <RadioButton
-                android:text="Retail"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
                 android:id="@+id/retail"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:buttonTint="@color/colorPrimary"
+
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Retail"
+                android:textColor="#fff" />
 
         </RadioGroup>
 
@@ -233,9 +402,9 @@
         <Button
             android:id="@+id/upload"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@color/colorPrimary"
+            android:layout_height="35dp"
+            android:layout_margin="15dp"
+            android:background="@drawable/btn_bg"
             android:text="upload"
             android:textColor="#fff"
             android:visibility="visible" />

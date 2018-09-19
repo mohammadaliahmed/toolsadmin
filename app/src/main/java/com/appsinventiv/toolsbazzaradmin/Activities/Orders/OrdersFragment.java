@@ -2,8 +2,11 @@ package com.appsinventiv.toolsbazzaradmin.Activities.Orders;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +18,8 @@ import com.appsinventiv.toolsbazzaradmin.Adapters.OrdersAdapter;
 import com.appsinventiv.toolsbazzaradmin.Models.OrderModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +39,8 @@ public class OrdersFragment extends Fragment {
     String orderStatus;
     OrdersAdapter adapter;
     ProgressBar progress;
+    DatabaseReference mDatabase;
+    ;
 
     public OrdersFragment() {
         // Required empty public constructor
@@ -49,6 +56,7 @@ public class OrdersFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
     }
 
@@ -58,15 +66,100 @@ public class OrdersFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_orders, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_orders);
-        progress=rootView.findViewById(R.id.progress);
+        progress = rootView.findViewById(R.id.progress);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new OrdersAdapter(context, arrayList);
+        adapter = new OrdersAdapter(context, arrayList, new OrdersAdapter.UpdateOrderStatus() {
+            @Override
+            public void markAsProcessing(String orderId) {
+                updateOrderStatus(orderId);
+            }
+
+            @Override
+            public void markAsDeleted(String orderId) {
+                markOrderAsDeleted(orderId);
+            }
+        });
         recyclerView.setAdapter(adapter);
 
 
-
         return rootView;
+
+    }
+
+    private void markOrderAsDeleted(final String orderId) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setMessage("Delete Order " + orderId + "?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        mDatabase.child("Orders").child(orderId).child("orderStatus").setValue("Deleted").addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                CommonUtils.showToast("Order status updated");
+                                getDataFromServer();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                CommonUtils.showToast("Error: " + e.getMessage());
+
+                            }
+                        });
+
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    private void updateOrderStatus(final String orderId) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setMessage("Mark order " + orderId + " as under process?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        mDatabase.child("Orders").child(orderId).child("orderStatus").setValue("Under Process").addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                CommonUtils.showToast("Order status updated");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                CommonUtils.showToast("Error: " + e.getMessage());
+
+                            }
+                        });
+
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
 
     }
 
@@ -77,9 +170,8 @@ public class OrdersFragment extends Fragment {
     }
 
     private void getDataFromServer() {
-        DatabaseReference mDatabase;
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Orders").addListenerForSingleValueEvent(new ValueEventListener() {
+
+        mDatabase.child("Orders").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 arrayList.clear();
@@ -101,16 +193,14 @@ public class OrdersFragment extends Fragment {
                                 });
                                 adapter.notifyDataSetChanged();
                                 progress.setVisibility(View.GONE);
-                            }
-                            else {
+                            } else {
 //                                CommonUtils.showToast("Nothing to show");
                                 progress.setVisibility(View.GONE);
 
                             }
                         }
                     }
-                }
-                else {
+                } else {
 //                    CommonUtils.showToast("Nothing to show");
                     progress.setVisibility(View.GONE);
 
@@ -130,7 +220,6 @@ public class OrdersFragment extends Fragment {
         this.context = context;
 
     }
-
 
 
 }

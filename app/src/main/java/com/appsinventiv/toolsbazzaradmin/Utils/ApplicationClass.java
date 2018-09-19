@@ -18,4 +18,11 @@ public class ApplicationClass extends Application {
         instance = this;
 
     }
+
+    @Override
+    public void onTerminate() {
+        CommonUtils.showToast("Terminated");
+        super.onTerminate();
+
+    }
 }

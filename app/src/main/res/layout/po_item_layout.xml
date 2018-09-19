@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:text="Rs 200"
+            android:text="Rs 0"
             android:textColor="#000" />
     </RelativeLayout>
 

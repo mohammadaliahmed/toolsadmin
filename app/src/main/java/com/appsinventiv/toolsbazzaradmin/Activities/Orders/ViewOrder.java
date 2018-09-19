@@ -122,8 +122,8 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                                     customer,
                                     getTotalPrice(),
                                     System.currentTimeMillis(),
-                                    orderIdFromIntent,deliveryCharges,
-                                    (grandTotal+deliveryCharges+totalPrice)
+                                    orderIdFromIntent, deliveryCharges,
+                                    (grandTotal + deliveryCharges + totalPrice)
 
                             ))
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -165,6 +165,13 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                 if (dataSnapshot != null) {
                     model = dataSnapshot.getValue(OrderModel.class);
                     if (model != null) {
+                        if (model.getOrderStatus().equalsIgnoreCase("pending")
+                                || model.getOrderStatus().equalsIgnoreCase("under process")
+                                ) {
+                            invoice.setVisibility(View.VISIBLE);
+                        }else{
+                            invoice.setVisibility(View.GONE);
+                        }
                         orderId.setText("" + model.getOrderId());
                         orderTime.setText("" + CommonUtils.getFormattedDate(model.getTime()));
                         quantity.setText("" + model.getCountModelArrayList().size());
@@ -243,7 +250,7 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
 
 
                         } else {
-                           setQuantity(model);
+                            setQuantity(model);
                         }
                     }
                 }

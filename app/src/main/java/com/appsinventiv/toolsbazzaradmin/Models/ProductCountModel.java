@@ -11,7 +11,7 @@ public class ProductCountModel {
     Product product;
     int quantity;
     long time;
-    private HashMap<String,String> OrderId;
+    private HashMap<String,String> orderId;
 
     int quantityPurchased;
     int outOfStock;
@@ -76,15 +76,15 @@ public class ProductCountModel {
         this.product = product;
         this.quantity = quantity;
         this.time = time;
-        OrderId = orderId;
+        orderId = orderId;
     }
 
     public HashMap<String, String> getOrderId() {
-        return OrderId;
+        return orderId;
     }
 
     public void setOrderId(HashMap<String, String> orderId) {
-        OrderId = orderId;
+        orderId = orderId;
     }
 
     public Product getProduct() {

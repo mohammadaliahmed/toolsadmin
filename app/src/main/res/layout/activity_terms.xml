@@ -1,31 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:orientation="vertical"
     tools:context="com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.Terms">
 
-    <EditText
-        android:id="@+id/termsAndConditions"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Terms"
-        android:inputType="textMultiLine|textCapSentences" />
 
-    <Button
-        android:id="@+id/update"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/termsAndConditions"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
-        android:background="@color/colorPrimary"
-        android:text="Update"
-        android:textColor="#fff" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-</RelativeLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/terms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Terms"
+                android:textSize="12sp"
+                android:inputType="textMultiLine|textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/cookies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cookies"
+                android:textSize="12sp"
+                android:inputType="textMultiLine|textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/license"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="License"
+                android:textSize="12sp"
+                android:inputType="textMultiLine|textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/hyperlink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Hyperlinking to our content"
+                android:textSize="12sp"
+                android:inputType="textMultiLine|textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/iframes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="I frames"
+                android:textSize="12sp"
+                android:inputType="textMultiLine|textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/contentLiability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Content Liability"
+                android:textSize="12sp"
+                android:inputType="textMultiLine|textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/reservation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Reservation of rights"
+                android:textSize="12sp"
+                android:inputType="textMultiLine|textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/removal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Removal of links from our application"
+                android:textSize="12sp"
+                android:inputType="textMultiLine|textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/disclaimer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Disclaimer"
+                android:textSize="12sp"
+                android:inputType="textMultiLine|textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/replacement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Replacement"
+                android:textSize="12sp"
+                android:inputType="textMultiLine|textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Other"
+                android:textSize="12sp"
+                android:inputType="textMultiLine|textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:text="Update"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+</ScrollView>

@@ -27,15 +27,19 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return new OrdersFragment("Pending");
         } else if (position == 1) {
-            return new OrdersFragment("Shipped");
+            return new OrdersFragment("Under Process");
         } else if (position == 2) {
-            return new OrdersFragment("Delivered");
+            return new OrdersFragment("Shipped");
         } else if (position == 3) {
-            return new OrdersFragment("Credit");
+            return new OrdersFragment("Delivered");
         } else if (position == 4) {
-            return new OrdersFragment("Completed");
+            return new OrdersFragment("Credit");
         } else if (position == 5) {
+            return new OrdersFragment("Completed");
+        } else if (position == 6) {
             return new OrdersFragment("Cancelled");
+        } else if (position == 7) {
+            return new OrdersFragment("Refused");
         } else {
             return null;
         }
@@ -44,7 +48,7 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     // This determines the number of tabs
     @Override
     public int getCount() {
-        return 6;
+        return 8;
     }
 
     // This determines the title for each tab
@@ -55,15 +59,19 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return "Pending";
             case 1:
-                return "Shipped";
+                return "Under Process";
             case 2:
-                return "Delivered";
+                return "Shipped";
             case 3:
-                return "Credit";
+                return "Delivered";
             case 4:
-                return "Completed";
+                return "Credit";
             case 5:
+                return "Completed";
+            case 6:
                 return "Cancelled";
+            case 7:
+                return "Refused";
 
             default:
                 return null;
