@@ -47,33 +47,33 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
         holder.title.setText(model.getProduct().getTitle());
         holder.subtitle.setText("Description: " + model.getProduct().getMeasurement() + "\nQuantity: " + model.getQuantity());
         if (customerType.equalsIgnoreCase("wholesale")) {
-            holder.price.setText("Unit price: Rs " + model.getProduct().getWholeSalePrice());
+            holder.price.setText("Unit price: Rs " + CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice()));
             if (list2 != null) {
                 if (list2.contains(model)) {
                     holder.outOfStockText.setVisibility(View.GONE);
                     holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorBlack));
-                    holder.totalItemPrice.setText("Rs " + (model.getProduct().getWholeSalePrice() * model.getQuantity()));
+                    holder.totalItemPrice.setText("Rs " + (CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice() * model.getQuantity())));
 
                 } else {
                     holder.outOfStockText.setVisibility(View.VISIBLE);
                     holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
-                    holder.totalItemPrice.setText("-Rs " + (model.getProduct().getWholeSalePrice() * model.getQuantity()));
+                    holder.totalItemPrice.setText("-Rs " + CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice() * model.getQuantity()));
                 }
             }
 
 
         } else if (customerType.equalsIgnoreCase("retail")) {
-            holder.price.setText("Unit price: " + model.getProduct().getRetailPrice());
+            holder.price.setText("Unit price: " + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice()));
 
             if (list2.contains(model)) {
                 holder.outOfStockText.setVisibility(View.GONE);
-                holder.totalItemPrice.setText("Rs " + (model.getProduct().getRetailPrice() * model.getQuantity()));
+                holder.totalItemPrice.setText("Rs " + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity()));
 
             } else {
                 holder.outOfStockText.setVisibility(View.VISIBLE);
                 holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
 
-                holder.totalItemPrice.setText("-Rs " + (model.getProduct().getRetailPrice() * model.getQuantity()));
+                holder.totalItemPrice.setText("-Rs " + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity()));
             }
         }
 

@@ -18,6 +18,9 @@ public class ProductCountModel {
     float newCostPrice;
 
     float purchaseTotal;
+    boolean isPurchased;
+    String size;
+    String color;
 
     public ProductCountModel() {
     }
@@ -38,7 +41,30 @@ public class ProductCountModel {
         return result;
     }
 
+    public String getSize() {
+        return size;
+    }
 
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public boolean isPurchased() {
+        return isPurchased;
+    }
+
+
+    public void setPurchased(boolean purchased) {
+        isPurchased = purchased;
+    }
 
     public int getQuantityPurchased() {
         return quantityPurchased;
@@ -76,7 +102,7 @@ public class ProductCountModel {
         this.product = product;
         this.quantity = quantity;
         this.time = time;
-        orderId = orderId;
+        this.orderId= orderId;
     }
 
     public HashMap<String, String> getOrderId() {
@@ -84,7 +110,7 @@ public class ProductCountModel {
     }
 
     public void setOrderId(HashMap<String, String> orderId) {
-        orderId = orderId;
+        this.orderId = orderId;
     }
 
     public Product getProduct() {

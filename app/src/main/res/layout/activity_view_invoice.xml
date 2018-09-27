@@ -23,17 +23,16 @@
 
 
     <ScrollView
-        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-     >
+        android:layout_marginTop="60dp">
 
         <RelativeLayout
-            android:background="#fff"
             android:id="@+id/ll_linear"
-            android:padding="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/poNumber"
@@ -71,14 +70,17 @@
                 android:textSize="11sp" />
 
 
+
+
             <TextView
                 android:id="@+id/orderNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/address"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:textColor="#000" />
+                android:layout_marginTop="30dp"
+                android:textColor="#000"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"
@@ -107,44 +109,94 @@
                 android:layout_marginTop="10dp"
                 android:background="#aaa" />
 
-            <TextView
-                android:id="@+id/delivery"
+            <GridLayout
+
+                android:id="@+id/grid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/recyclerview"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
-                android:hint="delivery rs 40"
-                android:textColor="#000" />
+                android:columnCount="2"
+                android:rowCount="4">
 
-            <TextView
-                android:id="@+id/total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/delivery"
+                <TextView
+                    android:layout_width="wrap_content"
 
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:hint="Total Rs 100"
-                android:textColor="#000" />
+                    android:layout_height="wrap_content"
+                    android:text="Total:    "
+                    android:textColor="#000"
+                    android:textSize="13sp" />
 
-            <TextView
-                android:id="@+id/grandTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/total"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:hint="Total Rs 100"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:textColor="#000"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:text="Delivery:    "
+                    android:textColor="#000"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/delivery"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:textColor="#000"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:text="Shipping:    "
+                    android:textColor="#000"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/shipping"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:textColor="#000"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:text="Grand Total:    "
+                    android:textColor="#000"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/grandTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textSize="13sp" />
+
+
+            </GridLayout>
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/grandTotal"
+                android:layout_below="@id/grid"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
@@ -154,7 +206,7 @@
                 android:id="@+id/thanks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/grandTotal"
+                android:layout_below="@id/grid"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
                 android:text="Thank you for your Order!"
@@ -169,8 +221,8 @@
                 android:layout_below="@id/thanks"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
-                android:gravity="center"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:text="Thank you for your order"
                 android:textSize="10sp" />
         </RelativeLayout>

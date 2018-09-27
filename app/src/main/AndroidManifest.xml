@@ -36,7 +36,9 @@
         <activity android:name=".Activities.Products.CategoryChooser" />
         <activity android:name=".Activities.Chat.Chats" />
         <activity android:name=".Activities.Chat.LiveChat" />
-        <activity android:name=".Activities.Orders.Orders" />
+        <activity
+            android:name=".Activities.Orders.Orders"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Activities.Orders.ViewOrder" />
         <activity android:name=".Activities.Products.ListOfProducts" />
         <activity android:name=".Activities.SalesReport" />
@@ -79,7 +81,14 @@
         <activity android:name=".Activities.Purchases.EditPurchase" />
         <activity android:name=".Activities.Invoicing.ListOfInvoices" />
         <activity android:name=".Activities.AppSettings.AddLocationAndCharges" />
-        <activity android:name=".Activities.AppSettings.ListOfLocationAndCharges"></activity>
+        <activity android:name=".Activities.AppSettings.ListOfLocationAndCharges" />
+        <activity android:name=".Activities.Accounts.Accounts" />
+        <activity
+            android:name=".Activities.AppSettings.CompanySettings"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".Activities.Orders.OrdersDelivery" />
+        <activity android:name=".Activities.Orders.OrdersCourier" />
+        <activity android:name=".Activities.Orders.ViewUnderProcessOrder"></activity>
     </application>
 
 </manifest>

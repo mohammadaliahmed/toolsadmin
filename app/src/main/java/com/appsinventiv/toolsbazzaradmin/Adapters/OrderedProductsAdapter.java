@@ -28,14 +28,16 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
     ArrayList<ProductCountModel> productList;
     String customerType;
     OnProductSelected onProductSelected;
+    int flag;
 
-    public OrderedProductsAdapter(Context context, ArrayList<ProductCountModel> productList, String customerType
+    public OrderedProductsAdapter(Context context, ArrayList<ProductCountModel> productList, String customerType,int flag
             , OnProductSelected onProductSelected
     ) {
         this.context = context;
         this.productList = productList;
         this.customerType = customerType;
         this.onProductSelected = onProductSelected;
+        this.flag=flag;
     }
 
     @NonNull
@@ -52,6 +54,7 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
         final ProductCountModel model = productList.get(position);
 
         holder.title.setText(model.getProduct().getTitle());
+
         if (customerType.equalsIgnoreCase("wholesale")) {
             holder.price.setText("Rs. " + model.getProduct().getWholeSalePrice());
 
@@ -64,19 +67,36 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
         holder.serial.setText("" + (position + 1) + ")");
         holder.vendor.setText("Vendor: " + model.getProduct().getVendor().getVendorName());
         holder.productSku.setText("SKU: " + model.getProduct().getSku());
+        if (model.getColor() != null) {
+            if (!model.getColor().equalsIgnoreCase("")) {
+                holder.color.setVisibility(View.VISIBLE);
+                holder.color.setText("Color: " + model.getColor());
+            }
+        }
+        if (model.getSize() != null) {
+            if (!model.getSize().equalsIgnoreCase("")) {
+                holder.size.setVisibility(View.VISIBLE);
+
+                holder.size.setText("Size: " + model.getSize());
+            }
+        }
 
         Glide.with(context).load(model.getProduct().getThumbnailUrl()).into(holder.image);
+        if(flag==1) {
 
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    onProductSelected.onChecked(model, position);
-                } else {
-                    onProductSelected.onUnChecked(model, position);
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        onProductSelected.onChecked(model, position);
+                    } else {
+                        onProductSelected.onUnChecked(model, position);
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            holder.checkBox.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -85,7 +105,7 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title, subtitle, price, count, serial, vendor, productSku;
+        TextView title, subtitle, price, count, serial, vendor, productSku, color, size;
         CheckBox checkBox;
         ImageView image;
 
@@ -100,6 +120,8 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
             serial = itemView.findViewById(R.id.count);
             vendor = itemView.findViewById(R.id.vendor);
             productSku = itemView.findViewById(R.id.productSku);
+            color = itemView.findViewById(R.id.color);
+            size = itemView.findViewById(R.id.size);
 
 
         }

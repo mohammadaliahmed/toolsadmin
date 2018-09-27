@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.OrdersFragment;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by AliAh on 02/03/2018.
@@ -14,68 +16,37 @@ import com.appsinventiv.toolsbazzaradmin.Activities.Orders.OrdersFragment;
 
 public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private Context mContext;
+    Context mContext;
+    ArrayList<String> arrayList;
+    String by;
 
-    public SimpleFragmentPagerAdapter(Context context, FragmentManager fm) {
+    public SimpleFragmentPagerAdapter(Context context, ArrayList<String> arrayList, FragmentManager fm,String by) {
         super(fm);
-        mContext = context;
+        this.mContext = context;
+        this.arrayList = arrayList;
+        this.by=by;
     }
 
     // This determines the fragment for each tab
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) {
-            return new OrdersFragment("Pending");
-        } else if (position == 1) {
-            return new OrdersFragment("Under Process");
-        } else if (position == 2) {
-            return new OrdersFragment("Shipped");
-        } else if (position == 3) {
-            return new OrdersFragment("Delivered");
-        } else if (position == 4) {
-            return new OrdersFragment("Credit");
-        } else if (position == 5) {
-            return new OrdersFragment("Completed");
-        } else if (position == 6) {
-            return new OrdersFragment("Cancelled");
-        } else if (position == 7) {
-            return new OrdersFragment("Refused");
-        } else {
-            return null;
-        }
+
+        return new OrdersFragment(arrayList.get(position),by);
+
     }
 
     // This determines the number of tabs
     @Override
     public int getCount() {
-        return 8;
+        return arrayList.size();
     }
 
     // This determines the title for each tab
     @Override
     public CharSequence getPageTitle(int position) {
         // Generate title based on item position
-        switch (position) {
-            case 0:
-                return "Pending";
-            case 1:
-                return "Under Process";
-            case 2:
-                return "Shipped";
-            case 3:
-                return "Delivered";
-            case 4:
-                return "Credit";
-            case 5:
-                return "Completed";
-            case 6:
-                return "Cancelled";
-            case 7:
-                return "Refused";
 
-            default:
-                return null;
-        }
+        return arrayList.get(position);
     }
 
 }

@@ -67,7 +67,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
     ArrayList<SelectedAdImages> selectedAdImages = new ArrayList<>();
     ArrayList<String> imageUrl = new ArrayList<>();
     EditText e_title, e_sku, e_subtitle, e_costPrice, e_wholesalePrice,
-            e_retailPrice, e_minOrderQty, e_measurement, e_attributes, e_description,
+            e_retailPrice, e_minOrderQty, e_measurement, e_sizes, e_colors, e_description,
             e_oldRetailPrice, e_oldWholesalePrice;
     String productId;
     ProgressBar progressBar;
@@ -116,7 +116,8 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
         e_measurement = findViewById(R.id.measurement);
         e_sku = findViewById(R.id.productSku);
         e_description = findViewById(R.id.description);
-        e_attributes = findViewById(R.id.attribute);
+        e_sizes = findViewById(R.id.size);
+        e_colors = findViewById(R.id.color);
         e_oldWholesalePrice = findViewById(R.id.oldWholeSalePrice);
         e_oldRetailPrice = findViewById(R.id.oldRetailPrice);
         progressBar = findViewById(R.id.prgress);
@@ -161,9 +162,21 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
                 } else if (e_costPrice.getText().length() == 0) {
                     e_costPrice.setError("Enter price");
                 } else {
+                    List<String> container = new ArrayList<>();
+                    if (e_sizes.getText().length() > 0) {
+                        String[] sizes = e_sizes.getText().toString().replace("[", "").replace("]", "").replace(" ", "").split(",");
+                        container = Arrays.asList(sizes);
 
-                    String[] items = e_attributes.getText().toString().replace("[", "").replace("]", "").replace(" ","").split(",");
-                    List<String> container = Arrays.asList(items);
+                    }
+                    List<String> container1 = new ArrayList<>();
+
+                    if (e_colors.getText().length() > 0) {
+                        String[] colors = e_colors.getText().toString().replace("[", "").replace("]", "").replace(" ", "").split(",");
+                        container1 = Arrays.asList(colors);
+
+                    }
+
+
                     progressBar.setVisibility(View.VISIBLE);
                     int selectedId = radioGroup.getCheckedRadioButtonId();
 
@@ -187,6 +200,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
                             selected.getText().toString(),
                             e_description.getText().toString(),
                             container,
+                            container1,
                             Float.parseFloat(e_oldWholesalePrice.getText().toString()),
                             Float.parseFloat(e_oldRetailPrice.getText().toString()),
                             0
@@ -196,7 +210,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
                         @Override
                         public void onSuccess(Void aVoid) {
                             int count = 0;
-                            CommonUtils.showToast(imageUrl + "");
+
                             if (imageUrl.size() != 0) {
 
                                 for (String img : imageUrl) {
@@ -255,7 +269,13 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
                         e_measurement.setText(product.getMeasurement());
                         e_sku.setText("" + product.getSku());
                         e_description.setText(product.getDescription());
-                        e_attributes.setText("" + product.getAttributesList());
+                        if (product.getSizeList() != null) {
+                            e_sizes.setText("" + product.getSizeList());
+                        }
+                        if (product.getColorList() != null) {
+                            e_colors.setText("" + product.getColorList());
+                        }
+
                         e_oldWholesalePrice.setText("" + product.getOldWholeSalePrice());
                         e_oldRetailPrice.setText("" + product.getOldRetailPrice());
                         newSku = product.getSku();

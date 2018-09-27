@@ -17,7 +17,8 @@ public class Product {
     int sku;
     String sellingTo;
     String description;
-    List<String> attributesList;
+    List<String> colorList;
+    List<String> sizeList;
     float oldWholeSalePrice, oldRetailPrice;
     float rating;
     ArrayList<String> pictures;
@@ -54,9 +55,12 @@ public class Product {
                    int sku, String thumbnailUrl, String mainCategory, String subCategory,
                    long time, float costPrice, float wholeSalePrice, float retailPrice,
                    long minOrderQuantity, String measurement, VendorModel vendor, String sellingTo,
-                   String description, List<String> attributesList,
+                   String description,
+
+                   List<String> sizeList,
+                   List<String> colorList,
                    float oldWholeSalePrice, float oldRetailPrice
-                   ,float rating
+            , float rating
     ) {
         this.id = id;
         this.title = title;
@@ -75,14 +79,31 @@ public class Product {
         this.vendor = vendor;
         this.sellingTo = sellingTo;
         this.description = description;
-        this.attributesList = attributesList;
+        this.sizeList=sizeList;
+        this.colorList=colorList;
         this.oldRetailPrice = oldRetailPrice;
         this.oldWholeSalePrice = oldWholeSalePrice;
-        this.rating=rating;
+        this.rating = rating;
     }
 
     public ArrayList<String> getPictures() {
         return pictures;
+    }
+
+    public List<String> getColorList() {
+        return colorList;
+    }
+
+    public void setColorList(List<String> colorList) {
+        this.colorList = colorList;
+    }
+
+    public List<String> getSizeList() {
+        return sizeList;
+    }
+
+    public void setSizeList(List<String> sizeList) {
+        this.sizeList = sizeList;
     }
 
     public void setPictures(ArrayList<String> pictures) {
@@ -121,13 +142,7 @@ public class Product {
         this.description = description;
     }
 
-    public List<String> getAttributesList() {
-        return attributesList;
-    }
 
-    public void setAttributesList(List<String> attributesList) {
-        this.attributesList = attributesList;
-    }
 
     public String getSellingTo() {
         return sellingTo;

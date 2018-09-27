@@ -22,7 +22,7 @@
         <Button
             android:id="@+id/pick"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
 
             android:layout_margin="15dp"
             android:background="@drawable/btn_bg"
@@ -263,12 +263,30 @@
             android:textColorHint="@color/default_grey">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/attribute"
+                android:id="@+id/size"
                 android:layout_width="match_parent"
                 android:inputType="text"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/default_grey"
-                android:hint="Attributes e.g 4GB,8Gb,16GB.."
+                android:hint="Sizes: 8,9,10.."
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/default_grey" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            android:textColorHint="@color/default_grey">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/color"
+                android:layout_width="match_parent"
+                android:inputType="text"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/default_grey"
+                android:hint="Color:  Yellow, Green, Blue.."
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/default_grey" />
         </android.support.design.widget.TextInputLayout>
@@ -402,7 +420,7 @@
         <Button
             android:id="@+id/upload"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:layout_margin="15dp"
             android:background="@drawable/btn_bg"
             android:text="upload"

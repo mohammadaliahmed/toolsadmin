@@ -23,6 +23,8 @@ import com.appsinventiv.toolsbazzaradmin.Activities.Employees.ListOfEmployees;
 import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ListOfInvoices;
 import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
+import com.appsinventiv.toolsbazzaradmin.Activities.Orders.OrdersCourier;
+import com.appsinventiv.toolsbazzaradmin.Activities.Orders.OrdersDelivery;
 import com.appsinventiv.toolsbazzaradmin.Activities.Products.ListOfProducts;
 import com.appsinventiv.toolsbazzaradmin.Activities.Purchases.Purchases;
 import com.appsinventiv.toolsbazzaradmin.Activities.Vendors.Vendors;
@@ -39,28 +41,27 @@ public class MainActivity extends AppCompatActivity
     private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
     private long mBackPressed;
 
-    LinearLayout chats, customers, sales, orders, products, notifications, signout,vendors, settings, purchases, invoices, employees;
+    LinearLayout chats, customers, delivery, orders, products,
+            notifications, signout, vendors, settings, purchases,
+             employees, accounts, courier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setStatusBarColor(Color.BLACK);
         }
 
         chats = findViewById(R.id.chats);
         customers = findViewById(R.id.customers);
         signout = findViewById(R.id.signout);
-        sales = findViewById(R.id.sales);
+        delivery = findViewById(R.id.delivery);
         orders = findViewById(R.id.orders);
         products = findViewById(R.id.products);
         notifications = findViewById(R.id.notifications);
@@ -68,8 +69,9 @@ public class MainActivity extends AppCompatActivity
         notifications = findViewById(R.id.notifications);
         settings = findViewById(R.id.settings);
         purchases = findViewById(R.id.purchases);
-        invoices = findViewById(R.id.invoices);
         employees = findViewById(R.id.employees);
+        accounts = findViewById(R.id.accounts);
+        courier = findViewById(R.id.courier);
 
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,11 +120,11 @@ public class MainActivity extends AppCompatActivity
                 startActivity(i);
             }
         });
-        sales.setOnClickListener(new View.OnClickListener() {
+        delivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(MainActivity.this, SalesReport.class);
+                Intent i = new Intent(MainActivity.this, OrdersDelivery.class);
                 startActivity(i);
             }
         });
@@ -149,14 +151,24 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        invoices.setOnClickListener(new View.OnClickListener() {
+
+        accounts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ListOfInvoices.class);
-                i.putExtra("invoiceNumber", 10001l);
+                Intent i = new Intent(MainActivity.this, Purchases.class);
                 startActivity(i);
             }
         });
+
+        courier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, OrdersCourier.class);
+                startActivity(i);
+            }
+        });
+
+
 
 
         if (SharedPrefs.getIsLoggedIn().equals("yes")) {
@@ -189,14 +201,14 @@ public class MainActivity extends AppCompatActivity
 //        if (drawer.isDrawerOpen(GravityCompat.START)) {
 //            drawer.closeDrawer(GravityCompat.START);
 //        } else {
-            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
-                super.onBackPressed();
-                return;
-            } else {
-                Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
-            }
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
+        }
 
-            mBackPressed = System.currentTimeMillis();
+        mBackPressed = System.currentTimeMillis();
 //        }
     }
 

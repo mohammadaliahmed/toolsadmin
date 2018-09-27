@@ -68,7 +68,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
 
     String imagePath;
     EditText e_title, e_sku, e_subtitle, e_costPrice, e_wholesalePrice,
-            e_retailPrice, e_minOrderQty, e_measurement, e_attributes, e_description,
+            e_retailPrice, e_minOrderQty, e_measurement, e_sizes, e_colors, e_description,
             e_oldRetailPrice, e_oldWholesalePrice;
     String productId;
     ProgressBar progressBar;
@@ -77,7 +77,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
     VendorModel vendor;
     ProductObserver observer;
     ArrayList<Integer> skuList = new ArrayList<>();
-    int newSku = 10001;
+    long newSku = 10001;
     RadioGroup radioGroup;
     RadioButton selected;
 
@@ -117,7 +117,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         spinner = findViewById(R.id.chooseVendor);
         radioGroup = findViewById(R.id.radioGroup);
         e_description = findViewById(R.id.description);
-        e_attributes = findViewById(R.id.attribute);
+        e_sizes = findViewById(R.id.size);
+        e_colors = findViewById(R.id.color);
         e_oldWholesalePrice = findViewById(R.id.oldWholeSalePrice);
         e_oldRetailPrice = findViewById(R.id.oldRetailPrice);
         showPickedPictures();
@@ -159,8 +160,21 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                 } else if (e_costPrice.getText().length() == 0) {
                     e_costPrice.setError("Enter price");
                 } else {
-                    String[] items = e_attributes.getText().toString().split(",");
-                    List<String> container = Arrays.asList(items);
+                    List<String> container = new ArrayList<>();
+                    if (e_sizes.getText().length() > 0) {
+                        String[] sizes = e_sizes.getText().toString().split(",");
+                        container = Arrays.asList(sizes);
+
+                    }
+                    List<String> container1 = new ArrayList<>();
+
+                    if (e_colors.getText().length() > 0) {
+                        String[] colors = e_colors.getText().toString().split(",");
+                        container1 = Arrays.asList(colors);
+
+                    }
+
+
                     progressBar.setVisibility(View.VISIBLE);
                     int selectedId = radioGroup.getCheckedRadioButtonId();
 
@@ -171,7 +185,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                             e_title.getText().toString(),
                             e_subtitle.getText().toString(),
                             "true",
-                            newSku,
+                            Integer.parseInt(""+newSku),
                             "",
                             extras.getString("mainCategory"),
                             extras.getString("subCategory"),
@@ -185,6 +199,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                             selected.getText().toString(),
                             e_description.getText().toString(),
                             container,
+                            container1,
                             Float.parseFloat(e_oldWholesalePrice.getText().toString()),
                             Float.parseFloat(e_oldRetailPrice.getText().toString()),
                             0
@@ -223,18 +238,9 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-                    newSku = Integer.parseInt("" + dataSnapshot.getChildrenCount());
-//                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                        Product product = snapshot.getValue(Product.class);
-//                        if (product != null) {
-//                            skuList.add(product.getSku());
-//                        }
-//                    }
-//                    newSku = (skuList.get(skuList.size() - 1) + 1);
-//                    if (skuList.contains(newSku)) {
-//                        newSku += 1;
-//                    }
-                    newSku = newSku + 1;
+                    long abc = Integer.parseInt("" + dataSnapshot.getChildrenCount());
+
+                    newSku = newSku + abc;
 
                     e_sku.setText("" + newSku);
 

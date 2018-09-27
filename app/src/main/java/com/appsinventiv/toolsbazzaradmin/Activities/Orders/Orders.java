@@ -12,8 +12,10 @@ import com.appsinventiv.toolsbazzaradmin.Activities.MainActivity;
 import com.appsinventiv.toolsbazzaradmin.Adapters.SimpleFragmentPagerAdapter;
 import com.appsinventiv.toolsbazzaradmin.R;
 
-public class Orders extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class Orders extends AppCompatActivity {
+    ArrayList<String> orderStatusList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +26,18 @@ public class Orders extends AppCompatActivity {
         }
         this.setTitle("Orders");
         ViewPager viewPager = findViewById(R.id.viewpager);
-        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(this, getSupportFragmentManager());
+        orderStatusList.add("Pending");
+        orderStatusList.add("Under Process");
+        orderStatusList.add("Cancelled");
+        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(this,orderStatusList, getSupportFragmentManager(),"none");
         viewPager.setAdapter(adapter);
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorRed));
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+
 
     }
 

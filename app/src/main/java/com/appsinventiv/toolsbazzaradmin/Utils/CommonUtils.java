@@ -7,6 +7,7 @@ import android.text.format.DateFormat;
 import android.widget.Toast;
 
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 /**
@@ -28,6 +29,14 @@ public class CommonUtils {
             }
         });
     }
+
+    public static String getFormattedPrice(Object price){
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        String formattedPrice = formatter.format(price);
+        return formattedPrice;
+    }
+
+
     public static String getFormattedDate(long smsTimeInMilis) {
         Calendar smsTime = Calendar.getInstance();
         smsTime.setTimeInMillis(smsTimeInMilis);

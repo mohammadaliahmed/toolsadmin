@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.appsinventiv.toolsbazzaradmin.Models.ProductCountModel;
 import com.appsinventiv.toolsbazzaradmin.R;
+import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
 
 import java.util.ArrayList;
 
@@ -44,15 +45,15 @@ public class PurchaseOrderAdapter extends RecyclerView.Adapter<PurchaseOrderAdap
         holder.subtitle.setText(
                 "Description: " + model.getProduct().getMeasurement() +
                         "\nQty: " + model.getQuantity() +
-                        "\nCost price: Rs." + model.getProduct().getCostPrice());
-        holder.price.setText("Rs." + (model.getQuantity() * model.getProduct().getCostPrice()));
+                        "\nCost price: Rs." + CommonUtils.getFormattedPrice(model.getProduct().getCostPrice()));
+        holder.price.setText("Rs." + CommonUtils.getFormattedPrice(model.getQuantity() * model.getProduct().getCostPrice()));
 
         if (model.getQuantityPurchased() != 0) {
             holder.edited.setVisibility(View.VISIBLE);
             holder.quantityPurchased.setText("Qty purchased: " + model.getQuantityPurchased() + "");
             holder.outOfStockQty.setText("Out of stock: " + model.getOutOfStock() + "");
-            holder.newCostPrice.setText("New / Old cost price: Rs." + model.getNewCostPrice() + "");
-            holder.puchaseTotal.setText("Purchase Total: Rs." + model.getPurchaseTotal() + "");
+            holder.newCostPrice.setText("New / Old cost price: Rs." + CommonUtils.getFormattedPrice(model.getNewCostPrice()) + "");
+            holder.puchaseTotal.setText("Purchase Total: Rs." + CommonUtils.getFormattedPrice(model.getPurchaseTotal()));
 
         }
 

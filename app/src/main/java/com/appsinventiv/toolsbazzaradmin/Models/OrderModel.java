@@ -18,6 +18,9 @@ public class OrderModel {
     boolean isInvoiced;
     long invoiceNumber;
 
+    String trackingNumber;
+    String carrier;
+
 
 
 
@@ -36,6 +39,22 @@ public class OrderModel {
         this.orderStatus = orderStatus;
         this.isInvoiced = isInvoiced;
         this.invoiceNumber = invoiceNumber;
+    }
+
+    public String getTrackingNumber() {
+        return trackingNumber;
+    }
+
+    public void setTrackingNumber(String trackingNumber) {
+        this.trackingNumber = trackingNumber;
+    }
+
+    public String getCarrier() {
+        return carrier;
+    }
+
+    public void setCarrier(String carrier) {
+        this.carrier = carrier;
     }
 
     public boolean isInvoiced() {

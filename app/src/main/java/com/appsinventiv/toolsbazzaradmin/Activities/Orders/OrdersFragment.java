@@ -40,15 +40,17 @@ public class OrdersFragment extends Fragment {
     OrdersAdapter adapter;
     ProgressBar progress;
     DatabaseReference mDatabase;
-    ;
+    String by;
+
 
     public OrdersFragment() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public OrdersFragment(String orderStatus) {
+    public OrdersFragment(String orderStatus, String by) {
         this.orderStatus = orderStatus;
+        this.by = by;
 
     }
 
@@ -57,6 +59,10 @@ public class OrdersFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        if (by.equalsIgnoreCase("courier")) {
+            orderStatus = orderStatus + " by courier";
+        }
 
     }
 

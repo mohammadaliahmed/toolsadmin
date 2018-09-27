@@ -39,7 +39,7 @@ public class ViewInvoice extends AppCompatActivity {
     DatabaseReference mDatabase;
     ArrayList<ProductCountModel> allProductsInOneOrderList = new ArrayList<>();
     ArrayList<ProductCountModel> availableProductsInOneOrderList = new ArrayList<>();
-    TextView invoiceNumberText, date, address, delivery, total, storeAddress, orderNumber,grandTotal;
+    TextView invoiceNumberText, date, address, delivery, total, storeAddress, orderNumber, grandTotal, shipping;
     RecyclerView recyclerView;
     InvoiceAdapter adapter;
     RelativeLayout wholeLayout;
@@ -57,7 +57,7 @@ public class ViewInvoice extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-        ll_linear=findViewById(R.id.ll_linear);
+        ll_linear = findViewById(R.id.ll_linear);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -71,6 +71,7 @@ public class ViewInvoice extends AppCompatActivity {
         storeAddress = findViewById(R.id.storeAddress);
         orderNumber = findViewById(R.id.orderNumber);
         grandTotal = findViewById(R.id.grandTotal);
+        shipping = findViewById(R.id.shipping);
 
 
         Intent i = getIntent();
@@ -85,7 +86,6 @@ public class ViewInvoice extends AppCompatActivity {
 
 
     }
-
 
 
     private void getAddressFromDb() {
@@ -123,11 +123,15 @@ public class ViewInvoice extends AppCompatActivity {
                         availableProductsInOneOrderList = model.getNewCountModelArrayList();
                         invoiceNumberText.setText("Invoice # " + model.getId());
                         date.setText("" + CommonUtils.getFormattedDatee(model.getTime()));
-                        delivery.setText("Delivery:             " + "Rs 40");
-                        total.setText("Total:        Rs " + model.getTotalPrice());
+                        delivery.setText("Rs 40");
+                        total.setText("Rs " + CommonUtils.getFormattedPrice(model.getTotalPrice()));
+                        shipping.setText("Rs " + CommonUtils.getFormattedPrice(model.getTotalPrice()));
+                        grandTotal.setText("Rs " + CommonUtils.getFormattedPrice(model.getGrandTotal()));
                         orderNumber.setText("Order number: " + model.getOrderId());
-                        grandTotal.setText("Grand Total:        Rs "+model.getGrandTotal());
-                        address.setText("Name:  " + model.getCustomer().getName() + "\nPhone: " + model.getCustomer().getPhone() + "\nAddress:  " + model.getCustomer().getAddress() + ", " + model.getCustomer().getCity());
+
+                        address.setText("Name:  " + model.getCustomer().getName() + "\nPhone: " + model.getCustomer().getPhone() + "\nAddress:  " + model.getCustomer().getAddress()
+                                + ", " + model.getCustomer().getCity()
+                                + "\nCountry: " + model.getCustomer().getCountry());
                         adapter = new InvoiceAdapter(ViewInvoice.this,
                                 allProductsInOneOrderList,
                                 availableProductsInOneOrderList,
@@ -160,6 +164,7 @@ public class ViewInvoice extends AppCompatActivity {
 
         finish();
     }
+
     public static Bitmap loadBitmapFromView(View v, int width, int height) {
         Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(b);
@@ -167,9 +172,10 @@ public class ViewInvoice extends AppCompatActivity {
 
         return b;
     }
+
     public void saveBitmap(Bitmap bitmap) {
         String imgName = Long.toHexString(Double.doubleToLongBits(Math.random()));
-        File imagePath = new File("/sdcard/"+"Invoice_Number_"+".jpg");
+        File imagePath = new File("/sdcard/" + "Invoice_Number_" + ".jpg");
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(imagePath);
@@ -184,6 +190,7 @@ public class ViewInvoice extends AppCompatActivity {
             Log.e("GREC", e.getMessage(), e);
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -200,14 +207,13 @@ public class ViewInvoice extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.print_menu, menu);
         return true;
     }
-
-
 
 
 }

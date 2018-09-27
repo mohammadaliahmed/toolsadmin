@@ -62,6 +62,8 @@
                     android:text=""
                     android:textColor="#000"
                     android:textSize="12sp" />
+
+
             </LinearLayout>
 
             <View
@@ -96,7 +98,16 @@
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/shippingInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            android:text=""
+            android:layout_below="@+id/linearLayout"
+            android:textColor="@color/colorRed"
+            android:textSize="13sp" />
 
         <ImageView
             android:id="@+id/phone_dial"
