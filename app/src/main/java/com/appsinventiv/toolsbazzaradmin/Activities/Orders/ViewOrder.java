@@ -56,7 +56,8 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
 
     ArrayList<ProductCountModel> newList = new ArrayList<>();
     long totalPrice;
-    private long deliveryCharges = 40;
+    private Float deliveryCharges = 0.0f;
+    private Float shippingCharges = 0.0f;
     long grandTotal = 0;
     CardView shipping_card, order_card, shipping_info_card, delivered_card;
     Button markAsCOD, markAsDeliveredCredit, markAsRefused;
@@ -165,8 +166,10 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                                     customer,
                                     getTotalPrice(),
                                     System.currentTimeMillis(),
-                                    orderIdFromIntent, deliveryCharges,
-                                    (grandTotal + deliveryCharges + totalPrice)
+                                    orderIdFromIntent,
+                                    deliveryCharges,
+                                    shippingCharges,
+                                    (grandTotal + deliveryCharges + shippingCharges + totalPrice)
 
                             ))
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -209,6 +212,8 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                         orderTime.setText("" + CommonUtils.getFormattedDate(model.getTime()));
                         quantity.setText("" + model.getCountModelArrayList().size());
                         price.setText("Rs " + model.getTotalPrice());
+                        deliveryCharges=model.getDeliveryCharges();
+
                         username.setText("" + model.getCustomer().getName());
                         phone.setText("" + model.getCustomer().getPhone());
                         instructions.setText("Instructions: " + model.getInstructions());

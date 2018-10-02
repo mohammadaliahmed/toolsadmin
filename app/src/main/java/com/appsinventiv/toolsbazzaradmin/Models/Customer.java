@@ -5,31 +5,32 @@ package com.appsinventiv.toolsbazzaradmin.Models;
  */
 
 public class Customer {
+
     String id,name, username, email, password, phone,telNumber,address, city,country,fcmKey;
     long time;
     String customerType;
     String storeName,businessRegistrationNumber;
-
+    String locationId;
+    String currencySymbol;
 
     public Customer() {
     }
 
-    public Customer(String id, String name, String username, String email, String password, String phone, String telNumber, String address, String city, String country, String fcmKey, long time, String customerType, String storeName, String businessRegistrationNumber) {
-        this.id = id;
-        this.name = name;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.telNumber = telNumber;
-        this.address = address;
-        this.city = city;
-        this.country = country;
-        this.fcmKey = fcmKey;
-        this.time = time;
-        this.customerType = customerType;
-        this.storeName = storeName;
-        this.businessRegistrationNumber = businessRegistrationNumber;
+
+    public String getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(String locationId) {
+        this.locationId = locationId;
+    }
+
+    public String getCurrencySymbol() {
+        return currencySymbol;
+    }
+
+    public void setCurrencySymbol(String currencySymbol) {
+        this.currencySymbol = currencySymbol;
     }
 
     public String getTelNumber() {

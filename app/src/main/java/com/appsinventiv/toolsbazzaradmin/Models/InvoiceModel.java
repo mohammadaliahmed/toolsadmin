@@ -14,10 +14,16 @@ public class InvoiceModel {
     long totalPrice;
     long time;
     String orderId;
-    long deliveryCharges;
-    long grandTotal;
+    float deliveryCharges;
+    float shippingCharges;
+    float grandTotal;
 
-    public InvoiceModel(long id, ArrayList<ProductCountModel> countModelArrayList, ArrayList<ProductCountModel> newCountModelArrayList, Customer customer, long totalPrice, long time, String orderId, long deliveryCharges, long grandTotal) {
+
+    public InvoiceModel(long id, ArrayList<ProductCountModel> countModelArrayList, ArrayList<ProductCountModel> newCountModelArrayList, Customer customer, long totalPrice,
+                        long time, String orderId,
+                        float deliveryCharges,
+                        float shippingCharges,
+                        float grandTotal) {
         this.id = id;
         this.countModelArrayList = countModelArrayList;
         this.newCountModelArrayList = newCountModelArrayList;
@@ -26,19 +32,32 @@ public class InvoiceModel {
         this.time = time;
         this.orderId = orderId;
         this.deliveryCharges = deliveryCharges;
+        this.shippingCharges = shippingCharges;
         this.grandTotal = grandTotal;
     }
 
-    public long getDeliveryCharges() {
+    public float getDeliveryCharges() {
         return deliveryCharges;
     }
 
-    public void setDeliveryCharges(long deliveryCharges) {
+    public void setDeliveryCharges(float deliveryCharges) {
         this.deliveryCharges = deliveryCharges;
     }
 
-    public long getGrandTotal() {
+    public float getShippingCharges() {
+        return shippingCharges;
+    }
+
+    public void setShippingCharges(float shippingCharges) {
+        this.shippingCharges = shippingCharges;
+    }
+
+    public float getGrandTotal() {
         return grandTotal;
+    }
+
+    public void setGrandTotal(float grandTotal) {
+        this.grandTotal = grandTotal;
     }
 
     public void setGrandTotal(long grandTotal) {

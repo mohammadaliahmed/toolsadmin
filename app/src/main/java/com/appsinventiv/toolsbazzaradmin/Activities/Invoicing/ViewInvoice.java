@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
 import com.appsinventiv.toolsbazzaradmin.Adapters.InvoiceAdapter;
 import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
+import com.appsinventiv.toolsbazzaradmin.Models.LocationAndChargesModel;
 import com.appsinventiv.toolsbazzaradmin.Models.ProductCountModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
@@ -45,6 +46,9 @@ public class ViewInvoice extends AppCompatActivity {
     RelativeLayout wholeLayout;
     InvoiceModel model;
     RelativeLayout ll_linear;
+    LocationAndChargesModel locationAndChargesModel;
+    String locationId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +84,6 @@ public class ViewInvoice extends AppCompatActivity {
 
 
         setUpRecycler();
-
         getInvoiceFromDb();
         getAddressFromDb();
 
@@ -123,12 +126,7 @@ public class ViewInvoice extends AppCompatActivity {
                         availableProductsInOneOrderList = model.getNewCountModelArrayList();
                         invoiceNumberText.setText("Invoice # " + model.getId());
                         date.setText("" + CommonUtils.getFormattedDatee(model.getTime()));
-                        delivery.setText("Rs 40");
-                        total.setText("Rs " + CommonUtils.getFormattedPrice(model.getTotalPrice()));
-                        shipping.setText("Rs " + CommonUtils.getFormattedPrice(model.getTotalPrice()));
-                        grandTotal.setText("Rs " + CommonUtils.getFormattedPrice(model.getGrandTotal()));
-                        orderNumber.setText("Order number: " + model.getOrderId());
-
+                        setUpLayout(model.getCustomer().getLocationId());
                         address.setText("Name:  " + model.getCustomer().getName() + "\nPhone: " + model.getCustomer().getPhone() + "\nAddress:  " + model.getCustomer().getAddress()
                                 + ", " + model.getCustomer().getCity()
                                 + "\nCountry: " + model.getCustomer().getCountry());
@@ -153,6 +151,40 @@ public class ViewInvoice extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setUpLayout(String locationId) {
+        mDatabase.child("Settings").child("DeliveryCharges").child(locationId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    locationAndChargesModel = dataSnapshot.getValue(LocationAndChargesModel.class);
+                    if (locationAndChargesModel != null) {
+                        total.setText(locationAndChargesModel.getCurrency() + " " +
+                                CommonUtils.getFormattedPrice(model.getTotalPrice() * locationAndChargesModel.getCurrencyRate()));
+
+
+                        delivery.setText(locationAndChargesModel.getCurrency() + " " +
+                                CommonUtils.getFormattedPrice(model.getDeliveryCharges() * locationAndChargesModel.getCurrencyRate()));
+
+
+
+                        shipping.setText(locationAndChargesModel.getCurrency() + " " +
+                                CommonUtils.getFormattedPrice(model.getShippingCharges() * locationAndChargesModel.getCurrencyRate()));
+
+                        grandTotal.setText(locationAndChargesModel.getCurrency() + " " +
+                                CommonUtils.getFormattedPrice(model.getGrandTotal() * locationAndChargesModel.getCurrencyRate()));
+                        orderNumber.setText("Order number: " + model.getOrderId());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     public void CalculateTotal() {

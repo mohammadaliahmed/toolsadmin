@@ -20,6 +20,7 @@ public class OrderModel {
 
     String trackingNumber;
     String carrier;
+    float shippingCharges,deliveryCharges;
 
 
 
@@ -43,6 +44,22 @@ public class OrderModel {
 
     public String getTrackingNumber() {
         return trackingNumber;
+    }
+
+    public Float getShippingCharges() {
+        return shippingCharges;
+    }
+
+    public void setShippingCharges(Float shippingCharges) {
+        this.shippingCharges = shippingCharges;
+    }
+
+    public Float getDeliveryCharges() {
+        return deliveryCharges;
+    }
+
+    public void setDeliveryCharges(Float deliveryCharges) {
+        this.deliveryCharges = deliveryCharges;
     }
 
     public void setTrackingNumber(String trackingNumber) {
