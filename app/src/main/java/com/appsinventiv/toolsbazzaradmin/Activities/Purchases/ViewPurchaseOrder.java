@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
 import com.appsinventiv.toolsbazzaradmin.Adapters.PurchaseOrderAdapter;
 import com.appsinventiv.toolsbazzaradmin.Models.ProductCountModel;
 import com.appsinventiv.toolsbazzaradmin.Models.PurchaseOrderModel;
@@ -108,7 +107,7 @@ public class ViewPurchaseOrder extends AppCompatActivity {
                     PurchaseOrderModel model = dataSnapshot.getValue(PurchaseOrderModel.class);
                     if (model != null) {
                         poNumber.setText("PO number: " + model.getId());
-                        date.setText("" + CommonUtils.getFormattedDatee(model.getTime()));
+                        date.setText("" + CommonUtils.getFormattedDateOnly(model.getTime()));
                         total.setText("Total        Rs: " + model.getTotal());
                         employee.setText("Staff name: " + model.getEmployeeName());
                         orderList = model.getProductsList();

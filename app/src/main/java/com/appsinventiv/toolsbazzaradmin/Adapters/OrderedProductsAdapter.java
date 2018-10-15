@@ -82,6 +82,7 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
         }
 
         Glide.with(context).load(model.getProduct().getThumbnailUrl()).into(holder.image);
+
         if(flag==1) {
 
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

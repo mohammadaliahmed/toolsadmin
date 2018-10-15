@@ -10,10 +10,14 @@ import android.view.MenuItem;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.MainActivity;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
+import com.appsinventiv.toolsbazzaradmin.Adapters.AccountsFragmentAdapter;
 import com.appsinventiv.toolsbazzaradmin.Adapters.SimpleFragmentPagerAdapter;
 import com.appsinventiv.toolsbazzaradmin.R;
 
+import java.util.ArrayList;
+
 public class Accounts extends AppCompatActivity {
+    ArrayList<String> accountsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +29,16 @@ public class Accounts extends AppCompatActivity {
         }
         this.setTitle("Accounts");
         ViewPager viewPager = findViewById(R.id.viewpager);
-//        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(this, getSupportFragmentManager());
-//        viewPager.setAdapter(adapter);
-
+        accountsList.add("Pending PO");
+        accountsList.add("Pending SO");
+        accountsList.add("Sales");
+        accountsList.add("Purchase");
+        accountsList.add("Expenses & Revenue");
+        AccountsFragmentAdapter adapter = new AccountsFragmentAdapter(this, accountsList, getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
+
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorRed));
     }

@@ -82,6 +82,11 @@ public class OrdersFragment extends Fragment {
             }
 
             @Override
+            public void markAsCancelled(String orderId) {
+                updateOrderStatusAsCencelled(orderId);
+            }
+
+            @Override
             public void markAsDeleted(String orderId) {
                 markOrderAsDeleted(orderId);
             }
@@ -91,6 +96,44 @@ public class OrdersFragment extends Fragment {
 
         return rootView;
 
+    }
+
+    private void updateOrderStatusAsCencelled(final String orderId) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setMessage("Mark order " + orderId + " as cancelled?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        mDatabase.child("Orders").child(orderId).child("orderStatus").setValue("Cancelled").addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                CommonUtils.showToast("Order status updated");
+                                getDataFromServer();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                CommonUtils.showToast("Error: " + e.getMessage());
+
+                            }
+                        });
+
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 
     private void markOrderAsDeleted(final String orderId) {

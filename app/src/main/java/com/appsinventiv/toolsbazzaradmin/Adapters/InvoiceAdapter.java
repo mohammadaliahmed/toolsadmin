@@ -65,15 +65,17 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
         } else if (customerType.equalsIgnoreCase("retail")) {
             holder.price.setText("Unit price: " + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice()));
 
-            if (list2.contains(model)) {
-                holder.outOfStockText.setVisibility(View.GONE);
-                holder.totalItemPrice.setText("Rs " + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity()));
+            if(list2!=null) {
+                if (list2.contains(model)) {
+                    holder.outOfStockText.setVisibility(View.GONE);
+                    holder.totalItemPrice.setText("Rs " + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity()));
 
-            } else {
-                holder.outOfStockText.setVisibility(View.VISIBLE);
-                holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
+                } else {
+                    holder.outOfStockText.setVisibility(View.VISIBLE);
+                    holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
 
-                holder.totalItemPrice.setText("-Rs " + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity()));
+                    holder.totalItemPrice.setText("-Rs " + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity()));
+                }
             }
         }
 

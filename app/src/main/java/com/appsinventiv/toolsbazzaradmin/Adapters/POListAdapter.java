@@ -1,7 +1,6 @@
 package com.appsinventiv.toolsbazzaradmin.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,11 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.appsinventiv.toolsbazzaradmin.Activities.Purchases.Purchases;
-import com.appsinventiv.toolsbazzaradmin.Activities.Purchases.ViewPurchaseOrder;
 import com.appsinventiv.toolsbazzaradmin.Models.PurchaseOrderModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
@@ -48,7 +44,7 @@ public class POListAdapter extends RecyclerView.Adapter<POListAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull POListAdapter.ViewHolder holder, final int position) {
         final PurchaseOrderModel model = itemList.get(position);
-        holder.date.setText(CommonUtils.getFormattedDatee(model.getTime()));
+        holder.date.setText(CommonUtils.getFormattedDateOnly(model.getTime()));
         holder.purchaseTotal.setText("Rs: " + CommonUtils.getFormattedPrice(model.getTotal()));
         holder.ponumber.setText("" + model.getId());
         holder.vendorname.setText("" + model.getVendor().getVendorName());

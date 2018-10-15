@@ -18,6 +18,8 @@ public class InvoiceModel {
     float shippingCharges;
     float grandTotal;
 
+    public InvoiceModel() {
+    }
 
     public InvoiceModel(long id, ArrayList<ProductCountModel> countModelArrayList, ArrayList<ProductCountModel> newCountModelArrayList, Customer customer, long totalPrice,
                         long time, String orderId,
@@ -36,53 +38,6 @@ public class InvoiceModel {
         this.grandTotal = grandTotal;
     }
 
-    public float getDeliveryCharges() {
-        return deliveryCharges;
-    }
-
-    public void setDeliveryCharges(float deliveryCharges) {
-        this.deliveryCharges = deliveryCharges;
-    }
-
-    public float getShippingCharges() {
-        return shippingCharges;
-    }
-
-    public void setShippingCharges(float shippingCharges) {
-        this.shippingCharges = shippingCharges;
-    }
-
-    public float getGrandTotal() {
-        return grandTotal;
-    }
-
-    public void setGrandTotal(float grandTotal) {
-        this.grandTotal = grandTotal;
-    }
-
-    public void setGrandTotal(long grandTotal) {
-        this.grandTotal = grandTotal;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public ArrayList<ProductCountModel> getNewCountModelArrayList() {
-        return newCountModelArrayList;
-    }
-
-    public void setNewCountModelArrayList(ArrayList<ProductCountModel> newCountModelArrayList) {
-        this.newCountModelArrayList = newCountModelArrayList;
-    }
-
-    public InvoiceModel() {
-    }
-
     public long getId() {
         return id;
     }
@@ -97,6 +52,14 @@ public class InvoiceModel {
 
     public void setCountModelArrayList(ArrayList<ProductCountModel> countModelArrayList) {
         this.countModelArrayList = countModelArrayList;
+    }
+
+    public ArrayList<ProductCountModel> getNewCountModelArrayList() {
+        return newCountModelArrayList;
+    }
+
+    public void setNewCountModelArrayList(ArrayList<ProductCountModel> newCountModelArrayList) {
+        this.newCountModelArrayList = newCountModelArrayList;
     }
 
     public Customer getCustomer() {
@@ -121,5 +84,37 @@ public class InvoiceModel {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public float getDeliveryCharges() {
+        return deliveryCharges;
+    }
+
+    public void setDeliveryCharges(float deliveryCharges) {
+        this.deliveryCharges = deliveryCharges;
+    }
+
+    public float getShippingCharges() {
+        return shippingCharges;
+    }
+
+    public void setShippingCharges(float shippingCharges) {
+        this.shippingCharges = shippingCharges;
+    }
+
+    public float getGrandTotal() {
+        return grandTotal;
+    }
+
+    public void setGrandTotal(float grandTotal) {
+        this.grandTotal = grandTotal;
     }
 }

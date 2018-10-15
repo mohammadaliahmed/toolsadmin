@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Orders.InvoiceListFragment;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.OrdersFragment;
 
 import java.util.ArrayList;
@@ -20,18 +21,20 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     ArrayList<String> arrayList;
     String by;
 
-    public SimpleFragmentPagerAdapter(Context context, ArrayList<String> arrayList, FragmentManager fm,String by) {
+    public SimpleFragmentPagerAdapter(Context context, ArrayList<String> arrayList, FragmentManager fm, String by) {
         super(fm);
         this.mContext = context;
         this.arrayList = arrayList;
-        this.by=by;
+        this.by = by;
     }
 
     // This determines the fragment for each tab
     @Override
     public Fragment getItem(int position) {
 
-        return new OrdersFragment(arrayList.get(position),by);
+
+        return new OrdersFragment(arrayList.get(position), by);
+
 
     }
 

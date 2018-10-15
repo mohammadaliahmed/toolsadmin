@@ -9,13 +9,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.MainActivity;
+import com.appsinventiv.toolsbazzaradmin.Adapters.OrdersFragmentAdapter;
 import com.appsinventiv.toolsbazzaradmin.Adapters.SimpleFragmentPagerAdapter;
 import com.appsinventiv.toolsbazzaradmin.R;
 
 import java.util.ArrayList;
 
 public class Orders extends AppCompatActivity {
-    ArrayList<String> orderStatusList=new ArrayList<>();
+    ArrayList<String> orderStatusList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +30,9 @@ public class Orders extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.viewpager);
         orderStatusList.add("Pending");
         orderStatusList.add("Under Process");
+        orderStatusList.add("Invoice");
         orderStatusList.add("Cancelled");
-        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(this,orderStatusList, getSupportFragmentManager(),"none");
+        OrdersFragmentAdapter adapter = new OrdersFragmentAdapter(this, orderStatusList, getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         // Give the TabLayout the ViewPager

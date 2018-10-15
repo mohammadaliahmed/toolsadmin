@@ -28,6 +28,9 @@ import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
 import com.appsinventiv.toolsbazzaradmin.Utils.CompressImage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -53,9 +56,12 @@ public class BannerSettings extends AppCompatActivity {
 
     List<Uri> mSelected;
     ArrayList<String> imageUrl = new ArrayList<>();
+    ArrayList<SelectedAdImages> banners = new ArrayList<>();
     ArrayList<SelectedAdImages> selectedAdImages = new ArrayList<>();
 
     Button update, pick;
+    RecyclerView recyclerviewPics;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +76,11 @@ public class BannerSettings extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         pick = findViewById(R.id.pick);
         recyclerView = findViewById(R.id.recyclerview);
+        recyclerviewPics = findViewById(R.id.recyclerviewPics);
         update=findViewById(R.id.update);
         showPickedPictures();
+        setUpAlreadyPics();
+        getPicsFromDb();
 
 
         pick.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +130,51 @@ public class BannerSettings extends AppCompatActivity {
         });
 
 
+    }
+
+    private void setUpAlreadyPics() {
+        LinearLayoutManager horizontalLayoutManagaer
+                = new LinearLayoutManager(BannerSettings.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerviewPics.setLayoutManager(horizontalLayoutManagaer);
+        SelectedImagesAdapter adapter = new SelectedImagesAdapter(BannerSettings.this, banners);
+        recyclerviewPics.setAdapter(adapter);
+    }
+
+    private void getPicsFromDb() {
+        mDatabase.child("Settings").child("Banners").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if(dataSnapshot.getValue()!=null){
+                    recyclerviewPics.setVisibility(View.VISIBLE);
+                    BannerPicsModel model =dataSnapshot.getValue(BannerPicsModel.class);
+                    if(model!=null){
+                        banners.add(new SelectedAdImages(model.getUrl()));
+                        adapter.notifyDataSetChanged();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void putPictures(String path, final String key, final int count) {

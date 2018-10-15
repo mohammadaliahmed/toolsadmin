@@ -21,6 +21,7 @@ public class OrderModel {
     String trackingNumber;
     String carrier;
     float shippingCharges,deliveryCharges;
+    String deliveryBy,receiverName,receiverNameCredit,creditDueDate;
 
 
 
@@ -40,6 +41,38 @@ public class OrderModel {
         this.orderStatus = orderStatus;
         this.isInvoiced = isInvoiced;
         this.invoiceNumber = invoiceNumber;
+    }
+
+    public String getReceiverNameCredit() {
+        return receiverNameCredit;
+    }
+
+    public void setReceiverNameCredit(String receiverNameCredit) {
+        this.receiverNameCredit = receiverNameCredit;
+    }
+
+    public String getCreditDueDate() {
+        return creditDueDate;
+    }
+
+    public void setCreditDueDate(String creditDueDate) {
+        this.creditDueDate = creditDueDate;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public String getDeliveryBy() {
+        return deliveryBy;
+    }
+
+    public void setDeliveryBy(String deliveryBy) {
+        this.deliveryBy = deliveryBy;
     }
 
     public String getTrackingNumber() {

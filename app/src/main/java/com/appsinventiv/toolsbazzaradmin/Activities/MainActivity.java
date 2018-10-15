@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Accounts;
 import com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.Settings;
 import com.appsinventiv.toolsbazzaradmin.Activities.Chat.Chats;
 import com.appsinventiv.toolsbazzaradmin.Activities.Employees.ListOfEmployees;
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity
         accounts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, Purchases.class);
+                Intent i = new Intent(MainActivity.this, Accounts.class);
                 startActivity(i);
             }
         });

@@ -30,7 +30,7 @@ public class CommonUtils {
         });
     }
 
-    public static String getFormattedPrice(Object price){
+    public static String getFormattedPrice(Object price) {
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         String formattedPrice = formatter.format(price);
         return formattedPrice;
@@ -56,7 +56,8 @@ public class CommonUtils {
             return DateFormat.format("dd MMM , h:mm aa", smsTime).toString();
         }
     }
-    public static String getFormattedDatee(long smsTimeInMilis) {
+
+    public static String getFormattedDateOnly(long smsTimeInMilis) {
         Calendar smsTime = Calendar.getInstance();
         smsTime.setTimeInMillis(smsTimeInMilis);
 
@@ -65,17 +66,36 @@ public class CommonUtils {
         final String timeFormatString = "h:mm aa";
         final String dateTimeFormatString = "yyyy-MMM-dd";
         final long HOURS = 60 * 60 * 60;
-//        if (now.get(Calendar.DATE) == smsTime.get(Calendar.DATE)) {
-//            return "" + DateFormat.format(timeFormatString, smsTime);
-//        } else if (now.get(Calendar.DATE) - smsTime.get(Calendar.DATE) == 1) {
-//            return "Yesterday ";
-//        }
-//        else if (now.get(Calendar.YEAR) == smsTime.get(Calendar.YEAR)) {
-            return DateFormat.format(dateTimeFormatString, smsTime).toString();
-//        } else {
-//            return DateFormat.format("dd MMM , h:mm aa", smsTime).toString();
-//        }
-    }
 
+        return DateFormat.format(dateTimeFormatString, smsTime).toString();
+
+    }
+    public static String getYear(long smsTimeInMilis) {
+        Calendar smsTime = Calendar.getInstance();
+        smsTime.setTimeInMillis(smsTimeInMilis);
+
+        final String dateTimeFormatString = "yyyy";
+
+        return DateFormat.format(dateTimeFormatString, smsTime).toString();
+
+    }
+    public static String getMonth(long smsTimeInMilis) {
+        Calendar smsTime = Calendar.getInstance();
+        smsTime.setTimeInMillis(smsTimeInMilis);
+
+        final String dateTimeFormatString = "MMM";
+
+        return DateFormat.format(dateTimeFormatString, smsTime).toString();
+
+    }
+    public static String getDate(long smsTimeInMilis) {
+        Calendar smsTime = Calendar.getInstance();
+        smsTime.setTimeInMillis(smsTimeInMilis);
+
+        final String dateTimeFormatString = "dd";
+
+        return DateFormat.format(dateTimeFormatString, smsTime).toString();
+
+    }
 
 }

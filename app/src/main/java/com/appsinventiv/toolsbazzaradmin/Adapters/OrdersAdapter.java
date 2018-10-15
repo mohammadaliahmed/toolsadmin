@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Orders.ViewDeliveryShippedOrder;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.ViewOrder;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.ViewUnderProcessOrder;
 import com.appsinventiv.toolsbazzaradmin.Models.OrderModel;
@@ -50,27 +51,28 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         final OrderModel model = itemList.get(position);
 
 
-        if (model.getOrderStatus().equalsIgnoreCase("Cancelled")) {
+        if (model.getOrderStatus().equalsIgnoreCase("Cancelled")
+                || model.getOrderStatus().equalsIgnoreCase("Pending")) {
             holder.cancel.setVisibility(View.VISIBLE);
         } else {
             holder.cancel.setVisibility(View.GONE);
         }
 
+
         holder.cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateOrderStatus.markAsDeleted(model.getOrderId());
+                if (model.getOrderStatus().equalsIgnoreCase("Cancelled")) {
+                    updateOrderStatus.markAsDeleted(model.getOrderId());
+                } else if (model.getOrderStatus().equalsIgnoreCase("Pending")) {
+                    updateOrderStatus.markAsCancelled(model.getOrderId());
+                }
             }
         });
         if (model.getOrderStatus().equalsIgnoreCase("Pending")) {
-//        if (model.getOrderStatus().equalsIgnoreCase("Under Process")
-//                || model.getOrderStatus().equalsIgnoreCase("Pending")) {
+
             holder.checkbox.setVisibility(View.VISIBLE);
-//            if (model.getOrderStatus().equalsIgnoreCase("Under Process")) {
-//                holder.checkbox.setChecked(true);
-//            } else {
-//                holder.checkbox.setChecked(false);
-//            }
+
         } else {
             holder.checkbox.setVisibility(View.GONE);
         }
@@ -83,8 +85,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             );
             holder.userDetails.setText("Name: " + model.getCustomer().getName()
                     + "\n\nPhone: " + model.getCustomer().getPhone()
-                    + "\n\nAddress: " + model.getCustomer().getAddress() + ", " + model.getCustomer().getCity()
-                    + "\n\nCountry: " + model.getCustomer().getCountry()
+                    + "\n\nAddress: " + model.getCustomer().getAddress() + ", " + model.getCustomer().getCity() + ", " + model.getCustomer().getCountry()
+                    + "\n\nType: " + model.getCustomer().getCustomerType()
 
 
             );
@@ -95,6 +97,9 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
                     if (model.getOrderStatus().equalsIgnoreCase("Under Process")) {
                         i = new Intent(context, ViewUnderProcessOrder.class);
+
+                    } else if (model.getOrderStatus().equalsIgnoreCase("Shipped")) {
+                        i = new Intent(context, ViewDeliveryShippedOrder.class);
 
                     } else {
                         i = new Intent(context, ViewOrder.class);
@@ -123,14 +128,17 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 }
             }
         });
-
-        if (model.getCarrier() != null) {
-            holder.shippingInfo.setVisibility(View.VISIBLE);
-            holder.shippingInfo.setText("Carrier: " + model.getCarrier() + "\nTracking: " + model.getTrackingNumber());
-        } else {
-            holder.shippingInfo.setVisibility(View.GONE);
+        if (!model.getOrderStatus().equalsIgnoreCase("refused")) {
+            if (model.getCarrier() != null) {
+                holder.shippingInfo.setVisibility(View.VISIBLE);
+                holder.shippingInfo.setText("Carrier: " + model.getCarrier() + "\nTracking: " + model.getTrackingNumber());
+            } else if (model.getDeliveryBy() != null) {
+                holder.shippingInfo.setVisibility(View.VISIBLE);
+                holder.shippingInfo.setText("Delivery by: " + model.getDeliveryBy());
+            } else {
+                holder.shippingInfo.setVisibility(View.GONE);
+            }
         }
-
     }
 
     @Override
@@ -156,6 +164,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     public interface UpdateOrderStatus {
         public void markAsProcessing(String orderId);
+
+        public void markAsCancelled(String orderId);
 
         public void markAsDeleted(String orderId);
     }

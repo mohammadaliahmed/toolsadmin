@@ -39,7 +39,8 @@
         <activity
             android:name=".Activities.Orders.Orders"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".Activities.Orders.ViewOrder" />
+        <activity android:name=".Activities.Orders.ViewOrder"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".Activities.Products.ListOfProducts" />
         <activity android:name=".Activities.SalesReport" />
         <activity android:name=".Activities.Products.EditProduct" />
@@ -88,7 +89,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Activities.Orders.OrdersDelivery" />
         <activity android:name=".Activities.Orders.OrdersCourier" />
-        <activity android:name=".Activities.Orders.ViewUnderProcessOrder"></activity>
+        <activity android:name=".Activities.Orders.ViewUnderProcessOrder" />
+        <activity android:name=".Activities.Orders.ViewDeliveryShippedOrder"></activity>
     </application>
 
 </manifest>

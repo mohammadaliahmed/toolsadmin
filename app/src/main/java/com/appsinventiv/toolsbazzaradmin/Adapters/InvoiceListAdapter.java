@@ -9,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ListOfInvoices;
 import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice;
-import com.appsinventiv.toolsbazzaradmin.Activities.MainActivity;
 import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
@@ -43,7 +41,7 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final InvoiceModel model = itemList.get(position);
-        holder.date.setText(CommonUtils.getFormattedDatee(model.getTime()));
+        holder.date.setText(CommonUtils.getFormattedDateOnly(model.getTime()));
         holder.invoiceNumber.setText("" + model.getId());
         holder.invoiceTotal.setText("" + CommonUtils.getFormattedPrice(model.getGrandTotal()));
         holder.orderId.setText("" + model.getOrderId());

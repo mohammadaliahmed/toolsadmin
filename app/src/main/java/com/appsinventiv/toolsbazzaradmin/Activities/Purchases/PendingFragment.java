@@ -130,11 +130,12 @@ public class PendingFragment extends Fragment {
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        String key=mDatabase.push().getKey();
 
                         mDatabase.child("Purchases").child("Completed")
-                                .child(purchaseOrder+"")
+                                .child(key)
                                 .setValue(new PurchaseOrderModel(
-                                        "" + purchaseOrder,
+                                        key,
                                         itemList,
                                         vendor,
                                         calculateTotal()

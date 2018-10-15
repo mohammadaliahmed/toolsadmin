@@ -14,9 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
 import com.appsinventiv.toolsbazzaradmin.Adapters.InvoiceAdapter;
 import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
 import com.appsinventiv.toolsbazzaradmin.Models.LocationAndChargesModel;
@@ -125,7 +123,7 @@ public class ViewInvoice extends AppCompatActivity {
                         allProductsInOneOrderList = model.getCountModelArrayList();
                         availableProductsInOneOrderList = model.getNewCountModelArrayList();
                         invoiceNumberText.setText("Invoice # " + model.getId());
-                        date.setText("" + CommonUtils.getFormattedDatee(model.getTime()));
+                        date.setText("" + CommonUtils.getFormattedDateOnly(model.getTime()));
                         setUpLayout(model.getCustomer().getLocationId());
                         address.setText("Name:  " + model.getCustomer().getName() + "\nPhone: " + model.getCustomer().getPhone() + "\nAddress:  " + model.getCustomer().getAddress()
                                 + ", " + model.getCustomer().getCity()

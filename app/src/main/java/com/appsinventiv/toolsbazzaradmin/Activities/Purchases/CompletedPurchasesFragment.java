@@ -40,7 +40,6 @@ public class CompletedPurchasesFragment extends Fragment {
     Button fab;
     ArrayList<CompletedArrayListModel> completedPurchasesIds = new ArrayList<>();
 
-
     public CompletedPurchasesFragment() {
         // Required empty public constructor
     }
@@ -55,9 +54,14 @@ public class CompletedPurchasesFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromDb();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_completed_purchases, container, false);
         fab = rootView.findViewById(R.id.fab);
 
@@ -93,7 +97,7 @@ public class CompletedPurchasesFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-        getDataFromDb();
+
         return rootView;
 
     }
@@ -127,11 +131,11 @@ public class CompletedPurchasesFragment extends Fragment {
 
     private void sendDataToDb() {
         for (final CompletedArrayListModel id : completedPurchasesIds) {
-
-            mDatabase.child("Accounts").child("PendingPO").push().setValue(itemList.get(id.getPosition())).addOnSuccessListener(new OnSuccessListener<Void>() {
+           final String key=""+itemList.get(id.getPosition()).getId();
+            mDatabase.child("Accounts").child("PendingPO").child(key).setValue(itemList.get(id.getPosition())).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    removeFromCompleted(id.getId());
+                    removeFromCompleted(key);
                 }
             });
 
@@ -149,7 +153,7 @@ public class CompletedPurchasesFragment extends Fragment {
     }
 
     private void getDataFromDb() {
-        mDatabase.child("Purchases").child("Completed").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Purchases").child("Completed").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {

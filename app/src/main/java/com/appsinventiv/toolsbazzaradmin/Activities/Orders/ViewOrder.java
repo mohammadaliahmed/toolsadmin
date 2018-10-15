@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,22 +39,23 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ViewOrder extends AppCompatActivity implements NotificationObserver {
-    TextView orderId, orderTime, quantity, price, username, phone, address, city, instructions;
+    TextView orderId, orderTime, quantity, price, username, phone, address,
+            city, ship_country, instructions, deliveredBy, receivedBy;
     String orderIdFromIntent;
     DatabaseReference mDatabase;
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     OrderedProductsAdapter adapter;
     ArrayList<ProductCountModel> list = new ArrayList<>();
-    Button button;
-
+    Button button, button_refused;
+    TextView creditDue, amount;
     String s_orderId, s_quantity, s_price, s_username;
     String userFcmKey;
     FloatingActionButton invoice;
     long invoiceNumber = 10001;
     Customer customer;
     OrderModel model;
-    RelativeLayout wholeLayout;
+    RelativeLayout wholeLayout, creditDueLayout;
 
     ArrayList<ProductCountModel> newList = new ArrayList<>();
     long totalPrice;
@@ -60,8 +63,11 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
     private Float shippingCharges = 0.0f;
     long grandTotal = 0;
     CardView shipping_card, order_card, shipping_info_card, delivered_card;
-    Button markAsCOD, markAsDeliveredCredit, markAsRefused;
-    EditText dueDate;
+    EditText dueDate, receiverName;
+
+    Button transferToAccounts,transferToAccounts1, markAsDeliveredCourier, markAsRefusedCourier;
+    CardView courier_card, courier_card_delivered;
+    TextView courierName, trackingNumber, courierReceiverName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,54 +81,108 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
 
         Intent intent = getIntent();
         orderIdFromIntent = intent.getStringExtra("orderId");
-        this.setTitle("Order #: " + orderIdFromIntent);
+        this.setTitle("Order # " + orderIdFromIntent);
 
+        courierName = findViewById(R.id.courierName);
+        trackingNumber = findViewById(R.id.trackingNumber);
+        courierReceiverName = findViewById(R.id.courierReceiverName);
+        courier_card_delivered = findViewById(R.id.courier_card_delivered);
+        courier_card = findViewById(R.id.courier_card);
+        markAsDeliveredCourier = findViewById(R.id.markAsDeliveredCourier);
+        markAsRefusedCourier = findViewById(R.id.markAsRefusedCourier);
+        receiverName = findViewById(R.id.receiverName);
         orderId = findViewById(R.id.order_id);
+        amount = findViewById(R.id.amount);
+        creditDue = findViewById(R.id.creditDue);
         orderTime = findViewById(R.id.order_time);
         quantity = findViewById(R.id.order_quantity);
         price = findViewById(R.id.order_price);
         instructions = findViewById(R.id.instructions);
         wholeLayout = findViewById(R.id.wholeLayout);
+        button_refused = findViewById(R.id.button_refused);
+        creditDueLayout = findViewById(R.id.creditDueLayout);
+        transferToAccounts1 = findViewById(R.id.transferToAccounts1);
+
 
         username = findViewById(R.id.ship_username);
         phone = findViewById(R.id.ship_phone);
         address = findViewById(R.id.ship_address);
         city = findViewById(R.id.ship_city);
+        ship_country = findViewById(R.id.ship_country);
         delivered_card = findViewById(R.id.delivered_card);
         shipping_card = findViewById(R.id.shipping_card);
         order_card = findViewById(R.id.order_card);
         shipping_info_card = findViewById(R.id.shipping_info_card);
-        markAsCOD = findViewById(R.id.markAsCOD);
-        markAsDeliveredCredit = findViewById(R.id.markAsDeliveredCredit);
-        markAsRefused = findViewById(R.id.markAsRefused);
-        dueDate = findViewById(R.id.dueDate);
+        transferToAccounts = findViewById(R.id.transferToAccounts);
+        receivedBy = findViewById(R.id.receivedBy);
+        deliveredBy = findViewById(R.id.deliveredBy);
 
-        markAsRefused.setOnClickListener(new View.OnClickListener() {
+
+        transferToAccounts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.child("Orders").child(orderIdFromIntent).child("Refused").setValue("");
-
+                CommonUtils.showToast("Hi");
+            }
+        });
+        transferToAccounts1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CommonUtils.showToast("Hi");
             }
         });
 
 
-        markAsCOD.setOnClickListener(new View.OnClickListener() {
+        button_refused.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.child("Orders").child(orderIdFromIntent).child("orderStatus").setValue("");
-                mDatabase.child("Orders").child(orderIdFromIntent).child("creditDueDate").setValue(dueDate.getText().toString());
-
+                markasRefusedByCourier();
             }
         });
 
-        markAsDeliveredCredit.setOnClickListener(new View.OnClickListener() {
+
+        markAsDeliveredCourier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.child("Orders").child(orderIdFromIntent).child("orderStatus").setValue("Credit");
-                mDatabase.child("Orders").child(orderIdFromIntent).child("creditDueDate").setValue(dueDate.getText().toString());
-
+                if (receiverName.getText().length() == 0) {
+                    receiverName.setError("Enter name");
+                } else {
+                    markOrderAsDeliverdByCourier();
+                }
             }
         });
+        markAsRefusedCourier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                markasRefusedByCourier();
+            }
+        });
+
+//        markAsRefused.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                markAsRefusedAdmin();
+//
+//            }
+//        });
+//
+//
+//        markAsCOD.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mDatabase.child("Orders").child(orderIdFromIntent).child("orderStatus").setValue("Delivered COD");
+//                mDatabase.child("Orders").child(orderIdFromIntent).child("creditDueDate").setValue(dueDate.getText().toString());
+//
+//            }
+//        });
+//
+//        markAsDeliveredCredit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mDatabase.child("Orders").child(orderIdFromIntent).child("orderStatus").setValue("Credit");
+//                mDatabase.child("Orders").child(orderIdFromIntent).child("creditDueDate").setValue(dueDate.getText().toString());
+//
+//            }
+//        });
 
 
         button = findViewById(R.id.button);
@@ -138,6 +198,8 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                     markOrderAsShipped();
                 } else if (model.getOrderStatus().equalsIgnoreCase("shipped")) {
                     markOrderAsComplete();
+                } else if (model.getOrderStatus().equalsIgnoreCase("shipped by courier")) {
+                    markOrderAsDeliverdByCourier();
                 } else {
 
                 }
@@ -194,7 +256,7 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recylerview);
-        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
 
@@ -207,21 +269,47 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
 
                         setUpLayout(model.getOrderStatus());
 
+                        if (model.getCountModelArrayList().size() > 1) {
+                            recyclerView.setMinimumHeight(model.getCountModelArrayList().size() * 520);
+                        }
 
                         orderId.setText("" + model.getOrderId());
                         orderTime.setText("" + CommonUtils.getFormattedDate(model.getTime()));
                         quantity.setText("" + model.getCountModelArrayList().size());
                         price.setText("Rs " + model.getTotalPrice());
-                        deliveryCharges=model.getDeliveryCharges();
+                        deliveryCharges = model.getDeliveryCharges();
 
                         username.setText("" + model.getCustomer().getName());
                         phone.setText("" + model.getCustomer().getPhone());
                         instructions.setText("Instructions: " + model.getInstructions());
                         address.setText(model.getCustomer().getAddress());
                         city.setText(model.getCustomer().getCity());
+                        ship_country.setText(model.getCustomer().getCountry());
                         list = model.getCountModelArrayList();
+
+                        if (model.getDeliveryBy() != null) {
+                            deliveredBy.setText(model.getDeliveryBy());
+                        }
+                        if (model.getReceiverName() != null) {
+                            receivedBy.setText(model.getReceiverName());
+                        }
+
+                        if (model.getReceiverNameCredit() != null) {
+                            receivedBy.setText(model.getReceiverNameCredit());
+                        }
+                        if (model.getCreditDueDate() != null) {
+                            creditDue.setText("Due Date: " + model.getCreditDueDate());
+                            amount.setText("Amount: Rs " + CommonUtils.getFormattedPrice(model.getTotalPrice()));
+                        }
+
+                        if(model.getCarrier()!=null){
+                            courierReceiverName.setText(model.getReceiverName());
+                            courierName.setText(model.getCarrier());
+                            trackingNumber.setText(model.getTrackingNumber()+"");
+                        }
+
                         customer = model.getCustomer();
-                        adapter = new OrderedProductsAdapter(ViewOrder.this, list, model.getCustomer().getCustomerType(), 1, new OrderedProductsAdapter.OnProductSelected() {
+                        adapter = new OrderedProductsAdapter(ViewOrder.this, list, model.getCustomer().getCustomerType(), 0, new OrderedProductsAdapter.OnProductSelected() {
                             @Override
                             public void onChecked(ProductCountModel product, int position) {
                                 if (!newList.contains(product)) {
@@ -239,21 +327,48 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                         });
                         recyclerView.setAdapter(adapter);
 
-                        if (model.getOrderStatus().equalsIgnoreCase("Pending")
-                                ||
-                                model.getOrderStatus().equalsIgnoreCase("under process")
-                                ) {
+                        if (model.getOrderStatus().equalsIgnoreCase("under process")) {
                             button.setText("Mark as shipped");
+                            courier_card.setVisibility(View.GONE);
+
 
 
                         } else if (model.getOrderStatus().equalsIgnoreCase("Shipped")) {
                             button.setText("Mark as delivered");
+                            courier_card.setVisibility(View.GONE);
 
-                        } else {
+
+                        } else if (model.getOrderStatus().equalsIgnoreCase("Pending")) {
+                            invoice.setVisibility(View.GONE);
                             button.setVisibility(View.GONE);
+                            courier_card_delivered.setVisibility(View.GONE);
+                            courier_card.setVisibility(View.GONE);
+
+
+
+
+                        } else if (model.getOrderStatus().equalsIgnoreCase("Shipped by courier")) {
+                            courier_card.setVisibility(View.VISIBLE);
+                            button.setVisibility(View.GONE);
+                            courier_card_delivered.setVisibility(View.GONE);
+
+
+//                            button.setText("Mark as delivered");
+//                            button_refused.setVisibility(View.VISIBLE);
                         }
-//                        Toast.makeText(ViewOrder.this, ""+list, Toast.LENGTH_SHORT).show();
-//                        adapter.notifyDataSetChanged();
+                        else if (model.getOrderStatus().equalsIgnoreCase("delivered by courier")) {
+                            courier_card_delivered.setVisibility(View.VISIBLE);
+                            button.setVisibility(View.GONE);
+
+                        }
+
+                        else {
+                            button.setVisibility(View.GONE);
+                            courier_card.setVisibility(View.GONE);
+                            courier_card_delivered.setVisibility(View.GONE);
+
+                        }
+
 
                         s_orderId = model.getOrderId();
                         s_quantity = "" + model.getCountModelArrayList().size();
@@ -273,6 +388,107 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
 
     }
 
+    private void markAsRefusedAdmin() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrder.this);
+        builder.setTitle("Alert");
+        builder.setMessage("Do you want to mark this order as refused?");
+
+        // add the buttons
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mDatabase.child("Orders").child(orderIdFromIntent).child("Refused").setValue("Refused")
+
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                CommonUtils.showToast("Marked as refused");
+                                finish();
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void markasRefusedByCourier() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrder.this);
+        builder.setTitle("Alert");
+        builder.setMessage("Do you want to mark this order as refused?");
+
+        // add the buttons
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mDatabase.child("Orders").child(orderIdFromIntent).child("orderStatus").setValue("Refused By Courier")
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                CommonUtils.showToast("Marked as delivered");
+                                finish();
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void markOrderAsDeliverdByCourier() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrder.this);
+        builder.setTitle("Alert");
+        builder.setMessage("Do you want to mark this order as delivered?");
+
+        // add the buttons
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mDatabase.child("Orders").child(orderIdFromIntent).child("receiverName").setValue(receiverName.getText().toString());
+                mDatabase.child("Orders").child(orderIdFromIntent).child("orderStatus").setValue("Delivered By Courier")
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                CommonUtils.showToast("Marked as delivered");
+                                finish();
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     private void setUpLayout(String orderStatus) {
         if (model.getOrderStatus().equalsIgnoreCase("pending")
                 || model.getOrderStatus().equalsIgnoreCase("under process")
@@ -284,11 +500,14 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
 
 
         if (model.getOrderStatus().equalsIgnoreCase("delivered")) {
-            shipping_card.setVisibility(View.GONE);
-            shipping_info_card.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.GONE);
+
             delivered_card.setVisibility(View.VISIBLE);
         }
+        if (model.getOrderStatus().equalsIgnoreCase("credit")) {
+            creditDueLayout.setVisibility(View.VISIBLE);
+            delivered_card.setVisibility(View.VISIBLE);
+        }
+
     }
 
     private void addPurchase() {
@@ -411,8 +630,7 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                                 String notification_title = "Your order has been " + message;
                                 String notification_message = "Click to view";
                                 notificationAsync.execute("ali", userFcmKey, notification_title, notification_message, "Order", "abc");
-                                Intent i = new Intent(ViewOrder.this, Orders.class);
-                                startActivity(i);
+
                                 finish();
 
                             }
@@ -441,4 +659,20 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
     public void onFailure() {
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
