@@ -52,7 +52,7 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
     String s_orderId, s_quantity, s_price, s_username;
     String userFcmKey;
     FloatingActionButton invoice;
-    long invoiceNumber = 10001;
+    int invoiceNumber = 10001;
     Customer customer;
     OrderModel model;
     RelativeLayout wholeLayout, creditDueLayout;
@@ -65,7 +65,7 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
     CardView shipping_card, order_card, shipping_info_card, delivered_card;
     EditText dueDate, receiverName;
 
-    Button transferToAccounts,transferToAccounts1, markAsDeliveredCourier, markAsRefusedCourier;
+    Button transferToAccounts, transferToAccounts1, markAsDeliveredCourier, markAsRefusedCourier;
     CardView courier_card, courier_card_delivered;
     TextView courierName, trackingNumber, courierReceiverName;
 
@@ -121,13 +121,14 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
         transferToAccounts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CommonUtils.showToast("Hi");
+                addToInvoiceAccounts();
+
             }
         });
         transferToAccounts1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CommonUtils.showToast("Hi");
+                CommonUtils.showToast("Hi2");
             }
         });
 
@@ -188,7 +189,7 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
         button = findViewById(R.id.button);
         invoice = findViewById(R.id.invoice);
 
-        getInvoicesFromDb();
+        getInvoicesCountFromDb();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,47 +211,45 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
         invoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (model.isInvoiced()) {
-                    Intent i = new Intent(ViewOrder.this, ViewInvoice.class);
-                    i.putExtra("invoiceNumber", model.getInvoiceNumber());
-                    startActivity(i);
-                    finish();
-                } else {
-
-                    wholeLayout.setVisibility(View.VISIBLE);
-                    mDatabase.child("Invoices").child("" + invoiceNumber)
-                            .setValue(new InvoiceModel(
-
-                                    invoiceNumber,
-                                    list,
-                                    newList,
-                                    customer,
-                                    getTotalPrice(),
-                                    System.currentTimeMillis(),
-                                    orderIdFromIntent,
-                                    deliveryCharges,
-                                    shippingCharges,
-                                    (grandTotal + deliveryCharges + shippingCharges + totalPrice)
-
-                            ))
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    updateInvoiceStatus();
-                                    Intent i = new Intent(ViewOrder.this, ViewInvoice.class);
-                                    i.putExtra("invoiceNumber", invoiceNumber);
-                                    startActivity(i);
-                                    addPurchase();
-
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                        }
-                    });
-                }
+                addPurchase();
+//
+//                if (model.isInvoiced()) {
+//                    Intent i = new Intent(ViewOrder.this, ViewInvoice.class);
+//                    i.putExtra("invoiceNumber", model.getInvoiceNumber());
+//                    startActivity(i);
+//                    finish();
+//                } else {
+//
+//                    wholeLayout.setVisibility(View.VISIBLE);
+//                    mDatabase.child("Invoices").child("" + invoiceNumber)
+//                            .setValue(new InvoiceModel(
+//
+//                                    invoiceNumber,
+//                                    list,
+//                                    list,
+//                                    customer,
+//                                    getTotalPrice(),
+//                                    System.currentTimeMillis(),
+//                                    orderIdFromIntent,
+//                                    deliveryCharges,
+//                                    shippingCharges,
+//                                    (grandTotal + deliveryCharges + shippingCharges + totalPrice)
+//
+//                            ))
+//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                @Override
+//                                public void onSuccess(Void aVoid) {
+//                                    updateInvoiceStatus();
+//
+//
+//                                }
+//                            }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//
+//                        }
+//                    });
+//                }
             }
         });
 
@@ -270,7 +269,7 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                         setUpLayout(model.getOrderStatus());
 
                         if (model.getCountModelArrayList().size() > 1) {
-                            recyclerView.setMinimumHeight(model.getCountModelArrayList().size() * 520);
+                            recyclerView.setMinimumHeight(model.getCountModelArrayList().size() * 550);
                         }
 
                         orderId.setText("" + model.getOrderId());
@@ -302,10 +301,10 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                             amount.setText("Amount: Rs " + CommonUtils.getFormattedPrice(model.getTotalPrice()));
                         }
 
-                        if(model.getCarrier()!=null){
+                        if (model.getCarrier() != null) {
                             courierReceiverName.setText(model.getReceiverName());
                             courierName.setText(model.getCarrier());
-                            trackingNumber.setText(model.getTrackingNumber()+"");
+                            trackingNumber.setText(model.getTrackingNumber() + "");
                         }
 
                         customer = model.getCustomer();
@@ -332,7 +331,6 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                             courier_card.setVisibility(View.GONE);
 
 
-
                         } else if (model.getOrderStatus().equalsIgnoreCase("Shipped")) {
                             button.setText("Mark as delivered");
                             courier_card.setVisibility(View.GONE);
@@ -345,8 +343,6 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                             courier_card.setVisibility(View.GONE);
 
 
-
-
                         } else if (model.getOrderStatus().equalsIgnoreCase("Shipped by courier")) {
                             courier_card.setVisibility(View.VISIBLE);
                             button.setVisibility(View.GONE);
@@ -355,14 +351,11 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
 
 //                            button.setText("Mark as delivered");
 //                            button_refused.setVisibility(View.VISIBLE);
-                        }
-                        else if (model.getOrderStatus().equalsIgnoreCase("delivered by courier")) {
+                        } else if (model.getOrderStatus().equalsIgnoreCase("delivered by courier")) {
                             courier_card_delivered.setVisibility(View.VISIBLE);
                             button.setVisibility(View.GONE);
 
-                        }
-
-                        else {
+                        } else {
                             button.setVisibility(View.GONE);
                             courier_card.setVisibility(View.GONE);
                             courier_card_delivered.setVisibility(View.GONE);
@@ -386,6 +379,65 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
             }
         });
 
+    }
+
+    private void addToInvoiceAccounts() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrder.this);
+        builder.setTitle("Alert");
+        builder.setMessage("Move to accounts?");
+
+        // add the buttons
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mDatabase.child("Accounts/PendingInvoices").child("" + invoiceNumber)
+                        .setValue(new InvoiceModel(
+
+                                invoiceNumber,
+                                list,
+                                list,
+                                customer,
+                                getTotalPrice(),
+                                System.currentTimeMillis(),
+                                orderIdFromIntent,
+                                deliveryCharges,
+                                shippingCharges,
+                                (grandTotal + deliveryCharges + shippingCharges + totalPrice),
+                                model.getOrderStatus(),
+                                list.size(),
+                                model.getDeliveryBy(),
+                                0
+
+                        ))
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                updateInvoicesCount();
+                                updateOrderStatus();
+                                CommonUtils.showToast("Moved to accounts");
+                                finish();
+
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    private void updateOrderStatus() {
+        mDatabase.child("Orders").child(orderIdFromIntent).child("orderStatus").setValue("Completed");
     }
 
     private void markAsRefusedAdmin() {
@@ -576,20 +628,18 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
         return totalPrice;
     }
 
-    private void updateInvoiceStatus() {
-        mDatabase.child("Orders").child(orderIdFromIntent).child("isInvoiced").setValue(true);
-        mDatabase.child("Orders").child(orderIdFromIntent).child("invoiceNumber").setValue(invoiceNumber);
 
-
+    private void updateInvoicesCount() {
+        mDatabase.child("Accounts").child("InvoicesCount").setValue(invoiceNumber);
     }
 
-    private void getInvoicesFromDb() {
-        mDatabase.child("Invoices").addListenerForSingleValueEvent(new ValueEventListener() {
+    private void getInvoicesCountFromDb() {
+        mDatabase.child("Accounts").child("InvoicesCount").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-                    long invoiceNum = dataSnapshot.getChildrenCount();
-                    invoiceNumber = invoiceNum + invoiceNumber;
+                    invoiceNumber = dataSnapshot.getValue(Integer.class) + 1;
+                } else {
 
                 }
             }

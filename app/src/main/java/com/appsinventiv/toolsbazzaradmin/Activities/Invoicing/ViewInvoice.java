@@ -46,6 +46,8 @@ public class ViewInvoice extends AppCompatActivity {
     RelativeLayout ll_linear;
     LocationAndChargesModel locationAndChargesModel;
     String locationId;
+    String path;
+    float totalPrice = 0;
 
 
     @Override
@@ -78,6 +80,7 @@ public class ViewInvoice extends AppCompatActivity {
 
         Intent i = getIntent();
         invoiceNumber = i.getLongExtra("invoiceNumber", 0);
+        path = i.getStringExtra("path");
         this.setTitle("Invoice # " + invoiceNumber);
 
 
@@ -113,7 +116,8 @@ public class ViewInvoice extends AppCompatActivity {
     }
 
     private void getInvoiceFromDb() {
-        mDatabase.child("Invoices").child("" + invoiceNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Accounts/InvoicesFinalized/" + path)
+                .child("" + invoiceNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
@@ -158,20 +162,24 @@ public class ViewInvoice extends AppCompatActivity {
                 if (dataSnapshot.getValue() != null) {
                     locationAndChargesModel = dataSnapshot.getValue(LocationAndChargesModel.class);
                     if (locationAndChargesModel != null) {
+                        for (int i = 0; i < model.getCountModelArrayList().size(); i++) {
+                            totalPrice = totalPrice + (((model.getCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getCountModelArrayList().get(i).getQuantity())
+                            ));
+
+                        }
                         total.setText(locationAndChargesModel.getCurrency() + " " +
-                                CommonUtils.getFormattedPrice(model.getTotalPrice() * locationAndChargesModel.getCurrencyRate()));
+                                CommonUtils.getFormattedPrice(totalPrice));
 
 
                         delivery.setText(locationAndChargesModel.getCurrency() + " " +
-                                CommonUtils.getFormattedPrice(model.getDeliveryCharges() * locationAndChargesModel.getCurrencyRate()));
-
+                                CommonUtils.getFormattedPrice(model.getDeliveryCharges()));
 
 
                         shipping.setText(locationAndChargesModel.getCurrency() + " " +
-                                CommonUtils.getFormattedPrice(model.getShippingCharges() * locationAndChargesModel.getCurrencyRate()));
+                                CommonUtils.getFormattedPrice(model.getShippingCharges()));
 
                         grandTotal.setText(locationAndChargesModel.getCurrency() + " " +
-                                CommonUtils.getFormattedPrice(model.getGrandTotal() * locationAndChargesModel.getCurrencyRate()));
+                                CommonUtils.getFormattedPrice(model.getGrandTotal()));
                         orderNumber.setText("Order number: " + model.getOrderId());
                     }
                 }

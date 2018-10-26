@@ -1,6 +1,7 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Accounts;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Callbacks.WhichKey;
 import com.appsinventiv.toolsbazzaradmin.Activities.MainActivity;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
 import com.appsinventiv.toolsbazzaradmin.Adapters.AccountsFragmentAdapter;
@@ -16,9 +18,10 @@ import com.appsinventiv.toolsbazzaradmin.R;
 
 import java.util.ArrayList;
 
-public class Accounts extends AppCompatActivity {
+public class Accounts extends AppCompatActivity implements WhichKey{
     ArrayList<String> accountsList = new ArrayList<>();
-
+    int id;
+    Menu menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +55,8 @@ public class Accounts extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+         id = item.getItemId();
+
         if (item.getItemId() == android.R.id.home) {
             Intent i = new Intent(Accounts.this, MainActivity.class);
             startActivity(i);
@@ -62,8 +66,20 @@ public class Accounts extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
+    @Override
+    public void which(String key) {
+        MenuItem menuItem = menu.findItem(R.id.which);
+        menuItem.setTitle(key);
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.accounts_menu, menu);
+        this.menu=menu;
+        return true;
     }
+
 }

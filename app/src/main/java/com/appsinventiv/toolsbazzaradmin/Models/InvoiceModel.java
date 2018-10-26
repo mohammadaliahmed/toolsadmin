@@ -17,6 +17,9 @@ public class InvoiceModel {
     float deliveryCharges;
     float shippingCharges;
     float grandTotal;
+    String orderStatus, deliveryBy;
+    int orderItems;
+    int outOfStock;
 
     public InvoiceModel() {
     }
@@ -25,7 +28,12 @@ public class InvoiceModel {
                         long time, String orderId,
                         float deliveryCharges,
                         float shippingCharges,
-                        float grandTotal) {
+                        float grandTotal,
+                        String orderStatus,
+                        int orderItems,
+                        String deliveryBy,
+                        int outOfStock
+    ) {
         this.id = id;
         this.countModelArrayList = countModelArrayList;
         this.newCountModelArrayList = newCountModelArrayList;
@@ -36,6 +44,42 @@ public class InvoiceModel {
         this.deliveryCharges = deliveryCharges;
         this.shippingCharges = shippingCharges;
         this.grandTotal = grandTotal;
+        this.orderStatus = orderStatus;
+        this.orderItems = orderItems;
+        this.deliveryBy = deliveryBy;
+        this.outOfStock = outOfStock;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public int getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(int orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public String getDeliveryBy() {
+        return deliveryBy;
+    }
+
+    public void setDeliveryBy(String deliveryBy) {
+        this.deliveryBy = deliveryBy;
+    }
+
+    public int getOutOfStock() {
+        return outOfStock;
+    }
+
+    public void setOutOfStock(int outOfStock) {
+        this.outOfStock = outOfStock;
     }
 
     public long getId() {

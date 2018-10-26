@@ -15,10 +15,10 @@ public class ProductCountModel {
 
     int quantityPurchased;
     int outOfStock;
-    float newCostPrice;
+    float newCostPrice=-1;
 
     float purchaseTotal;
-    boolean isPurchased;
+    boolean purchased;
     String size;
     String color;
 
@@ -41,6 +41,7 @@ public class ProductCountModel {
         return result;
     }
 
+
     public String getSize() {
         return size;
     }
@@ -58,12 +59,11 @@ public class ProductCountModel {
     }
 
     public boolean isPurchased() {
-        return isPurchased;
+        return purchased;
     }
 
-
     public void setPurchased(boolean purchased) {
-        isPurchased = purchased;
+        this.purchased = purchased;
     }
 
     public int getQuantityPurchased() {

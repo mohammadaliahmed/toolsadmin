@@ -46,10 +46,11 @@ public class PendingFragment extends Fragment {
     public static ArrayList<ProductCountModel> itemList = new ArrayList<>();
     PendingProductsAdapter adapter;
     ProgressBar progress;
-    long purchaseOrder = 10001;
+    long poNumber = 10001;
     Button generate;
     ArrayList<String> productIds = new ArrayList<>();
     Context context;
+
 
     public PendingFragment() {
         // Required empty public constructor
@@ -116,7 +117,8 @@ public class PendingFragment extends Fragment {
 
 
         getVendorsFromDb();
-        getPurchaseOrdersFromDb();
+        getPurchaseOrderCountFromDb();
+
         return rootView;
 
     }
@@ -130,7 +132,7 @@ public class PendingFragment extends Fragment {
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        String key=mDatabase.push().getKey();
+                        String key = mDatabase.push().getKey();
 
                         mDatabase.child("Purchases").child("Completed")
                                 .child(key)
@@ -141,13 +143,19 @@ public class PendingFragment extends Fragment {
                                         calculateTotal()
                                         , System.currentTimeMillis(),
                                         false,
-                                        SharedPrefs.getFullName())).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        SharedPrefs.getFullName(),
+                                        "" + poNumber)
+
+
+                                ).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 CommonUtils.showToast("Marked as completed");
                                 for (ProductCountModel item : itemList) {
                                     removeValueFromDb(item.getProduct().getId());
                                 }
+                                updatePOCount();
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -180,22 +188,8 @@ public class PendingFragment extends Fragment {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        mDatabase.child("Purchases").child("PendingPurchases").child(productId).child("isPurchased").setValue(true);
+                        mDatabase.child("Purchases").child("PendingPurchases").child(productId).child("purchased").setValue(true);
 
-
-//                        mDatabase.child("Purchases").child("Purchased").child("" + purchaseOrder)
-//                                .setValue(itemList.get(position))
-//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void aVoid) {
-////                                removeValueFromDb(productId);
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//
-//                            }
-//                        });
                     }
                 });
 
@@ -227,13 +221,18 @@ public class PendingFragment extends Fragment {
         });
     }
 
-    private void getPurchaseOrdersFromDb() {
-        mDatabase.child("Purchases").child("PurchaseOrders").addListenerForSingleValueEvent(new ValueEventListener() {
+
+    private void updatePOCount() {
+        mDatabase.child("Accounts").child("PurchaseOrderCount").setValue(poNumber);
+    }
+
+    private void getPurchaseOrderCountFromDb() {
+        mDatabase.child("Accounts").child("PurchaseOrderCount").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-                    long po = dataSnapshot.getChildrenCount();
-                    purchaseOrder = purchaseOrder + po;
+                    poNumber = dataSnapshot.getValue(Integer.class) + 1;
+                } else {
 
                 }
             }
@@ -243,35 +242,6 @@ public class PendingFragment extends Fragment {
 
             }
         });
-    }
-
-    private void createPurchaseOrder() {
-        mDatabase.child("Purchases").child("PurchaseOrders")
-                .child("" + purchaseOrder)
-                .setValue(new PurchaseOrderModel("" + purchaseOrder,
-                        itemList,
-                        vendor,
-                        calculateTotal()
-                        , System.currentTimeMillis(),
-                        false,
-                        SharedPrefs.getFullName()
-
-                )).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-
-                Intent i = new Intent(context, ViewPurchaseOrder.class);
-                i.putExtra("po", purchaseOrder);
-                startActivity(i);
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-
     }
 
     private long calculateTotal() {

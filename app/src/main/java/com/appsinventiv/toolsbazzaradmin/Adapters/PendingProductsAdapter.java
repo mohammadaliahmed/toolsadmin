@@ -46,7 +46,7 @@ public class PendingProductsAdapter extends RecyclerView.Adapter<PendingProducts
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final ProductCountModel model = itemList.get(position);
 
         if (model.isPurchased()) {
@@ -73,8 +73,11 @@ public class PendingProductsAdapter extends RecyclerView.Adapter<PendingProducts
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     isPurchased.addToArray(model.getProduct().getId(), position);
+                    holder.purchased.setChecked(true);
                 } else {
                     isPurchased.removeFromArray(model.getProduct().getId(), position);
+                    holder.purchased.setChecked(false);
+
                 }
             }
         });
@@ -97,6 +100,16 @@ public class PendingProductsAdapter extends RecyclerView.Adapter<PendingProducts
                 context.startActivity(i);
             }
         });
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
     }
 
     @Override

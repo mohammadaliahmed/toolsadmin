@@ -26,7 +26,7 @@
             android:layout_marginTop="10dp"
             android:background="@color/colorPrimary"
             android:inputType="text"
-            android:text="Purchase order finalized"
+            android:text="Finalize"
             android:textColor="#fff" />
 
     </RelativeLayout>

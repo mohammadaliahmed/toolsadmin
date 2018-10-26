@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context="com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice">
 
     <android.support.design.widget.AppBarLayout
@@ -46,8 +47,9 @@
                 android:id="@+id/poNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/employee"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:hint="PO Order "
                 android:textColor="#000"
                 android:textSize="16sp"
@@ -84,10 +86,19 @@
                 android:id="@+id/employee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Purchase officer"
+                android:textSize="10sp"
+                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/address"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:text=""
+                android:text="Purchase Order"
                 android:textStyle="bold" />
 
             <View
@@ -140,8 +151,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_below="@id/total"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text=""
                 android:textSize="10sp" />

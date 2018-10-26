@@ -64,6 +64,7 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
     long invoiceNumber = 10001;
     Customer customer;
     OrderModel model;
+
 //    RelativeLayout wholeLayout;
 
     ArrayList<ProductCountModel> newList = new ArrayList<>();
@@ -139,7 +140,7 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
                         address.setText(model.getCustomer().getAddress());
                         ship_country.setText(model.getCustomer().getCountry());
                         if (model.getCountModelArrayList().size() > 1) {
-                            recyclerView.setMinimumHeight(model.getCountModelArrayList().size() * 520);
+                            recyclerView.setMinimumHeight(model.getCountModelArrayList().size() * 550);
                         }
 
                         city.setText(model.getCustomer().getCity());
@@ -209,55 +210,59 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
         invoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (model.isInvoiced()) {
-                    Intent i = new Intent(ViewUnderProcessOrder.this, ViewInvoice.class);
-                    i.putExtra("invoiceNumber", model.getInvoiceNumber());
-                    startActivity(i);
-                    finish();
-                } else {
-
-//                    wholeLayout.setVisibility(View.VISIBLE);
-                    mDatabase.child("Invoices").child("" + invoiceNumber)
-                            .setValue(new InvoiceModel(
-
-                                    invoiceNumber,
-                                    list,
-                                    newList,
-                                    customer,
-                                    getTotalPrice(),
-                                    System.currentTimeMillis(),
-                                    orderIdFromIntent,
-                                    deliveryCharges,
-                                    shippingCharges,
-                                    (grandTotal + deliveryCharges + shippingCharges + totalPrice)
-
-                            ))
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    updateInvoiceStatus();
-                                    Intent i = new Intent(ViewUnderProcessOrder.this, ViewInvoice.class);
-                                    i.putExtra("invoiceNumber", invoiceNumber);
-                                    startActivity(i);
-                                    addPurchase();
-
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                        }
-                    });
-                }
+                addPurchase();
+//                if (model.isInvoiced()) {
+//                    Intent i = new Intent(ViewUnderProcessOrder.this, ViewInvoice.class);
+//                    i.putExtra("invoiceNumber", model.getInvoiceNumber());
+//                    startActivity(i);
+//                    finish();
+//                } else {
+//
+////                    wholeLayout.setVisibility(View.VISIBLE);
+//                    mDatabase.child("Invoices").child("" + invoiceNumber)
+//                            .setValue(new InvoiceModel(
+//
+//                                    invoiceNumber,
+//                                    list,
+//                                    newList,
+//                                    customer,
+//                                    getTotalPrice(),
+//                                    System.currentTimeMillis(),
+//                                    orderIdFromIntent,
+//                                    deliveryCharges,
+//                                    shippingCharges,
+//                                    (grandTotal + deliveryCharges + shippingCharges + totalPrice)
+//
+//                            ))
+//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                @Override
+//                                public void onSuccess(Void aVoid) {
+//                                    updateInvoiceStatus();
+//                                    Intent i = new Intent(ViewUnderProcessOrder.this, ViewInvoice.class);
+//                                    i.putExtra("invoiceNumber", invoiceNumber);
+//                                    startActivity(i);
+//                                    addPurchase();
+//
+//
+//                                }
+//                            }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//
+//                        }
+//                    });
+//                }
             }
         });
 
 
         getDeliveryBoysFromDb();
-        getInvoicesFromDb();
+        getInvoiceCountFromDb();
 
     }
-    private void getInvoicesFromDb() {
+
+
+    private void getInvoiceCountFromDb() {
         mDatabase.child("Invoices").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -287,6 +292,7 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
                     }
                     for (final ProductCountModel model : newList) {
                         if (!keys.contains(model.getProduct().getId())) {
+
                             mDatabase.child("Purchases").child("PendingPurchases").child(model.getProduct().getId()).setValue(model);
                             mDatabase.child("Purchases").child("PendingPurchases").child(model.getProduct().getId()).child("orderId").child(orderIdFromIntent).setValue(orderIdFromIntent);
 

@@ -45,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Full name"
                 android:backgroundTint="@color/default_grey"
-
                 android:inputType="textCapWords"
                 android:maxLines="1"
                 android:textColor="@color/colorWhite"

@@ -14,8 +14,13 @@ public class PurchaseOrderModel {
     long time;
     boolean isCancelled;
     String employeeName;
+    String poNumber;
 
-    public PurchaseOrderModel(String id, ArrayList<ProductCountModel> productsList, VendorModel vendor, long total, long time, boolean isCancelled, String employeeName) {
+    public PurchaseOrderModel(String id, ArrayList<ProductCountModel> productsList, VendorModel vendor,
+                              long total, long time, boolean isCancelled,
+                              String employeeName,
+                              String poNumber
+    ) {
         this.id = id;
         this.productsList = productsList;
         this.vendor = vendor;
@@ -23,6 +28,16 @@ public class PurchaseOrderModel {
         this.time = time;
         this.isCancelled = isCancelled;
         this.employeeName = employeeName;
+        this.poNumber=poNumber;
+    }
+
+
+    public String getPoNumber() {
+        return poNumber;
+    }
+
+    public void setPoNumber(String poNumber) {
+        this.poNumber = poNumber;
     }
 
     public String getEmployeeName() {

@@ -64,7 +64,17 @@ public class InvoiceListFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_orders);
         layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new InvoiceListAdapter(context, itemList);
+        adapter = new InvoiceListAdapter(context, itemList, 0, new InvoiceListAdapter.SelectInvoices() {
+            @Override
+            public void addToArray(long id, int position) {
+
+            }
+
+            @Override
+            public void removeFromArray(long id, int position) {
+
+            }
+        });
 
         recyclerView.setAdapter(adapter);
 

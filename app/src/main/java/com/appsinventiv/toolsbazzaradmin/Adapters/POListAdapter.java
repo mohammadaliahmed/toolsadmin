@@ -1,6 +1,7 @@
 package com.appsinventiv.toolsbazzaradmin.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Purchases.ViewPurchaseOrder;
 import com.appsinventiv.toolsbazzaradmin.Models.PurchaseOrderModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
@@ -25,11 +27,15 @@ public class POListAdapter extends RecyclerView.Adapter<POListAdapter.ViewHolder
     Context context;
     ArrayList<PurchaseOrderModel> itemList;
     SettleBills settleBills;
+    String path;
+    int showCheckbox;
 
-    public POListAdapter(Context context, ArrayList<PurchaseOrderModel> itemList, SettleBills settleBills) {
+    public POListAdapter(Context context, ArrayList<PurchaseOrderModel> itemList, String path, int showCheckbox, SettleBills settleBills) {
         this.context = context;
         this.itemList = itemList;
         this.settleBills = settleBills;
+        this.path = path;
+        this.showCheckbox = showCheckbox;
     }
 
     @NonNull
@@ -45,30 +51,38 @@ public class POListAdapter extends RecyclerView.Adapter<POListAdapter.ViewHolder
     public void onBindViewHolder(@NonNull POListAdapter.ViewHolder holder, final int position) {
         final PurchaseOrderModel model = itemList.get(position);
         holder.date.setText(CommonUtils.getFormattedDateOnly(model.getTime()));
-        holder.purchaseTotal.setText("Rs: " + CommonUtils.getFormattedPrice(model.getTotal()));
-        holder.ponumber.setText("" + model.getId());
+        holder.totalCost.setText("Rs: " + CommonUtils.getFormattedPrice(model.getTotal()));
+        holder.totalCost.setText("Rs: " + CommonUtils.getFormattedPrice(model.getTotal()));
+        holder.ponumber.setText("" + model.getPoNumber());
         holder.vendorname.setText("" + model.getVendor().getVendorName());
         holder.purchaseOfficer.setText(model.getEmployeeName());
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    settleBills.addToArray(model.getId(), position);
-                } else {
-                    settleBills.removeFromArray(model.getId(), position);
+        if (showCheckbox == 1) {
+            holder.checkBox.setVisibility(View.VISIBLE);
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        settleBills.addToArray(model.getId(), position);
+                    } else {
+                        settleBills.removeFromArray(model.getId(), position);
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            holder.checkBox.setVisibility(View.GONE);
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(context, ViewPurchaseOrder.class);
-//                i.putExtra("po", Long.parseLong(model.getId()));
-//                context.startActivity(i);
-//            }
-//        });
 
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, ViewPurchaseOrder.class);
+                    i.putExtra("po", model.getId());
+                    i.putExtra("path", path);
+                    context.startActivity(i);
+                }
+            });
+
+        }
     }
 
     @Override
@@ -77,7 +91,7 @@ public class POListAdapter extends RecyclerView.Adapter<POListAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView date, ponumber, vendorname, purchaseTotal, purchaseOfficer;
+        TextView date, ponumber, vendorname, totalCost, purchaseOfficer, newOldCost;
         CheckBox checkBox;
 
         public ViewHolder(View itemView) {
@@ -85,9 +99,10 @@ public class POListAdapter extends RecyclerView.Adapter<POListAdapter.ViewHolder
             date = itemView.findViewById(R.id.date);
             ponumber = itemView.findViewById(R.id.ponumber);
             vendorname = itemView.findViewById(R.id.vendorname);
-            purchaseTotal = itemView.findViewById(R.id.purchaseTotal);
+            totalCost = itemView.findViewById(R.id.totalCost);
             purchaseOfficer = itemView.findViewById(R.id.purchaseOfficer);
             checkBox = itemView.findViewById(R.id.checkBox);
+            newOldCost = itemView.findViewById(R.id.newOldCost);
 
 
         }

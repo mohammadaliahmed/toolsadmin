@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ViewPurchaseOrder extends AppCompatActivity {
-    long purchaseOrder;
+    String purchaseOrder;
     DatabaseReference mDatabase;
     ArrayList<ProductCountModel> orderList = new ArrayList<>();
     TextView poNumber, date, address, total, storeAddress;
@@ -43,6 +43,7 @@ public class ViewPurchaseOrder extends AppCompatActivity {
     PurchaseOrderAdapter adapter;
     RelativeLayout ll_linear;
     TextView employee;
+    String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,8 @@ public class ViewPurchaseOrder extends AppCompatActivity {
         }
 
         Intent i = getIntent();
-        purchaseOrder = i.getLongExtra("po", 0);
-        this.setTitle("PO #: " + purchaseOrder);
+        purchaseOrder = i.getStringExtra("po");
+        path = i.getStringExtra("path");
         ll_linear = findViewById(R.id.ll_linear);
 
         poNumber = findViewById(R.id.poNumber);
@@ -100,13 +101,15 @@ public class ViewPurchaseOrder extends AppCompatActivity {
 
 
     private void getDataFromDb() {
-        mDatabase.child("Purchases").child("PurchaseOrders").child("" + purchaseOrder).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Accounts").child("PurchaseFinalized").child(path).child(purchaseOrder).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
                     PurchaseOrderModel model = dataSnapshot.getValue(PurchaseOrderModel.class);
                     if (model != null) {
-                        poNumber.setText("PO number: " + model.getId());
+                        poNumber.setText("PO number: " + model.getPoNumber());
+                        ViewPurchaseOrder.this.setTitle("PO #: " + model.getPoNumber());
+
                         date.setText("" + CommonUtils.getFormattedDateOnly(model.getTime()));
                         total.setText("Total        Rs: " + model.getTotal());
                         employee.setText("Staff name: " + model.getEmployeeName());

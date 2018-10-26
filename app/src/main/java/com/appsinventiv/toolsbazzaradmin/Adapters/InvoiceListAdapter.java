@@ -7,9 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice;
+import com.appsinventiv.toolsbazzaradmin.Activities.Purchases.ViewPurchaseOrder;
 import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
@@ -23,11 +26,14 @@ import java.util.ArrayList;
 public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.ViewHolder> {
     Context context;
     ArrayList<InvoiceModel> itemList;
+    int showCheckbox;
+    SelectInvoices selectInvoices;
 
-
-    public InvoiceListAdapter(Context context, ArrayList<InvoiceModel> itemList) {
+    public InvoiceListAdapter(Context context, ArrayList<InvoiceModel> itemList, int showCheckbox, SelectInvoices selectInvoices) {
         this.context = context;
         this.itemList = itemList;
+        this.showCheckbox = showCheckbox;
+        this.selectInvoices = selectInvoices;
     }
 
     @NonNull
@@ -39,7 +45,7 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final InvoiceModel model = itemList.get(position);
         holder.date.setText(CommonUtils.getFormattedDateOnly(model.getTime()));
         holder.invoiceNumber.setText("" + model.getId());
@@ -53,6 +59,32 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
                 context.startActivity(i);
             }
         });
+        if (showCheckbox == 1) {
+            holder.checkBox.setVisibility(View.VISIBLE);
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        selectInvoices.addToArray(model.getId(), position);
+                    } else {
+                        selectInvoices.removeFromArray(model.getId(), position);
+                    }
+                }
+            });
+        } else {
+            holder.checkBox.setVisibility(View.GONE);
+
+
+//            holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent i = new Intent(context, ViewPurchaseOrder.class);
+//
+//                    context.startActivity(i);
+//                }
+//            });
+
+        }
     }
 
     @Override
@@ -62,6 +94,7 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView date, invoiceNumber, orderId, invoiceTotal;
+        CheckBox checkBox;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -70,7 +103,15 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
             invoiceNumber = itemView.findViewById(R.id.invoiceNumber);
             orderId = itemView.findViewById(R.id.orderId);
             invoiceTotal = itemView.findViewById(R.id.invoiceTotal);
+            checkBox = itemView.findViewById(R.id.checkBox);
+
 
         }
+    }
+
+    public interface SelectInvoices {
+        public void addToArray(long id, int position);
+
+        public void removeFromArray(long id, int position);
     }
 }
