@@ -92,7 +92,12 @@
         <activity android:name=".Activities.Orders.OrdersCourier" />
         <activity android:name=".Activities.Orders.ViewUnderProcessOrder" />
         <activity android:name=".Activities.Orders.ViewDeliveryShippedOrder" />
-        <activity android:name=".Activities.Accounts.Salaries"></activity>
+        <activity android:name=".Activities.Accounts.ExpensesAndRevenue.Salaries" />
+        <activity android:name=".Activities.Accounts.ExpensesAndRevenue.Transportation" />
+        <activity android:name=".Activities.Accounts.ExpensesAndRevenue.Rent" />
+        <activity android:name=".Activities.Accounts.ExpensesAndRevenue.UtilityBills" />
+        <activity android:name=".Activities.Accounts.ExpensesAndRevenue.Stationaries" />
+        <activity android:name=".Activities.Accounts.ExpensesAndRevenue.Miscellaneous"></activity>
     </application>
 
 </manifest>
