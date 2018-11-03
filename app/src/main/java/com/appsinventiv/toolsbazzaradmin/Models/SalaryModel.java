@@ -6,14 +6,15 @@ package com.appsinventiv.toolsbazzaradmin.Models;
 
 public class SalaryModel {
     String id;
-    float basicSalary=0,overTime=0,bonus=0,deduction=0;
+    float basicSalary=0,overTime=0,bonus=0,deduction=0,ETFandEPF=0;
     String reason;
-    float time;
-    String year,month;
+    long time;
     String userId;
 
+    float total;
 
-    public SalaryModel(String id, float basicSalary, float overTime, float bonus, float deduction, String reason, float time, String year, String month, String userId) {
+    public SalaryModel(String id, float basicSalary, float overTime, float bonus, float deduction,
+                       String reason, long time, String userId,float ETFandEPF) {
         this.id = id;
         this.basicSalary = basicSalary;
         this.overTime = overTime;
@@ -21,9 +22,22 @@ public class SalaryModel {
         this.deduction = deduction;
         this.reason = reason;
         this.time = time;
-        this.year = year;
-        this.month = month;
+
         this.userId = userId;
+        this.ETFandEPF=ETFandEPF;
+    }
+
+    public float getTotal() {
+        total=(basicSalary+overTime+bonus)-(deduction+ETFandEPF);
+        return total;
+    }
+
+    public float getETFandEPF() {
+        return ETFandEPF;
+    }
+
+    public void setETFandEPF(float ETFandEPF) {
+        this.ETFandEPF = ETFandEPF;
     }
 
     public String getId() {
@@ -34,29 +48,14 @@ public class SalaryModel {
         this.id = id;
     }
 
-    public float getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(float time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
-    }
 
     public String getUserId() {
         return userId;

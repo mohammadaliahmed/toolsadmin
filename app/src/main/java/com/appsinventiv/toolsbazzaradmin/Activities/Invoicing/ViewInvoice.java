@@ -137,7 +137,6 @@ public class ViewInvoice extends AppCompatActivity {
                                 availableProductsInOneOrderList,
                                 model.getCustomer().getCustomerType());
 
-
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                         wholeLayout.setVisibility(View.GONE);

@@ -31,7 +31,7 @@ public class CommonUtils {
     }
 
     public static String getFormattedPrice(Object price) {
-        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        DecimalFormat formatter = new DecimalFormat("##,##,###");
         String formattedPrice = formatter.format(price);
         return formattedPrice;
     }

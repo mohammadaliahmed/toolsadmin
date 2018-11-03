@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Office Transportation"
                 android:inputType="number"
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Staff Transportation"
                 android:inputType="number"
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -56,7 +56,7 @@
                 android:hint="Office fuel"
                 android:inputType="number"
 
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -73,7 +73,7 @@
                 android:hint="Staff fuel"
                 android:inputType="number"
 
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -90,7 +90,7 @@
                 android:hint="Shipping"
                 android:inputType="number"
 
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -107,7 +107,7 @@
                 android:hint="Delivery"
                 android:inputType="number"
 
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 

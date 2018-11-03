@@ -277,6 +277,8 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                         quantity.setText("" + model.getCountModelArrayList().size());
                         price.setText("Rs " + model.getTotalPrice());
                         deliveryCharges = model.getDeliveryCharges();
+                        shippingCharges = model.getShippingCharges();
+                        totalPrice=model.getTotalPrice();
 
                         username.setText("" + model.getCustomer().getName());
                         phone.setText("" + model.getCustomer().getPhone());
@@ -397,12 +399,13 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                                 list,
                                 list,
                                 customer,
-                                getTotalPrice(),
+//                                getTotalPrice(),
+                                totalPrice,
                                 System.currentTimeMillis(),
                                 orderIdFromIntent,
                                 deliveryCharges,
                                 shippingCharges,
-                                (grandTotal + deliveryCharges + shippingCharges + totalPrice),
+                                totalPrice,
                                 model.getOrderStatus(),
                                 list.size(),
                                 model.getDeliveryBy(),
@@ -615,18 +618,18 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
             }
         });
     }
-
-    private long getTotalPrice() {
-        totalPrice = 0;
-        for (ProductCountModel abc : newList) {
-            if (model.getCustomer().getCustomerType().equalsIgnoreCase("wholesale")) {
-                totalPrice += abc.getQuantity() * abc.getProduct().getWholeSalePrice();
-            } else if (model.getCustomer().getCustomerType().equalsIgnoreCase("retail")) {
-                totalPrice += abc.getQuantity() * abc.getProduct().getRetailPrice();
-            }
-        }
-        return totalPrice;
-    }
+//
+//    private long getTotalPrice() {
+//        totalPrice = 0;
+//        for (ProductCountModel abc : newList) {
+//            if (model.getCustomer().getCustomerType().equalsIgnoreCase("wholesale")) {
+//                totalPrice += abc.getQuantity() * abc.getProduct().getWholeSalePrice();
+//            } else if (model.getCustomer().getCustomerType().equalsIgnoreCase("retail")) {
+//                totalPrice += abc.getQuantity() * abc.getProduct().getRetailPrice();
+//            }
+//        }
+//        return totalPrice;
+//    }
 
 
     private void updateInvoicesCount() {

@@ -219,38 +219,43 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
 //                } else {
 //
 ////                    wholeLayout.setVisibility(View.VISIBLE);
-//                    mDatabase.child("Invoices").child("" + invoiceNumber)
-//                            .setValue(new InvoiceModel(
-//
-//                                    invoiceNumber,
-//                                    list,
-//                                    newList,
-//                                    customer,
-//                                    getTotalPrice(),
-//                                    System.currentTimeMillis(),
-//                                    orderIdFromIntent,
-//                                    deliveryCharges,
-//                                    shippingCharges,
-//                                    (grandTotal + deliveryCharges + shippingCharges + totalPrice)
-//
-//                            ))
-//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                @Override
-//                                public void onSuccess(Void aVoid) {
-//                                    updateInvoiceStatus();
-//                                    Intent i = new Intent(ViewUnderProcessOrder.this, ViewInvoice.class);
-//                                    i.putExtra("invoiceNumber", invoiceNumber);
-//                                    startActivity(i);
-//                                    addPurchase();
-//
-//
-//                                }
-//                            }).addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//
-//                        }
-//                    });
+                mDatabase.child("Accounts/PendingInvoices").child("" + invoiceNumber)
+                        .setValue(new InvoiceModel(
+
+                                invoiceNumber,
+                                list,
+                                newList,
+                                customer,
+                                model.getTotalPrice(),
+                                System.currentTimeMillis(),
+                                orderIdFromIntent,
+                                model.getDeliveryCharges(),
+                                model.getShippingCharges(),
+                                model.getTotalPrice(),
+                                model.getOrderStatus(),
+                                list.size(),
+                                model.getDeliveryBy(),
+                                0
+
+                        ))
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                updateInvoiceStatus();
+                                CommonUtils.showToast("Done!\nGo to purchases");
+//                                Intent i = new Intent(ViewUnderProcessOrder.this, ViewInvoice.class);
+//                                i.putExtra("invoiceNumber", invoiceNumber);
+//                                startActivity(i);
+//                                addPurchase();
+
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
 //                }
             }
         });

@@ -1,5 +1,6 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Accounts.ExpensesAndRevenue;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class UtilityBills extends AppCompatActivity {
     DatabaseReference mDatabase;
     EditText electricCityBill, waterBill, internetBill, staffInternetBill, officeTelephoneBill, staffMobileBill, governmentTax;
     Button save;
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class UtilityBills extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        Intent i =getIntent();
+        path=i.getStringExtra("path");
         mDatabase = FirebaseDatabase.getInstance().getReference();
         save = findViewById(R.id.save);
         electricCityBill = findViewById(R.id.electricCityBill);
@@ -42,7 +46,7 @@ public class UtilityBills extends AppCompatActivity {
         internetBill = findViewById(R.id.internetBill);
         staffInternetBill = findViewById(R.id.staffInternetBill);
         officeTelephoneBill = findViewById(R.id.officeTelephoneBill);
-        staffMobileBill = findViewById(R.id.electricCityBill);
+        staffMobileBill = findViewById(R.id.staffMobileBill);
         governmentTax = findViewById(R.id.governmentTax);
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -67,11 +71,11 @@ public class UtilityBills extends AppCompatActivity {
                 }
             }
         });
-        getDataFromDb("");
+        getDataFromDb(path);
     }
 
     private void getDataFromDb(String path) {
-        mDatabase.child("Accounts").child("ExpensesAndRevenue").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Accounts").child("ExpensesAndRevenue").child(path).child("UtilityBills").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
@@ -99,8 +103,7 @@ public class UtilityBills extends AppCompatActivity {
         long time = System.currentTimeMillis();
         mDatabase.child("Accounts")
                 .child("ExpensesAndRevenue")
-                .child(CommonUtils.getYear(time))
-                .child(CommonUtils.getMonth(time))
+                .child(path)
                 .child("UtilityBills").setValue(new UtilityBillsModel(
                 Float.parseFloat(electricCityBill.getText().toString()),
                 Float.parseFloat(waterBill.getText().toString()),

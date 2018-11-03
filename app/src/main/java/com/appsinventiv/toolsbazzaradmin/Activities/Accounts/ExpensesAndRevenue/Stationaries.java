@@ -1,5 +1,6 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Accounts.ExpensesAndRevenue;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class Stationaries extends AppCompatActivity {
     DatabaseReference mDatabase;
     EditText officeStationaries, staffStationaries, advertising, billBooksPrint, packingMaterial, businessCardPrint;
     Button save;
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class Stationaries extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        Intent i =getIntent();
+        path=i.getStringExtra("path");
         mDatabase = FirebaseDatabase.getInstance().getReference();
         save = findViewById(R.id.save);
         officeStationaries = findViewById(R.id.officeStationaries);
@@ -65,11 +69,11 @@ public class Stationaries extends AppCompatActivity {
                 }
             }
         });
-        getDataFromDb("");
+        getDataFromDb(path);
     }
 
     private void getDataFromDb(String path) {
-        mDatabase.child("Accounts").child("ExpensesAndRevenue").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Accounts").child("ExpensesAndRevenue").child(path).child("Stationaries").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
@@ -96,8 +100,7 @@ public class Stationaries extends AppCompatActivity {
     private void sendDataToDb() {
         long time = System.currentTimeMillis();
         mDatabase.child("Accounts").child("ExpensesAndRevenue")
-                .child(CommonUtils.getYear(time))
-                .child(CommonUtils.getMonth(time))
+                .child(path)
                 .child("Stationaries").setValue(new StationariesModel(
                 Float.parseFloat(officeStationaries.getText().toString()),
                 Float.parseFloat(staffStationaries.getText().toString()),

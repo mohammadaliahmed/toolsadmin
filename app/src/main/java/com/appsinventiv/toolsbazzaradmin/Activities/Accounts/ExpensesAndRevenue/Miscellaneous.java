@@ -1,5 +1,6 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Accounts.ExpensesAndRevenue;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,17 +11,22 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.appsinventiv.toolsbazzaradmin.Models.MiscellaneousModel;
+import com.appsinventiv.toolsbazzaradmin.Models.TransportationModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Miscellaneous extends AppCompatActivity {
     DatabaseReference mDatabase;
     EditText remarks1, remarks2, remarks3, remarks4, remarks5, cost1, cost2, cost3, cost4, cost5;
     Button save;
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,8 @@ public class Miscellaneous extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        Intent i =getIntent();
+        path=i.getStringExtra("path");
         mDatabase = FirebaseDatabase.getInstance().getReference();
         save = findViewById(R.id.save);
         remarks1 = findViewById(R.id.remarks1);
@@ -44,13 +52,14 @@ public class Miscellaneous extends AppCompatActivity {
         cost4 = findViewById(R.id.cost4);
         cost5 = findViewById(R.id.cost5);
 
+        getDataFromDb(path);
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 long time = System.currentTimeMillis();
                 mDatabase.child("Accounts").child("ExpensesAndRevenue")
-                        .child(CommonUtils.getYear(time))
-                        .child(CommonUtils.getMonth(time))
+                        .child(path)
                         .child("Miscellaneous").setValue(new MiscellaneousModel(
                         remarks1.getText().toString() + " ",
                         remarks2.getText().toString() + " ",
@@ -81,6 +90,35 @@ public class Miscellaneous extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getDataFromDb(String path) {
+        mDatabase.child("Accounts").child("ExpensesAndRevenue").child(path).child("Miscellaneous").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    MiscellaneousModel model = dataSnapshot.getValue(MiscellaneousModel.class);
+                    if (model != null) {
+                        remarks1.setText("" + model.getRemarks1());
+                        remarks2.setText("" + model.getRemarks2());
+                        remarks3.setText("" + model.getRemarks3());
+                        remarks4.setText("" + model.getRemarks4());
+                        remarks5.setText("" + model.getRemarks5());
+                        cost1.setText("" + model.getCost1());
+                        cost2.setText("" + model.getCost2());
+                        cost3.setText("" + model.getCost3());
+                        cost4.setText("" + model.getCost4());
+                        cost5.setText("" + model.getCost5());
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private float calcualteTotal() {

@@ -1,5 +1,6 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Accounts.ExpensesAndRevenue;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class Transportation extends AppCompatActivity {
     DatabaseReference mDatabase;
     EditText officeTransportation, staffTransportation, officeFuel, staffFuel, shipping, delivery;
     Button save;
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,8 @@ public class Transportation extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
+        Intent i =getIntent();
+        path=i.getStringExtra("path");
         officeTransportation = findViewById(R.id.officeTransportation);
         staffTransportation = findViewById(R.id.staffTransportation);
         officeFuel = findViewById(R.id.officeFuel);
@@ -44,7 +47,7 @@ public class Transportation extends AppCompatActivity {
 
         save = findViewById(R.id.save);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        getDataFromDb("ali");
+        getDataFromDb(path);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +74,7 @@ public class Transportation extends AppCompatActivity {
     }
 
     private void getDataFromDb(String path) {
-        mDatabase.child("Accounts").child("ExpensesAndRevenue").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Accounts").child("ExpensesAndRevenue").child(path).child("Transportation").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
@@ -97,8 +100,7 @@ public class Transportation extends AppCompatActivity {
     private void sendDataToDb() {
         long time = System.currentTimeMillis();
         mDatabase.child("Accounts").child("ExpensesAndRevenue")
-                .child(CommonUtils.getYear(time))
-                .child(CommonUtils.getMonth(time))
+                .child(path)
                 .child("Transportation").setValue(new TransportationModel(
                 Float.parseFloat(officeTransportation.getText().toString()),
                 Float.parseFloat(staffTransportation.getText().toString()),

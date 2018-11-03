@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Electricity bill"
                 android:inputType="number"
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Water Bill"
                 android:inputType="number"
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -55,7 +55,7 @@
                 android:hint="Internet Bill"
                 android:inputType="number"
 
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -72,7 +72,7 @@
                 android:hint="Staff Internet Bill"
                 android:inputType="number"
 
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -89,7 +89,7 @@
                 android:hint="Office Telephone Bill"
                 android:inputType="number"
 
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -106,7 +106,7 @@
                 android:hint="Staff Mobile Bill"
                 android:inputType="number"
 
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -123,7 +123,7 @@
                 android:hint="Government Tax"
                 android:inputType="number"
 
-                android:textSize="13sp" />
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 

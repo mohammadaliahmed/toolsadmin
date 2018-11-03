@@ -1,5 +1,6 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Accounts.ExpensesAndRevenue;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,15 +23,19 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class Salaries extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Employee> itemList = new ArrayList<>();
+    ArrayList<SalaryModel> salaryList = new ArrayList<>();
     Button save;
     SalariesAdapter adapter;
     DatabaseReference mDatabase;
+    float total;
+    String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +48,26 @@ public class Salaries extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         this.setTitle("Salaries");
+        Intent i = getIntent();
+        path = i.getStringExtra("path");
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new SalariesAdapter(Salaries.this, itemList, new SalariesAdapter.SalaryInterface() {
+        adapter = new SalariesAdapter(Salaries.this, itemList, salaryList, new SalariesAdapter.SalaryInterface() {
             @Override
-            public void values(ArrayList<SalaryModel> salaryModelList) {
-//                sendDataToServer(salaryModelList);
+            public void values(ArrayList<SalaryModel> salaryModelList, ArrayList<Employee> employeeList) {
+                for (int i = 0; i < employeeList.size(); i++) {
+                    total = total+ ((salaryModelList.get(i).getBasicSalary()
+                            + salaryModelList.get(i).getBonus()
+                            + salaryModelList.get(i).getOverTime()) - (salaryModelList.get(i).getDeduction() + salaryModelList.get(i).getETFandEPF())
+                    );
+                    sendDataToServer(salaryModelList.get(i), employeeList.get(i), i);
+
+                }
+
             }
+
+
         });
         recyclerView.setAdapter(adapter);
 
@@ -87,6 +105,7 @@ public class Salaries extends AppCompatActivity {
             }
         });
 
+        getDataFromServer(path);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,24 +114,68 @@ public class Salaries extends AppCompatActivity {
         });
     }
 
-    private void sendDataToServer(ArrayList<SalaryModel> salaryModelList) {
-        long time=System.currentTimeMillis();
+    private void getDataFromServer(String path) {
+        mDatabase.child("Accounts").child("ExpensesAndRevenue").child(path).child("Salaries").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        if (!snapshot.getKey().equalsIgnoreCase("total")) {
+                            SalaryModel model = snapshot.getValue(SalaryModel.class);
+                            if (model != null) {
+                                salaryList.add(model);
+                            }
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void sendDataToServer(SalaryModel salaryModel, Employee employee, int position) {
+        long time = System.currentTimeMillis();
         mDatabase.child("Accounts").child("ExpensesAndRevenue")
-                .child(CommonUtils.getYear(time))
-                .child(CommonUtils.getMonth(time))
-                .child("Salaries").setValue(salaryModelList).addOnFailureListener(new OnFailureListener() {
+                .child(path)
+                .child("Salaries").child("" + position).setValue(new SalaryModel(
+                "" + position,
+                salaryModel.getBasicSalary(),
+                salaryModel.getOverTime(),
+                salaryModel.getBonus(),
+                salaryModel.getDeduction(),
+                salaryModel.getReason(),
+                time,
+                employee.getUsername(),
+                salaryModel.getETFandEPF()
+        )).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                CommonUtils.showToast("Updated");
+                long time = System.currentTimeMillis();
+                mDatabase.child("Accounts").child("ExpensesAndRevenue")
+                        .child(CommonUtils.getYear(time))
+                        .child(CommonUtils.getMonth(time))
+                        .child("Salaries").child("total").setValue(calculateTotal());
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 CommonUtils.showToast(e.getMessage());
             }
-        }).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                CommonUtils.showToast("Updated salaries");
-                finish();
-            }
         });
     }
+
+    private float calculateTotal() {
+
+        return total;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

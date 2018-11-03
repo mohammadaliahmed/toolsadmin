@@ -17,15 +17,20 @@ public class InvoiceModel {
     float deliveryCharges;
     float shippingCharges;
     float grandTotal;
-    String orderStatus, deliveryBy;
+    String orderStatus, deliveryBy="";
     int orderItems;
     int outOfStock;
 
     public InvoiceModel() {
     }
 
-    public InvoiceModel(long id, ArrayList<ProductCountModel> countModelArrayList, ArrayList<ProductCountModel> newCountModelArrayList, Customer customer, long totalPrice,
-                        long time, String orderId,
+    public InvoiceModel(long id,
+                        ArrayList<ProductCountModel> countModelArrayList,
+                        ArrayList<ProductCountModel> newCountModelArrayList, 
+                        Customer customer,
+                        long totalPrice,
+                        long time,
+                        String orderId,
                         float deliveryCharges,
                         float shippingCharges,
                         float grandTotal,

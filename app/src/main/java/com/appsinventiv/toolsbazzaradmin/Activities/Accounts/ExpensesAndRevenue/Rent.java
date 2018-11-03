@@ -1,5 +1,6 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Accounts.ExpensesAndRevenue;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class Rent extends AppCompatActivity {
     DatabaseReference mDatabase;
     EditText rentACar, officeRent;
     Button save;
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +37,11 @@ public class Rent extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        Intent i =getIntent();
+        path=i.getStringExtra("path");
         save = findViewById(R.id.save);
-        rentACar = findViewById(R.id.rentACar);
+        rentACar = findViewById(R.id.rentACart
+        );
         officeRent = findViewById(R.id.officeRent);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -52,11 +57,11 @@ public class Rent extends AppCompatActivity {
                 }
             }
         });
-        getDataFromDb("");
+        getDataFromDb(path);
     }
 
     private void getDataFromDb(String path) {
-        mDatabase.child("Accounts").child("Rent").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Accounts").child("ExpensesAndRevenue").child(path).child("Rent").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
@@ -78,8 +83,7 @@ public class Rent extends AppCompatActivity {
     private void sendDataToDB() {
         long time = System.currentTimeMillis();
         mDatabase.child("Accounts").child("ExpensesAndRevenue")
-                .child(CommonUtils.getYear(time))
-                .child(CommonUtils.getMonth(time))
+                .child(path)
                 .child("Rent").setValue(new RentModel(
                 Float.parseFloat(officeRent.getText().toString()),
                 Float.parseFloat(rentACar.getText().toString()),

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120dp">
+    android:layout_height="150dp">
 
     <TextView
         android:id="@+id/name"
@@ -37,89 +37,123 @@
         android:textColor="#fff"
         android:textSize="12sp" />
 
-    <GridLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:columnCount="5"
-        android:rowCount="1">
+        android:layout_margin="10dp"
+        android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="65dp"
+        <LinearLayout
+
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="1dp">
+            android:orientation="horizontal"
+            android:weightSum="3">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/salary"
-                android:layout_width="match_parent"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:hint="Salary"
-                android:inputType="numberDecimal"
-                android:textSize="11sp" />
-        </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="65dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1">
 
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/salary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Salary"
+                    android:inputType="numberDecimal"
+                    android:textSize="13sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="1dp"
+                android:layout_weight="1">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/overTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Over time"
+                    android:inputType="numberDecimal"
+                    android:textSize="13sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/bonus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Bonus"
+                    android:inputType="numberDecimal"
+                    android:textSize="13sp" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="1dp">
+            android:orientation="horizontal"
+            android:weightSum="3">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/overTime"
-                android:layout_width="match_parent"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:hint="Over time"
-                android:inputType="numberDecimal"
-                android:textSize="11sp" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_margin="1dp"
+                android:layout_weight="1">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="65dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etf"
+                    android:layout_width="match_parent"
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/bonus"
-                android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ETF &amp; EPF"
+                    android:inputType="numberDecimal"
+                    android:textSize="13sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:hint="Bonus"
-                android:inputType="numberDecimal"
-                android:textSize="11sp" />
-        </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp">
+                android:layout_margin="1dp"
+                android:layout_weight="1">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/deduction"
-                android:layout_width="match_parent"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/deduction"
+                    android:layout_width="match_parent"
 
+                    android:layout_height="wrap_content"
+                    android:hint="Deductions"
+                    android:inputType="numberDecimal"
+                    android:textSize="13sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:hint="Deductions"
-                android:inputType="numberDecimal"
-                android:textSize="11sp" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_margin="1dp"
+                android:layout_weight="1">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Reason"
+                    android:inputType="textCapWords"
+                    android:textSize="13sp" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/reason"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Reason"
-                android:inputType="text"
-                android:textSize="11sp" />
-        </android.support.design.widget.TextInputLayout>
-
-
-    </GridLayout>
+    </LinearLayout>
 
 </RelativeLayout>
