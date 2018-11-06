@@ -191,12 +191,15 @@ public class FinalizedInvoicesAccountsFragment extends Fragment {
 
                             if (model != null) {
 
+                                float otherCharges=((model.getShippingCharges()+model.getDeliveryCharges()));
                                 for (int i = 0; i < model.getNewCountModelArrayList().size(); i++) {
-                                    sale = sale + (model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice()*model.getNewCountModelArrayList().get(i).getQuantity())+(model.getShippingCharges()+model.getDeliveryCharges());
-                                    profit = profit + (model.getShippingCharges()+model.getDeliveryCharges()+(model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getNewCountModelArrayList().get(i).getQuantity()) -
+                                    sale = sale + (model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice()*model.getNewCountModelArrayList().get(i).getQuantity());
+                                    profit = profit  +((model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getNewCountModelArrayList().get(i).getQuantity()) -
                                             (model.getNewCountModelArrayList().get(i).getProduct().getCostPrice() * model.getNewCountModelArrayList().get(i).getQuantity())
                                     );
                                 }
+                                sale=sale+otherCharges;
+                                profit=profit+otherCharges;
                             }
                         }
                         newList.add(new Temporarymodel(allMonthSnapshot.getKey(), count, sale, profit));
@@ -235,12 +238,15 @@ public class FinalizedInvoicesAccountsFragment extends Fragment {
                             for (DataSnapshot allDays : allMonthSnapshot.getChildren()) {
                                 InvoiceModel model = allDays.getValue(InvoiceModel.class);
                                 if (model != null) {
+                                    float otherCharges=((model.getShippingCharges()+model.getDeliveryCharges()));
                                     for (int i = 0; i < model.getNewCountModelArrayList().size(); i++) {
-                                        sale = sale + (model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice()*model.getNewCountModelArrayList().get(i).getQuantity())+(model.getShippingCharges()+model.getDeliveryCharges());
-                                        profit = profit + ((model.getShippingCharges()+model.getDeliveryCharges())+(model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getNewCountModelArrayList().get(i).getQuantity()) -
+                                        sale = sale + (model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice()*model.getNewCountModelArrayList().get(i).getQuantity());
+                                        profit = profit  +((model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getNewCountModelArrayList().get(i).getQuantity()) -
                                                 (model.getNewCountModelArrayList().get(i).getProduct().getCostPrice() * model.getNewCountModelArrayList().get(i).getQuantity())
                                         );
                                     }
+                                    sale=sale+otherCharges;
+                                    profit=profit+otherCharges;
                                 }
                             }
                         }
@@ -282,12 +288,15 @@ public class FinalizedInvoicesAccountsFragment extends Fragment {
                                 for (DataSnapshot allDays : allMonthSnapshot.getChildren()) {
                                     InvoiceModel model = allDays.getValue(InvoiceModel.class);
                                     if (model != null) {
+                                        float otherCharges=((model.getShippingCharges()+model.getDeliveryCharges()));
                                         for (int i = 0; i < model.getNewCountModelArrayList().size(); i++) {
-                                            sale = sale + (model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice()*model.getNewCountModelArrayList().get(i).getQuantity())+(model.getShippingCharges()+model.getDeliveryCharges());
-                                            profit = profit + ((model.getShippingCharges()+model.getDeliveryCharges())+(model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getNewCountModelArrayList().get(i).getQuantity()) -
+                                            sale = sale + (model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice()*model.getNewCountModelArrayList().get(i).getQuantity());
+                                            profit = profit  +((model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getNewCountModelArrayList().get(i).getQuantity()) -
                                                     (model.getNewCountModelArrayList().get(i).getProduct().getCostPrice() * model.getNewCountModelArrayList().get(i).getQuantity())
                                             );
                                         }
+                                        sale=sale+otherCharges;
+                                        profit=profit+otherCharges;
                                     }
                                 }
                             }

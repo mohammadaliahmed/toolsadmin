@@ -49,16 +49,9 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
         final InvoiceModel model = itemList.get(position);
         holder.date.setText(CommonUtils.getFormattedDateOnly(model.getTime()));
         holder.invoiceNumber.setText("" + model.getId());
-        holder.invoiceTotal.setText("" + CommonUtils.getFormattedPrice(model.getGrandTotal()));
+        holder.invoiceTotal.setText("Rs " + CommonUtils.getFormattedPrice(model.getGrandTotal()));
         holder.orderId.setText("" + model.getOrderId());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, ViewInvoice.class);
-                i.putExtra("invoiceNumber", model.getId());
-                context.startActivity(i);
-            }
-        });
+
         if (showCheckbox == 1) {
             holder.checkBox.setVisibility(View.VISIBLE);
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -75,14 +68,14 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
             holder.checkBox.setVisibility(View.GONE);
 
 
-//            holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent i = new Intent(context, ViewPurchaseOrder.class);
-//
-//                    context.startActivity(i);
-//                }
-//            });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, ViewInvoice.class);
+                    i.putExtra("invoiceNumber", model.getId());
+                    context.startActivity(i);
+                }
+            });
 
         }
     }

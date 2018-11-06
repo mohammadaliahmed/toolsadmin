@@ -6,11 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.ExpensesAndRevenue.ExpensesAndRevenueFragment;
-import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.ExpensesAndRevenue.ExpensesDetailFragment;
 import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Invoices.FinalizedInvoicesAccountsFragment;
+import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Purchases.FinalizedPOAccountsFragment;
 import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Purchases.PendingPOAccounts;
 import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Invoices.PendingSOAccounts;
-import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Purchases.FinalizedPOAccountsFragment;
 
 import java.util.ArrayList;
 
@@ -44,7 +43,7 @@ public class AccountsFragmentAdapter extends FragmentPagerAdapter {
             return new FinalizedInvoicesAccountsFragment();
 
         } else if (position == 3) {
-            return new ExpensesDetailFragment();
+            return new FinalizedPOAccountsFragment();
 
         } else if (position == 4) {
             return new ExpensesAndRevenueFragment();

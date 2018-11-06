@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     tools:context="com.appsinventiv.toolsbazzaradmin.Activities.Orders.ViewOrder">
 
@@ -528,11 +529,25 @@
         android:id="@+id/invoice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/purchase"
+        android:layout_alignParentRight="true"
+        android:visibility="visible"
+        android:layout_marginRight="16dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:srcCompat="@drawable/ic_info" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/purchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@id/button"
         android:layout_alignParentRight="true"
+        android:visibility="visible"
+
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@drawable/ic_open" />
+        app:srcCompat="@drawable/ic_purchase" />
+
+
 </RelativeLayout>

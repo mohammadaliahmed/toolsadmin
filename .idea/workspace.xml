@@ -21,11 +21,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74098e2a-521d-4dbc-956a-f407569cba32" name="Default" comment="Updated">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetailFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_expenses_detail.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_expenses_and_revenue.xml" afterPath="" />
+    <list default="true" id="74098e2a-521d-4dbc-956a-f407569cba32" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetailFragment.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" />
@@ -37,26 +34,17 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Miscellaneous.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Miscellaneous.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Rent.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Rent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Salaries.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Salaries.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Stationaries.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Stationaries.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Transportation.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Transportation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/UtilityBills.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/UtilityBills.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/FinalizedInvoicesAccountsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/FinalizedInvoicesAccountsFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Invoicing/ViewInvoice.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Invoicing/ViewInvoice.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/PendingSOAccounts.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/PendingSOAccounts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/FinalizedPOAccountsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/FinalizedPOAccountsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/PendingPOAccounts.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/PendingPOAccounts.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/AccountsFragmentAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/AccountsFragmentAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/InvoiceModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/InvoiceModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/SalaryModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/SalaryModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Utils/CommonUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Utils/CommonUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_miscellaneous.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_miscellaneous.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_rent.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_rent.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_transportation.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_transportation.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_utility_bills.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_utility_bills.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/salaries_item_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/salaries_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/FinalInvoiceListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/FinalInvoiceListAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/InvoiceListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/InvoiceListAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_view_under_process_order.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_view_under_process_order.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -99,22 +87,39 @@
       <file leaf-file-name="ExpensesAndRevenueFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-499">
-              <caret line="154" column="21" lean-forward="true" selection-start-line="154" selection-start-column="21" selection-end-line="154" selection-end-column="21" />
+            <state relative-caret-position="1941">
+              <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FinalizedPOAccountsFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/FinalizedPOAccountsFragment.java">
+      <file leaf-file-name="ViewUnderProcessOrder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="292" column="19" lean-forward="false" selection-start-line="292" selection-start-column="19" selection-end-line="319" selection-end-column="21" />
+            <state relative-caret-position="351">
+              <caret line="217" column="33" lean-forward="false" selection-start-line="217" selection-start-column="33" selection-end-line="217" selection-end-column="33" />
               <folding>
-                <element signature="e#2620#3496#0" expanded="true" />
-                <element signature="e#3495#3496#0" expanded="true" />
+                <element signature="e#9329#10307#0" expanded="true" />
+                <element signature="e#10014#10015#0" expanded="true" />
+                <element signature="e#10306#10307#0" expanded="true" />
+                <element signature="e#10345#11322#0" expanded="true" />
+                <element signature="e#10779#11031#0" expanded="true" />
+                <element signature="e#11030#11031#0" expanded="true" />
+                <element signature="e#11321#11322#0" expanded="true" />
+                <element signature="e#12203#12531#0" expanded="true" />
+                <element signature="e#12530#12531#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewOrder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="553" column="45" lean-forward="false" selection-start-line="553" selection-start-column="45" selection-end-line="553" selection-end-column="45" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -133,25 +138,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Expenses</find>
-      <find>Expenses t</find>
-      <find>Expenses tot</find>
-      <find>print</find>
-      <find>&quot;total&quot;</find>
-      <find>11sp</find>
-      <find>sala</find>
-      <find>n</find>
-      <find>noti</find>
-      <find>notif</find>
-      <find>sdfdsfs</find>
-      <find>sick</find>
-      <find>t</find>
-      <find>transfer</find>
-      <find>transfer to a</find>
-      <find>transfer to acc</find>
-      <find>transferToAccounts</find>
-      <find>trans</find>
-      <find>expenses</find>
       <find>leftTotal</find>
       <find>leftTotaltota</find>
       <find>onresu</find>
@@ -161,8 +147,27 @@
       <find>getCountModelArrayList</find>
       <find>invoice</find>
       <find>tota</find>
-      <find>path</find>
       <find>which</find>
+      <find>rootView.</find>
+      <find>print</find>
+      <find>path</find>
+      <find>transfer to acc</find>
+      <find>PurchaseOrderCount</find>
+      <find>Nov</find>
+      <find>oct</find>
+      <find>+(model.getShippingCharges()+model.getDeliveryCharges())</find>
+      <find>common</find>
+      <find>commo</find>
+      <find>35</find>
+      <find>salaries</find>
+      <find>totalSalaries</find>
+      <find>floa</find>
+      <find>a</find>
+      <find>al</find>
+      <find>alert</find>
+      <find>alert.d</find>
+      <find>alert.</find>
+      <find>alert.bui</find>
     </findStrings>
     <replaceStrings>
       <replace>12sp</replace>
@@ -1952,20 +1957,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_purchased_order_accounts.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/SalariesAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Salaries.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Salaries.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Transportation.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/Rent.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/UtilityBillsClass.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_stationaries.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/MiscellaneousModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/StationariesModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/RentModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/UtilityBillsModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/TransportationModel.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/FinalizedPOAccountsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/ExpensesAndRevenueModelMap.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_miscellaneous.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_transportation.xml" />
@@ -1980,28 +1976,37 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SlariesReportAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_view_expenses_report.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/salaries_report_item_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesReportAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Rent.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Transportation.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/UtilityBills.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Stationaries.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Miscellaneous.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Salaries.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewExpensesReport.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/salaries_item_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/InvoiceModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/expenses_item_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_expenses_and_revenue.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesModel.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/FinalizedInvoicesAccountsFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetailFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_expenses_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/AccountsFragmentAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/PendingPOAccounts.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/PendingSOAccounts.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/FinalizedPOAccountsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/InvoiceListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/FinalizedInvoicesAccountsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/FinalInvoiceListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetail.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_view_expenses_report.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewExpensesReport.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_view_under_process_order.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueFragment.java" />
       </list>
     </option>
@@ -2031,142 +2036,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groceryadmin" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groceryadmin" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groceryadmin" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groceryadmin" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="toolsbazzaradmin" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groceryadmin" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="toolsbazzaradmin" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groceryadmin" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="toolsbazzaradmin" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Accounts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groceryadmin" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="toolsbazzaradmin" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Accounts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExpensesAndRevenue" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2295,11 +2164,51 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groceryadmin" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gradle Scripts" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidBuildScriptsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groceryadmin" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groceryadmin" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="D:/projects/ustadapp" />
-    <property name="SearchEverywhereHistoryKey" value="finali&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/FinalizedPOAccountsFragment.java&#10;finalized&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/FinalizedInvoicesAccountsFragment.java&#10;acco&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/AccountsFragmentAdapter.java&#10;expen&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetailFragment.java&#10;ex&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetailFragment.java&#10;acc&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/AccountsFragmentAdapter.java&#10;final&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/FinalizedInvoicesAccountsFragment.java&#10;invoice&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/FinalizedInvoicesAccountsFragment.java&#10;finaliz&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Purchases.FinalizedPOAccountsFragment&#10;expe&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueFragment.java&#10;salari&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesAdapter.java&#10;viewin&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Invoicing/ViewInvoice.java&#10;pending&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/PendingSOAccounts.java&#10;vieword&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java&#10;underpro&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java&#10;salar&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/res/layout/salaries_item_layout.xml&#10;sal&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Salaries.java&#10;misce&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Miscellaneous.java&#10;station&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Stationaries.java&#10;transpo&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Transportation.java&#10;util&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/UtilityBills.java&#10;trans&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Transportation.java&#10;viewre&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewExpensesReport.java&#10;viewor&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java&#10;pendin&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Invoices.PendingSOAccounts&#10;vieworder&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java&#10;underpr&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java&#10;fireb&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Utils.MyFirebaseMessagingService&#10;noti&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Utils/NotificationAsync.java&#10;mani&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/AndroidManifest.xml&#10;googl&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/google-services.json&#10;viewu&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java&#10;sala&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesReportAdapter.java&#10;viewe&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewExpensesReport.java&#10;as&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Utils.NotificationAsync&#10;logi&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Activities.Login.Login&#10;regis&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Activities.Login.Register&#10;viewund&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java&#10;view&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewExpensesReport.java&#10;exp&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueFragment.java&#10;activ&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/res/layout/activity_view_expenses_report.xml&#10;repo&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesReportAdapter.java&#10;repor&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesReportAdapter.java&#10;item&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/res/layout/salaries_report_item_layout.xml&#10;views&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewSalary.java&#10;manif&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/AndroidManifest.xml&#10;e&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueFragment.java&#10;salarie&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Salaries.java&#10;sa&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesAdapter.java&#10;viewsa&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewSalary.java" />
+    <property name="SearchEverywhereHistoryKey" value="frag&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueFragment.java&#10;view&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/res/layout/activity_view_under_process_order.xml&#10;viewunder&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java&#10;expe&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/res/layout/activity_view_expenses_report.xml&#10;viewe&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewExpensesReport.java&#10;viewund&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java&#10;viewex&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/res/layout/activity_view_expenses_report.xml&#10;expens&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetail.java&#10;invoice&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/FinalInvoiceListAdapter.java&#10;final&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/FinalizedInvoicesAccountsFragment.java&#10;fina&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/FinalizedPOAccountsFragment.java&#10;pending&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/PendingSOAccounts.java&#10;viewun&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java&#10;viewsa&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Activities.Accounts.ExpensesAndRevenue.ViewSalary&#10;ada&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueAdapter.java&#10;finali&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/FinalizedPOAccountsFragment.java&#10;finalized&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/FinalizedPOAccountsFragment.java&#10;viewrepo&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewExpensesReport.java&#10;viewinv&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Invoicing/ViewInvoice.java&#10;under&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java&#10;pendingpo&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Purchases.PendingPOAccounts&#10;addpr&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Activities.Products.AddProduct&#10;acco&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/AccountsFragmentAdapter.java&#10;expen&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetailFragment.java&#10;ex&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetailFragment.java&#10;acc&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/AccountsFragmentAdapter.java&#10;finaliz&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Purchases.FinalizedPOAccountsFragment&#10;salari&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesAdapter.java&#10;viewin&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Invoicing/ViewInvoice.java&#10;vieword&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java&#10;underpro&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java&#10;salar&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/res/layout/salaries_item_layout.xml&#10;sal&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Salaries.java&#10;misce&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Miscellaneous.java&#10;station&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Stationaries.java&#10;transpo&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Transportation.java&#10;util&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/UtilityBills.java&#10;trans&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/Transportation.java&#10;viewre&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewExpensesReport.java&#10;viewor&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java&#10;pendin&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Invoices.PendingSOAccounts&#10;vieworder&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java&#10;underpr&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java&#10;fireb&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Utils.MyFirebaseMessagingService&#10;noti&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Utils/NotificationAsync.java&#10;mani&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/AndroidManifest.xml&#10;googl&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/google-services.json&#10;viewu&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java&#10;sala&#9;FILE&#9;file://D:/Total bazar/groceryadmin/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesReportAdapter.java&#10;as&#9;PSI&#9;JAVA://com.appsinventiv.toolsbazzaradmin.Utils.NotificationAsync" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="device.picker.selection" value="9885e63457354d4139" />
     <property name="DEBUGGABLE_DEVICE" value="samsung-sm_g930f-9885e63457354d4139" />
@@ -2308,12 +2217,8 @@
     <property name="DEBUGGER_ID" value="Auto" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Total bazar\groceryadmin\app\src\main\res\layout" />
-      <recent name="D:\Total bazar\groceryadmin\app\src\main\res\menu" />
-      <recent name="D:\Total bazar\groceryadmin\app\src\main\res\drawable" />
-      <recent name="D:\Total bazar\groceryadmin\app\src\main\res\drawable-v21" />
-      <recent name="D:\Total bazar\groceryadmin\app\src\main\res" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.appsinventiv.toolsbazzaradmin.Activities.Accounts" />
     </key>
     <key name="android.template.packageName">
       <recent name="com.appsinventiv.toolsbazzaradmin.Activities.Accounts.ExpensesAndRevenue" />
@@ -2332,8 +2237,12 @@
       <recent name="com.appsinventiv.toolsbazzaradmin.Activities.Orders" />
       <recent name="com.appsinventiv.toolsbazzaradmin.Activities.Purchases" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.appsinventiv.toolsbazzaradmin.Activities.Accounts" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Total bazar\groceryadmin\app\src\main\res\drawable" />
+      <recent name="D:\Total bazar\groceryadmin\app\src\main\res\layout" />
+      <recent name="D:\Total bazar\groceryadmin\app\src\main\res\menu" />
+      <recent name="D:\Total bazar\groceryadmin\app\src\main\res\drawable-v21" />
+      <recent name="D:\Total bazar\groceryadmin\app\src\main\res" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -2419,7 +2328,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1541265290264" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1541481445275" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2467,7 +2376,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1541265290264" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1541481445276" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2650,7 +2559,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1541265290264" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1541481445277" />
       </method>
     </configuration>
     <list size="1">
@@ -2731,7 +2640,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540559481171</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Updated">
+      <created>1541265360683</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1541265360683</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2753,7 +2669,6 @@
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.69624573" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2730711" sideWeight="0.5068259" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3993174" sideWeight="0.4969743" order="10" side_tool="false" content_ui="tabs" />
@@ -2778,6 +2693,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="combo" />
       <window_info id="Assistant" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2821,15 +2737,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewExpensesReport.java</url>
-          <line>320</line>
+          <line>322</line>
           <properties />
           <option name="timeStamp" value="148" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesReportAdapter.java</url>
-          <line>45</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/YearViewPOAdapter.java</url>
+          <line>59</line>
           <properties />
-          <option name="timeStamp" value="150" />
+          <option name="timeStamp" value="161" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetail.java</url>
+          <line>249</line>
+          <properties />
+          <option name="timeStamp" value="173" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetail.java</url>
+          <line>257</line>
+          <properties />
+          <option name="timeStamp" value="177" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -2839,93 +2767,15 @@
           </selected-grouping-rules>
         </breakpoints-dialog>
       </breakpoints-dialog>
-      <option name="time" value="159" />
+      <option name="time" value="179" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewSalary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="163" column="33" lean-forward="true" selection-start-line="163" selection-start-column="33" selection-end-line="163" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/UtilityBillsModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="27" column="17" lean-forward="false" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Login/Register.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-108">
-          <caret line="135" column="54" lean-forward="false" selection-start-line="135" selection-start-column="54" selection-end-line="135" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Login/Login.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="36" column="17" lean-forward="false" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesReportAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="45" column="61" lean-forward="false" selection-start-line="45" selection-start-column="61" selection-end-line="45" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-27/android.jar!/android/view/View.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="310" column="16" lean-forward="false" selection-start-line="310" selection-start-column="16" selection-end-line="310" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="20" column="4" lean-forward="true" selection-start-line="20" selection-start-column="4" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/google-services.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="50" lean-forward="false" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Utils/CommonUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="34" column="56" lean-forward="false" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Chat/LiveChat.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="193" column="11" lean-forward="false" selection-start-line="193" selection-start-column="11" selection-end-line="193" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2941,39 +2791,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-720">
           <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_view_order.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="86">
           <caret line="517" column="63" lean-forward="false" selection-start-line="517" selection-start-column="45" selection-end-line="517" selection-end-column="63" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_pending_po_accounts.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_pending_po_accounts.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/InvoiceListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="71" column="17" lean-forward="false" selection-start-line="71" selection-start-column="17" selection-end-line="71" selection-end-column="17" />
-          <folding>
-            <element signature="e#2573#3003#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2981,26 +2820,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_view_expenses_report.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="38" column="41" lean-forward="false" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/ExpensesAndRevenueModelMap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3047,51 +2873,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewExpensesReport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5413">
-          <caret line="359" column="17" lean-forward="false" selection-start-line="359" selection-start-column="17" selection-end-line="359" selection-end-column="17" />
-          <folding>
-            <element signature="e#16089#16090#0" expanded="true" />
-            <element signature="e#16113#16114#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/salaries_report_item_layout.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
           <caret line="162" column="27" lean-forward="true" selection-start-line="162" selection-start-column="27" selection-end-line="162" selection-end-column="27" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/salaries_item_layout.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/salaries_item_layout.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
           <caret line="151" column="51" lean-forward="false" selection-start-line="151" selection-start-column="51" selection-end-line="151" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/PendingSOAccounts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2087">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="394" column="85" lean-forward="false" selection-start-line="394" selection-start-column="13" selection-end-line="394" selection-end-column="85" />
           <folding />
         </state>
       </provider>
@@ -3100,28 +2899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-570">
           <caret line="27" column="11" lean-forward="false" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Invoicing/ViewInvoice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="164" column="32" lean-forward="false" selection-start-line="164" selection-start-column="28" selection-end-line="164" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="228" column="53" lean-forward="false" selection-start-line="228" selection-start-column="53" selection-end-line="228" selection-end-column="53" />
-          <folding>
-            <element signature="e#9271#11531#0" expanded="false" />
-            <element signature="e#10690#11300#0" expanded="false" />
-            <element signature="e#11299#11300#0" expanded="false" />
-            <element signature="e#11530#11531#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3129,14 +2906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Callbacks/WhichKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -3157,42 +2926,109 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_expenses_detail.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="114" column="36" lean-forward="false" selection-start-line="114" selection-start-column="36" selection-end-line="114" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_expenses_and_revenue.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_expenses_and_revenue.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/expenses_item_layout.xml">
       <provider editor-type-id="android-designer2">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="48" column="42" lean-forward="false" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_expenses_detail.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="114" column="36" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="333" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_expenses_detail.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="333" column="17" lean-forward="false" selection-start-line="333" selection-start-column="17" selection-end-line="333" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Callbacks/WhichKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Products/AddProduct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="408" column="2" lean-forward="true" selection-start-line="408" selection-start-column="2" selection-end-line="421" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetailFragment.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/AccountsFragmentAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="45" column="52" lean-forward="false" selection-start-line="45" selection-start-column="52" selection-end-line="45" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/PendingPOAccounts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="139" column="80" lean-forward="false" selection-start-line="139" selection-start-column="80" selection-end-line="139" selection-end-column="90" />
+          <folding>
+            <element signature="e#3667#3861#0" expanded="false" />
+            <element signature="e#3860#3861#0" expanded="false" />
+            <element signature="e#3939#4133#0" expanded="false" />
+            <element signature="e#4132#4133#0" expanded="false" />
+            <element signature="e#4853#5545#0" expanded="false" />
+            <element signature="e#5544#5545#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Purchases/PendingFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="119" column="8" lean-forward="false" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Invoicing/ViewInvoice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="130" column="24" lean-forward="false" selection-start-line="130" selection-start-column="24" selection-end-line="130" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/POListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-462">
+          <caret line="32" column="11" lean-forward="false" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Models/Temporarymodel.java">
@@ -3200,47 +3036,6 @@
         <state relative-caret-position="108">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/YearViewPOAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="89" column="32" lean-forward="false" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/FinalInvoiceListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-396">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/expenses_item_layout.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="48" column="42" lean-forward="false" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="65" column="52" lean-forward="false" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1838#2049#0" expanded="true" />
-            <element signature="e#2048#2049#0" expanded="true" />
-            <element signature="e#2103#2104#0" expanded="true" />
-            <element signature="e#2141#2142#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3252,45 +3047,173 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/AccountsFragmentAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/SalariesReportAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="46" column="47" lean-forward="false" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+        <state relative-caret-position="108">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewSalary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="30" column="37" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/YearViewPOAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="774">
+          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding>
+            <element signature="e#1988#2616#0" expanded="true" />
+            <element signature="e#2615#2616#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/InvoiceListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="51" column="40" lean-forward="false" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
+          <folding>
+            <element signature="e#2243#2673#0" expanded="false" />
+            <element signature="e#2672#2673#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/FinalizedPOAccountsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="80" column="44" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/PendingSOAccounts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Invoices/FinalizedInvoicesAccountsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2301">
-          <caret line="267" column="60" lean-forward="false" selection-start-line="267" selection-start-column="43" selection-end-line="267" selection-end-column="60" />
+        <state relative-caret-position="1017">
+          <caret line="201" column="59" lean-forward="false" selection-start-line="201" selection-start-column="59" selection-end-line="201" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetailFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Adapters/FinalInvoiceListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="218" column="32" lean-forward="false" selection-start-line="218" selection-start-column="32" selection-end-line="218" selection-end-column="32" />
+        <state relative-caret-position="112">
+          <caret line="62" column="60" lean-forward="false" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/Purchases/FinalizedPOAccountsFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesDetail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="292" column="19" lean-forward="false" selection-start-line="292" selection-start-column="19" selection-end-line="319" selection-end-column="21" />
+        <state relative-caret-position="168">
+          <caret line="93" column="8" lean-forward="false" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_view_expenses_report.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="160" column="34" lean-forward="true" selection-start-line="160" selection-start-column="34" selection-end-line="160" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ViewExpensesReport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="296" column="56" lean-forward="false" selection-start-line="296" selection-start-column="56" selection-end-line="296" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="9" column="50" lean-forward="false" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_open.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_view_under_process_order.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="549" column="44" lean-forward="false" selection-start-line="549" selection-start-column="44" selection-end-line="549" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewUnderProcessOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="217" column="33" lean-forward="false" selection-start-line="217" selection-start-column="33" selection-end-line="217" selection-end-column="33" />
           <folding>
-            <element signature="e#2620#3496#0" expanded="true" />
-            <element signature="e#3495#3496#0" expanded="true" />
+            <element signature="e#9329#10307#0" expanded="true" />
+            <element signature="e#10014#10015#0" expanded="true" />
+            <element signature="e#10306#10307#0" expanded="true" />
+            <element signature="e#10345#11322#0" expanded="true" />
+            <element signature="e#10779#11031#0" expanded="true" />
+            <element signature="e#11030#11031#0" expanded="true" />
+            <element signature="e#11321#11322#0" expanded="true" />
+            <element signature="e#12203#12531#0" expanded="true" />
+            <element signature="e#12530#12531#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Orders/ViewOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="553" column="45" lean-forward="false" selection-start-line="553" selection-start-column="45" selection-end-line="553" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="48" column="89" lean-forward="false" selection-start-line="48" selection-start-column="89" selection-end-line="48" selection-end-column="89" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/appsinventiv/toolsbazzaradmin/Activities/Accounts/ExpensesAndRevenue/ExpensesAndRevenueFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-499">
-          <caret line="154" column="21" lean-forward="true" selection-start-line="154" selection-start-column="21" selection-end-line="154" selection-end-column="21" />
+        <state relative-caret-position="1941">
+          <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
           <folding />
         </state>
       </provider>

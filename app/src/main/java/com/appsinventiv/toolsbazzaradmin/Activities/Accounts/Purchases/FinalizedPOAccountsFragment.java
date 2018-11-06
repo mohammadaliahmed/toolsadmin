@@ -90,7 +90,6 @@ public class FinalizedPOAccountsFragment extends Fragment {
                 } else if (what.equalsIgnoreCase("day")) {
 
                     getDayDataFromServer(year, month, key);
-//                    what = "itself";
                     day = key;
                     whichKey.which("day");
 

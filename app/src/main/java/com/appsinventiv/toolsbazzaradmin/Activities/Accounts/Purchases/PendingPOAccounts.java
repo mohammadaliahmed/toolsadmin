@@ -132,6 +132,12 @@ public class PendingPOAccounts extends Fragment {
                     .setValue(itemList.get(id.getPosition())).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
+                    mDatabase.child("Accounts").child("ExpensesAndRevenue")
+                            .child(CommonUtils.getYear(itemList.get(id.getPosition()).getTime()))
+                            .child(CommonUtils.getMonth(itemList.get(id.getPosition()).getTime()))
+                            .child("PO")
+                            .child(CommonUtils.getDate(itemList.get(id.getPosition()).getTime()))
+                            .child(key).setValue(itemList.get(id.getPosition()).getTotal());
                     removeFromCompleted(key);
                 }
             });

@@ -103,9 +103,10 @@
         <activity
             android:name=".Activities.Accounts.ExpensesAndRevenue.ViewSalary"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.Accounts.ExpensesAndRevenue.ViewExpensesReport"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+        <activity
+            android:name=".Activities.Accounts.ExpensesAndRevenue.ViewExpensesReport"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.Accounts.ExpensesAndRevenue.ExpensesDetail"></activity>
     </application>
 
 </manifest>

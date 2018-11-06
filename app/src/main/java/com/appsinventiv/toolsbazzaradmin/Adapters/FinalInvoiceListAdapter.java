@@ -52,6 +52,7 @@ public class FinalInvoiceListAdapter extends RecyclerView.Adapter<FinalInvoiceLi
             orderProfit = orderProfit+(((model.getCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getCountModelArrayList().get(i).getQuantity()) -
                     (model.getCountModelArrayList().get(i).getProduct().getCostPrice() * model.getCountModelArrayList().get(i).getQuantity())));
         }
+        orderProfit=(orderProfit+model.getDeliveryCharges()+model.getShippingCharges());
         holder.orderDetails.setText(
                 "Order Time: " + CommonUtils.getFormattedDate(model.getTime()) +
                         "\nOrder Status: " + model.getOrderStatus() +
@@ -59,8 +60,8 @@ public class FinalInvoiceListAdapter extends RecyclerView.Adapter<FinalInvoiceLi
                         "\nOut of stock: " + model.getOutOfStock() +
                         "\nOrder amount: Rs " + model.getGrandTotal() +
                         "\nOrder delivery: Rs " + model.getDeliveryCharges() +
-                        "\nOrder profit: Rs " + orderProfit +
-                        "\n\nOrder delivered by: " + model.getDeliveryBy()
+                        "\nOrder profit: Rs " + orderProfit+
+                "\n\nOrder delivered by: " + model.getDeliveryBy()
         );
 
         holder.userDetails.setText(

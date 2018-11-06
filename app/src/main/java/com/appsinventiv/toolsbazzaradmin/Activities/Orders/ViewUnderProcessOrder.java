@@ -60,7 +60,7 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
 
     String s_orderId, s_quantity, s_price, s_username;
     String userFcmKey;
-    FloatingActionButton invoice;
+    FloatingActionButton invoice, purchase;
     long invoiceNumber = 10001;
     Customer customer;
     OrderModel model;
@@ -106,6 +106,7 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
         instructions = findViewById(R.id.instructions);
 //        wholeLayout = findViewById(R.id.wholeLayout);
         invoice = findViewById(R.id.invoice);
+        purchase = findViewById(R.id.purchase);
 
         username = findViewById(R.id.ship_username);
         phone = findViewById(R.id.ship_phone);
@@ -206,57 +207,55 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
                 }
             }
         });
+        purchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (newList.size() > 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ViewUnderProcessOrder.this);
+                    builder.setTitle("Alert");
+                    builder.setMessage("Do you want to add this order to purchases " + "?");
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
+                            addPurchase();
+
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", null);
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+
+                } else {
+                    CommonUtils.showToast("Nothing selected");
+                }
+            }
+        });
         invoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addPurchase();
-//                if (model.isInvoiced()) {
-//                    Intent i = new Intent(ViewUnderProcessOrder.this, ViewInvoice.class);
-//                    i.putExtra("invoiceNumber", model.getInvoiceNumber());
-//                    startActivity(i);
-//                    finish();
-//                } else {
-//
-////                    wholeLayout.setVisibility(View.VISIBLE);
-                mDatabase.child("Accounts/PendingInvoices").child("" + invoiceNumber)
-                        .setValue(new InvoiceModel(
+                if (newList.size() > 0) {
 
-                                invoiceNumber,
-                                list,
-                                newList,
-                                customer,
-                                model.getTotalPrice(),
-                                System.currentTimeMillis(),
-                                orderIdFromIntent,
-                                model.getDeliveryCharges(),
-                                model.getShippingCharges(),
-                                model.getTotalPrice(),
-                                model.getOrderStatus(),
-                                list.size(),
-                                model.getDeliveryBy(),
-                                0
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ViewUnderProcessOrder.this);
+                    builder.setTitle("Alert");
+                    builder.setMessage("Do you want to add this order to invoices " + "?");
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            addToInvoice();
 
-                        ))
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                updateInvoiceStatus();
-                                CommonUtils.showToast("Done!\nGo to purchases");
-//                                Intent i = new Intent(ViewUnderProcessOrder.this, ViewInvoice.class);
-//                                i.putExtra("invoiceNumber", invoiceNumber);
-//                                startActivity(i);
-//                                addPurchase();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", null);
 
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else {
+                    CommonUtils.showToast("Nothing selected");
+                }
 
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
-//                }
             }
         });
 
@@ -266,14 +265,55 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
 
     }
 
+    private void addToInvoice() {
+        mDatabase.child("Accounts/PendingInvoices").child("" + invoiceNumber)
+                .setValue(new InvoiceModel(
+
+                        invoiceNumber,
+                        list,
+                        newList,
+                        customer,
+                        model.getTotalPrice(),
+                        System.currentTimeMillis(),
+                        orderIdFromIntent,
+                        model.getDeliveryCharges(),
+                        model.getShippingCharges(),
+                        model.getTotalPrice(),
+                        model.getOrderStatus(),
+                        list.size(),
+                        model.getDeliveryBy(),
+                        0
+
+                ))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        updateInvoiceStatus();
+                        CommonUtils.showToast("Added to pending invoices");
+                        updateInvoiceCount();
+
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+
+    private void updateInvoiceCount() {
+        mDatabase.child("Accounts").child("InvoiceCount").setValue(invoiceNumber);
+    }
 
     private void getInvoiceCountFromDb() {
-        mDatabase.child("Invoices").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Accounts").child("InvoiceCount").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-                    long invoiceNum = dataSnapshot.getChildrenCount();
-                    invoiceNumber = invoiceNum + invoiceNumber;
+                    invoiceNumber = dataSnapshot.getValue(Integer.class) + 1;
+                } else {
 
                 }
             }
@@ -306,6 +346,7 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
                             setQuantity(model);
                         }
                     }
+                    CommonUtils.showToast("Done\nGo to purchases");
                 }
             }
 

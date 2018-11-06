@@ -43,7 +43,7 @@ public class ExpensesAndRevenueFragment extends Fragment {
     String month = "";
     String day = "";
     public String path = "";
-    //    WhichKey whichKey;
+        WhichKey whichKey;
     ArrayList<ExpensesModel> itemList = new ArrayList<>();
     ExpensesAndRevenueAdapter adapter;
 
@@ -54,6 +54,8 @@ public class ExpensesAndRevenueFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        whichKey=(WhichKey)context;
+        whichKey.which("Year");
     }
 
     @Override
@@ -62,9 +64,22 @@ public class ExpensesAndRevenueFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_expenses_and_revenue, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        adapter = new ExpensesAndRevenueAdapter(context, itemList, new ExpensesAndRevenueAdapter.ChangeLayout() {
+        adapter = new ExpensesAndRevenueAdapter(context, itemList, "1", new ExpensesAndRevenueAdapter.ChangeLayout() {
             @Override
             public void onClick(ExpensesModel model, int position, String type, String key) {
+                if (what.equalsIgnoreCase("year")) {
+                    year = key;
+
+                    getDataFromServer(key);
+                    what = "month";
+                    whichKey.which("month");
+
+                } else if (what.equalsIgnoreCase("month")) {
+                    month = key;
+                    Intent i = new Intent(context, ExpensesDetail.class);
+                    i.putExtra("path", year + "/" + key);
+                    context.startActivity(i);
+                }
             }
         });
         recyclerView.setAdapter(adapter);
@@ -81,12 +96,99 @@ public class ExpensesAndRevenueFragment extends Fragment {
         month = "";
         day = "";
 
-        getDataFromServer();
+        getALLDataFromServer();
+//        getDataFromServer();
 
 
     }
 
-    private void getDataFromServer() {
+    private void getDataFromServer(final String year) {
+        itemList.clear();
+        mDatabase.child("Accounts").child("ExpensesAndRevenue").child(year).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+
+//                    for (DataSnapshot allYears : dataSnapshot.getChildren()) {
+
+                    for (DataSnapshot allMonth : dataSnapshot.getChildren()) {
+                        float total = 0;
+                        float purchase = 0;
+                        float sale = 0;
+                        ExpensesAndRevenueModelMap modelMap = allMonth.getValue(ExpensesAndRevenueModelMap.class);
+                        float salary = 0;
+                        if (allMonth.child("Salaries").getValue() != null) {
+                            salary = allMonth.child("Salaries").child("total").getValue(Float.class);
+                            total = total + salary;
+                        }
+                        if (modelMap.getRent() != null) {
+                            total = total + modelMap.getRent().getTotal();
+
+                        }
+                        if (modelMap.getStationaries() != null) {
+                            total = total + modelMap.getStationaries().getTotal();
+
+                        }
+                        if (modelMap.getTransportation() != null) {
+                            total = total + modelMap.getTransportation().getTotal();
+
+                        }
+                        if (modelMap.getUtilityBills() != null) {
+                            total = total + modelMap.getUtilityBills().getTotal();
+
+                        }
+
+                        if (modelMap.getMiscellaneous() != null) {
+                            total = total + modelMap.getMiscellaneous().getTotal();
+
+                        }
+
+                        if (allMonth.child("PO").getValue() != null) {
+
+                            for (DataSnapshot allDays : allMonth.child("PO").getChildren()) {
+                                for (DataSnapshot oneDay : allDays.getChildren()) {
+                                    float abc = oneDay.getValue(Float.class);
+                                    purchase = purchase + abc;
+                                }
+                            }
+
+                        }
+                        if (allMonth.child("SO").getValue() != null) {
+
+                            for (DataSnapshot allDays : allMonth.child("SO").getChildren()) {
+                                for (DataSnapshot oneDay : allDays.getChildren()) {
+                                    float abc = oneDay.getValue(Float.class);
+                                    sale = sale + abc;
+                                }
+                            }
+
+                        }
+
+                        float profit = sale - purchase;
+                        String leftTotal = "Sale: Rs " + sale + "\nPurchase: Rs" + purchase + "\nProfit: Rs " + (sale - purchase) + "" + "\nCost: Rs " + purchase + "";
+                        String rightTotal = "Expense: Rs " + total + "\nPurchase Banking: Rs" + purchase + "\nNet Profit: Rs " + (profit - total) + "\nLoss: Rs " + ((profit - total) < 0 ? (profit - total) : 0);
+
+                        itemList.add(new ExpensesModel(allMonth.getKey(), leftTotal, rightTotal, year, ""));
+
+                    }
+//                       }
+
+                    adapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void getALLDataFromServer() {
+        whichKey.which("Year");
+
         itemList.clear();
         mDatabase.child("Accounts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -95,6 +197,8 @@ public class ExpensesAndRevenueFragment extends Fragment {
 
                     for (DataSnapshot allYears : dataSnapshot.child("ExpensesAndRevenue").getChildren()) {
                         float total = 0;
+                        float purchase = 0;
+                        float sale = 0;
                         for (DataSnapshot allMonth : allYears.getChildren()) {
 
                             ExpensesAndRevenueModelMap modelMap = allMonth.getValue(ExpensesAndRevenueModelMap.class);
@@ -125,63 +229,35 @@ public class ExpensesAndRevenueFragment extends Fragment {
 
                             }
 
-                        }
-//                        itemList.add(new ExpensesModel("left text", "Expenses: Rs " + total, "aaa", ""));
-                    }
-                    for (DataSnapshot allYearsSnapshot : dataSnapshot.child("InvoicesFinalized").getChildren()) {
-                        float sale = 0;
-                        long count = 0;
-                        float profit = 0;
-                        for (DataSnapshot yearSnapshot : allYearsSnapshot.getChildren()) {
+                            if (allMonth.child("PO").getValue() != null) {
 
-                            for (DataSnapshot allMonthSnapshot : yearSnapshot.getChildren()) {
-                                count = count + allMonthSnapshot.getChildrenCount();
-                                for (DataSnapshot allDays : allMonthSnapshot.getChildren()) {
-                                    InvoiceModel model = allDays.getValue(InvoiceModel.class);
-                                    if (model != null) {
-                                        for (int i = 0; i < model.getNewCountModelArrayList().size(); i++) {
-                                            sale = sale + (model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getNewCountModelArrayList().get(i).getQuantity()) + (model.getShippingCharges() + model.getDeliveryCharges());
-                                            profit = profit + ((model.getShippingCharges() + model.getDeliveryCharges()) + (model.getNewCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getNewCountModelArrayList().get(i).getQuantity()) -
-                                                    (model.getNewCountModelArrayList().get(i).getProduct().getCostPrice() * model.getNewCountModelArrayList().get(i).getQuantity())
-                                            );
-                                        }
+                                for (DataSnapshot allDays : allMonth.child("PO").getChildren()) {
+                                    for (DataSnapshot oneDay : allDays.getChildren()) {
+                                        float abc = oneDay.getValue(Float.class);
+                                        purchase = purchase + abc;
                                     }
                                 }
+
                             }
-                        }
-//                        String leftTotal = "Sale: Rs " + sale + "\nPurchase: Rs" + "" + "\nProfit: Rs " + profit + "\nCost: Rs " + "";
-//
-//                        itemList.add(new ExpensesModel(leftTotal, "Expenses: Rs " + count, "aaa" + sale, "" + profit));
-                    }
-                    for (DataSnapshot allYearsSnapshot : dataSnapshot.child("PurchaseFinalized").getChildren()) {
-                        float cost = 0;
-                        long count = 0;
-                        float purchaseCost=0;
-                        for (DataSnapshot yearSnapshot : allYearsSnapshot.getChildren()) {
+                            if (allMonth.child("SO").getValue() != null) {
 
-                            for (DataSnapshot allMonthSnapshot : yearSnapshot.getChildren()) {
-                                count = count + allMonthSnapshot.getChildrenCount();
-                                for (DataSnapshot allDays : allMonthSnapshot.getChildren()) {
-                                    PurchaseOrderModel model = allDays.getValue(PurchaseOrderModel.class);
-                                    if (model != null) {
-                                        for (int i = 0; i < model.getProductsList().size(); i++) {
-                                            cost = cost + model.getProductsList().get(i).getProduct().getCostPrice();
-                                            if (model.getProductsList().get(i).getNewCostPrice() != -1 ) {
-                                                purchaseCost = cost + model.getProductsList().get(i).getNewCostPrice();
-                                                purchaseCost=purchaseCost-model.getProductsList().get(i).getProduct().getCostPrice();
-
-                                            } else {
-                                                purchaseCost = cost;
-                                            }
-
-                                        }
+                                for (DataSnapshot allDays : allMonth.child("SO").getChildren()) {
+                                    for (DataSnapshot oneDay : allDays.getChildren()) {
+                                        float abc = oneDay.getValue(Float.class);
+                                        sale = sale + abc;
                                     }
                                 }
-                            }
-                        }
-                        String leftTotal = "Sale: Rs " + cost + "\nPurchase: Rs" + "" + "\nProfit: Rs " + "" + "\nCost: Rs " + "";
 
-                        itemList.add(new ExpensesModel(leftTotal, "Expenses: Rs " + count, "aaa" + "", "" + ""));
+                            }
+
+
+                        }
+                        float profit = sale - purchase;
+                        String leftTotal = "Sale: Rs " + sale + "\nPurchase: Rs" + purchase + "\nProfit: Rs " + (sale - purchase) + "" + "\nCost: Rs " + purchase + "";
+                        String rightTotal = "Expense: Rs " + total + "\nPurchase Banking: Rs" + purchase + "\nNet Profit: Rs " + (profit - total) + "\nLoss: Rs " + ((profit - total) < 0 ? (profit - total) : 0);
+
+                        itemList.add(new ExpensesModel(allYears.getKey(), leftTotal, rightTotal, "", ""));
+
                     }
 
                     adapter.notifyDataSetChanged();

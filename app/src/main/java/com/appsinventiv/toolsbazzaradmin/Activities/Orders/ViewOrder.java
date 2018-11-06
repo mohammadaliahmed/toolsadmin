@@ -549,6 +549,7 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                 || model.getOrderStatus().equalsIgnoreCase("under process")
                 ) {
             invoice.setVisibility(View.VISIBLE);
+
         } else {
             invoice.setVisibility(View.GONE);
         }
