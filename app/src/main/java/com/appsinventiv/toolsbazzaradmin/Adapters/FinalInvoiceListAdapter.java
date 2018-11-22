@@ -77,6 +77,7 @@ public class FinalInvoiceListAdapter extends RecyclerView.Adapter<FinalInvoiceLi
             public void onClick(View view) {
                 Intent i = new Intent(context, ViewInvoice.class);
                 i.putExtra("path", path);
+                i.putExtra("from", "final");
                 i.putExtra("invoiceNumber", model.getId());
                 context.startActivity(i);
             }

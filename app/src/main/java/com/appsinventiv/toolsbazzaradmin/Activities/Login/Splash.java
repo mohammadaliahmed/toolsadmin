@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import com.appsinventiv.toolsbazzaradmin.R;
 
 public class Splash extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 10;
+    private static int SPLASH_TIME_OUT = 4000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -17,8 +17,8 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/position"
         android:hint="jgjhgjhjg "
         android:textColor="#000"
         android:textSize="13sp" />
@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="50dp"
         android:layout_toRightOf="@id/title"
         android:text="(Out of Stock)"
         android:textColor="@color/colorRed"
@@ -56,6 +57,7 @@
         android:textSize="11sp" />
     <TextView
         android:id="@+id/totalItemPrice"
+        android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

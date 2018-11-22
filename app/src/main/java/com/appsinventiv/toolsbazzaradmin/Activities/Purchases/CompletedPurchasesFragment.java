@@ -77,7 +77,7 @@ public class CompletedPurchasesFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new POListAdapter(context, itemList,"",1, new POListAdapter.SettleBills() {
+        adapter = new POListAdapter(context, itemList,"",1,"completed", new POListAdapter.SettleBills() {
             @Override
             public void addToArray(String id, int position) {
                 if (!completedPurchasesIds.contains(id)) {

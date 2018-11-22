@@ -23,10 +23,12 @@ import java.util.ArrayList;
 public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.ViewHolder> {
     Context context;
     ArrayList<VendorModel> itemList;
+    DeleteVendor deleteVendor;
 
-    public VendorsListAdapter(Context context, ArrayList<VendorModel> itemList) {
+    public VendorsListAdapter(Context context, ArrayList<VendorModel> itemList, DeleteVendor deleteVendor) {
         this.context = context;
         this.itemList = itemList;
+        this.deleteVendor = deleteVendor;
     }
 
     @NonNull
@@ -59,6 +61,12 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
                 context.startActivity(i);
             }
         });
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteVendor.onDelete(model);
+            }
+        });
 
     }
 
@@ -69,7 +77,7 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, phone, address;
-        ImageView dial, whatsapp;
+        ImageView dial, whatsapp,delete;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -78,7 +86,11 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
             address = itemView.findViewById(R.id.address);
             dial = itemView.findViewById(R.id.phone_dial);
             whatsapp = itemView.findViewById(R.id.whatsapp);
+            delete = itemView.findViewById(R.id.delete);
 
         }
+    }
+    public interface DeleteVendor{
+       public void onDelete(VendorModel model);
     }
 }

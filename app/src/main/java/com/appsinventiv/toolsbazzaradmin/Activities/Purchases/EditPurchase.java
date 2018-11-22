@@ -176,6 +176,7 @@ public class EditPurchase extends AppCompatActivity {
                         totalPrice.setText("Order Total: Rs " + (model.getProduct().getCostPrice() * model.getQuantity()));
                         ArrayList<String> abc = new ArrayList<>();
                         for (int i = 0; i < model.getOrderId().size(); i++) {
+
                             abc.add("" + model.getOrderId().keySet().toArray()[i]);
                         }
                         orderIds.setText("Order Ids: " + abc);

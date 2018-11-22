@@ -43,7 +43,7 @@ public class ViewPurchaseOrder extends AppCompatActivity {
     PurchaseOrderAdapter adapter;
     RelativeLayout ll_linear;
     TextView employee;
-    String path;
+    String path, from;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,7 @@ public class ViewPurchaseOrder extends AppCompatActivity {
         Intent i = getIntent();
         purchaseOrder = i.getStringExtra("po");
         path = i.getStringExtra("path");
+        from = i.getStringExtra("from");
         ll_linear = findViewById(R.id.ll_linear);
 
         poNumber = findViewById(R.id.poNumber);
@@ -73,13 +74,83 @@ public class ViewPurchaseOrder extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerview.setLayoutManager(layoutManager);
-        getDataFromDb();
+
+        if (from.equalsIgnoreCase("final")) {
+            getDataFromDb();
+        } else if (from.equalsIgnoreCase("completed")) {
+            getCompletedDataFromDb();
+        } else if (from.equalsIgnoreCase("pending")) {
+            getPendingDataFromDb();
+        }
+
 
         adapter = new PurchaseOrderAdapter(this, orderList);
         recyclerview.setAdapter(adapter);
 
         getAddressFromDb();
 
+    }
+
+    private void getPendingDataFromDb() {
+        mDatabase.child(path).child(purchaseOrder).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    PurchaseOrderModel model = dataSnapshot.getValue(PurchaseOrderModel.class);
+                    if (model != null) {
+                        poNumber.setText("PO number: " + model.getPoNumber());
+                        ViewPurchaseOrder.this.setTitle("PO #: " + model.getPoNumber());
+
+                        date.setText("" + CommonUtils.getFormattedDateOnly(model.getTime()));
+                        total.setText("Total        Rs: " + model.getTotal());
+                        employee.setText("Staff name: " + model.getEmployeeName());
+                        orderList = model.getProductsList();
+                        address.setText("Name: " + model.getVendor().getVendorName()
+                                + "\nPhone: " + model.getVendor().getVendorPhone() + "\nAddress: " + model.getVendor().getVendorAddress());
+                        adapter = new PurchaseOrderAdapter(ViewPurchaseOrder.this, orderList);
+                        recyclerview.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        wholeLayout.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void getCompletedDataFromDb() {
+        mDatabase.child(path).child(purchaseOrder).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    PurchaseOrderModel model = dataSnapshot.getValue(PurchaseOrderModel.class);
+                    if (model != null) {
+                        poNumber.setText("PO number: " + model.getPoNumber());
+                        ViewPurchaseOrder.this.setTitle("PO #: " + model.getPoNumber());
+
+                        date.setText("" + CommonUtils.getFormattedDateOnly(model.getTime()));
+                        total.setText("Total        Rs: " + model.getTotal());
+                        employee.setText("Staff name: " + model.getEmployeeName());
+                        orderList = model.getProductsList();
+                        address.setText("Name: " + model.getVendor().getVendorName()
+                                + "\nPhone: " + model.getVendor().getVendorPhone() + "\nAddress: " + model.getVendor().getVendorAddress());
+                        adapter = new PurchaseOrderAdapter(ViewPurchaseOrder.this, orderList);
+                        recyclerview.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        wholeLayout.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void getAddressFromDb() {

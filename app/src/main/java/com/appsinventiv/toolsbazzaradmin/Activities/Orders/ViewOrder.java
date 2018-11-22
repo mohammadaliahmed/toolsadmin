@@ -128,7 +128,7 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
         transferToAccounts1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CommonUtils.showToast("Hi2");
+                addToInvoiceAccounts();
             }
         });
 
@@ -409,7 +409,9 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                                 model.getOrderStatus(),
                                 list.size(),
                                 model.getDeliveryBy(),
-                                0
+                                0,
+                                "pendingSO"
+
 
                         ))
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -27,13 +27,15 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
     Context context;
     ArrayList<InvoiceModel> itemList;
     int showCheckbox;
+    String from;
     SelectInvoices selectInvoices;
 
-    public InvoiceListAdapter(Context context, ArrayList<InvoiceModel> itemList, int showCheckbox, SelectInvoices selectInvoices) {
+    public InvoiceListAdapter(Context context, ArrayList<InvoiceModel> itemList, int showCheckbox,String from, SelectInvoices selectInvoices) {
         this.context = context;
         this.itemList = itemList;
         this.showCheckbox = showCheckbox;
         this.selectInvoices = selectInvoices;
+
     }
 
     @NonNull
@@ -78,6 +80,16 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
             });
 
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, ViewInvoice.class);
+                i.putExtra("invoiceNumber", model.getId());
+                i.putExtra("from", "pending");
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

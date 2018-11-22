@@ -1,88 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_brick"
+    android:orientation="vertical"
     tools:context="com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.Settings">
 
+
     <RelativeLayout
+        android:id="@+id/company"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp">
 
         <ImageView
-            android:id="@+id/logo"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            android:inputType="text"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/placeholder" />
 
-            android:src="@drawable/logo" />
-
-        <Button
-            android:id="@+id/aboutUs"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/logo"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            android:background="@drawable/btn_bg"
-
-            android:inputType="text"
-            android:text="About us"
-            android:textColor="#fff" />
-
-
-        <Button
-            android:id="@+id/terms"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/aboutUs"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            android:background="@drawable/btn_bg"
-
-            android:inputType="text"
-            android:text="Terms"
-            android:textColor="#fff" />
-
-        <Button
-            android:id="@+id/banner"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/terms"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            android:background="@drawable/btn_bg"
-
-            android:inputType="text"
-            android:text="Banner"
-            android:textColor="#fff" />
-
-        <Button
-            android:id="@+id/deliveryCharges"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/banner"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            android:background="@drawable/btn_bg"
-            android:inputType="text"
-            android:text="Delivery Charges"
-            android:textColor="#fff" />
-
-        <Button
-            android:id="@+id/company"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/deliveryCharges"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            android:background="@drawable/btn_bg"
-            android:inputType="text"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
             android:text="Manage Company"
-            android:textColor="#fff" />
+            android:textColor="#000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/default_grey" />
     </RelativeLayout>
-</ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/deliveryCharges"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/placeholder" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text="Delivery Charge"
+            android:textColor="#000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/default_grey" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/aboutUs"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/placeholder" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text="About Us"
+            android:textColor="#000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/default_grey" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/terms"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/placeholder" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text="Term &amp; Condition"
+            android:textColor="#000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/default_grey" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/placeholder" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text="Banner"
+            android:textColor="#000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/default_grey" />
+    </RelativeLayout>
+
+
+</LinearLayout>

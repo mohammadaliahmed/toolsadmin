@@ -48,6 +48,7 @@ public class ViewInvoice extends AppCompatActivity {
     String locationId;
     String path;
     float totalPrice = 0;
+    String from;
 
 
     @Override
@@ -81,14 +82,59 @@ public class ViewInvoice extends AppCompatActivity {
         Intent i = getIntent();
         invoiceNumber = i.getLongExtra("invoiceNumber", 0);
         path = i.getStringExtra("path");
+        from = i.getStringExtra("from");
         this.setTitle("Invoice # " + invoiceNumber);
 
 
         setUpRecycler();
-        getInvoiceFromDb();
+        if (from.equalsIgnoreCase("pending")) {
+            getPendignInvoicesFromDB();
+        } else {
+            getInvoiceFromDb();
+        }
+
         getAddressFromDb();
 
 
+    }
+
+    private void getPendignInvoicesFromDB() {
+        mDatabase.child("Accounts/PendingInvoices/")
+                .child("" + invoiceNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    model = dataSnapshot.getValue(InvoiceModel.class);
+                    if (model != null) {
+
+                        allProductsInOneOrderList = model.getCountModelArrayList();
+                        availableProductsInOneOrderList = model.getNewCountModelArrayList();
+                        invoiceNumberText.setText("Invoice # " + model.getId());
+                        date.setText("" + CommonUtils.getFormattedDateOnly(model.getTime()));
+                        setUpLayout(model.getCustomer().getLocationId());
+                        address.setText("Name:  " + model.getCustomer().getName() + "\nPhone: " + model.getCustomer().getPhone() + "\nAddress:  " + model.getCustomer().getAddress()
+                                + ", " + model.getCustomer().getCity()
+                                + "\nCountry: " + model.getCustomer().getCountry());
+                        adapter = new InvoiceAdapter(ViewInvoice.this,
+                                allProductsInOneOrderList,
+                                availableProductsInOneOrderList,
+                                model.getCustomer().getCustomerType(), locationAndChargesModel);
+
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        wholeLayout.setVisibility(View.GONE);
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
@@ -135,7 +181,7 @@ public class ViewInvoice extends AppCompatActivity {
                         adapter = new InvoiceAdapter(ViewInvoice.this,
                                 allProductsInOneOrderList,
                                 availableProductsInOneOrderList,
-                                model.getCustomer().getCustomerType());
+                                model.getCustomer().getCustomerType(), locationAndChargesModel);
 
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
@@ -161,6 +207,8 @@ public class ViewInvoice extends AppCompatActivity {
                 if (dataSnapshot.getValue() != null) {
                     locationAndChargesModel = dataSnapshot.getValue(LocationAndChargesModel.class);
                     if (locationAndChargesModel != null) {
+                        adapter.location(locationAndChargesModel);
+//                        adapter.notifyDataSetChanged();
                         for (int i = 0; i < model.getCountModelArrayList().size(); i++) {
                             totalPrice = totalPrice + (((model.getCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getCountModelArrayList().get(i).getQuantity())
                             ));

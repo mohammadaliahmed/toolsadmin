@@ -20,6 +20,7 @@ public class InvoiceModel {
     String orderStatus, deliveryBy="";
     int orderItems;
     int outOfStock;
+    String invoiceStatus;
 
     public InvoiceModel() {
     }
@@ -37,7 +38,8 @@ public class InvoiceModel {
                         String orderStatus,
                         int orderItems,
                         String deliveryBy,
-                        int outOfStock
+                        int outOfStock,
+                        String invoiceStatus
     ) {
         this.id = id;
         this.countModelArrayList = countModelArrayList;
@@ -53,6 +55,15 @@ public class InvoiceModel {
         this.orderItems = orderItems;
         this.deliveryBy = deliveryBy;
         this.outOfStock = outOfStock;
+        this.invoiceStatus=invoiceStatus;
+    }
+
+    public String getInvoiceStatus() {
+        return invoiceStatus;
+    }
+
+    public void setInvoiceStatus(String invoiceStatus) {
+        this.invoiceStatus = invoiceStatus;
     }
 
     public String getOrderStatus() {

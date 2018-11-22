@@ -58,7 +58,7 @@ public class PendingSOAccounts extends Fragment {
         finalized = rootView.findViewById(R.id.finalized);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new InvoiceListAdapter(context, itemList, 1, new InvoiceListAdapter.SelectInvoices() {
+        adapter = new InvoiceListAdapter(context, itemList, 1,"pending", new InvoiceListAdapter.SelectInvoices() {
             @Override
             public void addToArray(long id, int position) {
                 if (!invoicesSelectedList.contains(id)) {
@@ -151,6 +151,7 @@ public class PendingSOAccounts extends Fragment {
 
             }
         });
+        adapter.notifyDataSetChanged();
     }
 
 
@@ -170,7 +171,9 @@ public class PendingSOAccounts extends Fragment {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         InvoiceModel model = snapshot.getValue(InvoiceModel.class);
                         if (model != null) {
-                            itemList.add(model);
+                            if(model.getInvoiceStatus().equalsIgnoreCase("pendingSO")) {
+                                itemList.add(model);
+                            }
 
 //                            progress.setVisibility(View.GONE);
 

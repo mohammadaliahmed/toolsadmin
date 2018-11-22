@@ -1,7 +1,10 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Vendors;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,11 +16,15 @@ import android.view.View;
 import com.appsinventiv.toolsbazzaradmin.Adapters.VendorsListAdapter;
 import com.appsinventiv.toolsbazzaradmin.Models.VendorModel;
 import com.appsinventiv.toolsbazzaradmin.R;
+import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -44,7 +51,45 @@ public class Vendors extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new VendorsListAdapter(this, vendorModelArrayList);
+        adapter = new VendorsListAdapter(this, vendorModelArrayList, new VendorsListAdapter.DeleteVendor() {
+            @Override
+            public void onDelete(final VendorModel model) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(Vendors.this);
+                builder1.setMessage("Delete vendor?");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                mDatabase.child("Vendors").child(model.getVendorId()).child("isActive").setValue("no").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        CommonUtils.showToast("Vendor deleted");
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        CommonUtils.showToast(e.getMessage());
+                                    }
+                                });
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+        });
         recyclerView.setAdapter(adapter);
 
 
@@ -60,31 +105,20 @@ public class Vendors extends AppCompatActivity {
 
     private void getVendorsFromDb() {
         vendorModelArrayList.clear();
-        mDatabase.child("Vendors").addChildEventListener(new ChildEventListener() {
+        mDatabase.child("Vendors").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null) {
-                    VendorModel model = dataSnapshot.getValue(VendorModel.class);
-                    if (model != null) {
-                        vendorModelArrayList.add(model);
-                        adapter.notifyDataSetChanged();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        VendorModel model = snapshot.getValue(VendorModel.class);
+                        if (model != null) {
+                            vendorModelArrayList.add(model);
+
+                        }
                     }
+                    adapter.notifyDataSetChanged();
+
                 }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override

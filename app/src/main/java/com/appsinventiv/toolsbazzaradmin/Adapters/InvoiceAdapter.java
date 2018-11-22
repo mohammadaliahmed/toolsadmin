@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
+import com.appsinventiv.toolsbazzaradmin.Models.LocationAndChargesModel;
 import com.appsinventiv.toolsbazzaradmin.Models.ProductCountModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
@@ -24,14 +25,21 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
     ArrayList<ProductCountModel> list1;
     ArrayList<ProductCountModel> list2;
     String customerType;
+    LocationAndChargesModel locationAndChargesModel;
 
-    public InvoiceAdapter(Context context, ArrayList<ProductCountModel> list1, ArrayList<ProductCountModel> list2, String customerType) {
+    public InvoiceAdapter(Context context, ArrayList<ProductCountModel> list1, ArrayList<ProductCountModel> list2, String customerType
+    ,LocationAndChargesModel locationAndChargesModel
+    ) {
         this.context = context;
         this.list1 = list1;
         this.list2 = list2;
         this.customerType = customerType;
+        this.locationAndChargesModel=locationAndChargesModel;
     }
-
+    public void location(LocationAndChargesModel locationAndChargesModel){
+        this.locationAndChargesModel=locationAndChargesModel;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,35 +54,37 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
         holder.position.setText("" + (position + 1) + ".");
         holder.title.setText(model.getProduct().getTitle());
         holder.subtitle.setText("Description: " + model.getProduct().getMeasurement() + "\nQuantity: " + model.getQuantity());
-        if (customerType.equalsIgnoreCase("wholesale")) {
-            holder.price.setText("Unit price: Rs " + CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice()));
-            if (list2 != null) {
-                if (list2.contains(model)) {
-                    holder.outOfStockText.setVisibility(View.GONE);
-                    holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorBlack));
-                    holder.totalItemPrice.setText("Rs " + (CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice() * model.getQuantity())));
+        if(locationAndChargesModel!=null) {
+            if (customerType.equalsIgnoreCase("wholesale")) {
+                holder.price.setText("Unit price: Rs " + CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice()));
+                if (list2 != null) {
+                    if (list2.contains(model)) {
+                        holder.outOfStockText.setVisibility(View.GONE);
+                        holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorBlack));
+                        holder.totalItemPrice.setText(locationAndChargesModel.getCurrency() + (CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate())));
 
-                } else {
-                    holder.outOfStockText.setVisibility(View.VISIBLE);
-                    holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
-                    holder.totalItemPrice.setText("-Rs " + CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice() * model.getQuantity()));
+                    } else {
+                        holder.outOfStockText.setVisibility(View.VISIBLE);
+                        holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
+                        holder.totalItemPrice.setText("-" + locationAndChargesModel.getCurrency() + CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate()));
+                    }
                 }
-            }
 
 
-        } else if (customerType.equalsIgnoreCase("retail")) {
-            holder.price.setText("Unit price: " + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice()));
+            } else if (customerType.equalsIgnoreCase("retail")) {
+                holder.price.setText("Unit price: " + locationAndChargesModel.getCurrency() + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * locationAndChargesModel.getCurrencyRate()));
 
-            if(list2!=null) {
-                if (list2.contains(model)) {
-                    holder.outOfStockText.setVisibility(View.GONE);
-                    holder.totalItemPrice.setText("Rs " + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity()));
+                if (list2 != null) {
+                    if (list2.contains(model)) {
+                        holder.outOfStockText.setVisibility(View.GONE);
+                        holder.totalItemPrice.setText(locationAndChargesModel.getCurrency() + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate()));
 
-                } else {
-                    holder.outOfStockText.setVisibility(View.VISIBLE);
-                    holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
+                    } else {
+                        holder.outOfStockText.setVisibility(View.VISIBLE);
+                        holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
 
-                    holder.totalItemPrice.setText("-Rs " + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity()));
+                        holder.totalItemPrice.setText("-" + locationAndChargesModel.getCurrency() + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate()));
+                    }
                 }
             }
         }

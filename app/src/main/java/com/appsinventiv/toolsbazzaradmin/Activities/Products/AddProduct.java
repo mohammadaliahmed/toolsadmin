@@ -159,6 +159,10 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                     e_subtitle.setError("Enter subtitle");
                 } else if (e_costPrice.getText().length() == 0) {
                     e_costPrice.setError("Enter price");
+                } else if (e_wholesalePrice.getText().length() == 0) {
+                    e_wholesalePrice.setError("Enter whole sale price");
+                } else if (e_retailPrice.getText().length() == 0) {
+                    e_retailPrice.setError("Enter price");
                 } else {
                     List<String> container = new ArrayList<>();
                     if (e_sizes.getText().length() > 0) {
@@ -185,7 +189,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                             e_title.getText().toString(),
                             e_subtitle.getText().toString(),
                             "true",
-                            Integer.parseInt(""+newSku),
+                            Integer.parseInt("" + newSku),
                             "",
                             extras.getString("mainCategory"),
                             extras.getString("subCategory"),
@@ -193,15 +197,15 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                             Float.parseFloat(e_costPrice.getText().toString()),
                             Float.parseFloat(e_wholesalePrice.getText().toString()),
                             Float.parseFloat(e_retailPrice.getText().toString()),
-                            Long.parseLong(e_minOrderQty.getText().toString()),
+                            Long.parseLong(e_minOrderQty.getText().length() > 0 ? e_minOrderQty.getText().toString() : "" + 1),
                             e_measurement.getText().toString(),
                             vendor,
                             selected.getText().toString(),
                             e_description.getText().toString(),
                             container,
                             container1,
-                            Float.parseFloat(e_oldWholesalePrice.getText().toString()),
-                            Float.parseFloat(e_oldRetailPrice.getText().toString()),
+                            Float.parseFloat(e_oldWholesalePrice.getText().length() > 0 ? e_oldWholesalePrice.getText().toString() : "" + 0),
+                            Float.parseFloat(e_oldRetailPrice.getText().length() > 0 ? e_oldRetailPrice.getText().toString() : "" + 0),
                             0
 
 

@@ -43,7 +43,7 @@ public class ListOfInvoices extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new InvoiceListAdapter(this, itemList, 0, new InvoiceListAdapter.SelectInvoices() {
+        adapter = new InvoiceListAdapter(this, itemList, 0,"", new InvoiceListAdapter.SelectInvoices() {
             @Override
             public void addToArray(long id, int position) {
 

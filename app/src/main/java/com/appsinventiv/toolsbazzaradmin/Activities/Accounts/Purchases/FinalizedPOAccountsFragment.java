@@ -144,7 +144,7 @@ public class FinalizedPOAccountsFragment extends Fragment {
     private void getDayDataFromServer(String year, String month, String day) {
         wholeLayout.setVisibility(View.VISIBLE);
         String path = year + "/" + month + "/" + day;
-        poListAdapter = new POListAdapter(context, itemList, path, 0, new POListAdapter.SettleBills() {
+        poListAdapter = new POListAdapter(context, itemList, path, 0,"", new POListAdapter.SettleBills() {
             @Override
             public void addToArray(String id, int position) {
 

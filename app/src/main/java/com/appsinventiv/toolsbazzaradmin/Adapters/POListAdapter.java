@@ -29,13 +29,15 @@ public class POListAdapter extends RecyclerView.Adapter<POListAdapter.ViewHolder
     SettleBills settleBills;
     String path;
     int showCheckbox;
+    String from;
 
-    public POListAdapter(Context context, ArrayList<PurchaseOrderModel> itemList, String path, int showCheckbox, SettleBills settleBills) {
+    public POListAdapter(Context context, ArrayList<PurchaseOrderModel> itemList, String path, int showCheckbox, String from, SettleBills settleBills) {
         this.context = context;
         this.itemList = itemList;
         this.settleBills = settleBills;
         this.path = path;
         this.showCheckbox = showCheckbox;
+        this.from = from;
     }
 
     @NonNull
@@ -70,19 +72,44 @@ public class POListAdapter extends RecyclerView.Adapter<POListAdapter.ViewHolder
             });
         } else {
             holder.checkBox.setVisibility(View.GONE);
-
-
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(context, ViewPurchaseOrder.class);
                     i.putExtra("po", model.getId());
                     i.putExtra("path", path);
+                    i.putExtra("from", "final");
                     context.startActivity(i);
                 }
             });
-
         }
+        if (from.equalsIgnoreCase("pending")) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, ViewPurchaseOrder.class);
+                    i.putExtra("po", model.getId());
+                    String pendingPath = "Accounts/PendingPO";
+                    i.putExtra("path", pendingPath);
+                    i.putExtra("from", "pending");
+                    context.startActivity(i);
+                }
+            });
+        } else if (from.equalsIgnoreCase("completed")) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, ViewPurchaseOrder.class);
+                    i.putExtra("po", model.getId());
+                    String completedPath = "Purchases/Completed";
+                    i.putExtra("path", completedPath);
+                    i.putExtra("from", "completed");
+                    context.startActivity(i);
+                }
+            });
+        }
+
+
     }
 
     @Override

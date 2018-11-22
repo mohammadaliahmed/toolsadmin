@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -64,8 +67,7 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
     long invoiceNumber = 10001;
     Customer customer;
     OrderModel model;
-
-//    RelativeLayout wholeLayout;
+    CheckBox selectAll;
 
     ArrayList<ProductCountModel> newList = new ArrayList<>();
     long totalPrice;
@@ -93,6 +95,7 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
 
 
         carrier = findViewById(R.id.carrier);
+        selectAll = findViewById(R.id.selectAll);
         trackingNumber = findViewById(R.id.trackingNumber);
         orderId = findViewById(R.id.order_id);
         markAsCourier = findViewById(R.id.markAsCourier);
@@ -104,7 +107,6 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
         ship_country = findViewById(R.id.ship_country);
         price = findViewById(R.id.order_price);
         instructions = findViewById(R.id.instructions);
-//        wholeLayout = findViewById(R.id.wholeLayout);
         invoice = findViewById(R.id.invoice);
         purchase = findViewById(R.id.purchase);
 
@@ -116,13 +118,20 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
         shipping_card = findViewById(R.id.shipping_card);
         order_card = findViewById(R.id.order_card);
         shipping_info_card = findViewById(R.id.shipping_info_card);
-//        markAsCOD = findViewById(R.id.markAsCOD);
-//        markAsDeliveredCredit = findViewById(R.id.markAsDeliveredCredit);
-//        markAsRefused = findViewById(R.id.markAsRefused);
-//        dueDate = findViewById(R.id.dueDate);
 
+        selectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    model.getCountModelArrayList().get(0).setIsSelected(1);
+                    newList.addAll(model.getCountModelArrayList());
+                } else {
+                    newList.clear();
+                }
+            }
+        });
 
-        recyclerView = (RecyclerView) findViewById(R.id.recylerview);
+        recyclerView = findViewById(R.id.recylerview);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         mDatabase.child("Orders").child(orderIdFromIntent).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -150,16 +159,16 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
                         adapter = new OrderedProductsAdapter(ViewUnderProcessOrder.this, list, model.getCustomer().getCustomerType(), 1, new OrderedProductsAdapter.OnProductSelected() {
                             @Override
                             public void onChecked(ProductCountModel product, int position) {
-                                if (!newList.contains(product)) {
-                                    newList.add(product);
-                                }
+                                newList.add(product);
+
+
                             }
 
                             @Override
                             public void onUnChecked(ProductCountModel product, int position) {
-                                if (newList.contains(product)) {
-                                    newList.remove(newList.indexOf(newList.get(position)));
-                                }
+
+                                newList.remove(position);
+
 
                             }
                         });
@@ -282,7 +291,8 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
                         model.getOrderStatus(),
                         list.size(),
                         model.getDeliveryBy(),
-                        0
+                        0,
+                        "waiting"
 
                 ))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

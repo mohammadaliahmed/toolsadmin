@@ -30,14 +30,14 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
     OnProductSelected onProductSelected;
     int flag;
 
-    public OrderedProductsAdapter(Context context, ArrayList<ProductCountModel> productList, String customerType,int flag
+    public OrderedProductsAdapter(Context context, ArrayList<ProductCountModel> productList, String customerType, int flag
             , OnProductSelected onProductSelected
     ) {
         this.context = context;
         this.productList = productList;
         this.customerType = customerType;
         this.onProductSelected = onProductSelected;
-        this.flag=flag;
+        this.flag = flag;
     }
 
     @NonNull
@@ -54,6 +54,7 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
         final ProductCountModel model = productList.get(position);
 
         holder.title.setText(model.getProduct().getTitle());
+
 
         if (customerType.equalsIgnoreCase("wholesale")) {
             holder.price.setText("Rs. " + model.getProduct().getWholeSalePrice());
@@ -83,19 +84,25 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
 
         Glide.with(context).load(model.getProduct().getThumbnailUrl()).into(holder.image);
 
-        if(flag==1) {
-
+        if (flag == 1) {
+            if (model.getIsSelected() == 1) {
+                holder.checkBox.setChecked(true);
+            } else {
+                holder.checkBox.setChecked(false);
+            }
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if (b) {
+                        model.setIsSelected(1);
                         onProductSelected.onChecked(model, position);
                     } else {
+                        model.setIsSelected(0);
                         onProductSelected.onUnChecked(model, position);
                     }
                 }
             });
-        }else{
+        } else {
             holder.checkBox.setVisibility(View.GONE);
         }
     }

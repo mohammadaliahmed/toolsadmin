@@ -44,13 +44,13 @@ public class PendingFragment extends Fragment {
     DatabaseReference mDatabase;
     RecyclerView recyclerview;
     public static ArrayList<ProductCountModel> itemList = new ArrayList<>();
+    public static ArrayList<ProductCountModel> newList = new ArrayList<>();
     PendingProductsAdapter adapter;
     ProgressBar progress;
     long poNumber = 10001;
     Button generate;
     ArrayList<String> productIds = new ArrayList<>();
     Context context;
-
 
     public PendingFragment() {
         // Required empty public constructor
@@ -76,15 +76,12 @@ public class PendingFragment extends Fragment {
         generate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                    if(newList.size()>0) {
+                        showAlertBoxForCompletion();
+                    }else{
+                        CommonUtils.showToast("Products are pending for purchase");
+                    }
 
-                showAlertBoxForCompletion();
-
-
-//                if (itemList.size() > 0) {
-//                    createPurchaseOrder();
-//                } else {
-//                    CommonUtils.showToast("No pending orders from " + vendor.getVendorName());
-//                }
 
 
             }
@@ -138,7 +135,7 @@ public class PendingFragment extends Fragment {
                                 .child(key)
                                 .setValue(new PurchaseOrderModel(
                                         key,
-                                        itemList,
+                                        newList,
                                         vendor,
                                         calculateTotal()
                                         , System.currentTimeMillis(),
@@ -151,10 +148,11 @@ public class PendingFragment extends Fragment {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 CommonUtils.showToast("Marked as completed");
-                                for (ProductCountModel item : itemList) {
+                                for (ProductCountModel item : newList) {
                                     removeValueFromDb(item.getProduct().getId());
                                 }
                                 updatePOCount();
+                                adapter.notifyDataSetChanged();
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -316,12 +314,16 @@ public class PendingFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
                     itemList.clear();
+                    newList.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         ProductCountModel model = snapshot.getValue(ProductCountModel.class);
                         if (model != null) {
                             if (vendorId != null) {
                                 if (model.getProduct().getVendor().getVendorId().equalsIgnoreCase(vendorId)) {
                                     itemList.add(model);
+                                    if(model.isPurchased()){
+                                        newList.add(model);
+                                    }
 
                                     adapter.notifyDataSetChanged();
                                     progress.setVisibility(View.GONE);

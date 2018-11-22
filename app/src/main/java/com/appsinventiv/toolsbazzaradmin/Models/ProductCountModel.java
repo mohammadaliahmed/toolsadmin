@@ -21,6 +21,7 @@ public class ProductCountModel {
     boolean purchased;
     String size;
     String color;
+    int isSelected=0;
 
     public ProductCountModel() {
     }
@@ -41,6 +42,13 @@ public class ProductCountModel {
         return result;
     }
 
+    public int getIsSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(int isSelected) {
+        this.isSelected = isSelected;
+    }
 
     public String getSize() {
         return size;

@@ -1,7 +1,9 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Products;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -14,10 +16,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,6 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -111,6 +116,8 @@ public class ListOfProducts extends AppCompatActivity {
 
                             }
                         });
+                        adapter.updatelist(productArrayList);
+
                         adapter.notifyDataSetChanged();
                     }
                 }
@@ -137,19 +144,34 @@ public class ListOfProducts extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (item.getItemId() == android.R.id.home) {
-
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        final MenuItem mSearch = menu.findItem(R.id.action_search);
+//        mSearch.expandActionView();
+        SearchView mSearchView = (SearchView) mSearch.getActionView();
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                if (newText.length() > 0) {
+                    adapter.filter(newText);
+                }
+                return false;
+            }
+        });
+
+
+        return true;
+        // Get SearchView object.
+
     }
+
 }

@@ -7,12 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.Products.AddCategories;
 import com.appsinventiv.toolsbazzaradmin.R;
 
 public class Settings extends AppCompatActivity {
-    Button aboutUs, terms, banner, deliveryCharges, company;
+    RelativeLayout aboutUs, terms, banner, deliveryCharges, company;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,6 @@ public class Settings extends AppCompatActivity {
         banner = findViewById(R.id.banner);
         terms = findViewById(R.id.terms);
         company = findViewById(R.id.company);
-
         deliveryCharges = findViewById(R.id.deliveryCharges);
 
         deliveryCharges.setOnClickListener(new View.OnClickListener() {

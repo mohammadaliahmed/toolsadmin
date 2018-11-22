@@ -18,6 +18,7 @@ import com.appsinventiv.toolsbazzaradmin.R;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by AliAh on 20/06/2018.
@@ -27,11 +28,15 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     Context context;
     ArrayList<Product> productList;
     OnProductStatusChanged productStatusChanged;
+    private ArrayList<Product> arrayList;
+
 
     public ProductsAdapter(Context context, ArrayList<Product> productList, OnProductStatusChanged productStatusChanged) {
         this.context = context;
         this.productList = productList;
         this.productStatusChanged = productStatusChanged;
+        this.arrayList = new ArrayList<>(productList);
+
     }
 
     @NonNull
@@ -49,8 +54,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
 
         holder.title.setText(model.getTitle());
-        holder.wholesalePrice.setText("Rs. " + model.getWholeSalePrice()+"\nWhole sale");
-        holder.retailPrice.setText("Rs. " + model.getRetailPrice()+"\nRetail Price");
+        holder.wholesalePrice.setText("Whole sale   Rs. " + model.getWholeSalePrice() + "\nRetail Price   Rs. " + model.getRetailPrice());
+//        holder.retailPrice.setText("Rs. " + model.getRetailPrice()+"\nRetail Price");
 
         holder.subtitle.setText(model.getSubtitle());
         Glide.with(context).load(model.getThumbnailUrl()).into(holder.image);
@@ -59,8 +64,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             holder.switchh.setChecked(true);
         } else if (model.getIsActive().equalsIgnoreCase("false")) {
             holder.switchh.setChecked(false);
-        }
-        else {
+        } else {
             holder.switchh.setChecked(false);
 //            holder.switchh.setVisibility(View.GONE);
         }
@@ -79,19 +83,47 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(context, EditProduct.class);
-                i.putExtra("productId",model.getId());
+                Intent i = new Intent(context, EditProduct.class);
+                i.putExtra("productId", model.getId());
                 context.startActivity(i);
             }
         });
 
 
     }
+    public void updatelist(ArrayList<Product> productList) {
+        this.productList = productList;
+        arrayList.clear();
+        arrayList.addAll(productList);
+    }
+
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        productList.clear();
+        if (charText.length() == 0) {
+            productList.addAll(arrayList);
+        } else {
+            for (Product product : arrayList) {
+                if (product.getTitle().toLowerCase().contains(charText) ||
+                        product.getSubtitle().toLowerCase().contains(charText) ||
+                        product.getSubCategory().toLowerCase().contains(charText) ||
+                        product.getMainCategory().toLowerCase().contains(charText)
+                        ) {
+                    productList.add(product);
+                }
+            }
+
+
+        }
+        notifyDataSetChanged();
+
+    }
+
     @Override
-    public int getItemViewType(int position)
-    {
+    public int getItemViewType(int position) {
         return position;
     }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -103,7 +135,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title, subtitle, wholesalePrice,retailPrice;
+        TextView title, subtitle, wholesalePrice, retailPrice;
         ImageView image;
 
         Switch switchh;

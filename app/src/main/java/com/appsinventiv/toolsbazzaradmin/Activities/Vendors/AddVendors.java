@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AddVendors extends AppCompatActivity {
     Button addVendor;
-    EditText name, phone, address;
+    EditText name, phone, address, email;
     DatabaseReference mDatabase;
 
     @Override
@@ -39,6 +39,7 @@ public class AddVendors extends AppCompatActivity {
         name = findViewById(R.id.name);
         address = findViewById(R.id.address);
         phone = findViewById(R.id.phone);
+        email = findViewById(R.id.email);
 
         addVendor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +50,8 @@ public class AddVendors extends AppCompatActivity {
                     phone.setError("Enter phone");
                 } else if (address.getText().length() == 0) {
                     address.setError("Enter address");
+                } else if (email.getText().length() == 0) {
+                    email.setError("Enter email");
                 } else {
                     String key = mDatabase.push().getKey();
                     mDatabase.child("Vendors").child(key).setValue(new VendorModel(
@@ -56,7 +59,9 @@ public class AddVendors extends AppCompatActivity {
                             name.getText().toString(),
                             phone.getText().toString(),
                             address.getText().toString(),
-                            System.currentTimeMillis()
+                            System.currentTimeMillis(),
+                            email.getText().toString(),
+                            "yes"
                     )).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

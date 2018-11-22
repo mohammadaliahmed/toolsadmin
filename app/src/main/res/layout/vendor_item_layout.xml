@@ -20,6 +20,7 @@
             android:layout_margin="5dp"
             android:text="Name: " />
 
+
         <TextView
             android:id="@+id/phone"
             android:layout_width="wrap_content"
@@ -37,6 +38,13 @@
             android:text="Address: " />
 
         <ImageView
+            android:id="@+id/delete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_cancel" />
+
+        <ImageView
             android:id="@+id/phone_dial"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -44,13 +52,14 @@
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
             android:src="@drawable/ic_phone_dial" />
+
         <ImageView
             android:id="@+id/whatsapp"
             android:layout_width="30dp"
             android:layout_height="30dp"
-           android:layout_toLeftOf="@id/phone_dial"
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
+            android:layout_toLeftOf="@id/phone_dial"
             android:src="@drawable/ic_whatsapp" />
     </RelativeLayout>
 
