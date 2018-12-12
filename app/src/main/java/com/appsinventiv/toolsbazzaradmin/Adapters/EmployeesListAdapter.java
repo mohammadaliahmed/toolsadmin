@@ -15,6 +15,7 @@ import com.appsinventiv.toolsbazzaradmin.Activities.Employees.ViewEmployee;
 import com.appsinventiv.toolsbazzaradmin.Models.Employee;
 import com.appsinventiv.toolsbazzaradmin.Models.VendorModel;
 import com.appsinventiv.toolsbazzaradmin.R;
+import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
 
 import java.util.ArrayList;
 
@@ -45,6 +46,7 @@ public class EmployeesListAdapter extends RecyclerView.Adapter<EmployeesListAdap
         final Employee model = itemList.get(position);
         holder.name.setText("Name: " + model.getName());
         holder.phone.setText("Phone: " + model.getPhone());
+        holder.designation.setText("Designation: " + CommonUtils.rolesList[model.getRole()]);
 
         holder.dial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +64,7 @@ public class EmployeesListAdapter extends RecyclerView.Adapter<EmployeesListAdap
             }
         });
 
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +81,7 @@ public class EmployeesListAdapter extends RecyclerView.Adapter<EmployeesListAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, phone, address;
+        TextView name, phone, address,designation;
         ImageView dial, whatsapp;
 
         public ViewHolder(View itemView) {
@@ -87,6 +90,7 @@ public class EmployeesListAdapter extends RecyclerView.Adapter<EmployeesListAdap
             phone = itemView.findViewById(R.id.phone);
             dial = itemView.findViewById(R.id.phone_dial);
             whatsapp = itemView.findViewById(R.id.whatsapp);
+            designation = itemView.findViewById(R.id.designation);
         }
     }
 }

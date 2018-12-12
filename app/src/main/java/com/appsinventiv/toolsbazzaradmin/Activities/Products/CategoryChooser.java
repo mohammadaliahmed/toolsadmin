@@ -48,7 +48,7 @@ public class CategoryChooser extends AppCompatActivity {
         });
 
         this.setTitle("Choose category");
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Settings").child("Categories");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Settings").child("AddMainCategories");
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override

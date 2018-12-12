@@ -24,6 +24,14 @@ public class VendorModel {
     public VendorModel() {
     }
 
+    public String getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
+    }
+
     public String getVendorEmail() {
         return vendorEmail;
     }

@@ -12,9 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -80,6 +82,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
     long newSku = 10001;
     RadioGroup radioGroup;
     RadioButton selected;
+    public static ArrayList<String> categoryList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,8 +101,10 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         categoryChoosen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AddProduct.this, CategoryChooser.class);
+                Intent i = new Intent(AddProduct.this, ChooseCategory.class);
+                categoryList.clear();
                 startActivityForResult(i, 1);
+
             }
         });
         pick = findViewById(R.id.pick);
@@ -127,6 +132,50 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         getVendorsFromDb();
 
 
+        e_wholesalePrice.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+              /* Write your logic here that will be executed when user taps next button */
+                    e_oldWholesalePrice.requestFocus();
+
+                    handled = true;
+                }
+
+                return handled;
+            }
+        });
+        e_oldWholesalePrice.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+              /* Write your logic here that will be executed when user taps next button */
+                    e_retailPrice.requestFocus();
+
+                    handled = true;
+                }
+
+                return handled;
+            }
+        });
+        e_retailPrice.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+              /* Write your logic here that will be executed when user taps next button */
+                    e_oldRetailPrice.requestFocus();
+
+                    handled = true;
+                }
+
+                return handled;
+            }
+        });
+
+
         pick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,8 +200,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
             @Override
             public void onClick(View view) {
 
-                if (extras == null) {
-                    CommonUtils.showToast("Choose Category");
+                if (categoryList.size() == 0) {
+                    CommonUtils.showToast("Please select category");
                 } else if (e_title.getText().length() == 0) {
                     e_title.setError("Enter title");
                 } else if (e_subtitle.getText().length() == 0) {
@@ -191,8 +240,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                             "true",
                             Integer.parseInt("" + newSku),
                             "",
-                            extras.getString("mainCategory"),
-                            extras.getString("subCategory"),
+                            "",
+                            "",
                             System.currentTimeMillis(),
                             Float.parseFloat(e_costPrice.getText().toString()),
                             Float.parseFloat(e_wholesalePrice.getText().toString()),
@@ -206,7 +255,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                             container1,
                             Float.parseFloat(e_oldWholesalePrice.getText().length() > 0 ? e_oldWholesalePrice.getText().toString() : "" + 0),
                             Float.parseFloat(e_oldRetailPrice.getText().length() > 0 ? e_oldRetailPrice.getText().toString() : "" + 0),
-                            0
+                            0,
+                            categoryList
 
 
                     )).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -266,7 +316,14 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         LinearLayoutManager horizontalLayoutManagaer
                 = new LinearLayoutManager(AddProduct.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
-        adapter = new SelectedImagesAdapter(AddProduct.this, selectedAdImages);
+        adapter = new SelectedImagesAdapter(AddProduct.this, selectedAdImages, new SelectedImagesAdapter.ChooseOption() {
+            @Override
+            public void onDeleteClicked(SelectedAdImages images, int position) {
+                selectedAdImages.remove(position-1);
+                imageUrl.remove(position-1);
+                adapter.notifyDataSetChanged();
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
@@ -360,7 +417,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        CommonUtils.showToast(categoryList + "");
+        categoryChoosen.setText("Category: " + categoryList);
         selectedAdImages.clear();
         if (data != null) {
             if (requestCode == REQUEST_CODE_CHOOSE) {
@@ -379,10 +437,12 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
             }
             if (requestCode == 1) {
                 extras = data.getExtras();
-                if (extras.getString("subCategory") != null) {
-                    categoryChoosen.setText("Category: " + extras.getString("subCategory"));
 
-                }
+//                if (extras.getString("subCategory") != null) {
+////                    categoryChoosen.setText("Category: " + extras.getString("subCategory"));
+//
+//
+//                }
             }
             super.onActivityResult(requestCode, resultCode, data);
         }

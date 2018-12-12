@@ -149,7 +149,7 @@ public class ViewDeliveryShippedOrder extends AppCompatActivity {
                                 }
 
                             }
-                        });
+                        },0);
                         recyclerView.setAdapter(adapter);
 
 

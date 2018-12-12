@@ -49,7 +49,7 @@ public class AddCategories extends AppCompatActivity {
                 } else {
                     subCategoryList = new ArrayList<String>(Arrays.asList(subcategory.getText().toString().split("\n")));
                     mDatabase.child("Settings")
-                            .child("Categories")
+                            .child("AddMainCategories")
                             .child(maincategory.getText().toString()).setValue(subCategoryList).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

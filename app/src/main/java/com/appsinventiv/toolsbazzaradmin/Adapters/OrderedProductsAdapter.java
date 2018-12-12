@@ -29,15 +29,16 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
     String customerType;
     OnProductSelected onProductSelected;
     int flag;
-
+    int abc;
     public OrderedProductsAdapter(Context context, ArrayList<ProductCountModel> productList, String customerType, int flag
-            , OnProductSelected onProductSelected
+            , OnProductSelected onProductSelected,int abc
     ) {
         this.context = context;
         this.productList = productList;
         this.customerType = customerType;
         this.onProductSelected = onProductSelected;
         this.flag = flag;
+        this.abc=abc;
     }
 
     @NonNull
@@ -49,6 +50,10 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
     }
 
 
+    public void selectAll(int abc){
+        this.abc=abc;
+       notifyDataSetChanged();
+    }
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final ProductCountModel model = productList.get(position);
@@ -83,13 +88,19 @@ public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProducts
         }
 
         Glide.with(context).load(model.getProduct().getThumbnailUrl()).into(holder.image);
+        if(abc==1){
+            holder.checkBox.setChecked(true);
 
+        }else{
+            holder.checkBox.setChecked(false);
+
+        }
         if (flag == 1) {
-            if (model.getIsSelected() == 1) {
-                holder.checkBox.setChecked(true);
-            } else {
-                holder.checkBox.setChecked(false);
-            }
+//            if (model.getIsSelected() == 1) {
+//                holder.checkBox.setChecked(true);
+//            } else {
+//                holder.checkBox.setChecked(false);
+//            }
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

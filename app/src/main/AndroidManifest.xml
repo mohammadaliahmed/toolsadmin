@@ -106,7 +106,14 @@
         <activity
             android:name=".Activities.Accounts.ExpensesAndRevenue.ViewExpensesReport"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.Accounts.ExpensesAndRevenue.ExpensesDetail"></activity>
+        <activity android:name=".Activities.Accounts.ExpensesAndRevenue.ExpensesDetail" />
+        <activity
+            android:name=".Activities.Products.AddMainCategories"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".Activities.Products.ChooseCategory" />
+        <activity android:name=".Activities.Customers.ListOfCustomers" />
+        <activity android:name=".Activities.Customers.ViewCustomer" />
+        <activity android:name=".Activities.AppSettings.DealsBanner"></activity>
     </application>
 
 </manifest>

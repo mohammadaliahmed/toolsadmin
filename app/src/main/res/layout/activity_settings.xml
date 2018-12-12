@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:orientation="vertical"
     tools:context="com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.Settings">
 
@@ -19,7 +20,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/placeholder" />
+            android:src="@drawable/ic_setting_black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,7 +48,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/placeholder" />
+            android:src="@drawable/ic_delivery_black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,7 +76,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/placeholder" />
+            android:src="@drawable/ic_info_black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -103,7 +104,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/placeholder" />
+            android:src="@drawable/terms" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -131,7 +132,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/placeholder" />
+            android:src="@drawable/ic_banner" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -139,6 +140,34 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="50dp"
             android:text="Banner"
+            android:textColor="#000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/default_grey" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/dealsBanner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_banner" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text="Deals Banner"
             android:textColor="#000" />
 
         <View

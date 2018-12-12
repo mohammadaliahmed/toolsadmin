@@ -79,6 +79,8 @@ public class ViewInvoice extends AppCompatActivity {
         shipping = findViewById(R.id.shipping);
 
 
+        recyclerView.setNestedScrollingEnabled(false);
+
         Intent i = getIntent();
         invoiceNumber = i.getLongExtra("invoiceNumber", 0);
         path = i.getStringExtra("path");
@@ -122,7 +124,6 @@ public class ViewInvoice extends AppCompatActivity {
 
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
-                        wholeLayout.setVisibility(View.GONE);
 
                     }
 
@@ -228,6 +229,8 @@ public class ViewInvoice extends AppCompatActivity {
                         grandTotal.setText(locationAndChargesModel.getCurrency() + " " +
                                 CommonUtils.getFormattedPrice(model.getGrandTotal()));
                         orderNumber.setText("Order number: " + model.getOrderId());
+                        wholeLayout.setVisibility(View.GONE);
+
                     }
                 }
             }

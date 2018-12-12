@@ -104,15 +104,19 @@ public class Vendors extends AppCompatActivity {
     }
 
     private void getVendorsFromDb() {
-        vendorModelArrayList.clear();
         mDatabase.child("Vendors").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null) {
+                    vendorModelArrayList.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         VendorModel model = snapshot.getValue(VendorModel.class);
                         if (model != null) {
-                            vendorModelArrayList.add(model);
+
+                            if(model.getIsActive().equalsIgnoreCase("yes")){
+                                vendorModelArrayList.add(model);
+                            }
+
 
                         }
                     }

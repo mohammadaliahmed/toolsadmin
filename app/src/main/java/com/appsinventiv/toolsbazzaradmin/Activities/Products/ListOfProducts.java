@@ -1,9 +1,11 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Products;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -72,7 +74,7 @@ public class ListOfProducts extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ProductsAdapter(this, productArrayList, new ProductsAdapter.OnProductStatusChanged() {
             @Override
-            public void onStatusChanged(View v,Product product, final boolean status) {
+            public void onStatusChanged(View v, Product product, final boolean status) {
                 mDatabase.child("Products").child(product.getId()).child("isActive").setValue("" + status).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -92,50 +94,76 @@ public class ListOfProducts extends AppCompatActivity {
                 });
 
             }
+
+            @Override
+            public void onDelete(final Product product) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(ListOfProducts.this);
+                builder1.setMessage("Delete product?");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                deleteProduct(product.getId());
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
         });
         recyclerView.setAdapter(adapter);
         getProductsFromDB();
 
     }
 
-    private void getProductsFromDB() {
-        mDatabase.child("Products").addChildEventListener(new ChildEventListener() {
+    private void deleteProduct(String id) {
+
+        mDatabase.child("Products").child(id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                if(dataSnapshot.getValue()!=null){
-                    Product product = dataSnapshot.getValue(Product.class);
-                    if (product != null) {
-                        productArrayList.add(product);
-                        Collections.sort(productArrayList, new Comparator<Product>() {
-                            @Override
-                            public int compare(Product listData, Product t1) {
-                                String ob1 = listData.getTitle();
-                                String ob2 = t1.getTitle();
+            public void onSuccess(Void aVoid) {
+                CommonUtils.showToast("Product deleted");
+            }
+        });
+    }
 
-                                return ob1.compareTo(ob2);
+    private void getProductsFromDB() {
+        mDatabase.child("Products").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    productArrayList.clear();
+                    ListOfProducts.this.setTitle(dataSnapshot.getChildrenCount()+" Products");
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Product product = snapshot.getValue(Product.class);
+                        if (product != null) {
+                            productArrayList.add(product);
+                            Collections.sort(productArrayList, new Comparator<Product>() {
+                                @Override
+                                public int compare(Product listData, Product t1) {
+                                    String ob1 = listData.getTitle();
+                                    String ob2 = t1.getTitle();
 
-                            }
-                        });
-                        adapter.updatelist(productArrayList);
+                                    return ob1.compareTo(ob2);
 
-                        adapter.notifyDataSetChanged();
+                                }
+                            });
+                            adapter.updatelist(productArrayList);
+
+                            adapter.notifyDataSetChanged();
+                        }
                     }
                 }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
@@ -144,6 +172,7 @@ public class ListOfProducts extends AppCompatActivity {
             }
         });
     }
+
     @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

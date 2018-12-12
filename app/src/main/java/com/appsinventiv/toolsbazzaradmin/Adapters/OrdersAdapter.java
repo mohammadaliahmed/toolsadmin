@@ -78,10 +78,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         }
 
         if (model != null) {
-            holder.orderDetails.setText("Order Time: " + CommonUtils.getFormattedDate(model.getTime())
-                    + "\n\nOrder Status: " + model.getOrderStatus()
-                    + "\n\nOrder Items: " + model.getCountModelArrayList().size()
-                    + "\n\nOrder Amount: Rs." + CommonUtils.getFormattedPrice(model.getTotalPrice())
+            holder.orderDetails.setText(
+                    "Order No: " + model.getOrderId()
+                            + "\n\nOrder Time: " + CommonUtils.getFormattedDate(model.getTime())
+                            + "\n\nOrder Status: " + model.getOrderStatus()
+                            + "\n\nOrder Items: " + model.getCountModelArrayList().size()
+                            + "\n\nOrder Amount: Rs." + CommonUtils.getFormattedPrice(model.getTotalPrice())
             );
             holder.userDetails.setText("Name: " + model.getCustomer().getName()
                     + "\n\nPhone: " + model.getCustomer().getPhone()

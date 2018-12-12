@@ -22,6 +22,7 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/about"
+                android:textSize="13sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="About Us"
@@ -40,6 +41,8 @@
                 android:id="@+id/vision"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="13sp"
+
                 android:hint="Our Vision"
                 android:inputType="textMultiLine|textCapSentences" />
         </android.support.design.widget.TextInputLayout>
@@ -57,6 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Out Mission"
+                android:textSize="13sp"
+
                 android:inputType="textMultiLine|textCapSentences" />
         </android.support.design.widget.TextInputLayout>
 
@@ -73,6 +78,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Our Values"
+                android:textSize="13sp"
+
                 android:inputType="textMultiLine|textCapSentences" />
         </android.support.design.widget.TextInputLayout>
 
@@ -89,16 +96,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contact Us"
+                android:textSize="13sp"
+
                 android:inputType="textMultiLine|textCapSentences" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/update"
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="20dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/btn_bg"
             android:text="Update"
             android:textColor="#fff" />
     </LinearLayout>

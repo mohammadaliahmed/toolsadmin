@@ -58,7 +58,7 @@ public class PendingSOAccounts extends Fragment {
         finalized = rootView.findViewById(R.id.finalized);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new InvoiceListAdapter(context, itemList, 1,"pending", new InvoiceListAdapter.SelectInvoices() {
+        adapter = new InvoiceListAdapter(context, itemList, 1, "pending", new InvoiceListAdapter.SelectInvoices() {
             @Override
             public void addToArray(long id, int position) {
                 if (!invoicesSelectedList.contains(id)) {
@@ -118,8 +118,16 @@ public class PendingSOAccounts extends Fragment {
     }
 
     private void sendDataToDb() {
+
         for (final InvoicesSelected id : invoicesSelectedList) {
             final String key = "" + itemList.get(id.getPosition()).getId();
+
+            String path = "";
+            path = CommonUtils.getYear(itemList.get(id.getPosition()).getTime())
+                    +"/"+ CommonUtils.getMonth(itemList.get(id.getPosition()).getTime())
+                    +"/"+ CommonUtils.getDate(itemList.get(id.getPosition()).getTime())
+                    +"/"+ key;
+            final String finalPath = path;
             mDatabase.child("Accounts").child("InvoicesFinalized")
                     .child(CommonUtils.getYear(itemList.get(id.getPosition()).getTime()))
                     .child(CommonUtils.getMonth(itemList.get(id.getPosition()).getTime()))
@@ -136,6 +144,7 @@ public class PendingSOAccounts extends Fragment {
                             .child(key)
                             .setValue(itemList.get(id.getPosition()).getTotalPrice());
                     removeFromCompleted(key);
+                    addInvoicePathToOrder(itemList.get(id.getPosition()), finalPath);
                 }
             });
 
@@ -143,6 +152,11 @@ public class PendingSOAccounts extends Fragment {
         getDataFromServer();
 
     }
+
+    private void addInvoicePathToOrder(InvoiceModel model, String finalPath) {
+        mDatabase.child("Orders").child(model.getOrderId()).child("invoicePath").setValue(finalPath);
+    }
+
 
     private void removeFromCompleted(String id) {
         mDatabase.child("Accounts").child("PendingInvoices").child(id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -171,9 +185,9 @@ public class PendingSOAccounts extends Fragment {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         InvoiceModel model = snapshot.getValue(InvoiceModel.class);
                         if (model != null) {
-                            if(model.getInvoiceStatus().equalsIgnoreCase("pendingSO")) {
+//                            if (model.getInvoiceStatus().equalsIgnoreCase("pendingSO")) {
                                 itemList.add(model);
-                            }
+//                            }
 
 //                            progress.setVisibility(View.GONE);
 

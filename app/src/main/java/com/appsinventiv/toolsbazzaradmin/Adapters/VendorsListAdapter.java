@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Vendors.AddVendors;
 import com.appsinventiv.toolsbazzaradmin.Models.VendorModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 
@@ -45,11 +46,23 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
         holder.name.setText("Name: " + model.getVendorName());
         holder.phone.setText("Phone: " + model.getVendorPhone());
         holder.address.setText("Address: " + model.getVendorAddress());
+        if (model.getVendorEmail() != null) {
+            holder.email.setText("Email: " + model.getVendorEmail());
+
+        }
 
         holder.dial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + model.getVendorPhone()));
+                context.startActivity(i);
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, AddVendors.class);
+                i.putExtra("vendorId",model.getVendorId());
                 context.startActivity(i);
             }
         });
@@ -76,8 +89,8 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, phone, address;
-        ImageView dial, whatsapp,delete;
+        TextView name, phone, address, email;
+        ImageView dial, whatsapp, delete;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -87,10 +100,12 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
             dial = itemView.findViewById(R.id.phone_dial);
             whatsapp = itemView.findViewById(R.id.whatsapp);
             delete = itemView.findViewById(R.id.delete);
+            email = itemView.findViewById(R.id.email);
 
         }
     }
-    public interface DeleteVendor{
-       public void onDelete(VendorModel model);
+
+    public interface DeleteVendor {
+        public void onDelete(VendorModel model);
     }
 }

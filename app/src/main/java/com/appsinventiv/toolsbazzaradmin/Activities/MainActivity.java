@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Accounts;
 import com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.Settings;
 import com.appsinventiv.toolsbazzaradmin.Activities.Chat.Chats;
+import com.appsinventiv.toolsbazzaradmin.Activities.Customers.ListOfCustomers;
 import com.appsinventiv.toolsbazzaradmin.Activities.Employees.ListOfEmployees;
 import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ListOfInvoices;
 import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice;
@@ -73,6 +74,15 @@ public class MainActivity extends AppCompatActivity
         employees = findViewById(R.id.employees);
         accounts = findViewById(R.id.accounts);
         courier = findViewById(R.id.courier);
+
+
+        customers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ListOfCustomers.class);
+                startActivity(i);
+            }
+        });
 
         signout.setOnClickListener(new View.OnClickListener() {
             @Override

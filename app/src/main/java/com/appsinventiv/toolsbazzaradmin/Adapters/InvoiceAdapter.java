@@ -28,18 +28,20 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
     LocationAndChargesModel locationAndChargesModel;
 
     public InvoiceAdapter(Context context, ArrayList<ProductCountModel> list1, ArrayList<ProductCountModel> list2, String customerType
-    ,LocationAndChargesModel locationAndChargesModel
+            , LocationAndChargesModel locationAndChargesModel
     ) {
         this.context = context;
         this.list1 = list1;
         this.list2 = list2;
         this.customerType = customerType;
-        this.locationAndChargesModel=locationAndChargesModel;
+        this.locationAndChargesModel = locationAndChargesModel;
     }
-    public void location(LocationAndChargesModel locationAndChargesModel){
-        this.locationAndChargesModel=locationAndChargesModel;
+
+    public void location(LocationAndChargesModel locationAndChargesModel) {
+        this.locationAndChargesModel = locationAndChargesModel;
         notifyDataSetChanged();
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -51,10 +53,21 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProductCountModel model = list1.get(position);
-        holder.position.setText("" + (position + 1) + ".");
+        holder.position.setText("" + (position + 1) + ". ");
         holder.title.setText(model.getProduct().getTitle());
         holder.subtitle.setText("Description: " + model.getProduct().getMeasurement() + "\nQuantity: " + model.getQuantity());
-        if(locationAndChargesModel!=null) {
+        if (model.getSize() != null) {
+            holder.size.setText("Size: " + model.getSize());
+        } else {
+
+        }
+        if (model.getColor() != null) {
+            holder.color.setText("Color: " + model.getColor());
+        } else {
+
+        }
+
+        if (locationAndChargesModel != null) {
             if (customerType.equalsIgnoreCase("wholesale")) {
                 holder.price.setText("Unit price: Rs " + CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice()));
                 if (list2 != null) {
@@ -97,7 +110,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView position, title, subtitle, price, outOfStockText, totalItemPrice;
+        TextView position, title, subtitle, price, outOfStockText, totalItemPrice, size, color;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -108,6 +121,8 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
             price = itemView.findViewById(R.id.price);
             outOfStockText = itemView.findViewById(R.id.outOfStock);
             totalItemPrice = itemView.findViewById(R.id.totalItemPrice);
+            size = itemView.findViewById(R.id.size);
+            color = itemView.findViewById(R.id.color);
 
 
         }

@@ -15,13 +15,17 @@ import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AddVendors extends AppCompatActivity {
     Button addVendor;
     EditText name, phone, address, email;
     DatabaseReference mDatabase;
+    String vendorId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class AddVendors extends AppCompatActivity {
         }
         this.setTitle("Add Vendor");
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        vendorId = getIntent().getStringExtra("vendorId");
 
 
         addVendor = findViewById(R.id.addVendor);
@@ -40,6 +45,10 @@ public class AddVendors extends AppCompatActivity {
         address = findViewById(R.id.address);
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
+
+        if (vendorId != null) {
+            getVendorFromDB();
+        }
 
         addVendor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +62,13 @@ public class AddVendors extends AppCompatActivity {
                 } else if (email.getText().length() == 0) {
                     email.setError("Enter email");
                 } else {
-                    String key = mDatabase.push().getKey();
+                    String key;
+                    if (vendorId != null) {
+                        key = vendorId;
+                    } else {
+                        key = mDatabase.push().getKey();
+                    }
+
                     mDatabase.child("Vendors").child(key).setValue(new VendorModel(
                             key,
                             name.getText().toString(),
@@ -80,6 +95,28 @@ public class AddVendors extends AppCompatActivity {
         });
 
 
+    }
+
+    private void getVendorFromDB() {
+        mDatabase.child("Vendors").child(vendorId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    VendorModel model = dataSnapshot.getValue(VendorModel.class);
+                    if (model != null) {
+                        name.setText(model.getVendorName());
+                        phone.setText(model.getVendorPhone());
+                        email.setText(model.getVendorEmail());
+                        address.setText(model.getVendorAddress());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

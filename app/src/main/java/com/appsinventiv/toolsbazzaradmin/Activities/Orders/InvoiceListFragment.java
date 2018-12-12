@@ -66,11 +66,11 @@ public class InvoiceListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_orders, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_pending_po_accounts, container, false);
         finalized = rootView.findViewById(R.id.finalized);
         finalized.setText("Transfer to accounts");
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_orders);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new InvoiceListAdapter(context, itemList, 1, "", new InvoiceListAdapter.SelectInvoices() {

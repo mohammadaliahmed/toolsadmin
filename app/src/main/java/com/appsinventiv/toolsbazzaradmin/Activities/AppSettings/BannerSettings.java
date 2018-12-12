@@ -77,7 +77,7 @@ public class BannerSettings extends AppCompatActivity {
         pick = findViewById(R.id.pick);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerviewPics = findViewById(R.id.recyclerviewPics);
-        update=findViewById(R.id.update);
+        update = findViewById(R.id.update);
         showPickedPictures();
         setUpAlreadyPics();
         getPicsFromDb();
@@ -113,9 +113,9 @@ public class BannerSettings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int count = 0;
-                if(mSelected==null){
+                if (mSelected == null) {
                     CommonUtils.showToast("Please choose banners");
-                }else {
+                } else {
                     for (String img : imageUrl) {
 
                         putPictures(img, "" + "", count);
@@ -123,7 +123,7 @@ public class BannerSettings extends AppCompatActivity {
 
                     }
                     CommonUtils.showToast("Uploaded");
-                    Intent i=new Intent(BannerSettings.this,Settings.class);
+                    Intent i = new Intent(BannerSettings.this, Settings.class);
                     startActivity(i);
                 }
             }
@@ -136,7 +136,12 @@ public class BannerSettings extends AppCompatActivity {
         LinearLayoutManager horizontalLayoutManagaer
                 = new LinearLayoutManager(BannerSettings.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerviewPics.setLayoutManager(horizontalLayoutManagaer);
-        SelectedImagesAdapter adapter = new SelectedImagesAdapter(BannerSettings.this, banners);
+        SelectedImagesAdapter adapter = new SelectedImagesAdapter(BannerSettings.this, banners, new SelectedImagesAdapter.ChooseOption() {
+            @Override
+            public void onDeleteClicked(SelectedAdImages images, int position) {
+
+            }
+        });
         recyclerviewPics.setAdapter(adapter);
     }
 
@@ -144,10 +149,10 @@ public class BannerSettings extends AppCompatActivity {
         mDatabase.child("Settings").child("Banners").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                if(dataSnapshot.getValue()!=null){
+                if (dataSnapshot.getValue() != null) {
                     recyclerviewPics.setVisibility(View.VISIBLE);
-                    BannerPicsModel model =dataSnapshot.getValue(BannerPicsModel.class);
-                    if(model!=null){
+                    BannerPicsModel model = dataSnapshot.getValue(BannerPicsModel.class);
+                    if (model != null) {
                         banners.add(new SelectedAdImages(model.getUrl()));
                         adapter.notifyDataSetChanged();
                     }
@@ -244,7 +249,12 @@ public class BannerSettings extends AppCompatActivity {
         LinearLayoutManager horizontalLayoutManagaer
                 = new LinearLayoutManager(BannerSettings.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
-        adapter = new SelectedImagesAdapter(BannerSettings.this, selectedAdImages);
+        adapter = new SelectedImagesAdapter(BannerSettings.this, selectedAdImages, new SelectedImagesAdapter.ChooseOption() {
+            @Override
+            public void onDeleteClicked(SelectedAdImages images, int position) {
+
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
@@ -262,6 +272,7 @@ public class BannerSettings extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     private void getPermissions() {
         int PERMISSION_ALL = 1;
         String[] PERMISSIONS = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE,

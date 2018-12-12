@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class ViewEmployee extends AppCompatActivity {
     String username;
     DatabaseReference mDatabase;
-    TextView name, role, employeeRole, phone, email;
+    TextView name, role, employeeRole, phone, email, user_name, password;
     Button update, assignRole;
     String number;
     Spinner spinner;
@@ -58,6 +58,8 @@ public class ViewEmployee extends AppCompatActivity {
         update = findViewById(R.id.update);
         spinner = findViewById(R.id.roles);
         assignRole = findViewById(R.id.assignRole);
+        user_name = findViewById(R.id.username);
+        password = findViewById(R.id.password);
 
 
         setUpSpinner();
@@ -81,6 +83,8 @@ public class ViewEmployee extends AppCompatActivity {
                         phone.setText(employee.getPhone());
                         email.setText(employee.getEmail());
                         number = employee.getPhone();
+                        user_name.setText(employee.getUsername());
+                        password.setText(employee.getPassword());
                         if (employee.getRole() == 0) {
                             employeeRole.setText("No role assigned");
                         } else {

@@ -93,7 +93,6 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
 
         this.setTitle("Order # " + orderIdFromIntent);
 
-
         carrier = findViewById(R.id.carrier);
         selectAll = findViewById(R.id.selectAll);
         trackingNumber = findViewById(R.id.trackingNumber);
@@ -123,15 +122,18 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    model.getCountModelArrayList().get(0).setIsSelected(1);
                     newList.addAll(model.getCountModelArrayList());
+                    adapter.selectAll(1);
                 } else {
+                    adapter.selectAll(0);
                     newList.clear();
                 }
             }
         });
 
         recyclerView = findViewById(R.id.recylerview);
+        recyclerView.setNestedScrollingEnabled(false);
+
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         mDatabase.child("Orders").child(orderIdFromIntent).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -156,7 +158,10 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
                         city.setText(model.getCustomer().getCity());
                         list = model.getCountModelArrayList();
                         customer = model.getCustomer();
-                        adapter = new OrderedProductsAdapter(ViewUnderProcessOrder.this, list, model.getCustomer().getCustomerType(), 1, new OrderedProductsAdapter.OnProductSelected() {
+                        adapter = new OrderedProductsAdapter(ViewUnderProcessOrder.this, list,
+                                model.getCustomer().getCustomerType(),
+                                1,
+                                new OrderedProductsAdapter.OnProductSelected() {
                             @Override
                             public void onChecked(ProductCountModel product, int position) {
                                 newList.add(product);
@@ -166,12 +171,16 @@ public class ViewUnderProcessOrder extends AppCompatActivity {
 
                             @Override
                             public void onUnChecked(ProductCountModel product, int position) {
-
-                                newList.remove(position);
+                                try {
+                                    newList.remove(position);
+                                }
+                                catch (IndexOutOfBoundsException e){
+                                    e.printStackTrace();
+                                }
 
 
                             }
-                        });
+                        },0);
                         recyclerView.setAdapter(adapter);
 
 

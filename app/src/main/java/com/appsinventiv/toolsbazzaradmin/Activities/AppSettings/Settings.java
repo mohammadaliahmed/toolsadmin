@@ -13,7 +13,7 @@ import com.appsinventiv.toolsbazzaradmin.Activities.Products.AddCategories;
 import com.appsinventiv.toolsbazzaradmin.R;
 
 public class Settings extends AppCompatActivity {
-    RelativeLayout aboutUs, terms, banner, deliveryCharges, company;
+    RelativeLayout aboutUs, terms, banner,dealsBanner, deliveryCharges, company;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class Settings extends AppCompatActivity {
 
         aboutUs = findViewById(R.id.aboutUs);
         banner = findViewById(R.id.banner);
+        dealsBanner = findViewById(R.id.dealsBanner);
         terms = findViewById(R.id.terms);
         company = findViewById(R.id.company);
         deliveryCharges = findViewById(R.id.deliveryCharges);
@@ -59,6 +60,13 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Settings.this, BannerSettings.class);
+                startActivity(i);
+            }
+        });
+        dealsBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Settings.this, DealsBanner.class);
                 startActivity(i);
             }
         });

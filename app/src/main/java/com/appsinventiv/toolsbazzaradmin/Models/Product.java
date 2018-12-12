@@ -22,6 +22,7 @@ public class Product {
     float oldWholeSalePrice, oldRetailPrice;
     float rating;
     ArrayList<String> pictures;
+    ArrayList<String> category;
 
 
     public Product() {
@@ -60,7 +61,9 @@ public class Product {
                    List<String> sizeList,
                    List<String> colorList,
                    float oldWholeSalePrice, float oldRetailPrice
-            , float rating
+            , float rating,
+                   ArrayList<String> category
+
     ) {
         this.id = id;
         this.title = title;
@@ -79,11 +82,20 @@ public class Product {
         this.vendor = vendor;
         this.sellingTo = sellingTo;
         this.description = description;
-        this.sizeList=sizeList;
-        this.colorList=colorList;
+        this.sizeList = sizeList;
+        this.colorList = colorList;
         this.oldRetailPrice = oldRetailPrice;
         this.oldWholeSalePrice = oldWholeSalePrice;
         this.rating = rating;
+        this.category = category;
+    }
+
+    public ArrayList<String> getCategory() {
+        return category;
+    }
+
+    public void setCategory(ArrayList<String> category) {
+        this.category = category;
     }
 
     public ArrayList<String> getPictures() {
@@ -141,7 +153,6 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
 
     public String getSellingTo() {

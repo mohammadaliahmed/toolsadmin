@@ -325,7 +325,7 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                                 }
 
                             }
-                        });
+                        },0);
                         recyclerView.setAdapter(adapter);
 
                         if (model.getOrderStatus().equalsIgnoreCase("under process")) {
@@ -636,11 +636,11 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
 
 
     private void updateInvoicesCount() {
-        mDatabase.child("Accounts").child("InvoicesCount").setValue(invoiceNumber);
+        mDatabase.child("Accounts").child("InvoiceCount").setValue(invoiceNumber);
     }
 
     private void getInvoicesCountFromDb() {
-        mDatabase.child("Accounts").child("InvoicesCount").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Accounts").child("InvoiceCount").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
