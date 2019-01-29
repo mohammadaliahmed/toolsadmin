@@ -5,9 +5,9 @@ package com.appsinventiv.toolsbazzaradmin.Models;
  */
 
 public class StationariesModel {
-    float officeStationaries, staffStationaries, advertising, billBooksPrint, packingMaterial, businessCardPrint;
-    long time;
-    float total;
+    private float officeStationaries, staffStationaries, advertising, billBooksPrint, packingMaterial, businessCardPrint;
+    private long time;
+    private float total;
 
     public StationariesModel(float officeStationaries, float staffStationaries, float advertising, float billBooksPrint, float packingMaterial, float businessCardPrint, long time,
                              float total) {

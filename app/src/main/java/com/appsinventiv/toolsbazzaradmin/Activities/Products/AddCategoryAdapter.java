@@ -43,7 +43,7 @@ public class AddCategoryAdapter extends RecyclerView.Adapter<AddCategoryAdapter.
         holder.addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, AddMainCategories.class);
+                Intent i = new Intent(context, AddSubCategories.class);
                 i.putExtra("parentCategory", title);
                 context.startActivity(i);
 

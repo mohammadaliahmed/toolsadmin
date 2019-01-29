@@ -5,10 +5,10 @@ package com.appsinventiv.toolsbazzaradmin.Models;
  */
 
 public class MiscellaneousModel {
-    String remarks1, remarks2, remarks3, remarks4, remarks5;
-    float cost1, cost2, cost3, cost4, cost5;
-    long time;
-    float total;
+    private String remarks1, remarks2, remarks3, remarks4, remarks5;
+    private float cost1, cost2, cost3, cost4, cost5;
+    private long time;
+    private float total;
     public MiscellaneousModel(String remarks1, String remarks2, String remarks3, String remarks4,
                               String remarks5, float cost1, float cost2, float cost3, float cost4,
                               float cost5, long time,float total) {

@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.appsinventiv.toolsbazzaradmin.Activities.Products.AddCategories;
+import com.appsinventiv.toolsbazzaradmin.Activities.Locations.AddCountry;
+import com.appsinventiv.toolsbazzaradmin.Activities.Locations.ListOfCountries;
 import com.appsinventiv.toolsbazzaradmin.R;
 
 public class Settings extends AppCompatActivity {
@@ -35,7 +35,8 @@ public class Settings extends AppCompatActivity {
         deliveryCharges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Settings.this, ListOfLocationAndCharges.class);
+                Intent i = new Intent(Settings.this, ListOfCountries.class);
+//                i.putExtra("country","Sri Lanka");
                 startActivity(i);
             }
         });

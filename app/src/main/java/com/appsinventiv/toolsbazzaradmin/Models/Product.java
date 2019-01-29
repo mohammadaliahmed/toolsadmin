@@ -23,7 +23,9 @@ public class Product {
     float rating;
     ArrayList<String> pictures;
     ArrayList<String> category;
-
+    int quantityAvailable;
+    String brandName,productContents,warrantyType,productWeight;
+    String dimen;
 
     public Product() {
     }
@@ -62,7 +64,9 @@ public class Product {
                    List<String> colorList,
                    float oldWholeSalePrice, float oldRetailPrice
             , float rating,
-                   ArrayList<String> category
+                   ArrayList<String> category,int quantityAvailable,
+                   String brandName, String productContents,String warrantyType,String productWeight,
+                   String dimen
 
     ) {
         this.id = id;
@@ -88,6 +92,60 @@ public class Product {
         this.oldWholeSalePrice = oldWholeSalePrice;
         this.rating = rating;
         this.category = category;
+        this.quantityAvailable=quantityAvailable;
+        this.brandName=brandName;
+        this.productContents=productContents;
+        this.warrantyType=warrantyType;
+        this.productWeight=productWeight;
+        this.dimen=dimen;
+    }
+
+    public String getDimen() {
+        return dimen;
+    }
+
+    public void setDimen(String dimen) {
+        this.dimen = dimen;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getProductContents() {
+        return productContents;
+    }
+
+    public void setProductContents(String productContents) {
+        this.productContents = productContents;
+    }
+
+    public String getWarrantyType() {
+        return warrantyType;
+    }
+
+    public void setWarrantyType(String warrantyType) {
+        this.warrantyType = warrantyType;
+    }
+
+    public String getProductWeight() {
+        return productWeight;
+    }
+
+    public void setProductWeight(String productWeight) {
+        this.productWeight = productWeight;
+    }
+
+    public int getQuantityAvailable() {
+        return quantityAvailable;
+    }
+
+    public void setQuantityAvailable(int quantityAvailable) {
+        this.quantityAvailable = quantityAvailable;
     }
 
     public ArrayList<String> getCategory() {

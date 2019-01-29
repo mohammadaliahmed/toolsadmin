@@ -1,6 +1,7 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Products;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -8,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -71,7 +73,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
     String imagePath;
     EditText e_title, e_sku, e_subtitle, e_costPrice, e_wholesalePrice,
             e_retailPrice, e_minOrderQty, e_measurement, e_sizes, e_colors, e_description,
-            e_oldRetailPrice, e_oldWholesalePrice;
+            e_oldRetailPrice, e_oldWholesalePrice, e_quantityAvailable;
     String productId;
     ProgressBar progressBar;
     Spinner spinner;
@@ -83,6 +85,10 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
     RadioGroup radioGroup;
     RadioButton selected;
     public static ArrayList<String> categoryList = new ArrayList<>();
+    EditText brandName, productContents;
+    TextView warrantyChosen, weightChosen;
+    private String whichWarranty;
+    public static String productWeight, dimens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +132,27 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         e_colors = findViewById(R.id.color);
         e_oldWholesalePrice = findViewById(R.id.oldWholeSalePrice);
         e_oldRetailPrice = findViewById(R.id.oldRetailPrice);
+        e_quantityAvailable = findViewById(R.id.quantityAvailable);
+        brandName = findViewById(R.id.brandName);
+        productContents = findViewById(R.id.productContents);
+        weightChosen = findViewById(R.id.weightChosen);
+        warrantyChosen = findViewById(R.id.warrantyChosen);
+
+        warrantyChosen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showWarrantyAlert();
+            }
+        });
+
+        weightChosen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(AddProduct.this, AddProductWeight.class);
+                startActivity(i);
+            }
+        });
+
         showPickedPictures();
 
         getSKUFromDb();
@@ -137,7 +164,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-              /* Write your logic here that will be executed when user taps next button */
+                    /* Write your logic here that will be executed when user taps next button */
                     e_oldWholesalePrice.requestFocus();
 
                     handled = true;
@@ -151,7 +178,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-              /* Write your logic here that will be executed when user taps next button */
+                    /* Write your logic here that will be executed when user taps next button */
                     e_retailPrice.requestFocus();
 
                     handled = true;
@@ -165,7 +192,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-              /* Write your logic here that will be executed when user taps next button */
+                    /* Write your logic here that will be executed when user taps next button */
                     e_oldRetailPrice.requestFocus();
 
                     handled = true;
@@ -212,6 +239,14 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                     e_wholesalePrice.setError("Enter whole sale price");
                 } else if (e_retailPrice.getText().length() == 0) {
                     e_retailPrice.setError("Enter price");
+                } else if (e_quantityAvailable.getText().length() == 0) {
+                    e_quantityAvailable.setError("Enter quantity");
+                } else if (whichWarranty == null) {
+                    CommonUtils.showToast("Please select warranty type");
+                } else if (productWeight == null) {
+                    CommonUtils.showToast("Please select product weight");
+                } else if (mSelected.size() == 0) {
+                    CommonUtils.showToast("Please select image");
                 } else {
                     List<String> container = new ArrayList<>();
                     if (e_sizes.getText().length() > 0) {
@@ -256,7 +291,13 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
                             Float.parseFloat(e_oldWholesalePrice.getText().length() > 0 ? e_oldWholesalePrice.getText().toString() : "" + 0),
                             Float.parseFloat(e_oldRetailPrice.getText().length() > 0 ? e_oldRetailPrice.getText().toString() : "" + 0),
                             0,
-                            categoryList
+                            categoryList, Integer.parseInt(e_quantityAvailable.getText().toString()),
+                            brandName.getText().toString(),
+                            productContents.getText().toString(),
+
+                            whichWarranty,
+                            productWeight,
+                            dimens
 
 
                     )).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -286,6 +327,36 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
 
 
     }
+
+    private void showWarrantyAlert() {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(AddProduct.this);
+        builderSingle.setTitle("Select warranty type");
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AddProduct.this, android.R.layout.simple_list_item_1);
+        arrayAdapter.add("International Manufacture Warranty");
+        arrayAdapter.add("International Seller Warranty");
+        arrayAdapter.add("Local Seller Warranty");
+        arrayAdapter.add("No Warranty");
+        arrayAdapter.add("Non-local Warranty");
+
+        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                warrantyChosen.setText("Warranty chosen: " + arrayAdapter.getItem(which));
+                whichWarranty = arrayAdapter.getItem(which);
+
+            }
+        });
+        builderSingle.show();
+    }
+
 
     private void getSKUFromDb() {
         mDatabase.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -319,8 +390,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         adapter = new SelectedImagesAdapter(AddProduct.this, selectedAdImages, new SelectedImagesAdapter.ChooseOption() {
             @Override
             public void onDeleteClicked(SelectedAdImages images, int position) {
-                selectedAdImages.remove(position-1);
-                imageUrl.remove(position-1);
+                selectedAdImages.remove(position - 1);
+                imageUrl.remove(position - 1);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -414,10 +485,17 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (productWeight != null) {
+            weightChosen.setText("Weight: " + productWeight + "Kg");
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        CommonUtils.showToast(categoryList + "");
+//        CommonUtils.showToast(categoryList + "");
         categoryChoosen.setText("Category: " + categoryList);
         selectedAdImages.clear();
         if (data != null) {

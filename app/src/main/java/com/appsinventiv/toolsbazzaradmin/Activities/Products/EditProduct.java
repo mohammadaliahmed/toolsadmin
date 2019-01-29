@@ -70,7 +70,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
     ArrayList<String> imageUrl = new ArrayList<>();
     EditText e_title, e_sku, e_subtitle, e_costPrice, e_wholesalePrice,
             e_retailPrice, e_minOrderQty, e_measurement, e_sizes, e_colors, e_description,
-            e_oldRetailPrice, e_oldWholesalePrice;
+            e_oldRetailPrice, e_oldWholesalePrice, quantityAvailable;
     String productId;
     ProgressBar progressBar;
     Spinner spinner;
@@ -129,6 +129,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
         progressBar = findViewById(R.id.prgress);
         spinner = findViewById(R.id.chooseVendor);
         radioGroup = findViewById(R.id.radioGroup);
+        quantityAvailable = findViewById(R.id.quantityAvailable);
         showPickedPictures();
 
         getDataFromServer();
@@ -138,7 +139,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-              /* Write your logic here that will be executed when user taps next button */
+                    /* Write your logic here that will be executed when user taps next button */
                     e_oldWholesalePrice.requestFocus();
 
                     handled = true;
@@ -152,7 +153,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-              /* Write your logic here that will be executed when user taps next button */
+                    /* Write your logic here that will be executed when user taps next button */
                     e_retailPrice.requestFocus();
 
                     handled = true;
@@ -166,7 +167,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-              /* Write your logic here that will be executed when user taps next button */
+                    /* Write your logic here that will be executed when user taps next button */
                     e_oldRetailPrice.requestFocus();
 
                     handled = true;
@@ -252,7 +253,10 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
                             Float.parseFloat(e_oldWholesalePrice.getText().toString()),
                             Float.parseFloat(e_oldRetailPrice.getText().toString()),
                             0,
-                            categoryList
+                            categoryList,
+                            Integer.parseInt(quantityAvailable.getText().toString()),
+                            product.getBrandName(), product.getProductContents(),
+                            product.getWarrantyType(), product.getProductWeight(), product.getDimen()
 
 
                     )).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -318,6 +322,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
                         e_measurement.setText(product.getMeasurement());
                         e_sku.setText("" + product.getSku());
                         e_description.setText(product.getDescription());
+                        quantityAvailable.setText("" + product.getQuantityAvailable());
                         if (product.getSizeList() != null) {
                             e_sizes.setText("" + product.getSizeList());
                         }
@@ -328,7 +333,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
                         e_oldWholesalePrice.setText("" + product.getOldWholeSalePrice());
                         e_oldRetailPrice.setText("" + product.getOldRetailPrice());
                         newSku = product.getSku();
-                        if(product.getPictures()!=null) {
+                        if (product.getPictures() != null) {
                             for (int i = 0; i < product.getPictures().size(); i++) {
                                 selectedAdImages.add(new SelectedAdImages(product.getPictures().get(i)));
                             }
@@ -355,9 +360,9 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
         adapter = new SelectedImagesAdapter(EditProduct.this, selectedAdImages, new SelectedImagesAdapter.ChooseOption() {
             @Override
-            public void onDeleteClicked(SelectedAdImages images,int position) {
-                selectedAdImages.remove(position-1);
-                product.getPictures().remove(position-1);
+            public void onDeleteClicked(SelectedAdImages images, int position) {
+                selectedAdImages.remove(position - 1);
+                product.getPictures().remove(position - 1);
                 adapter.notifyDataSetChanged();
 
             }

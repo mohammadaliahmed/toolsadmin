@@ -103,8 +103,7 @@ public class ViewEmployee extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
-//                startActivity(i);
+             finish();
             }
         });
     }

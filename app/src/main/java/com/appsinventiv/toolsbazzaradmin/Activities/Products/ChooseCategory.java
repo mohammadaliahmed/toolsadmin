@@ -1,6 +1,5 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Products;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.appsinventiv.toolsbazzaradmin.R;
-import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

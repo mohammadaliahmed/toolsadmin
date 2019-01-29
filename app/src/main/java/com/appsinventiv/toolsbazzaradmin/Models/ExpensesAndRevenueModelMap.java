@@ -8,14 +8,14 @@ import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.ExpensesAndRevenue.
  */
 
 public class ExpensesAndRevenueModelMap {
-    MiscellaneousModel Miscellaneous;
-    RentModel Rent;
-    SalaryModel Salaries;
-    StationariesModel Stationaries;
-    TransportationModel Transportation;
-    UtilityBillsModel UtilityBills;
+    private MiscellaneousModel Miscellaneous;
+    private RentModel Rent;
+    private SalaryModel Salaries;
+    private StationariesModel Stationaries;
+    private TransportationModel Transportation;
+    private UtilityBillsModel UtilityBills;
 
-    float TotalExpense;
+    private float TotalExpense;
 
     public MiscellaneousModel getMiscellaneous() {
         return Miscellaneous;
@@ -26,9 +26,9 @@ public class ExpensesAndRevenueModelMap {
     }
 
     public float getTotalExpense() {
-        TotalExpense=0;
-        TotalExpense=Rent.getTotal()+UtilityBills.getTotal()+Stationaries.getTotal()+Transportation.getTotal()
-                +Miscellaneous.getTotal();
+        TotalExpense = 0;
+        TotalExpense = Rent.getTotal() + UtilityBills.getTotal() + Stationaries.getTotal() + Transportation.getTotal()
+                + Miscellaneous.getTotal();
 
         return TotalExpense;
     }

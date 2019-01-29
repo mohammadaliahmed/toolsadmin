@@ -5,9 +5,9 @@ package com.appsinventiv.toolsbazzaradmin.Models;
  */
 
 public class TransportationModel {
-    float officeTransportation, staffTransportation, officeFuel, staffFuel, shipping, delivery;
-    long time;
-    float total;
+    private  float officeTransportation, staffTransportation, officeFuel, staffFuel, shipping, delivery;
+    private long time;
+    private float total;
 
     public TransportationModel(float officeTransportation, float staffTransportation, float officeFuel, float staffFuel, float shipping, float delivery, long time
     ,float total

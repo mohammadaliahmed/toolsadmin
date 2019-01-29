@@ -2,6 +2,7 @@ package com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Invoices;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.TransferToAccountsDone;
 import com.appsinventiv.toolsbazzaradmin.Adapters.InvoiceListAdapter;
 import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
 import com.appsinventiv.toolsbazzaradmin.R;
@@ -124,9 +126,9 @@ public class PendingSOAccounts extends Fragment {
 
             String path = "";
             path = CommonUtils.getYear(itemList.get(id.getPosition()).getTime())
-                    +"/"+ CommonUtils.getMonth(itemList.get(id.getPosition()).getTime())
-                    +"/"+ CommonUtils.getDate(itemList.get(id.getPosition()).getTime())
-                    +"/"+ key;
+                    + "/" + CommonUtils.getMonth(itemList.get(id.getPosition()).getTime())
+                    + "/" + CommonUtils.getDate(itemList.get(id.getPosition()).getTime())
+                    + "/" + key;
             final String finalPath = path;
             mDatabase.child("Accounts").child("InvoicesFinalized")
                     .child(CommonUtils.getYear(itemList.get(id.getPosition()).getTime()))
@@ -136,19 +138,26 @@ public class PendingSOAccounts extends Fragment {
                     .setValue(itemList.get(id.getPosition())).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    mDatabase.child("Accounts").child("ExpensesAndRevenue")
-                            .child(CommonUtils.getYear(itemList.get(id.getPosition()).getTime()))
-                            .child(CommonUtils.getMonth(itemList.get(id.getPosition()).getTime()))
-                            .child("SO")
-                            .child(CommonUtils.getDate(itemList.get(id.getPosition()).getTime()))
-                            .child(key)
-                            .setValue(itemList.get(id.getPosition()).getTotalPrice());
-                    removeFromCompleted(key);
-                    addInvoicePathToOrder(itemList.get(id.getPosition()), finalPath);
+                    try {
+
+
+                        mDatabase.child("Accounts").child("ExpensesAndRevenue")
+                                .child(CommonUtils.getYear(itemList.get(id.getPosition()).getTime()))
+                                .child(CommonUtils.getMonth(itemList.get(id.getPosition()).getTime()))
+                                .child("SO")
+                                .child(CommonUtils.getDate(itemList.get(id.getPosition()).getTime()))
+                                .child(key)
+                                .setValue(itemList.get(id.getPosition()).getTotalPrice());
+                        removeFromCompleted(key);
+                        addInvoicePathToOrder(itemList.get(id.getPosition()), finalPath);
+                    } catch (IndexOutOfBoundsException e) {
+                    }
+
                 }
             });
 
         }
+
         getDataFromServer();
 
     }
@@ -186,7 +195,7 @@ public class PendingSOAccounts extends Fragment {
                         InvoiceModel model = snapshot.getValue(InvoiceModel.class);
                         if (model != null) {
 //                            if (model.getInvoiceStatus().equalsIgnoreCase("pendingSO")) {
-                                itemList.add(model);
+                            itemList.add(model);
 //                            }
 
 //                            progress.setVisibility(View.GONE);

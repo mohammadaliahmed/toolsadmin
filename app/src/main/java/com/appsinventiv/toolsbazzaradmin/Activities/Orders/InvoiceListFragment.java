@@ -3,6 +3,7 @@ package com.appsinventiv.toolsbazzaradmin.Activities.Orders;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Invoices.PendingSOAccounts;
+import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.TransferToAccountsDone;
 import com.appsinventiv.toolsbazzaradmin.Adapters.InvoiceListAdapter;
 import com.appsinventiv.toolsbazzaradmin.Adapters.OrdersAdapter;
 import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
@@ -103,7 +105,7 @@ public class InvoiceListFragment extends Fragment {
             }
         });
 
-        getDataFromDb();
+
 
         return rootView;
 
@@ -143,6 +145,9 @@ public class InvoiceListFragment extends Fragment {
             mDatabase.child("Accounts").child("PendingInvoices").child(key).child("invoiceStatus").setValue("pendingSO").addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
+                    Intent i=new Intent(context,TransferToAccountsDone.class);
+                    i.putExtra("orderId",key);
+                    context.startActivity(i);
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -189,9 +194,11 @@ public class InvoiceListFragment extends Fragment {
         });
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
+        getDataFromDb();
     }
 
 

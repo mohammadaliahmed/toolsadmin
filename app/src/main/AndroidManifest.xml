@@ -33,7 +33,6 @@
             android:name=".Activities.Products.AddProduct"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Activities.Products.ProductUploaded" />
-        <activity android:name=".Activities.Products.CategoryChooser" />
         <activity android:name=".Activities.Chat.Chats" />
         <activity android:name=".Activities.Chat.LiveChat" />
         <activity
@@ -52,7 +51,6 @@
             android:name=".Activities.AppSettings.AboutUs"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Activities.AppSettings.Terms" />
-        <activity android:name=".Activities.Products.AddCategories" />
         <activity
             android:name=".Activities.Invoicing.ViewInvoice"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -108,12 +106,23 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.Accounts.ExpensesAndRevenue.ExpensesDetail" />
         <activity
-            android:name=".Activities.Products.AddMainCategories"
+            android:name=".Activities.Products.AddSubCategories"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Activities.Products.ChooseCategory" />
         <activity android:name=".Activities.Customers.ListOfCustomers" />
         <activity android:name=".Activities.Customers.ViewCustomer" />
-        <activity android:name=".Activities.AppSettings.DealsBanner"></activity>
+        <activity android:name=".Activities.AppSettings.DealsBanner" />
+        <activity android:name=".Activities.Products.AddProductWeight" />
+        <activity android:name=".Activities.Accounts.TransferToAccountsDone" />
+        <activity android:name=".Activities.Products.AddMainCategories" />
+        <activity android:name=".Activities.Locations.AddCountry"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".Activities.Locations.AddDistricts"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".Activities.Locations.AddCityAndDeliveryCharges"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".Activities.Locations.ListOfCountries"></activity>
     </application>
 
 </manifest>

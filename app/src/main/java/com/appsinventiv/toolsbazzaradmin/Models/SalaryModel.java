@@ -5,13 +5,13 @@ package com.appsinventiv.toolsbazzaradmin.Models;
  */
 
 public class SalaryModel {
-    String id;
-    float basicSalary=0,overTime=0,bonus=0,deduction=0,ETFandEPF=0;
-    String reason;
-    long time;
-    String userId;
+    private String id;
+    private float basicSalary=0,overTime=0,bonus=0,deduction=0,ETFandEPF=0;
+    private String reason;
+    private long time;
+    private String userId;
 
-    float total;
+    private float total;
 
     public SalaryModel(String id, float basicSalary, float overTime, float bonus, float deduction,
                        String reason, long time, String userId,float ETFandEPF) {

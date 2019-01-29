@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.TransferToAccountsDone;
 import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice;
 import com.appsinventiv.toolsbazzaradmin.Adapters.OrderedProductsAdapter;
 import com.appsinventiv.toolsbazzaradmin.Models.Customer;
@@ -420,7 +421,9 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
                                 updateInvoicesCount();
                                 updateOrderStatus();
                                 CommonUtils.showToast("Moved to accounts");
-                                finish();
+                                Intent i=new Intent(ViewOrder.this,TransferToAccountsDone.class);
+                                i.putExtra("orderId",orderIdFromIntent);
+                                startActivity(i);
 
 
                             }

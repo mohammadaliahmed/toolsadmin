@@ -5,9 +5,9 @@ package com.appsinventiv.toolsbazzaradmin.Models;
  */
 
 public class UtilityBillsModel {
-    float electricCityBill, waterBill, internetBill, staffInternetBill, officeTelephoneBill, staffMobileBill, governmentTax;
-    long time;
-    float total;
+    private float electricCityBill, waterBill, internetBill, staffInternetBill, officeTelephoneBill, staffMobileBill, governmentTax;
+    private long time;
+    private  float total;
 
     public UtilityBillsModel(float electricCityBill, float waterBill, float internetBill, float staffInternetBill, float officeTelephoneBill, float staffMobileBill,
                              float governmentTax, long time,float total) {

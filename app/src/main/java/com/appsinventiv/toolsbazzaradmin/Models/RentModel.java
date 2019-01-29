@@ -5,9 +5,9 @@ package com.appsinventiv.toolsbazzaradmin.Models;
  */
 
 public class RentModel {
-    float officeRent,rentACar;
-    long time;
-    float total;
+    private float officeRent,rentACar;
+    private long time;
+    private float total;
 
     public RentModel(float officeRent, float rentACar, long time,float total) {
         this.officeRent = officeRent;
