@@ -69,17 +69,17 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
 
         if (locationAndChargesModel != null) {
             if (customerType.equalsIgnoreCase("wholesale")) {
-                holder.price.setText("Unit price: Rs " + CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice()));
+                holder.price.setText("Unit price: "+locationAndChargesModel.getCurrency()+" " + CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice()));
                 if (list2 != null) {
                     if (list2.contains(model)) {
                         holder.outOfStockText.setVisibility(View.GONE);
                         holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorBlack));
-                        holder.totalItemPrice.setText(locationAndChargesModel.getCurrency() + (CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate())));
+                        holder.totalItemPrice.setText(locationAndChargesModel.getCurrency() +" "+ (CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate())));
 
                     } else {
                         holder.outOfStockText.setVisibility(View.VISIBLE);
                         holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
-                        holder.totalItemPrice.setText("-" + locationAndChargesModel.getCurrency() + CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate()));
+                        holder.totalItemPrice.setText("-" + locationAndChargesModel.getCurrency() +" "+ CommonUtils.getFormattedPrice(model.getProduct().getWholeSalePrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate()));
                     }
                 }
 
@@ -90,13 +90,13 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
                 if (list2 != null) {
                     if (list2.contains(model)) {
                         holder.outOfStockText.setVisibility(View.GONE);
-                        holder.totalItemPrice.setText(locationAndChargesModel.getCurrency() + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate()));
+                        holder.totalItemPrice.setText(locationAndChargesModel.getCurrency() +" "+ CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate()));
 
                     } else {
                         holder.outOfStockText.setVisibility(View.VISIBLE);
                         holder.totalItemPrice.setTextColor(context.getResources().getColor(R.color.colorRed));
 
-                        holder.totalItemPrice.setText("-" + locationAndChargesModel.getCurrency() + CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate()));
+                        holder.totalItemPrice.setText("-" + locationAndChargesModel.getCurrency() +" "+ CommonUtils.getFormattedPrice(model.getProduct().getRetailPrice() * model.getQuantity() * locationAndChargesModel.getCurrencyRate()));
                     }
                 }
             }

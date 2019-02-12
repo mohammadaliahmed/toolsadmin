@@ -1,8 +1,12 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Invoicing;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appsinventiv.toolsbazzaradmin.Adapters.InvoiceAdapter;
+import com.appsinventiv.toolsbazzaradmin.Models.Customer;
 import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
 import com.appsinventiv.toolsbazzaradmin.Models.LocationAndChargesModel;
 import com.appsinventiv.toolsbazzaradmin.Models.ProductCountModel;
@@ -113,15 +118,23 @@ public class ViewInvoice extends AppCompatActivity {
                         availableProductsInOneOrderList = model.getNewCountModelArrayList();
                         invoiceNumberText.setText("Invoice # " + model.getId());
                         date.setText("" + CommonUtils.getFormattedDateOnly(model.getTime()));
-                        setUpLayout(model.getCustomer().getLocationId());
+
                         address.setText("Name:  " + model.getCustomer().getName() + "\nPhone: " + model.getCustomer().getPhone() + "\nAddress:  " + model.getCustomer().getAddress()
                                 + ", " + model.getCustomer().getCity()
                                 + "\nCountry: " + model.getCustomer().getCountry());
+
+
+                        locationAndChargesModel = new LocationAndChargesModel();
+                        locationAndChargesModel.setCountryName(model.getCustomer().getCountry());
+                        locationAndChargesModel.setCurrency(model.getCustomer().getCurrencySymbol());
+                        locationAndChargesModel.setCurrencyRate(model.getCustomer().getCurrencyRate());
+
+
                         adapter = new InvoiceAdapter(ViewInvoice.this,
                                 allProductsInOneOrderList,
                                 availableProductsInOneOrderList,
                                 model.getCustomer().getCustomerType(), locationAndChargesModel);
-
+                        setUpLayout(model.getCustomer());
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
 
@@ -175,14 +188,24 @@ public class ViewInvoice extends AppCompatActivity {
                         availableProductsInOneOrderList = model.getNewCountModelArrayList();
                         invoiceNumberText.setText("Invoice # " + model.getId());
                         date.setText("" + CommonUtils.getFormattedDateOnly(model.getTime()));
-                        setUpLayout(model.getCustomer().getLocationId());
+
                         address.setText("Name:  " + model.getCustomer().getName() + "\nPhone: " + model.getCustomer().getPhone() + "\nAddress:  " + model.getCustomer().getAddress()
                                 + ", " + model.getCustomer().getCity()
                                 + "\nCountry: " + model.getCustomer().getCountry());
+
+
+                        locationAndChargesModel = new LocationAndChargesModel();
+                        locationAndChargesModel.setCountryName(model.getCustomer().getCountry());
+                        locationAndChargesModel.setCurrency(model.getCustomer().getCurrencySymbol());
+                        locationAndChargesModel.setCurrencyRate(model.getCustomer().getCurrencyRate());
+
+
                         adapter = new InvoiceAdapter(ViewInvoice.this,
                                 allProductsInOneOrderList,
                                 availableProductsInOneOrderList,
                                 model.getCustomer().getCustomerType(), locationAndChargesModel);
+
+                        setUpLayout(model.getCustomer());
 
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
@@ -201,45 +224,35 @@ public class ViewInvoice extends AppCompatActivity {
         });
     }
 
-    private void setUpLayout(String locationId) {
-        mDatabase.child("Settings").child("DeliveryCharges").child(locationId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() != null) {
-                    locationAndChargesModel = dataSnapshot.getValue(LocationAndChargesModel.class);
-                    if (locationAndChargesModel != null) {
-                        adapter.location(locationAndChargesModel);
+    private void setUpLayout(final Customer customer) {
+        locationAndChargesModel = new LocationAndChargesModel();
+        locationAndChargesModel.setCountryName(customer.getCountry());
+        locationAndChargesModel.setCurrency(customer.getCurrencySymbol());
+        locationAndChargesModel.setCurrencyRate(customer.getCurrencyRate());
+        adapter.location(locationAndChargesModel);
 //                        adapter.notifyDataSetChanged();
-                        for (int i = 0; i < model.getCountModelArrayList().size(); i++) {
-                            totalPrice = totalPrice + (((model.getCountModelArrayList().get(i).getProduct().getRetailPrice() * model.getCountModelArrayList().get(i).getQuantity())
-                            ));
+        for (int i = 0; i < model.getCountModelArrayList().size(); i++) {
+            totalPrice = totalPrice + (((model.getCountModelArrayList().get(i).getProduct().getRetailPrice()
+                    * model.getCountModelArrayList().get(i).getQuantity())
+            ));
 
-                        }
-                        total.setText(locationAndChargesModel.getCurrency() + " " +
-                                CommonUtils.getFormattedPrice(totalPrice));
-
-
-                        delivery.setText(locationAndChargesModel.getCurrency() + " " +
-                                CommonUtils.getFormattedPrice(model.getDeliveryCharges()));
+        }
+        total.setText(locationAndChargesModel.getCurrency() + " " +
+                CommonUtils.getFormattedPrice(totalPrice*model.getCustomer().getCurrencyRate()));
 
 
-                        shipping.setText(locationAndChargesModel.getCurrency() + " " +
-                                CommonUtils.getFormattedPrice(model.getShippingCharges()));
+        delivery.setText(locationAndChargesModel.getCurrency() + " " +
+                CommonUtils.getFormattedPrice(model.getDeliveryCharges() * model.getCustomer().getCurrencyRate()));
 
-                        grandTotal.setText(locationAndChargesModel.getCurrency() + " " +
-                                CommonUtils.getFormattedPrice(model.getGrandTotal()));
-                        orderNumber.setText("Order number: " + model.getOrderId());
-                        wholeLayout.setVisibility(View.GONE);
 
-                    }
-                }
-            }
+        shipping.setText(locationAndChargesModel.getCurrency() + " " +
+                CommonUtils.getFormattedPrice(model.getShippingCharges() * model.getCustomer().getCurrencyRate()));
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+        grandTotal.setText(locationAndChargesModel.getCurrency() + " " +
+                CommonUtils.getFormattedPrice(model.getGrandTotal() * model.getCustomer().getCurrencyRate()));
+        orderNumber.setText("Order number: " + model.getOrderId());
+        wholeLayout.setVisibility(View.GONE);
 
-            }
-        });
 
     }
 
@@ -251,6 +264,27 @@ public class ViewInvoice extends AppCompatActivity {
     public void onBackPressed() {
 
         finish();
+    }
+    private void getPermissions() {
+        int PERMISSION_ALL = 1;
+        String[] PERMISSIONS = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+        };
+
+        if (!hasPermissions(this, PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
+    }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public static Bitmap loadBitmapFromView(View v, int width, int height) {
@@ -273,8 +307,10 @@ public class ViewInvoice extends AppCompatActivity {
             CommonUtils.showToast("Invoice saved in gallery\nKindly view it");
             Log.e("ImageSave", "Saveimage");
         } catch (FileNotFoundException e) {
+            getPermissions();
             Log.e("GREC", e.getMessage(), e);
         } catch (IOException e) {
+            getPermissions();
             Log.e("GREC", e.getMessage(), e);
         }
     }

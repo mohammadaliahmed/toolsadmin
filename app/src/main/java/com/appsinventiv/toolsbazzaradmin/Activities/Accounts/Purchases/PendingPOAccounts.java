@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.appsinventiv.toolsbazzaradmin.Adapters.POListAdapter;
+import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
 import com.appsinventiv.toolsbazzaradmin.Models.PurchaseOrderModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
@@ -24,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class PendingPOAccounts extends Fragment {
@@ -176,11 +179,23 @@ public class PendingPOAccounts extends Fragment {
                         if (model != null) {
                             itemList.add(model);
 
-                            adapter.notifyDataSetChanged();
+
 //                            progress.setVisibility(View.GONE);
 
                         }
                     }
+                    Collections.sort(itemList, new Comparator<PurchaseOrderModel>() {
+                        @Override
+                        public int compare(PurchaseOrderModel listData, PurchaseOrderModel t1) {
+                            Long ob1 = listData.getTime();
+                            Long ob2 = t1.getTime();
+
+                            return ob2.compareTo(ob1);
+
+                        }
+                    });
+                    adapter.notifyDataSetChanged();
+
                 } else {
 //                    CommonUtils.showToast("Nothing to show");
 //                    progress.setVisibility(View.GONE);

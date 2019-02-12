@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.appsinventiv.toolsbazzaradmin.Adapters.PendingProductsAdapter;
+import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
 import com.appsinventiv.toolsbazzaradmin.Models.ProductCountModel;
 import com.appsinventiv.toolsbazzaradmin.Models.PurchaseOrderModel;
 import com.appsinventiv.toolsbazzaradmin.Models.VendorModel;
@@ -34,6 +35,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class PendingFragment extends Fragment {
@@ -76,12 +79,11 @@ public class PendingFragment extends Fragment {
         generate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    if(newList.size()>0) {
-                        showAlertBoxForCompletion();
-                    }else{
-                        CommonUtils.showToast("Products are pending for purchase");
-                    }
-
+                if (newList.size() > 0) {
+                    showAlertBoxForCompletion();
+                } else {
+                    CommonUtils.showToast("Products are pending for purchase");
+                }
 
 
             }
@@ -321,10 +323,19 @@ public class PendingFragment extends Fragment {
                             if (vendorId != null) {
                                 if (model.getProduct().getVendor().getVendorId().equalsIgnoreCase(vendorId)) {
                                     itemList.add(model);
-                                    if(model.isPurchased()){
+                                    if (model.isPurchased()) {
                                         newList.add(model);
                                     }
+                                    Collections.sort(itemList, new Comparator<ProductCountModel>() {
+                                        @Override
+                                        public int compare(ProductCountModel listData, ProductCountModel t1) {
+                                            Long ob1 = listData.getTime();
+                                            Long ob2 = t1.getTime();
 
+                                            return ob2.compareTo(ob1);
+
+                                        }
+                                    });
                                     adapter.notifyDataSetChanged();
                                     progress.setVisibility(View.GONE);
 

@@ -12,10 +12,18 @@ public class Customer {
     String storeName,businessRegistrationNumber;
     String locationId;
     String currencySymbol;
+    float currencyRate;
 
     public Customer() {
     }
 
+    public float getCurrencyRate() {
+        return currencyRate;
+    }
+
+    public void setCurrencyRate(float currencyRate) {
+        this.currencyRate = currencyRate;
+    }
 
     public String getLocationId() {
         return locationId;

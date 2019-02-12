@@ -26,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class PendingSOAccounts extends Fragment {
@@ -202,6 +204,16 @@ public class PendingSOAccounts extends Fragment {
 
                         }
                     }
+                    Collections.sort(itemList, new Comparator<InvoiceModel>() {
+                        @Override
+                        public int compare(InvoiceModel listData, InvoiceModel t1) {
+                            Long ob1 = listData.getTime();
+                            Long ob2 = t1.getTime();
+
+                            return ob2.compareTo(ob1);
+
+                        }
+                    });
                     adapter.notifyDataSetChanged();
 
                 } else {

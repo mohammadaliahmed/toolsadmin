@@ -106,7 +106,6 @@ public class InvoiceListFragment extends Fragment {
         });
 
 
-
         return rootView;
 
     }
@@ -145,8 +144,8 @@ public class InvoiceListFragment extends Fragment {
             mDatabase.child("Accounts").child("PendingInvoices").child(key).child("invoiceStatus").setValue("pendingSO").addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Intent i=new Intent(context,TransferToAccountsDone.class);
-                    i.putExtra("orderId",key);
+                    Intent i = new Intent(context, TransferToAccountsDone.class);
+                    i.putExtra("orderId", key);
                     context.startActivity(i);
 
                 }
@@ -178,6 +177,16 @@ public class InvoiceListFragment extends Fragment {
 
                         }
                     }
+                    Collections.sort(itemList, new Comparator<InvoiceModel>() {
+                        @Override
+                        public int compare(InvoiceModel listData, InvoiceModel t1) {
+                            Long ob1 = listData.getTime();
+                            Long ob2 = t1.getTime();
+
+                            return ob2.compareTo(ob1);
+
+                        }
+                    });
                     adapter.notifyDataSetChanged();
 
                 } else {
