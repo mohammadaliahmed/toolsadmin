@@ -107,7 +107,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         categoryChoosen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AddProduct.this, ChooseCategory.class);
+                Intent i = new Intent(AddProduct.this, ChooseMainCategory.class);
                 categoryList.clear();
                 startActivityForResult(i, 1);
 

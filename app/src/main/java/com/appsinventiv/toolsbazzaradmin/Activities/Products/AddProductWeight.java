@@ -64,8 +64,12 @@ public class AddProductWeight extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (calculated) {
-                    AddProduct.productWeight = "" + dimenWeight;
+                    float w1=Float.parseFloat(pweight.getText().toString());
+                    float w2=Float.parseFloat(dimenWeight);
+                    AddProduct.productWeight = ""+(w1>w2?w1:w2);
+                    EditProduct.productWeight = "" +(w1>w2?w1:w2);
                     AddProduct.dimens = "" + dimens;
+                    EditProduct.dimens = "" + dimens;
                     finish();
                 } else {
                     CommonUtils.showToast("Please calculate weight");
@@ -79,13 +83,15 @@ public class AddProductWeight extends AppCompatActivity {
     private void calculateValues() {
         calculated = true;
         packageWeight.setText("Package Weight: " + pweight.getText().toString() + "Kg");
-        String dimeneight = "" + String.format("%.1f",((Double.parseDouble(plength.getText().toString()) *
+        String dimeneight = "" + String.format("%.1f", ((Double.parseDouble(plength.getText().toString()) *
                 Double.parseDouble(pwidth.getText().toString()) *
                 Double.parseDouble(pheight.getText().toString())) / 5000));
 
         dimenWeight = dimeneight;
         dimensionWeight.setText("Dimension Weight: " + dimeneight + "Kg");
-        dimens=dimeneight+" Dimensions: "+plength+"*"+pweight+"*"+pheight;
+        float w1=Float.parseFloat(pweight.getText().toString());
+        float w2=Float.parseFloat(dimenWeight);
+        dimens = ""+(w1>w2?w1:w2) +" Kg." + " Dimensions: " + plength.getText().toString() + "*" + pweight.getText().toString() + "*" + pheight.getText();
 
     }
 

@@ -40,7 +40,15 @@ public class AddCategoryAdapter extends RecyclerView.Adapter<AddCategoryAdapter.
         final String title = list.get(position);
         holder.title.setText(title);
 
-        holder.addCategory.setOnClickListener(new View.OnClickListener() {
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, AddSubCategories.class);
+                i.putExtra("parentCategory", title);
+                context.startActivity(i);
+
+            }
+        }); holder.addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, AddSubCategories.class);

@@ -22,6 +22,7 @@
 
         <RadioGroup
             android:id="@+id/radioGroup"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -51,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:hint="City And Delivery Charges"
+                android:hint="City And Charges"
                 android:inputType="textCapWords|textMultiLine"
                 />
         </android.support.design.widget.TextInputLayout>

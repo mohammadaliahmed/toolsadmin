@@ -9,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.appsinventiv.toolsbazzaradmin.Activities.Products.AddProduct;
-import com.appsinventiv.toolsbazzaradmin.Activities.Products.ChooseCategory;
-import com.appsinventiv.toolsbazzaradmin.Activities.Products.EditProduct;
+
 import com.appsinventiv.toolsbazzaradmin.R;
 
 import java.util.ArrayList;

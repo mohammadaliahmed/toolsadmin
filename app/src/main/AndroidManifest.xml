@@ -115,6 +115,7 @@
         <activity android:name=".Activities.Products.AddProductWeight" />
         <activity android:name=".Activities.Accounts.TransferToAccountsDone" />
         <activity android:name=".Activities.Products.AddMainCategories" />
+        <activity android:name=".Activities.Products.ChooseMainCategory" />
         <activity android:name=".Activities.Locations.AddCountry"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Activities.Locations.AddDistricts"

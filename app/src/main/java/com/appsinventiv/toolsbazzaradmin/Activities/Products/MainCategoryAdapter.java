@@ -18,11 +18,13 @@ import java.util.ArrayList;
 public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapter.ViewHolder> {
     Context context;
     ArrayList<MainCategoryModel> itemList;
+    MainCategoryCallBacks callBacks;
 
 
-    public MainCategoryAdapter(Context context, ArrayList<MainCategoryModel> itemList) {
+    public MainCategoryAdapter(Context context, ArrayList<MainCategoryModel> itemList, MainCategoryCallBacks callBacks) {
         this.context = context;
         this.itemList = itemList;
+        this.callBacks = callBacks;
     }
 
     @NonNull
@@ -47,6 +49,12 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
                 context.startActivity(i);
             }
         });
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callBacks.deleteCategory(model);
+            }
+        });
 
     }
 
@@ -57,12 +65,17 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView maincategory;
-        ImageView icon;
+        ImageView icon, delete;
 
         public ViewHolder(View itemView) {
             super(itemView);
             icon = itemView.findViewById(R.id.icon);
             maincategory = itemView.findViewById(R.id.maincategory);
+            delete = itemView.findViewById(R.id.delete);
         }
+    }
+
+    public interface MainCategoryCallBacks {
+        public void deleteCategory(MainCategoryModel model);
     }
 }

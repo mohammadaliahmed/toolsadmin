@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_brick"
-   >
+    android:background="@drawable/bg_brick">
 
     <ImageView
         android:id="@+id/logo"
@@ -18,11 +17,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
-        android:textColor="#fff"
+        android:layout_margin="20dp"
         android:fontFamily="@font/cosmic_fonts"
         android:gravity="center"
-        android:text="Product by \nTools Hardware &amp; Electrical"
+        android:text="Product by \Fort City"
+        android:textColor="#fff"
         android:textStyle="bold" />
 </RelativeLayout>

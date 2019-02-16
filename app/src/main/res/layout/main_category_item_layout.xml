@@ -2,23 +2,34 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp">
+
     <ImageView
         android:id="@+id/icon"
-        android:background="#fff"
-        android:padding="5dp"
-        android:src="@drawable/placeholder"
         android:layout_width="60dp"
-        android:layout_height="60dp" />
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:src="@drawable/placeholder" />
+
     <TextView
         android:id="@+id/maincategory"
-        android:layout_marginLeft="70dp"
-        android:layout_centerVertical="true"
-        android:textColor="#000"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="70dp"
+        android:textColor="#000" />
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:src="@drawable/ic_cancel" />
+
     <View
-        android:background="#eee"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="1dp"></View>
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="#eee"></View>
 </RelativeLayout>

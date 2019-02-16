@@ -1,9 +1,12 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Products;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,10 +18,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Orders.ViewOrder;
 import com.appsinventiv.toolsbazzaradmin.Models.SelectedAdImages;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
 import com.appsinventiv.toolsbazzaradmin.Utils.CompressImage;
+import com.appsinventiv.toolsbazzaradmin.Utils.NotificationAsync;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -67,7 +72,12 @@ public class AddMainCategories extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        adapter = new MainCategoryAdapter(this, itemList);
+        adapter = new MainCategoryAdapter(this, itemList, new MainCategoryAdapter.MainCategoryCallBacks() {
+            @Override
+            public void deleteCategory(MainCategoryModel model) {
+                showAlert(model);
+            }
+        });
         recyclerView.setAdapter(adapter);
 
         pickImage.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +111,34 @@ public class AddMainCategories extends AppCompatActivity {
 
         getMainCategoriesFromDB();
 
+    }
+
+    private void showAlert(final MainCategoryModel model) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddMainCategories.this);
+        builder.setTitle("Alert");
+        builder.setMessage("Do you want to delete this category?");
+
+        // add the buttons
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                deleteCategory(model);
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void deleteCategory(MainCategoryModel model) {
+        mDatabase.child("Settings/Categories/MainCategories").child(model.getMainCategory()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                CommonUtils.showToast("Category Deleted");
+            }
+        });
     }
 
     private void getMainCategoriesFromDB() {

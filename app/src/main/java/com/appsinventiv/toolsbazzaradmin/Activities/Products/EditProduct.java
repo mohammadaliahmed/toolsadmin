@@ -1,6 +1,7 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Products;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -8,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -82,7 +84,19 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
     RadioButton selected;
     Product product;
     public static ArrayList<String> categoryList = new ArrayList<>();
+    EditText brandName, productContents;
+    TextView warrantyChosen, weightChosen;
+    private String whichWarranty;
+    public static String productWeight, dimens;
+    TextView productIdd;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (productWeight != null) {
+            weightChosen.setText("Weight: " + productWeight + "Kg");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,13 +118,14 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
         categoryChoosen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(EditProduct.this, ChooseCategory.class);
+                Intent i = new Intent(EditProduct.this, ChooseMainCategory.class);
                 categoryList.clear();
                 startActivityForResult(i, 1);
 
             }
         });
         pick = findViewById(R.id.pick);
+        productIdd = findViewById(R.id.productId);
         upload = findViewById(R.id.upload);
         recyclerView = findViewById(R.id.recyclerview);
         e_title = findViewById(R.id.title);
@@ -130,6 +145,28 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
         spinner = findViewById(R.id.chooseVendor);
         radioGroup = findViewById(R.id.radioGroup);
         quantityAvailable = findViewById(R.id.quantityAvailable);
+        brandName = findViewById(R.id.brandName);
+        productContents = findViewById(R.id.productContents);
+        weightChosen = findViewById(R.id.weightChosen);
+        warrantyChosen = findViewById(R.id.warrantyChosen);
+        productIdd.setText("Product Id: " + productId);
+
+        warrantyChosen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showWarrantyAlert();
+            }
+        });
+
+        weightChosen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditProduct.this, AddProductWeight.class);
+                startActivity(i);
+            }
+        });
+
+
         showPickedPictures();
 
         getDataFromServer();
@@ -201,8 +238,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (categoryList.size() == 0) {
+                if (product.getCategory() == null && categoryList.size() == 0) {
                     CommonUtils.showToast("Please select category");
                 } else if (e_title.getText().length() == 0) {
                     e_title.setError("Enter title");
@@ -239,7 +275,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
                             product.getThumbnailUrl(),
                             "",
                             "",
-                            System.currentTimeMillis(),
+                            product.getTime(),
                             Float.parseFloat(e_costPrice.getText().toString()),
                             Float.parseFloat(e_wholesalePrice.getText().toString()),
                             Float.parseFloat(e_retailPrice.getText().toString()),
@@ -255,8 +291,12 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
                             0,
                             categoryList,
                             Integer.parseInt(quantityAvailable.getText().toString()),
-                            product.getBrandName(), product.getProductContents(),
-                            product.getWarrantyType(), product.getProductWeight(), product.getDimen()
+                            brandName.getText().toString(),
+                            productContents.getText().toString(),
+
+                            whichWarranty,
+                            productWeight,
+                            dimens
 
 
                     )).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -292,6 +332,35 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
         });
 
 
+    }
+
+    private void showWarrantyAlert() {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(EditProduct.this);
+        builderSingle.setTitle("Select warranty type");
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(EditProduct.this, android.R.layout.simple_list_item_1);
+        arrayAdapter.add("International Manufacture Warranty");
+        arrayAdapter.add("International Seller Warranty");
+        arrayAdapter.add("Local Seller Warranty");
+        arrayAdapter.add("No Warranty");
+        arrayAdapter.add("Non-local Warranty");
+
+        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                warrantyChosen.setText("Warranty chosen: " + arrayAdapter.getItem(which));
+                whichWarranty = arrayAdapter.getItem(which);
+
+            }
+        });
+        builderSingle.show();
     }
 
     private void putPicturesBack() {
@@ -341,6 +410,18 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
                         recyclerView.setVisibility(View.VISIBLE);
 
                         adapter.notifyDataSetChanged();
+
+
+                        warrantyChosen.setText("Warranty chosen: " + product.getWarrantyType() == null ? "" : product.getWarrantyType());
+                        whichWarranty = product.getWarrantyType();
+                        productContents.setText(product.getProductContents());
+                        brandName.setText(product.getBrandName());
+                        weightChosen.setText(product.getProductWeight() == null ? "Choose weight" : "Product Weight: " + product.getProductWeight());
+                        if (product.getCategory() != null) {
+                            categoryList = product.getCategory();
+                            categoryChoosen.setText("Category: " + product.getCategory());
+                        }
+
                     }
                 }
             }
