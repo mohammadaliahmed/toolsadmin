@@ -45,7 +45,7 @@ import java.util.List;
 
 public class AddMainCategories extends AppCompatActivity {
     DatabaseReference mDatabase;
-    EditText mainCategories;
+    EditText mainCategories, subCategories;
     ImageView pickImage;
     Button update;
     List<Uri> mSelected = new ArrayList<>();
@@ -70,9 +70,10 @@ public class AddMainCategories extends AppCompatActivity {
         update = findViewById(R.id.update);
         mainCategories = findViewById(R.id.mainCategories);
         recyclerView = findViewById(R.id.recyclerView);
+        subCategories = findViewById(R.id.subCategories);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        adapter = new MainCategoryAdapter(this, itemList, new MainCategoryAdapter.MainCategoryCallBacks() {
+        adapter = new MainCategoryAdapter(this, itemList, 1, new MainCategoryAdapter.MainCategoryCallBacks() {
             @Override
             public void deleteCategory(MainCategoryModel model) {
                 showAlert(model);
@@ -101,6 +102,8 @@ public class AddMainCategories extends AppCompatActivity {
             public void onClick(View view) {
                 if (mainCategories.getText().length() == 0) {
                     mainCategories.setError("Enter value");
+                } else if (subCategories.getText().length() == 0) {
+                    subCategories.setError("Enter categories");
                 } else if (mSelected.size() == 0) {
                     CommonUtils.showToast("Please pick icon");
                 } else {
@@ -166,7 +169,7 @@ public class AddMainCategories extends AppCompatActivity {
 
     private void uploadData() {
         mDatabase.child("Settings/Categories/MainCategories").child(mainCategories.getText().toString())
-                .setValue(new MainCategoryModel(mainCategories.getText().toString(), "")).addOnSuccessListener(new OnSuccessListener<Void>() {
+                .setValue(new MainCategoryModel(mainCategories.getText().toString(), "", subCategories.getText().toString())).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 for (String img : imageUrl) {
@@ -198,6 +201,7 @@ public class AddMainCategories extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 mainCategories.setText("");
+                                subCategories.setText("");
                                 Glide.with(AddMainCategories.this).load(R.drawable.photo).into(pickImage);
 
                                 adapter.notifyDataSetChanged();

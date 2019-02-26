@@ -72,11 +72,15 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         holder.switchh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (productStatusChanged != null) {
-                    model.setIsActive("" + b);
-                    productStatusChanged.onStatusChanged(compoundButton, model, b);
+                if (compoundButton.isPressed()) {
+                    productStatusChanged.onStatusChanged( model, b);
 
                 }
+//                if (productStatusChanged != null) {
+//                    model.setIsActive("" + b);
+//                    productStatusChanged.onStatusChanged(compoundButton, model, b);
+//
+//                }
 
             }
         });
@@ -97,6 +101,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
 
     }
+
     public void updatelist(ArrayList<Product> productList) {
         this.productList = productList;
         arrayList.clear();
@@ -142,7 +147,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title, subtitle, wholesalePrice, retailPrice;
-        ImageView image,delete;
+        ImageView image, delete;
 
         Switch switchh;
 
@@ -163,8 +168,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     }
 
     public interface OnProductStatusChanged {
-        public void onStatusChanged(View v, Product product, boolean status);
-        public void onDelete( Product product);
+        public void onStatusChanged( Product product, boolean status);
+
+        public void onDelete(Product product);
     }
 
 }

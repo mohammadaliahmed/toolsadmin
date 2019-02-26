@@ -1,5 +1,6 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Products;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,11 +31,12 @@ public class ChooseMainCategory extends AppCompatActivity {
     ArrayList<MainCategoryModel> itemList = new ArrayList<>();
     MainCategoryAdapter adapter;
     FloatingActionButton fab;
-
+    public static Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_main_category);
+        activity=this;
         this.setTitle("Choose Categories");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -53,7 +55,7 @@ public class ChooseMainCategory extends AppCompatActivity {
 
 
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        adapter = new MainCategoryAdapter(this, itemList, new MainCategoryAdapter.MainCategoryCallBacks() {
+        adapter = new MainCategoryAdapter(this, itemList,0, new MainCategoryAdapter.MainCategoryCallBacks() {
             @Override
             public void deleteCategory(MainCategoryModel model) {
                 showAlert(model);
@@ -126,6 +128,8 @@ public class ChooseMainCategory extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
 
+            AddProduct.categoryList.clear();
+            EditProduct.categoryList.clear();
             finish();
         }
 
@@ -134,6 +138,8 @@ public class ChooseMainCategory extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        AddProduct.categoryList.clear();
+        EditProduct.categoryList.clear();
         finish();
     }
 

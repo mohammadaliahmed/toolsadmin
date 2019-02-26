@@ -63,7 +63,7 @@ public class Vendors extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
-                                mDatabase.child("Vendors").child(model.getVendorId()).child("isActive").setValue("no").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                mDatabase.child("Vendors").child(model.getVendorId()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         CommonUtils.showToast("Vendor deleted");
@@ -89,6 +89,28 @@ public class Vendors extends AppCompatActivity {
                 AlertDialog alert11 = builder1.create();
                 alert11.show();
             }
+
+            @Override
+            public void onChangeStatus(VendorModel model, boolean abc) {
+                String status;
+                if (abc) {
+                    status = "yes";
+                } else {
+                    status = "no";
+                }
+                mDatabase.child("Vendors").child(model.getVendorId()).child("isActive").setValue(status).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        CommonUtils.showToast("Vendor status changed");
+                        adapter.notifyDataSetChanged();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        CommonUtils.showToast(e.getMessage());
+                    }
+                });
+            }
         });
         recyclerView.setAdapter(adapter);
 
@@ -113,9 +135,9 @@ public class Vendors extends AppCompatActivity {
                         VendorModel model = snapshot.getValue(VendorModel.class);
                         if (model != null) {
 
-                            if(model.getIsActive().equalsIgnoreCase("yes")){
-                                vendorModelArrayList.add(model);
-                            }
+//                            if(model.getIsActive().equalsIgnoreCase("yes")){
+                            vendorModelArrayList.add(model);
+//                            }
 
 
                         }

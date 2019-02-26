@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.Vendors.AddVendors;
@@ -41,15 +43,33 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final VendorModel model = itemList.get(position);
         holder.name.setText("Name: " + model.getVendorName());
         holder.phone.setText("Phone: " + model.getVendorPhone());
         holder.address.setText("Address: " + model.getVendorAddress());
+
+        if (model.getIsActive().equalsIgnoreCase("yes")) {
+            holder.switchh.setChecked(true);
+        } else if (model.getIsActive().equalsIgnoreCase("no")) {
+            holder.switchh.setChecked(false);
+        }
+
         if (model.getVendorEmail() != null) {
             holder.email.setText("Email: " + model.getVendorEmail());
 
         }
+
 
         holder.dial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +82,7 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, AddVendors.class);
-                i.putExtra("vendorId",model.getVendorId());
+                i.putExtra("vendorId", model.getVendorId());
                 context.startActivity(i);
             }
         });
@@ -81,6 +101,17 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
             }
         });
 
+
+
+        holder.switchh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (compoundButton.isPressed()){
+                    deleteVendor.onChangeStatus(model, b);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -91,6 +122,7 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, phone, address, email;
         ImageView dial, whatsapp, delete;
+        Switch switchh;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -101,11 +133,14 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
             whatsapp = itemView.findViewById(R.id.whatsapp);
             delete = itemView.findViewById(R.id.delete);
             email = itemView.findViewById(R.id.email);
+            switchh = itemView.findViewById(R.id.switchh);
 
         }
     }
 
     public interface DeleteVendor {
         public void onDelete(VendorModel model);
+
+        public void onChangeStatus(VendorModel model, boolean abc);
     }
 }

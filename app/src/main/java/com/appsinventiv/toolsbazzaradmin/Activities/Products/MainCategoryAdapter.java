@@ -19,12 +19,14 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
     Context context;
     ArrayList<MainCategoryModel> itemList;
     MainCategoryCallBacks callBacks;
+    int to = 0;
 
 
-    public MainCategoryAdapter(Context context, ArrayList<MainCategoryModel> itemList, MainCategoryCallBacks callBacks) {
+    public MainCategoryAdapter(Context context, ArrayList<MainCategoryModel> itemList, int to, MainCategoryCallBacks callBacks) {
         this.context = context;
         this.itemList = itemList;
         this.callBacks = callBacks;
+        this.to = to;
     }
 
     @NonNull
@@ -39,14 +41,27 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final MainCategoryModel model = itemList.get(position);
         holder.maincategory.setText(model.getMainCategory());
+        holder.subCategories.setText(model.getSubCategories() == null ? "" : model.getSubCategories());
         Glide.with(context).load(model.getUrl()).into(holder.icon);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, AddSubCategories.class);
-                i.putExtra("parentCategory", model.getMainCategory());
-                context.startActivity(i);
+                AddProduct.categoryList.add(model.getMainCategory());
+                EditProduct.categoryList.add(model.getMainCategory());
+                if (to == 1) {
+                    Intent i = new Intent(context, AddSubCategories.class);
+                    i.putExtra("parentCategory", model.getMainCategory());
+
+                    context.startActivity(i);
+//                    ((ChooseMainCategory) context).finish();
+                } else if (to == 0) {
+                    Intent i = new Intent(context, ChooseCategory.class);
+                    i.putExtra("parentCategory", model.getMainCategory());
+
+                    context.startActivity(i);
+//                    ((ChooseMainCategory) context).finish();
+                }
             }
         });
         holder.delete.setOnClickListener(new View.OnClickListener() {
@@ -64,12 +79,13 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView maincategory;
+        TextView maincategory, subCategories;
         ImageView icon, delete;
 
         public ViewHolder(View itemView) {
             super(itemView);
             icon = itemView.findViewById(R.id.icon);
+            subCategories = itemView.findViewById(R.id.subCategories);
             maincategory = itemView.findViewById(R.id.maincategory);
             delete = itemView.findViewById(R.id.delete);
         }

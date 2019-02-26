@@ -74,7 +74,7 @@ public class ListOfProducts extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ProductsAdapter(this, productArrayList, new ProductsAdapter.OnProductStatusChanged() {
             @Override
-            public void onStatusChanged(View v, Product product, final boolean status) {
+            public void onStatusChanged( Product product, final boolean status) {
                 mDatabase.child("Products").child(product.getId()).child("isActive").setValue("" + status).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

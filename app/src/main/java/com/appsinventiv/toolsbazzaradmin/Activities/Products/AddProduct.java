@@ -89,7 +89,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
     TextView warrantyChosen, weightChosen;
     private String whichWarranty;
     public static String productWeight, dimens;
-
+    public static int fromWhere=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +107,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         categoryChoosen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fromWhere=1;
                 Intent i = new Intent(AddProduct.this, ChooseMainCategory.class);
                 categoryList.clear();
                 startActivityForResult(i, 1);

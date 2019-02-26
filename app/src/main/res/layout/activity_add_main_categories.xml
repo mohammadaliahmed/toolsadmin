@@ -20,19 +20,41 @@
                 android:orientation="horizontal"
                 android:weightSum="10">
 
-                <android.support.design.widget.TextInputLayout
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="8">
+                    android:layout_weight="8"
+                    android:orientation="vertical">
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/mainCategories"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Category"
-                        android:inputType="textMultiLine|textCapWords" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_margin="10dp">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/mainCategories"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Category"
+                            android:inputType="textCapWords" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content"
+                       >
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/subCategories"
+                            android:layout_width="match_parent"
+                            android:textSize="11sp"
+                            android:layout_height="wrap_content"
+                            android:hint="Sub Categories"
+                            android:inputType="textMultiLine|textCapWords" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/pickImage"
@@ -42,6 +64,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="2"
                     android:src="@drawable/photo" />
+
             </LinearLayout>
 
 
@@ -58,9 +81,9 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
-                android:nestedScrollingEnabled="false"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false">
 
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>

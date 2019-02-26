@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -32,6 +34,11 @@ public class ChooseCategory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_category);
         this.setTitle("Choose category");
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         fab = findViewById(R.id.fab);
         recyclerView = findViewById(R.id.recyclerView);
@@ -46,28 +53,32 @@ public class ChooseCategory extends AppCompatActivity {
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        adapter = new CategoryAdapter(this, itemList);
+        adapter = new CategoryAdapter(this, itemList, new CategoryAdapter.GetNewData() {
+            @Override
+            public void whichCategory(String title) {
+                getCategoryDataFromDB(title);
+            }
+        });
 
         recyclerView.setAdapter(adapter);
 
 
         parentCategory = getIntent().getStringExtra("parentCategory");
 
-        if (parentCategory == null) {
-            getDataFromDB();
-        } else {
-            getCategoryDataFromDB();
-        }
+
+        getCategoryDataFromDB(parentCategory);
 
 
     }
 
-    private void getCategoryDataFromDB() {
+
+    private void getCategoryDataFromDB(String cate) {
         progress.setVisibility(View.VISIBLE);
-        mDatabase.child("Settings").child("Categories").child(parentCategory).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Settings").child("Categories").child(cate).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
+                    itemList.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String value = snapshot.getValue(String.class);
                         itemList.add(value);
@@ -76,6 +87,9 @@ public class ChooseCategory extends AppCompatActivity {
 
                     adapter.notifyDataSetChanged();
                 } else {
+//                    itemList.clear();
+//                    adapter.notifyDataSetChanged();
+                    ChooseMainCategory.activity.finish();
                     finish();
                 }
             }
@@ -89,7 +103,7 @@ public class ChooseCategory extends AppCompatActivity {
 
     private void getDataFromDB() {
         progress.setVisibility(View.VISIBLE);
-        mDatabase.child("Settings").child("Categories").child("MainCategory").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Settings").child("Categories").child("MainCategory").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
@@ -112,8 +126,56 @@ public class ChooseCategory extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AddProduct.categoryList.clear();
-        EditProduct.categoryList.clear();
-      finish();
+//        super.onBackPressed();
+        try {
+            if (AddProduct.categoryList.size() > 0 || EditProduct.categoryList.size() > 0) {
+                AddProduct.categoryList.remove(AddProduct.categoryList.size() - 1);
+                EditProduct.categoryList.remove(EditProduct.categoryList.size() - 1);
+                if (AddProduct.fromWhere == 1) {
+
+                    getCategoryDataFromDB(AddProduct.categoryList.get(AddProduct.categoryList.size() - 1));
+                } else if (EditProduct.fromWhere == 1) {
+                    getCategoryDataFromDB(EditProduct.categoryList.get(EditProduct.categoryList.size() - 1));
+                }
+
+            } else {
+                finish();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            finish();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            try {
+
+
+                if (AddProduct.categoryList.size() > 0 || EditProduct.categoryList.size() > 0) {
+                    AddProduct.categoryList.remove(AddProduct.categoryList.size() - 1);
+                    EditProduct.categoryList.remove(EditProduct.categoryList.size() - 1);
+                    if (AddProduct.fromWhere == 1) {
+                        getCategoryDataFromDB(AddProduct.categoryList.get(AddProduct.categoryList.size() - 1));
+                    } else if (EditProduct.fromWhere == 1) {
+                        getCategoryDataFromDB(EditProduct.categoryList.get(EditProduct.categoryList.size() - 1));
+                    }
+
+                } else {
+                    finish();
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                finish();
+            }
+//            super.onBackPressed();
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
