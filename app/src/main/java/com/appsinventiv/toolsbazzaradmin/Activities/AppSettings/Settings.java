@@ -13,7 +13,7 @@ import com.appsinventiv.toolsbazzaradmin.Activities.Locations.ListOfCountries;
 import com.appsinventiv.toolsbazzaradmin.R;
 
 public class Settings extends AppCompatActivity {
-    RelativeLayout aboutUs, terms, banner,dealsBanner, deliveryCharges, company;
+    RelativeLayout aboutUs, terms, banner, dealsBanner, deliveryCharges, company, cod, commissions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,24 @@ public class Settings extends AppCompatActivity {
         terms = findViewById(R.id.terms);
         company = findViewById(R.id.company);
         deliveryCharges = findViewById(R.id.deliveryCharges);
+        commissions = findViewById(R.id.commissions);
+        cod = findViewById(R.id.cod);
+        cod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(Settings.this, CODLimit.class);
+                startActivity(i);
+            }
+        });
+
+        commissions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Settings.this, Commissions.class);
+                startActivity(i);
+            }
+        });
 
         deliveryCharges.setOnClickListener(new View.OnClickListener() {
             @Override

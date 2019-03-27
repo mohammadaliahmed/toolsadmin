@@ -544,7 +544,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:visibility="visible"
-        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_info" />
 
     <android.support.design.widget.FloatingActionButton
@@ -554,11 +553,9 @@
         android:layout_above="@id/button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:visibility="visible"
-        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_purchase" />
 
 

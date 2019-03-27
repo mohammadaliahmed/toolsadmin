@@ -298,7 +298,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
 
                             whichWarranty,
                             productWeight,
-                            dimens
+                            dimens,"admin",
+                            "Approved"
 
 
                     )).addOnSuccessListener(new OnSuccessListener<Void>() {

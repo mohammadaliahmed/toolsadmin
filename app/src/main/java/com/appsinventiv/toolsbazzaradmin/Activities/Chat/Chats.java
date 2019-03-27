@@ -1,13 +1,21 @@
 package com.appsinventiv.toolsbazzaradmin.Activities.Chat;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.appsinventiv.toolsbazzaradmin.Adapters.ChatListAdapter;
+import com.appsinventiv.toolsbazzaradmin.Adapters.OrdersFragmentAdapter;
+import com.appsinventiv.toolsbazzaradmin.Interfaces.TabCountCallbacks;
 import com.appsinventiv.toolsbazzaradmin.Models.ChatModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.google.firebase.database.DataSnapshot;
@@ -21,81 +29,89 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class Chats extends AppCompatActivity {
-    RecyclerView recyclerView;
-    LinearLayoutManager layoutManager;
-    DatabaseReference mDatabase;
-    ArrayList<ChatModel> chatModels = new ArrayList<>();
-    ArrayList<String> username = new ArrayList<>();
 
-//    ArrayList<ChatModel> chatModels = new ArrayList<>();
+    ArrayList<String> orderStatusList = new ArrayList<>();
 
-    ChatListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
+        getSupportActionBar().setElevation(0);
         this.setTitle("Chats");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        recyclerView = findViewById(R.id.recyclerview_chats);
-        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        adapter = new ChatListAdapter(Chats.this, chatModels);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(layoutManager);
+        this.setTitle("Chats");
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        orderStatusList.add("Wholesale");
+        orderStatusList.add("Client");
+        orderStatusList.add("Seller");
+        viewPager.setOffscreenPageLimit(4);
+
+        ChatFragmentAdapter adapter = new ChatFragmentAdapter(this, orderStatusList, getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+
+        LinearLayout tabone = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+        final TextView countt = (TextView) tabone.findViewById(R.id.txtview);
+        TextView title = (TextView) tabone.findViewById(R.id.tabTitle);
+        title.setText("Wholesale");
+        countt.setText("1");
+
+        LinearLayout tabtwo = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+
+        final TextView counttt = (TextView) tabtwo.findViewById(R.id.txtview);
+        TextView titlee = (TextView) tabtwo.findViewById(R.id.tabTitle);
+        titlee.setText("Client");
+        counttt.setText("1");
+
+        LinearLayout tabthree = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+
+        final TextView countttt = (TextView) tabthree.findViewById(R.id.txtview);
+        TextView titleee = (TextView) tabthree.findViewById(R.id.tabTitle);
+        titleee.setText("Seller");
+        countttt.setText("1");
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorPrimaryDark));
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.getTabAt(0).setCustomView(tabone);
+        tabLayout.getTabAt(1).setCustomView(tabtwo);
+        tabLayout.getTabAt(2).setCustomView(tabthree);
 
-        mDatabase.child("Chats").addValueEventListener(new ValueEventListener() {
+        adapter.setListener(new TabCountCallbacks() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                chatModels.clear();
-                if (dataSnapshot.getValue() != null) {
-                    for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        mDatabase.child("Chats").child(snapshot.getKey()).limitToLast(1).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.getValue() != null) {
-                                    for (DataSnapshot abc : dataSnapshot.getChildren()) {
-                                        ChatModel model = abc.getValue(ChatModel.class);
-                                        if (model != null) {
+            public void newCount(int count, int position) {
+                if (position == 0) {
+                    if (count > 0) {
+                        countt.setVisibility(View.VISIBLE);
+                        countt.setText("" + count);
+                    } else {
+                        countt.setVisibility(View.GONE);
 
-                                            chatModels.add(model);
+                    }
+                } else if (position == 1) {
+                    if (count > 0) {
+                        counttt.setVisibility(View.VISIBLE);
+                        counttt.setText("" + count);
+                    } else {
+                        counttt.setVisibility(View.GONE);
 
+                    }
+                } else if (position == 2) {
+                    if (count > 0) {
+                        countttt.setVisibility(View.VISIBLE);
+                        countttt.setText("" + count);
+                    } else {
+                        countttt.setVisibility(View.GONE);
 
-                                            Collections.sort(chatModels, new Comparator<ChatModel>() {
-                                                @Override
-                                                public int compare(ChatModel listData, ChatModel t1) {
-                                                    Long ob1 = listData.getTime();
-                                                    Long ob2 = t1.getTime();
-
-                                                    return ob2.compareTo(ob1);
-
-                                                }
-                                            });
-                                            adapter.notifyDataSetChanged();
-                                        }
-                                    }
-
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
                     }
                 }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 

@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class CompanySettings extends AppCompatActivity {
-    EditText name, address, telephone, phone;
+    EditText name, address, telephone, phone, email;
     Button update;
     DatabaseReference mDatabase;
 
@@ -40,6 +40,7 @@ public class CompanySettings extends AppCompatActivity {
         telephone = findViewById(R.id.telephone);
         phone = findViewById(R.id.mobile);
         update = findViewById(R.id.update);
+        email = findViewById(R.id.email);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         getDataFromDb();
@@ -57,6 +58,9 @@ public class CompanySettings extends AppCompatActivity {
 
                 } else if (phone.getText().length() == 0) {
                     phone.setError("Cannot be null");
+
+                } else if (email.getText().length() == 0) {
+                    email.setError("Cannot be null");
 
                 } else {
                     sendDataToServer();
@@ -76,6 +80,7 @@ public class CompanySettings extends AppCompatActivity {
                         address.setText(model.getAddress());
                         telephone.setText(model.getTelephone());
                         phone.setText(model.getPhone());
+                        email.setText(model.getEmail());
                     }
                 }
             }
@@ -92,7 +97,8 @@ public class CompanySettings extends AppCompatActivity {
                 name.getText().toString(),
                 address.getText().toString(),
                 telephone.getText().toString(),
-                phone.getText().toString()
+                phone.getText().toString(),
+                email.getText().toString()
 
         )).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

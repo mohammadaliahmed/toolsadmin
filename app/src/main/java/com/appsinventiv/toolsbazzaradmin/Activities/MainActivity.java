@@ -9,26 +9,26 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Accounts;
 import com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.Settings;
 import com.appsinventiv.toolsbazzaradmin.Activities.Chat.Chats;
-import com.appsinventiv.toolsbazzaradmin.Activities.Customers.ListOfCustomers;
+import com.appsinventiv.toolsbazzaradmin.Activities.Customers.Customers;
 import com.appsinventiv.toolsbazzaradmin.Activities.Employees.ListOfEmployees;
-import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ListOfInvoices;
-import com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice;
+import com.appsinventiv.toolsbazzaradmin.Activities.Orders.NewOrderScreen;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.OrdersCourier;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.OrdersDelivery;
 import com.appsinventiv.toolsbazzaradmin.Activities.Products.ListOfProducts;
 import com.appsinventiv.toolsbazzaradmin.Activities.Purchases.Purchases;
+import com.appsinventiv.toolsbazzaradmin.Activities.SellerOrders.SellerOrders;
 import com.appsinventiv.toolsbazzaradmin.Activities.Vendors.Vendors;
 import com.appsinventiv.toolsbazzaradmin.Models.AdminModel;
 import com.appsinventiv.toolsbazzaradmin.R;
@@ -45,7 +45,40 @@ public class MainActivity extends AppCompatActivity
 
     LinearLayout chats, customers, delivery, orders, products,
             notifications, signout, vendors, settings, purchases,
-             employees, accounts, courier;
+            employees, accounts, courier;
+    TextView productNotificationsCount,chatNotificationsCount;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateProductCount();
+        updateChatCount();
+    }
+
+    private void updateProductCount() {
+        if (SharedPrefs.getSellerProductCount() != null) {
+            if (SharedPrefs.getSellerProductCount().equalsIgnoreCase("") || SharedPrefs.getSellerProductCount().equalsIgnoreCase("0")) {
+                productNotificationsCount.setVisibility(View.GONE);
+            } else {
+                productNotificationsCount.setVisibility(View.VISIBLE);
+                productNotificationsCount.setText("" + Integer.parseInt(SharedPrefs.getSellerProductCount()));
+            }
+        }
+
+    }
+
+    private void updateChatCount() {
+        if (SharedPrefs.getChatCount() != null) {
+            if (SharedPrefs.getChatCount().equalsIgnoreCase("") || SharedPrefs.getChatCount().equalsIgnoreCase("0")) {
+                chatNotificationsCount.setVisibility(View.GONE);
+            } else {
+                chatNotificationsCount.setVisibility(View.VISIBLE);
+                chatNotificationsCount.setText("" + Integer.parseInt(SharedPrefs.getChatCount()));
+            }
+        }
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +86,13 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.content_main);
 
 
-
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.BLACK);
+            window.setStatusBarColor(Color.TRANSPARENT);
         }
 
         chats = findViewById(R.id.chats);
@@ -74,15 +109,18 @@ public class MainActivity extends AppCompatActivity
         employees = findViewById(R.id.employees);
         accounts = findViewById(R.id.accounts);
         courier = findViewById(R.id.courier);
+        chatNotificationsCount = findViewById(R.id.chatNotificationsCount);
+        productNotificationsCount = findViewById(R.id.productNotificationsCount);
 
 
         customers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ListOfCustomers.class);
+                Intent i = new Intent(MainActivity.this, Customers.class);
                 startActivity(i);
             }
         });
+
 
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +157,7 @@ public class MainActivity extends AppCompatActivity
         orders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, Orders.class);
+                Intent i = new Intent(MainActivity.this, NewOrderScreen.class);
                 startActivity(i);
             }
         });
@@ -178,8 +216,6 @@ public class MainActivity extends AppCompatActivity
                 startActivity(i);
             }
         });
-
-
 
 
         if (SharedPrefs.getIsLoggedIn().equals("yes")) {

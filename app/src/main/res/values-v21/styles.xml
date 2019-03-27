@@ -3,13 +3,15 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/StatusBarColor</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar1">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@color/colorBlack</item>
+        <item name="android:statusBarColor">@color/StatusBarColor</item>
         <item name="colorAccent">@color/colorRed</item>
+
     </style>
 </resources>

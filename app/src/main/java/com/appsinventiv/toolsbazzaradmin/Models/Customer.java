@@ -13,8 +13,17 @@ public class Customer {
     String locationId;
     String currencySymbol;
     float currencyRate;
+    boolean status;
 
     public Customer() {
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public float getCurrencyRate() {

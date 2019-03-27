@@ -76,7 +76,7 @@ public class LiveChat extends AppCompatActivity implements NotificationObserver 
     }
 
     private void getUserDetails() {
-        mDatabase.child("customers").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Customers").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
@@ -95,7 +95,7 @@ public class LiveChat extends AppCompatActivity implements NotificationObserver 
     }
 
     private void readAllMessages() {
-        mDatabase.child("Chats").child(username).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Chats/ClientChats").child(username).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
@@ -103,7 +103,7 @@ public class LiveChat extends AppCompatActivity implements NotificationObserver 
                         ChatModel chatModel = snapshot.getValue(ChatModel.class);
                         if (chatModel != null) {
                             if (!chatModel.getUsername().equals(SharedPrefs.getUsername())) {
-                                mDatabase.child("Chats").child(username).child(chatModel.getId()).child("status").setValue("read");
+                                mDatabase.child("Chats/ClientChats").child(username).child(chatModel.getId()).child("status").setValue("read");
                             }
                         }
                     }
@@ -124,7 +124,7 @@ public class LiveChat extends AppCompatActivity implements NotificationObserver 
         adapter = new ChatAdapter(LiveChat.this, chatModelArrayList);
         recyclerView.setAdapter(adapter);
 
-        mDatabase.child("Chats").child(username).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Chats/ClientChats").child(username).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
@@ -133,10 +133,11 @@ public class LiveChat extends AppCompatActivity implements NotificationObserver 
                         ChatModel model = snapshot.getValue(ChatModel.class);
                         if (model != null) {
                             chatModelArrayList.add(model);
-                            recyclerView.scrollToPosition(chatModelArrayList.size() - 1);
-                            adapter.notifyDataSetChanged();
+
                         }
                     }
+                    recyclerView.scrollToPosition(chatModelArrayList.size() - 1);
+                    adapter.notifyDataSetChanged();
                 }
             }
 
@@ -168,7 +169,7 @@ public class LiveChat extends AppCompatActivity implements NotificationObserver 
                     final String msg = message.getText().toString();
                     message.setText(null);
                     final String key = mDatabase.push().getKey();
-                    mDatabase.child("Chats").child(username).child(key)
+                    mDatabase.child("Chats/ClientChats").child(username).child(key)
                             .setValue(new ChatModel(key, msg, SharedPrefs.getUsername()
                                     , System.currentTimeMillis(), "sending", username)).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -179,13 +180,13 @@ public class LiveChat extends AppCompatActivity implements NotificationObserver 
                             adapter.notifyDataSetChanged();
                             recyclerView.scrollToPosition(chatModelArrayList.size() - 1);
 
-                            mDatabase.child("Chats").child(username).child(key).child("status").setValue("sent");
+                            mDatabase.child("Chats/ClientChats").child(username).child(key).child("status").setValue("sent");
 
 
                             NotificationAsync notificationAsync = new NotificationAsync(LiveChat.this);
                             String NotificationTitle = "New message from " + SharedPrefs.getUsername();
                             String NotificationMessage = "Message: " + msg;
-                            notificationAsync.execute("ali", userFcmKey, NotificationTitle, NotificationMessage, "Chat", key);
+                            notificationAsync.execute("ali", userFcmKey, NotificationTitle, NotificationMessage, "RetailChat", key);
 
                         }
                     });
@@ -214,7 +215,7 @@ public class LiveChat extends AppCompatActivity implements NotificationObserver 
 
     @Override
     public void onSuccess(String chatId) {
-        mDatabase.child("Chats").child(username).child(chatId).child("status").setValue("delivered");
+        mDatabase.child("Chats/ClientChats").child(username).child(chatId).child("status").setValue("delivered");
     }
 
     @Override

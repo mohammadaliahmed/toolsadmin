@@ -89,7 +89,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
     private String whichWarranty;
     public static String productWeight, dimens;
     TextView productIdd;
-    public static int fromWhere=0;
+    public static int fromWhere = 0;
 
     @Override
     protected void onResume() {
@@ -119,7 +119,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
         categoryChoosen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fromWhere=1;
+                fromWhere = 1;
                 Intent i = new Intent(EditProduct.this, ChooseMainCategory.class);
                 categoryList.clear();
                 startActivityForResult(i, 1);
@@ -298,7 +298,9 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
 
                             whichWarranty,
                             productWeight,
-                            dimens
+                            dimens,
+                            product.getUploadedBy() == null ? "admin" : "seller",
+                            product.getSellerProductStatus()
 
 
                     )).addOnSuccessListener(new OnSuccessListener<Void>() {

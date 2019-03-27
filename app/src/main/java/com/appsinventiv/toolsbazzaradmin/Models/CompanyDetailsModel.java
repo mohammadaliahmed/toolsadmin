@@ -5,13 +5,22 @@ package com.appsinventiv.toolsbazzaradmin.Models;
  */
 
 public class CompanyDetailsModel {
-    String name,address,telephone,phone;
+    String name,address,telephone,phone,email;
 
-    public CompanyDetailsModel(String name, String address, String telephone, String phone) {
+    public CompanyDetailsModel(String name, String address, String telephone, String phone, String email) {
         this.name = name;
         this.address = address;
         this.telephone = telephone;
         this.phone = phone;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public CompanyDetailsModel() {

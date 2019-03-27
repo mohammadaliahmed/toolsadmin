@@ -11,7 +11,7 @@ public class OrderModel {
     long time;
     Customer customer;
     ArrayList<ProductCountModel> countModelArrayList;
-    long totalPrice;
+    float totalPrice;
     String instructions;
     String date,chosenTime;
     String orderStatus;
@@ -22,6 +22,8 @@ public class OrderModel {
     String carrier;
     float shippingCharges,deliveryCharges;
     String deliveryBy,receiverName,receiverNameCredit,creditDueDate;
+    String orderFor;
+
 
 
 
@@ -29,7 +31,7 @@ public class OrderModel {
     public OrderModel() {
     }
 
-    public OrderModel(String orderId, long time, Customer customer, ArrayList<ProductCountModel> countModelArrayList, long totalPrice, String instructions, String date, String chosenTime, String orderStatus, boolean isInvoiced, long invoiceNumber) {
+    public OrderModel(String orderId, long time, Customer customer, ArrayList<ProductCountModel> countModelArrayList, float totalPrice, String instructions, String date, String chosenTime, String orderStatus, boolean isInvoiced, long invoiceNumber) {
         this.orderId = orderId;
         this.time = time;
         this.customer = customer;
@@ -41,6 +43,14 @@ public class OrderModel {
         this.orderStatus = orderStatus;
         this.isInvoiced = isInvoiced;
         this.invoiceNumber = invoiceNumber;
+    }
+
+    public String getOrderFor() {
+        return orderFor;
+    }
+
+    public void setOrderFor(String orderFor) {
+        this.orderFor = orderFor;
     }
 
     public String getReceiverNameCredit() {
@@ -187,11 +197,11 @@ public class OrderModel {
         this.countModelArrayList = countModelArrayList;
     }
 
-    public long getTotalPrice() {
+    public float getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(long totalPrice) {
+    public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
     }
 }

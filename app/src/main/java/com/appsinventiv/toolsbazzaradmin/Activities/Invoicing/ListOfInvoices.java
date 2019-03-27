@@ -72,20 +72,21 @@ public class ListOfInvoices extends AppCompatActivity {
                         if (model != null) {
                             itemList.add(model);
 
-                            Collections.sort(itemList, new Comparator<InvoiceModel>() {
-                                @Override
-                                public int compare(InvoiceModel listData, InvoiceModel t1) {
-                                    Long ob1 = listData.getTime();
-                                    Long ob2 = t1.getTime();
-
-                                    return ob2.compareTo(ob1);
-
-                                }
-                            });
-                            adapter.notifyDataSetChanged();
 
                         }
                     }
+
+                    Collections.sort(itemList, new Comparator<InvoiceModel>() {
+                        @Override
+                        public int compare(InvoiceModel listData, InvoiceModel t1) {
+                            Long ob1 = listData.getTime();
+                            Long ob2 = t1.getTime();
+
+                            return ob2.compareTo(ob1);
+
+                        }
+                    });
+                    adapter.notifyDataSetChanged();
                 }
             }
 

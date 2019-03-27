@@ -26,6 +26,8 @@ public class Product {
     int quantityAvailable;
     String brandName,productContents,warrantyType,productWeight;
     String dimen;
+    String sellerProductStatus;
+    String uploadedBy;
 
     public Product() {
     }
@@ -66,7 +68,7 @@ public class Product {
             , float rating,
                    ArrayList<String> category,int quantityAvailable,
                    String brandName, String productContents,String warrantyType,String productWeight,
-                   String dimen
+                   String dimen,String uploadedBy,String sellerProductStatus
 
     ) {
         this.id = id;
@@ -98,6 +100,24 @@ public class Product {
         this.warrantyType=warrantyType;
         this.productWeight=productWeight;
         this.dimen=dimen;
+        this.uploadedBy=uploadedBy;
+        this.sellerProductStatus=sellerProductStatus;
+    }
+
+    public String getUploadedBy() {
+        return uploadedBy;
+    }
+
+    public void setUploadedBy(String uploadedBy) {
+        this.uploadedBy = uploadedBy;
+    }
+
+    public String getSellerProductStatus() {
+        return sellerProductStatus;
+    }
+
+    public void setSellerProductStatus(String sellerProductStatus) {
+        this.sellerProductStatus = sellerProductStatus;
     }
 
     public String getDimen() {

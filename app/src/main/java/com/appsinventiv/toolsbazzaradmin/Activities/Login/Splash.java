@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Welcome;
 import com.appsinventiv.toolsbazzaradmin.R;
 
 public class Splash extends AppCompatActivity {
@@ -45,7 +46,7 @@ public class Splash extends AppCompatActivity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                Intent i = new Intent(Splash.this, Login.class);
+                Intent i = new Intent(Splash.this, Welcome.class);
                 startActivity(i);
 
                 // close this activity

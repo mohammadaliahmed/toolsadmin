@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.Chat.LiveChat;
+import com.appsinventiv.toolsbazzaradmin.Activities.Chat.SellerChat;
+import com.appsinventiv.toolsbazzaradmin.Activities.Chat.WholesaleChat;
 import com.appsinventiv.toolsbazzaradmin.Models.ChatModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
@@ -24,11 +26,12 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
     Context context;
     ArrayList<ChatModel> itemList;
+    String with;
 
-
-    public ChatListAdapter(Context context, ArrayList<ChatModel> itemList) {
+    public ChatListAdapter(Context context, ArrayList<ChatModel> itemList, String with) {
         this.context = context;
         this.itemList = itemList;
+        this.with = with;
 
     }
 
@@ -53,9 +56,19 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(context, LiveChat.class);
-                i.putExtra("username",model.getInitiator());
-                context.startActivity(i);
+                if (with.equalsIgnoreCase("Wholesale")) {
+                    Intent i = new Intent(context, WholesaleChat.class);
+                    i.putExtra("username", model.getInitiator());
+                    context.startActivity(i);
+                } else if (with.equalsIgnoreCase("Client")) {
+                    Intent i = new Intent(context, LiveChat.class);
+                    i.putExtra("username", model.getInitiator());
+                    context.startActivity(i);
+                } else if (with.equalsIgnoreCase("Seller")) {
+                    Intent i = new Intent(context, SellerChat.class);
+                    i.putExtra("username", model.getInitiator());
+                    context.startActivity(i);
+                }
             }
         });
 

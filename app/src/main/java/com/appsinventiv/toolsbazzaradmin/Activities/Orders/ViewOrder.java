@@ -59,7 +59,7 @@ public class ViewOrder extends AppCompatActivity implements NotificationObserver
     RelativeLayout wholeLayout, creditDueLayout;
 
     ArrayList<ProductCountModel> newList = new ArrayList<>();
-    long totalPrice;
+    float totalPrice;
     private Float deliveryCharges = 0.0f;
     private Float shippingCharges = 0.0f;
     long grandTotal = 0;

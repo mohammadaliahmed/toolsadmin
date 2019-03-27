@@ -2,6 +2,7 @@ package com.appsinventiv.toolsbazzaradmin.Activities.Vendors;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,8 @@ import com.appsinventiv.toolsbazzaradmin.Adapters.VendorsListAdapter;
 import com.appsinventiv.toolsbazzaradmin.Models.VendorModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
+import com.appsinventiv.toolsbazzaradmin.Utils.SwipeControllerActions;
+import com.appsinventiv.toolsbazzaradmin.Utils.SwipeToDeleteCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
@@ -34,6 +38,7 @@ public class Vendors extends AppCompatActivity {
     ArrayList<VendorModel> vendorModelArrayList = new ArrayList<>();
     RecyclerView recyclerView;
     VendorsListAdapter adapter;
+    private SwipeToDeleteCallback swipeController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,40 +59,7 @@ public class Vendors extends AppCompatActivity {
         adapter = new VendorsListAdapter(this, vendorModelArrayList, new VendorsListAdapter.DeleteVendor() {
             @Override
             public void onDelete(final VendorModel model) {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(Vendors.this);
-                builder1.setMessage("Delete vendor?");
-                builder1.setCancelable(true);
-
-                builder1.setPositiveButton(
-                        "Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                mDatabase.child("Vendors").child(model.getVendorId()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        CommonUtils.showToast("Vendor deleted");
-                                        adapter.notifyDataSetChanged();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        CommonUtils.showToast(e.getMessage());
-                                    }
-                                });
-                            }
-                        });
-
-                builder1.setNegativeButton(
-                        "No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
+              deleteVendor(model);
             }
 
             @Override
@@ -113,6 +85,25 @@ public class Vendors extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+        swipeController = new SwipeToDeleteCallback(new SwipeControllerActions() {
+            @Override
+            public void onRightClicked(final int position) {
+
+                deleteVendor(vendorModelArrayList.get(position));
+
+            }
+        });
+
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        itemTouchhelper.attachToRecyclerView(recyclerView);
+
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                swipeController.onDraw(c);
+            }
+        });
 
 
         vendors.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +114,43 @@ public class Vendors extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void deleteVendor(final VendorModel model) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(Vendors.this);
+        builder1.setMessage("Delete vendor?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        mDatabase.child("Vendors").child(model.getVendorId()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                CommonUtils.showToast("Vendor deleted");
+                                adapter.notifyDataSetChanged();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                CommonUtils.showToast(e.getMessage());
+                            }
+                        });
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 
     private void getVendorsFromDb() {

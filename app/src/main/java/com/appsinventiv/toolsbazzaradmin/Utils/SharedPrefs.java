@@ -24,6 +24,30 @@ public class SharedPrefs {
         return preferenceGetter("userRole");
     }
 
+    public static void setOrderCount(String count) {
+        preferenceSetter("setOrderCount", count);
+    }
+
+    public static String getOrderCount() {
+        return preferenceGetter("setOrderCount");
+    }
+
+    public static void setSellerProductCount(String count) {
+        preferenceSetter("SellerProductCount", count);
+    }
+
+    public static String getSellerProductCount() {
+        return preferenceGetter("SellerProductCount");
+    }
+
+    public static void setChatCount(String count) {
+        preferenceSetter("setChatCount", count);
+    }
+
+    public static String getChatCount() {
+        return preferenceGetter("setChatCount");
+    }
+
 
     public static void setCartCount(String count) {
         preferenceSetter("cartCount", count);

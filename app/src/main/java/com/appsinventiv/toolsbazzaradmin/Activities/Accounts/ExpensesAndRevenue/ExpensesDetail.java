@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.appsinventiv.toolsbazzaradmin.Activities.Callbacks.WhichKey;
 import com.appsinventiv.toolsbazzaradmin.Adapters.FinalInvoiceListAdapter;
 import com.appsinventiv.toolsbazzaradmin.Adapters.YearViewInvoiceAdapter;
+import com.appsinventiv.toolsbazzaradmin.Models.CompanyDetailsModel;
 import com.appsinventiv.toolsbazzaradmin.Models.ExpensesAndRevenueModelMap;
 import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
 import com.appsinventiv.toolsbazzaradmin.Models.PurchaseOrderModel;
@@ -301,12 +302,12 @@ public class ExpensesDetail extends AppCompatActivity {
     }
 
     private void getAddressFromDb() {
-        mDatabase.child("Settings").child("AboutUs").child("contact").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Settings").child("CompanyDetails").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-                    String contact = dataSnapshot.getValue(String.class);
-                    shopAddress.setText(contact);
+                    CompanyDetailsModel model=dataSnapshot.getValue(CompanyDetailsModel.class);
+                    shopAddress.setText(model.getAddress()+" "+model.getPhone()+" "+model.getEmail());
                 }
             }
 

@@ -12,6 +12,8 @@ import android.util.Log;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.Chat.LiveChat;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Chat.SellerChat;
+import com.appsinventiv.toolsbazzaradmin.Activities.Chat.WholesaleChat;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
 import com.appsinventiv.toolsbazzaradmin.Models.NotificationModel;
 import com.appsinventiv.toolsbazzaradmin.R;
@@ -50,7 +52,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             message = map.get("Message");
             title = map.get("Title");
             type = map.get("Type");
-            username=map.get("Username");
+            username = map.get("Username");
             handleNow(title, message, type);
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
@@ -74,15 +76,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         int num = (int) System.currentTimeMillis();
         /**Creates an explicit intent for an Activity in your app**/
 
-        Intent resultIntent=null;
-        if(type.equalsIgnoreCase("chat")){
+        Intent resultIntent = null;
+        if (type.equalsIgnoreCase("RetailChat")) {
+            SharedPrefs.setChatCount("" + 1);
             resultIntent = new Intent(this, LiveChat.class);
-            resultIntent.putExtra("username",username);
-        }
-        else  if(type.equalsIgnoreCase("Order")){
+            resultIntent.putExtra("username", username);
+        } else if (type.equalsIgnoreCase("WholesaleChat")) {
+            SharedPrefs.setChatCount("" + 1);
+            resultIntent = new Intent(this, WholesaleChat.class);
+            resultIntent.putExtra("username", username);
+        } else if (type.equalsIgnoreCase("SellerChat")) {
+            SharedPrefs.setChatCount("" + 1);
+            resultIntent = new Intent(this, SellerChat.class);
+            resultIntent.putExtra("username", username);
+        } else if (type.equalsIgnoreCase("Order")) {
+            SharedPrefs.setOrderCount("" + 1);
             DatabaseReference mDatabase;
-            mDatabase= FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("Notifications").push().setValue(new NotificationModel(username,title,message,type,System.currentTimeMillis()));
+//            mDatabase = FirebaseDatabase.getInstance().getReference();
+//            mDatabase.child("Notifications").push().setValue(new NotificationModel(username, title, message, type, System.currentTimeMillis()));
             resultIntent = new Intent(this, Orders.class);
         }
 

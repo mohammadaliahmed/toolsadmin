@@ -3,12 +3,14 @@ package com.appsinventiv.toolsbazzaradmin.Activities.Orders;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import com.appsinventiv.toolsbazzaradmin.Adapters.OrdersAdapter;
 import com.appsinventiv.toolsbazzaradmin.Models.OrderModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
+import com.appsinventiv.toolsbazzaradmin.Utils.SwipeControllerActions;
+import com.appsinventiv.toolsbazzaradmin.Utils.SwipeToDeleteCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +45,7 @@ public class OrdersFragment extends Fragment {
     ProgressBar progress;
     DatabaseReference mDatabase;
     String by;
+    private SwipeToDeleteCallback swipeController;
 
 
     public OrdersFragment() {
@@ -90,9 +95,32 @@ public class OrdersFragment extends Fragment {
             public void markAsDeleted(String orderId) {
                 markOrderAsDeleted(orderId);
             }
+
+
         });
         recyclerView.setAdapter(adapter);
+        if (orderStatus.equalsIgnoreCase("Pending") || orderStatus.equalsIgnoreCase("Cancelled")) {
+            swipeController = new SwipeToDeleteCallback(new SwipeControllerActions() {
+                @Override
+                public void onRightClicked(final int position) {
 
+                    markOrderAsDeleted(arrayList.get(position).getOrderId());
+
+                }
+            });
+
+
+            ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+            itemTouchhelper.attachToRecyclerView(recyclerView);
+
+            recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+                @Override
+                public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                    swipeController.onDraw(c);
+                }
+            });
+
+        }
 
         return rootView;
 
@@ -229,19 +257,14 @@ public class OrdersFragment extends Fragment {
                         OrderModel model = snapshot.getValue(OrderModel.class);
                         if (model != null) {
                             if (model.getOrderStatus().equalsIgnoreCase(orderStatus)) {
-                                arrayList.add(model);
-                                Collections.sort(arrayList, new Comparator<OrderModel>() {
-                                    @Override
-                                    public int compare(OrderModel listData, OrderModel t1) {
-                                        Long ob1 = listData.getTime();
-                                        Long ob2 = t1.getTime();
+                                if (model.getOrderFor() == null) {
+                                    arrayList.add(model);
+                                }
+                                if (model.getOrderFor() != null && model.getOrderFor().equalsIgnoreCase("admin")) {
+                                    arrayList.add(model);
+                                }
 
-                                        return ob2.compareTo(ob1);
 
-                                    }
-                                });
-                                adapter.notifyDataSetChanged();
-                                progress.setVisibility(View.GONE);
                             } else {
 //                                CommonUtils.showToast("Nothing to show");
                                 progress.setVisibility(View.GONE);
@@ -249,6 +272,18 @@ public class OrdersFragment extends Fragment {
                             }
                         }
                     }
+                    Collections.sort(arrayList, new Comparator<OrderModel>() {
+                        @Override
+                        public int compare(OrderModel listData, OrderModel t1) {
+                            Long ob1 = listData.getTime();
+                            Long ob2 = t1.getTime();
+
+                            return ob2.compareTo(ob1);
+
+                        }
+                    });
+                    adapter.notifyDataSetChanged();
+                    progress.setVisibility(View.GONE);
                 } else {
 //                    CommonUtils.showToast("Nothing to show");
                     progress.setVisibility(View.GONE);

@@ -11,7 +11,7 @@ public class InvoiceModel {
     ArrayList<ProductCountModel> countModelArrayList;
     ArrayList<ProductCountModel> newCountModelArrayList;
     Customer customer;
-    long totalPrice;
+    float totalPrice;
     long time;
     String orderId;
     float deliveryCharges;
@@ -29,7 +29,7 @@ public class InvoiceModel {
                         ArrayList<ProductCountModel> countModelArrayList,
                         ArrayList<ProductCountModel> newCountModelArrayList, 
                         Customer customer,
-                        long totalPrice,
+                        float totalPrice,
                         long time,
                         String orderId,
                         float deliveryCharges,
@@ -130,11 +130,11 @@ public class InvoiceModel {
         this.customer = customer;
     }
 
-    public long getTotalPrice() {
+    public float getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(long totalPrice) {
+    public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
     }
 

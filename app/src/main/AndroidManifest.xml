@@ -35,6 +35,8 @@
         <activity android:name=".Activities.Products.ProductUploaded" />
         <activity android:name=".Activities.Chat.Chats" />
         <activity android:name=".Activities.Chat.LiveChat" />
+        <activity android:name=".Activities.Chat.SellerChat" />
+        <activity android:name=".Activities.Chat.WholesaleChat" />
         <activity
             android:name=".Activities.Orders.Orders"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -109,21 +111,33 @@
             android:name=".Activities.Products.AddSubCategories"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Activities.Products.ChooseCategory" />
-        <activity android:name=".Activities.Customers.ListOfCustomers" />
         <activity android:name=".Activities.Customers.ViewCustomer" />
         <activity android:name=".Activities.AppSettings.DealsBanner" />
         <activity android:name=".Activities.Products.AddProductWeight" />
         <activity android:name=".Activities.Accounts.TransferToAccountsDone" />
         <activity android:name=".Activities.Products.AddMainCategories" />
         <activity android:name=".Activities.Products.ChooseMainCategory" />
-        <activity android:name=".Activities.Locations.AddCountry"
+        <activity
+            android:name=".Activities.Locations.AddCountry"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".Activities.Locations.AddDistricts"
+        <activity
+            android:name=".Activities.Locations.AddDistricts"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".Activities.Locations.AddCityAndDeliveryCharges"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".Activities.Locations.ListOfCountries"></activity>
+        <activity android:name=".Activities.Locations.ListOfCountries" />
+        <activity android:name=".Activities.Customers.Customers" />
+        <activity android:name=".Activities.Customers.ViewSeller" />
+        <activity android:name=".Activities.SellerOrders.SellerOrders" />
+        <activity
+            android:name=".Activities.Welcome"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.AppSettings.Commissions" />
+        <activity android:name=".Activities.AppSettings.CODLimit"></activity>
+        <activity
+            android:name=".Activities.Orders.NewOrderScreen"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

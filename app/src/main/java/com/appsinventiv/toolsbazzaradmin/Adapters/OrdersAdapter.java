@@ -53,9 +53,11 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
         if (model.getOrderStatus().equalsIgnoreCase("Cancelled")
                 || model.getOrderStatus().equalsIgnoreCase("Pending")) {
-            holder.cancel.setVisibility(View.VISIBLE);
+//            holder.cancel.setVisibility(View.VISIBLE);
+//            updateOrderStatus.canDelete(true);
         } else {
-            holder.cancel.setVisibility(View.GONE);
+//            holder.cancel.setVisibility(View.GONE);
+//            updateOrderStatus.canDelete(false);
         }
 
 
@@ -170,5 +172,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         public void markAsCancelled(String orderId);
 
         public void markAsDeleted(String orderId);
+
     }
 }
