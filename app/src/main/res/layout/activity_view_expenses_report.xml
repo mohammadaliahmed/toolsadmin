@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/abc"
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
 
     <ScrollView
@@ -52,10 +45,10 @@
                 android:id="@+id/totalSalaries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/expenses"
-                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
                 android:text="Rs 0"
                 android:textColor="@color/colorRed" />
 
@@ -64,13 +57,14 @@
                 android:layout_height="1dp"
                 android:layout_below="@id/totalSalaries"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:background="@color/default_grey" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/salariesRecycler"
                 android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/totalSalaries"
                 android:layout_marginTop="5dp"
@@ -89,10 +83,10 @@
                 android:id="@+id/transportationTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/salariesRecycler"
-                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
                 android:text="Rs 0"
                 android:textColor="@color/colorRed" />
 
@@ -102,8 +96,8 @@
                 android:layout_height="1dp"
                 android:layout_below="@id/salariesRecycler"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginRight="10dp"
                 android:background="@color/default_grey" />
 
             <GridLayout
@@ -111,8 +105,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view4"
-                android:layout_marginLeft="12dp"
                 android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/textView2"
                 android:layout_toRightOf="@+id/textView2"
@@ -156,10 +150,10 @@
                 android:id="@+id/rentTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/grid1"
-                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
                 android:text="Rs 0"
                 android:textColor="@color/colorRed" />
 
@@ -169,17 +163,17 @@
                 android:layout_height="1dp"
                 android:layout_below="@id/grid1"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginRight="10dp"
                 android:background="@color/default_grey" />
 
             <GridLayout
                 android:id="@+id/grid2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/view5"
                 android:layout_alignEnd="@+id/grid1"
                 android:layout_alignRight="@+id/grid1"
-                android:layout_below="@+id/view5"
                 android:layout_marginTop="10dp"
                 android:columnCount="2"
                 android:rowCount="1">
@@ -220,10 +214,10 @@
                 android:id="@+id/billsTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/grid2"
-                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
                 android:text="Rs 0"
                 android:textColor="@color/colorRed" />
 
@@ -233,17 +227,17 @@
                 android:layout_height="1dp"
                 android:layout_below="@id/grid2"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginRight="10dp"
                 android:background="@color/default_grey" />
 
             <GridLayout
                 android:id="@+id/grid3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/view6"
                 android:layout_alignEnd="@+id/grid1"
                 android:layout_alignRight="@+id/grid1"
-                android:layout_below="@+id/view6"
                 android:columnCount="2"
                 android:rowCount="1">
 
@@ -282,10 +276,10 @@
                 android:id="@+id/stationariesTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/grid3"
-                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
                 android:text="Rs 0"
                 android:textColor="@color/colorRed" />
 
@@ -295,17 +289,17 @@
                 android:layout_height="1dp"
                 android:layout_below="@id/grid3"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginRight="10dp"
                 android:background="@color/default_grey" />
 
             <GridLayout
                 android:id="@+id/grid4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/view7"
                 android:layout_alignEnd="@+id/grid1"
                 android:layout_alignRight="@+id/grid1"
-                android:layout_below="@+id/view7"
                 android:layout_marginTop="10dp"
                 android:columnCount="2"
                 android:rowCount="1">
@@ -344,10 +338,10 @@
                 android:id="@+id/miscellaneousTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/grid4"
-                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
                 android:text="Rs 0"
                 android:textColor="@color/colorRed" />
 
@@ -357,17 +351,17 @@
                 android:layout_height="1dp"
                 android:layout_below="@id/grid4"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginRight="10dp"
                 android:background="@color/default_grey" />
 
             <GridLayout
                 android:id="@+id/grid5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/view8"
                 android:layout_alignEnd="@+id/grid1"
                 android:layout_alignRight="@+id/grid1"
-                android:layout_below="@+id/view8"
                 android:layout_marginTop="10dp"
                 android:columnCount="2"
                 android:rowCount="1">
@@ -400,33 +394,34 @@
                 android:layout_width="130dp"
                 android:layout_height="1dp"
 
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/grid5"
-                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="50dp"
+                android:layout_marginRight="20dp"
                 android:background="@color/colorBlack" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/grid5"
-                android:layout_marginBottom="50dp"
-                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="55dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="50dp"
                 android:text="Checked &amp; Approved"
                 android:textColor="@color/colorBlack" />
+
             <TextView
+                android:id="@+id/shopAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@id/grid5"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:id="@+id/shopAddress"
-                android:layout_marginTop="100dp"
                 android:text="Checked &amp; Approved"
                 android:textSize="10sp" />
         </RelativeLayout>
     </ScrollView>
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

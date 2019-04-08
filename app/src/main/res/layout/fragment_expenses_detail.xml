@@ -328,7 +328,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorRed"
         android:text="Print"
         android:textColor="#fff" />
 </RelativeLayout>

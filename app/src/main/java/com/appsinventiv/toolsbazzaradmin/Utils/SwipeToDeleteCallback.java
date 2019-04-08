@@ -60,7 +60,7 @@ public class SwipeToDeleteCallback extends Callback {
 
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-        return makeMovementFlags(0, LEFT );
+        return makeMovementFlags(0, LEFT);
     }
 
     @Override
@@ -176,7 +176,7 @@ public class SwipeToDeleteCallback extends Callback {
         Paint p = new Paint();
 
         RectF leftButton = new RectF(itemView.getLeft(), itemView.getTop(), itemView.getLeft() + buttonWidthWithoutPadding, itemView.getBottom());
-        p.setColor(Color.BLUE);
+        p.setColor(Color.WHITE);
         c.drawRoundRect(leftButton, corners, corners, p);
         drawText("EDIT", c, leftButton, p);
 

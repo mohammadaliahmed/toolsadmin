@@ -45,7 +45,7 @@ public class ViewEmployee extends AppCompatActivity {
         setContentView(R.layout.activity_view_employee);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         Intent i = getIntent();
         username = i.getStringExtra("username");

@@ -50,6 +50,7 @@ public class LiveChat extends AppCompatActivity implements NotificationObserver 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setElevation(0);
         }
 
         Intent i = getIntent();
@@ -171,7 +172,8 @@ public class LiveChat extends AppCompatActivity implements NotificationObserver 
                     final String key = mDatabase.push().getKey();
                     mDatabase.child("Chats/ClientChats").child(username).child(key)
                             .setValue(new ChatModel(key, msg, SharedPrefs.getUsername()
-                                    , System.currentTimeMillis(), "sending", username)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    , System.currentTimeMillis(), "sending", username,
+                                    username)).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
 
@@ -225,8 +227,6 @@ public class LiveChat extends AppCompatActivity implements NotificationObserver 
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(LiveChat.this, Chats.class);
-        startActivity(i);
         finish();
     }
 }

@@ -31,7 +31,7 @@ public class CODLimit extends AppCompatActivity {
         cod = findViewById(R.id.cod);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("COD limit");
 

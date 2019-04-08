@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.appsinventiv.toolsbazzaradmin.Adapters.InvoiceListAdapter;
@@ -19,9 +21,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ViewCustomer extends AppCompatActivity {
     DatabaseReference mDatabase;
-    String customerId;
+    String customerId, sellerId;
+    Button back;
     TextView name, username, lastOrder, totalOrders, customerSince, customerName,
-            type, storeName, email, shipping, city, country, telephone, mobile,password;
+            type, storeName, email, shipping, city, country, telephone, mobile, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,7 @@ public class ViewCustomer extends AppCompatActivity {
         this.setTitle("Customer info");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         mDatabase = FirebaseDatabase.getInstance().getReference();
         name = findViewById(R.id.name);
@@ -47,10 +50,25 @@ public class ViewCustomer extends AppCompatActivity {
         customerName = findViewById(R.id.customerName);
         type = findViewById(R.id.type);
         storeName = findViewById(R.id.storeName);
+        back = findViewById(R.id.back);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         customerId = getIntent().getStringExtra("customerId");
-        getDataFromDB(customerId);
+        sellerId = getIntent().getStringExtra("sellerId");
+        if (customerId != null) {
+            getDataFromDB(customerId);
+
+        } else if (sellerId != null) {
+            getSellerFromDB(sellerId);
+        }
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 
     private void getDataFromDB(final String customerId) {
@@ -61,7 +79,7 @@ public class ViewCustomer extends AppCompatActivity {
                     Customer customer = dataSnapshot.getValue(Customer.class);
                     if (customer != null) {
                         ViewCustomer.this.setTitle("Customer: " + customer.getName());
-                        name.setText(customer.getName());
+//                        name.setText(customer.getName());
                         username.setText(customer.getUsername());
                         shipping.setText(customer.getAddress());
                         city.setText(customer.getCity());
@@ -76,7 +94,43 @@ public class ViewCustomer extends AppCompatActivity {
                         customerName.setText(customer.getName());
                         password.setText(customer.getPassword());
 
-                        totalOrders.setText(""+dataSnapshot.child("Orders").getChildrenCount());
+                        totalOrders.setText("" + dataSnapshot.child("Orders").getChildrenCount());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void getSellerFromDB(final String sellerId) {
+        mDatabase.child("Sellers").child(sellerId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    Customer customer = dataSnapshot.getValue(Customer.class);
+                    if (customer != null) {
+                        ViewCustomer.this.setTitle("Seller : " + customer.getName());
+//                        name.setText(customer.getName());
+                        username.setText(customer.getUsername());
+                        shipping.setText(customer.getAddress());
+                        city.setText(customer.getCity());
+                        country.setText(customer.getCountry());
+                        telephone.setText(customer.getTelNumber());
+                        mobile.setText(customer.getPhone());
+                        lastOrder.setText(customer.getName());
+                        customerSince.setText(CommonUtils.getFormattedDateOnly(customer.getTime()));
+                        type.setText(customer.getCustomerType());
+                        email.setText(customer.getEmail());
+                        storeName.setText(customer.getStoreName());
+                        customerName.setText(customer.getName());
+                        password.setText(customer.getPassword());
+
+//                        totalOrders.setText("" + dataSnapshot.child("Orders").getChildrenCount());
                     }
 
                 }

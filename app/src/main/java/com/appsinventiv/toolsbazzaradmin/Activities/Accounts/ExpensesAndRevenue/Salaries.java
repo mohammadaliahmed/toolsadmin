@@ -45,7 +45,7 @@ public class Salaries extends AppCompatActivity {
         save = findViewById(R.id.save);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("Salaries");
         Intent i = getIntent();
@@ -53,7 +53,7 @@ public class Salaries extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new SalariesAdapter(Salaries.this, itemList, salaryList, new SalariesAdapter.SalaryInterface() {
+        adapter = new SalariesAdapter(Salaries.this, itemList, salaryList,path, new SalariesAdapter.SalaryInterface() {
             @Override
             public void values(ArrayList<SalaryModel> salaryModelList, ArrayList<Employee> employeeList) {
                 for (int i = 0; i < employeeList.size(); i++) {

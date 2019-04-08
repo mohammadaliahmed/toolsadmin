@@ -50,6 +50,7 @@ public class SellerChat extends AppCompatActivity implements NotificationObserve
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setElevation(0);
         }
 
         Intent i = getIntent();
@@ -171,7 +172,9 @@ public class SellerChat extends AppCompatActivity implements NotificationObserve
                     final String key = mDatabase.push().getKey();
                     mDatabase.child("Chats/SellerChats").child(username).child(key)
                             .setValue(new ChatModel(key, msg, SharedPrefs.getUsername()
-                                    , System.currentTimeMillis(), "sending", username)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    , System.currentTimeMillis(), "sending", username,
+                                    username
+                            )).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
 
@@ -225,8 +228,6 @@ public class SellerChat extends AppCompatActivity implements NotificationObserve
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(SellerChat.this, Chats.class);
-        startActivity(i);
         finish();
     }
 }

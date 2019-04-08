@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,10 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Accounts;
+import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.NewAccountsScreen;
 import com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.Settings;
 import com.appsinventiv.toolsbazzaradmin.Activities.Chat.Chats;
 import com.appsinventiv.toolsbazzaradmin.Activities.Customers.Customers;
 import com.appsinventiv.toolsbazzaradmin.Activities.Employees.ListOfEmployees;
+import com.appsinventiv.toolsbazzaradmin.Activities.Login.Login;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.NewOrderScreen;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.OrdersCourier;
@@ -31,10 +35,15 @@ import com.appsinventiv.toolsbazzaradmin.Activities.Purchases.Purchases;
 import com.appsinventiv.toolsbazzaradmin.Activities.SellerOrders.SellerOrders;
 import com.appsinventiv.toolsbazzaradmin.Activities.Vendors.Vendors;
 import com.appsinventiv.toolsbazzaradmin.Models.AdminModel;
+import com.appsinventiv.toolsbazzaradmin.Models.Customer;
 import com.appsinventiv.toolsbazzaradmin.R;
+import com.appsinventiv.toolsbazzaradmin.Utils.PrefManager;
 import com.appsinventiv.toolsbazzaradmin.Utils.SharedPrefs;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,46 +55,19 @@ public class MainActivity extends AppCompatActivity
     LinearLayout chats, customers, delivery, orders, products,
             notifications, signout, vendors, settings, purchases,
             employees, accounts, courier;
-    TextView productNotificationsCount,chatNotificationsCount;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateProductCount();
-        updateChatCount();
-    }
-
-    private void updateProductCount() {
-        if (SharedPrefs.getSellerProductCount() != null) {
-            if (SharedPrefs.getSellerProductCount().equalsIgnoreCase("") || SharedPrefs.getSellerProductCount().equalsIgnoreCase("0")) {
-                productNotificationsCount.setVisibility(View.GONE);
-            } else {
-                productNotificationsCount.setVisibility(View.VISIBLE);
-                productNotificationsCount.setText("" + Integer.parseInt(SharedPrefs.getSellerProductCount()));
-            }
-        }
-
-    }
-
-    private void updateChatCount() {
-        if (SharedPrefs.getChatCount() != null) {
-            if (SharedPrefs.getChatCount().equalsIgnoreCase("") || SharedPrefs.getChatCount().equalsIgnoreCase("0")) {
-                chatNotificationsCount.setVisibility(View.GONE);
-            } else {
-                chatNotificationsCount.setVisibility(View.VISIBLE);
-                chatNotificationsCount.setText("" + Integer.parseInt(SharedPrefs.getChatCount()));
-            }
-        }
-
-    }
+    TextView productNotificationsCount, chatNotificationsCount;
+    private Toolbar toolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_main);
+        setContentView(R.layout.activity_main);
 
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setElevation(0);
+        }
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
@@ -94,7 +76,13 @@ public class MainActivity extends AppCompatActivity
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+
+        toolbar = findViewById(R.id.toolbar);
         chats = findViewById(R.id.chats);
         customers = findViewById(R.id.customers);
         signout = findViewById(R.id.signout);
@@ -204,7 +192,7 @@ public class MainActivity extends AppCompatActivity
         accounts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, Accounts.class);
+                Intent i = new Intent(MainActivity.this, NewAccountsScreen.class);
                 startActivity(i);
             }
         });
@@ -231,16 +219,45 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.addDrawerListener(toggle);
-//        toggle.syncState();
-//
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
+        initDrawer();
     }
+
+    private void initDrawer() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.name_drawer);
+        TextView navSubtitle = (TextView) headerView.findViewById(R.id.customerType);
+
+
+        Menu nav_Menu = navigationView.getMenu();
+
+
+        if (SharedPrefs.getUsername().equalsIgnoreCase("")) {
+            nav_Menu.findItem(R.id.signout).setVisible(false);
+            navSubtitle.setText("Welcome to Fast Grocer");
+
+            navUsername.setText("Login or Signup");
+            navUsername.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(MainActivity.this, Login.class);
+                    startActivity(i);
+                }
+            });
+        } else {
+            navSubtitle.setText("");
+
+            navUsername.setText(SharedPrefs.getUsername());
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -287,20 +304,27 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            Intent i = new Intent(MainActivity.this, Chats.class);
+        if (id == R.id.home) {
+            Intent i = new Intent(MainActivity.this, MainActivity.class);
             startActivity(i);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.salarySheets) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.profile) {
 
-        } else if (id == R.id.nav_manage) {
-            Intent i = new Intent(MainActivity.this, Orders.class);
+        } else if (id == R.id.openSlider) {
+            PrefManager prefManager = new PrefManager(MainActivity.this);
+            prefManager.setIsFirstTimeLaunchWelcome(true);
+            Intent i = new Intent(MainActivity.this, Welcome.class);
+            i.putExtra("flag",1);
             startActivity(i);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.contactUs) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.aboutUs) {
+
+        } else if (id == R.id.terms) {
+
+        } else if (id == R.id.signout) {
 
         }
 
@@ -308,4 +332,36 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateProductCount();
+        updateChatCount();
+    }
+
+    private void updateProductCount() {
+        if (SharedPrefs.getSellerProductCount() != null) {
+            if (SharedPrefs.getSellerProductCount().equalsIgnoreCase("") || SharedPrefs.getSellerProductCount().equalsIgnoreCase("0")) {
+                productNotificationsCount.setVisibility(View.GONE);
+            } else {
+                productNotificationsCount.setVisibility(View.VISIBLE);
+                productNotificationsCount.setText("" + Integer.parseInt(SharedPrefs.getSellerProductCount()));
+            }
+        }
+
+    }
+
+    private void updateChatCount() {
+        if (SharedPrefs.getChatCount() != null) {
+            if (SharedPrefs.getChatCount().equalsIgnoreCase("") || SharedPrefs.getChatCount().equalsIgnoreCase("0")) {
+                chatNotificationsCount.setVisibility(View.GONE);
+            } else {
+                chatNotificationsCount.setVisibility(View.VISIBLE);
+                chatNotificationsCount.setText("" + Integer.parseInt(SharedPrefs.getChatCount()));
+            }
+        }
+
+    }
+
 }

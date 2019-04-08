@@ -89,7 +89,8 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
     TextView warrantyChosen, weightChosen;
     private String whichWarranty;
     public static String productWeight, dimens;
-    public static int fromWhere=0;
+    public static int fromWhere = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +99,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setElevation(0);
         }
         observer = AddProduct.this;
 
@@ -107,7 +109,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
         categoryChoosen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fromWhere=1;
+                fromWhere = 1;
                 Intent i = new Intent(AddProduct.this, ChooseMainCategory.class);
                 categoryList.clear();
                 startActivityForResult(i, 1);
@@ -298,7 +300,7 @@ public class AddProduct extends AppCompatActivity implements ProductObserver {
 
                             whichWarranty,
                             productWeight,
-                            dimens,"admin",
+                            dimens, "admin",
                             "Approved"
 
 

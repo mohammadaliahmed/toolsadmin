@@ -47,11 +47,14 @@ public class ViewSalary extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setElevation(0);
         }
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Intent i = getIntent();
         salaryId = i.getStringExtra("salaryId");
         path = i.getStringExtra("path");
+
 
         date = findViewById(R.id.date);
         total = findViewById(R.id.total);

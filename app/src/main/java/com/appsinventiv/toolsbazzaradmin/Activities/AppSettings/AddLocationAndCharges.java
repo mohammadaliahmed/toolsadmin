@@ -32,7 +32,7 @@ public class AddLocationAndCharges extends AppCompatActivity {
         setContentView(R.layout.activity_add_location_and_charges);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("Add Delivery");
 

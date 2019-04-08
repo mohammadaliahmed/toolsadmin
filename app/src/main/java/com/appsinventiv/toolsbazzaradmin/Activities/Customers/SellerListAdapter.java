@@ -2,12 +2,14 @@ package com.appsinventiv.toolsbazzaradmin.Activities.Customers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -35,7 +37,7 @@ public class SellerListAdapter extends RecyclerView.Adapter<SellerListAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.customer_item_layout, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.seller_item_layout, parent, false);
         SellerListAdapter.ViewHolder viewHolder = new SellerListAdapter.ViewHolder(view);
         return viewHolder;
     }
@@ -45,6 +47,7 @@ public class SellerListAdapter extends RecyclerView.Adapter<SellerListAdapter.Vi
         final SellerModel model = itemList.get(position);
         holder.name.setText(model.getVendorName());
         holder.info.setText("Phone: " + model.getPhone());
+        holder.status.setText(model.isApproved() ? "Approved" : "Unapproved");
         if (model.isStatus()) {
             holder.switchh.setChecked(true);
         } else {
@@ -53,7 +56,9 @@ public class SellerListAdapter extends RecyclerView.Adapter<SellerListAdapter.Vi
         holder.switchh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                callbacks.onStatusChanged(model, b);
+                if (compoundButton.isPressed()) {
+                    callbacks.onStatusChanged(model, b);
+                }
             }
         });
 
@@ -61,8 +66,23 @@ public class SellerListAdapter extends RecyclerView.Adapter<SellerListAdapter.Vi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, ViewCustomer.class);
-                i.putExtra("customerId", model.getUsername());
+                Intent i = new Intent(context, ViewSeller.class);
+                i.putExtra("sellerId", model.getUsername());
+                context.startActivity(i);
+            }
+        });
+        holder.dial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + model.getPhone()));
+                context.startActivity(i);
+            }
+        });
+        holder.whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "https://api.whatsapp.com/send?phone=" + model.getPhone();
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 context.startActivity(i);
             }
         });
@@ -74,14 +94,18 @@ public class SellerListAdapter extends RecyclerView.Adapter<SellerListAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, info;
+        TextView name, info, status;
         Switch switchh;
+        ImageView whatsapp, dial;
 
         public ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
             info = itemView.findViewById(R.id.info);
             switchh = itemView.findViewById(R.id.switchh);
+            status = itemView.findViewById(R.id.status);
+            dial = itemView.findViewById(R.id.dial);
+            whatsapp = itemView.findViewById(R.id.whatsapp);
         }
     }
 

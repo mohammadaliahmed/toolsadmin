@@ -67,7 +67,7 @@ public class ViewExpensesReport extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("Expense Report");
         mDatabase = FirebaseDatabase.getInstance().getReference();

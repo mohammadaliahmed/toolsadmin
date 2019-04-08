@@ -48,7 +48,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:inputType="text"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorRed"
             android:text="Mark as completed"
             android:textColor="#fff" />
 

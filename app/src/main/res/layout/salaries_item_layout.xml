@@ -31,7 +31,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorRed"
         android:inputType="text"
         android:text="Print salary"
         android:textColor="#fff"

@@ -40,7 +40,7 @@ public class ListOfEmployees extends AppCompatActivity {
         setContentView(R.layout.activity_list_of_employees);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         progress=findViewById(R.id.progress);
         this.setTitle("Employees");

@@ -20,7 +20,7 @@ public class ProductUploaded extends AppCompatActivity {
         setContentView(R.layout.activity_product_uploaded);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("Product Uploaded");
         Button done = findViewById(R.id.done);

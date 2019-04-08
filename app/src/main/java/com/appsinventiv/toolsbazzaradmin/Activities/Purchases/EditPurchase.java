@@ -46,7 +46,7 @@ public class EditPurchase extends AppCompatActivity {
         setContentView(R.layout.activity_edit_purchase);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("Edit Purchase");
         mDatabase = FirebaseDatabase.getInstance().getReference();

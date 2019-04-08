@@ -24,7 +24,7 @@ public class OrdersDelivery extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("Delivery");
         ViewPager viewPager = findViewById(R.id.viewpager);

@@ -63,7 +63,7 @@ public class AddMainCategories extends AppCompatActivity {
         this.setTitle("Add Main Categories");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         mDatabase = FirebaseDatabase.getInstance().getReference();
         pickImage = findViewById(R.id.pickImage);

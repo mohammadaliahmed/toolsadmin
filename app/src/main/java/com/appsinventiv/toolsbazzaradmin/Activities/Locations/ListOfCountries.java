@@ -32,7 +32,7 @@ public class ListOfCountries extends AppCompatActivity {
         setContentView(R.layout.activity_list_of_countries);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("List of countries");
         recyclerView = findViewById(R.id.recyclerView);

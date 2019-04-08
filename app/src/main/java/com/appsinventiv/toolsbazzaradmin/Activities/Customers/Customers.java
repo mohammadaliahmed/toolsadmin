@@ -25,7 +25,7 @@ public class Customers extends AppCompatActivity {
         this.setTitle("Customers");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
 
         ViewPager viewPager = findViewById(R.id.viewpager);

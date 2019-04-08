@@ -60,7 +60,9 @@ public class Welcome extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+
         Intent i = getIntent();
+        flag = i.getIntExtra("flag", 0);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         btnBack = (Button) findViewById(R.id.btnBack);
         btnNext = (Button) findViewById(R.id.btn_next);
@@ -107,7 +109,9 @@ public class Welcome extends AppCompatActivity {
     }
 
     private void launchHomeScreen() {
-        prefManager.setIsFirstTimeLaunchWelcome(false);
+        if (flag == 1) {
+            prefManager.setIsFirstTimeLaunchWelcome(false);
+        }
         Intent i = new Intent(Welcome.this, Login.class);
         startActivity(i);
     }

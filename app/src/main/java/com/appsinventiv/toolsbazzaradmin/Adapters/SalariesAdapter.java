@@ -33,13 +33,15 @@ public class SalariesAdapter extends RecyclerView.Adapter<SalariesAdapter.ViewHo
     ArrayList<SalaryModel> salaryList = new ArrayList<>();
     SalaryInterface salaryInterface;
     ArrayList<SalaryModel> salaryAlreadyList = new ArrayList<>();
+    String path;
 
 
-    public SalariesAdapter(Context context, ArrayList<Employee> itemList, ArrayList<SalaryModel> salaryAlreadyList, SalaryInterface salaryInterface) {
+    public SalariesAdapter(Context context, ArrayList<Employee> itemList, ArrayList<SalaryModel> salaryAlreadyList,String path, SalaryInterface salaryInterface) {
         this.context = context;
         this.itemList = itemList;
         this.salaryInterface = salaryInterface;
         this.salaryAlreadyList = salaryAlreadyList;
+        this.path=path;
 
     }
 
@@ -85,7 +87,7 @@ public class SalariesAdapter extends RecyclerView.Adapter<SalariesAdapter.ViewHo
             public void onClick(View view) {
                 Intent i=new Intent(context,ViewSalary.class);
                 i.putExtra("salaryId",""+position);
-                i.putExtra("path","2018/Nov");
+                i.putExtra("path",path);
                 context.startActivity(i);
 
             }

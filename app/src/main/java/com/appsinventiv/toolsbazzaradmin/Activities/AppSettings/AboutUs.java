@@ -32,7 +32,7 @@ public class AboutUs extends AppCompatActivity {
         setContentView(R.layout.activity_about_us);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("Edit:  About Us");
         update = findViewById(R.id.update);

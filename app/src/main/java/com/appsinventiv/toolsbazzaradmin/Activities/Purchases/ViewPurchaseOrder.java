@@ -59,7 +59,7 @@ public class ViewPurchaseOrder extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
 
         Intent i = getIntent();

@@ -30,7 +30,9 @@ public class SalesReport extends AppCompatActivity {
         setContentView(R.layout.activity_sales_report);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
+            getSupportActionBar().setElevation(0);
+
         }
 
         revenue = findViewById(R.id.revenue);

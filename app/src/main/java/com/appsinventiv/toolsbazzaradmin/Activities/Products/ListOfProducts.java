@@ -57,7 +57,7 @@ public class ListOfProducts extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("List of Products");
         ViewPager viewPager = findViewById(R.id.viewpager);
@@ -81,11 +81,11 @@ public class ListOfProducts extends AppCompatActivity {
         tabLayout.getTabAt(1).setCustomView(tabone);
         adapter.setListener(new TabCountCallbacks() {
             @Override
-            public void newCount(int count,int po) {
-                if(count>0){
+            public void newCount(int count, int po) {
+                if (count > 0) {
                     countt.setVisibility(View.VISIBLE);
-                    countt.setText(""+count);
-                }else{
+                    countt.setText("" + count);
+                } else {
                     countt.setVisibility(View.GONE);
                 }
             }

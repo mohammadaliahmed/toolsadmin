@@ -20,6 +20,7 @@ import com.appsinventiv.toolsbazzaradmin.Adapters.FinalInvoiceListAdapter;
 import com.appsinventiv.toolsbazzaradmin.Adapters.YearViewInvoiceAdapter;
 import com.appsinventiv.toolsbazzaradmin.Models.ExpensesAndRevenueModelMap;
 import com.appsinventiv.toolsbazzaradmin.Models.InvoiceModel;
+import com.appsinventiv.toolsbazzaradmin.Models.OrderModel;
 import com.appsinventiv.toolsbazzaradmin.Models.PurchaseOrderModel;
 import com.appsinventiv.toolsbazzaradmin.Models.Temporarymodel;
 import com.appsinventiv.toolsbazzaradmin.R;
@@ -30,7 +31,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 
 public class ExpensesAndRevenueFragment extends Fragment {
@@ -43,7 +50,7 @@ public class ExpensesAndRevenueFragment extends Fragment {
     String month = "";
     String day = "";
     public String path = "";
-        WhichKey whichKey;
+    WhichKey whichKey;
     ArrayList<ExpensesModel> itemList = new ArrayList<>();
     ExpensesAndRevenueAdapter adapter;
 
@@ -54,7 +61,7 @@ public class ExpensesAndRevenueFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        whichKey=(WhichKey)context;
+        whichKey = (WhichKey) context;
         whichKey.which("Year");
     }
 
@@ -171,8 +178,24 @@ public class ExpensesAndRevenueFragment extends Fragment {
                         itemList.add(new ExpensesModel(allMonth.getKey(), leftTotal, rightTotal, year, ""));
 
                     }
-//                       }
+                    Collections.sort(itemList, new Comparator<ExpensesModel>() {
+                        @Override
+                        public int compare(ExpensesModel listData, ExpensesModel t1) {
 
+                            SimpleDateFormat s = new SimpleDateFormat("MMM");
+                            Date s1 = null;
+                            Date s2 = null;
+                            try {
+                                s1 = s.parse(listData.getKey());
+                                s2 = s.parse(t1.getKey());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            return s2.compareTo(s1);
+
+                        }
+                    });
+//
                     adapter.notifyDataSetChanged();
                 }
 
@@ -259,6 +282,16 @@ public class ExpensesAndRevenueFragment extends Fragment {
                         itemList.add(new ExpensesModel(allYears.getKey(), leftTotal, rightTotal, "", ""));
 
                     }
+                    Collections.sort(itemList, new Comparator<ExpensesModel>() {
+                        @Override
+                        public int compare(ExpensesModel listData, ExpensesModel t1) {
+                            String ob1 = listData.getKey();
+                            String ob2 = t1.getKey();
+
+                            return ob2.compareTo(ob1);
+
+                        }
+                    });
 
                     adapter.notifyDataSetChanged();
                 }

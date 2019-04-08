@@ -21,6 +21,7 @@ import com.appsinventiv.toolsbazzaradmin.Adapters.ChatListAdapter;
 import com.appsinventiv.toolsbazzaradmin.Adapters.OrdersAdapter;
 import com.appsinventiv.toolsbazzaradmin.Interfaces.TabCountCallbacks;
 import com.appsinventiv.toolsbazzaradmin.Models.ChatModel;
+import com.appsinventiv.toolsbazzaradmin.Models.Customer;
 import com.appsinventiv.toolsbazzaradmin.Models.OrderModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
@@ -38,6 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 
 public class ChatFragment extends Fragment {
@@ -52,6 +54,8 @@ public class ChatFragment extends Fragment {
     TabCountCallbacks callbacks;
     int chatCount = 0;
     private SwipeToDeleteCallback swipeController;
+    HashMap<String, Boolean> map = new HashMap<>();
+    HashMap<String, Integer> unreadCount = new HashMap<>();
 
     public ChatFragment() {
         // Required empty public constructor
@@ -93,7 +97,7 @@ public class ChatFragment extends Fragment {
             @Override
             public void onRightClicked(final int position) {
 
-//                markOrderAsDeleted(arrayList.get(position).getOrderId());
+                deleteChat(itemList.get(position).getInitiator());
 
             }
         });
@@ -109,9 +113,41 @@ public class ChatFragment extends Fragment {
         });
 
 
-
         return rootView;
 
+    }
+
+    private void deleteChat(final String idd) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setMessage("Delete chat with: " + idd);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        final String chatName = chatWith + "Chats";
+
+                        mDatabase.child("Chats").child(chatName).child(idd).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                CommonUtils.showToast("Chat deleted");
+                            }
+                        });
+
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 
 
@@ -125,6 +161,7 @@ public class ChatFragment extends Fragment {
 
     private void getDataFromServer() {
         final String chatName = chatWith + "Chats";
+        final String userType = chatWith;
         mDatabase.child("Chats").child(chatName).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -133,6 +170,7 @@ public class ChatFragment extends Fragment {
                 if (dataSnapshot.getValue() != null) {
                     for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         getUnreadCount("Chats/" + chatName + "/" + snapshot.getKey());
+                        getUserStatus(snapshot.getKey(), userType);
                         mDatabase.child("Chats").child(chatName).child(snapshot.getKey()).limitToLast(1).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -180,18 +218,49 @@ public class ChatFragment extends Fragment {
 
     }
 
+    private void getUserStatus(String userId, String key) {
+        if (key.equalsIgnoreCase("sellers")) {
+
+        } else {
+            mDatabase.child("Customers").child(userId).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Customer customer = dataSnapshot.getValue(Customer.class);
+                    if (customer != null) {
+
+                        map.put(customer.getUsername(), customer.isOnline());
+                        adapter.setUserStatus(map);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+    }
+
     private void getUnreadCount(String s) {
-        mDatabase.child(s).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(s).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
+                    int count = 0;
                     for (DataSnapshot abc : dataSnapshot.getChildren()) {
                         ChatModel model = abc.getValue(ChatModel.class);
                         if (model != null) {
                             if (!model.getUsername().equalsIgnoreCase(SharedPrefs.getUsername())) {
                                 if (!model.getStatus().equalsIgnoreCase("read")) {
+                                    count = count + 1;
+                                    unreadCount.put(model.getInitiator(), count);
+                                    adapter.setUnreadCount(unreadCount);
                                     chatCount = chatCount + 1;
 
+                                } else {
+                                    unreadCount.put(model.getInitiator(), 0);
+                                    adapter.setUnreadCount(unreadCount);
                                 }
                             }
 
@@ -203,6 +272,9 @@ public class ChatFragment extends Fragment {
                     setChatCount();
 
 
+                } else {
+                    unreadCount.clear();
+                    adapter.setUnreadCount(unreadCount);
                 }
             }
 

@@ -2,11 +2,13 @@ package com.appsinventiv.toolsbazzaradmin.Activities.Customers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import com.appsinventiv.toolsbazzaradmin.Models.Customer;
 import com.appsinventiv.toolsbazzaradmin.Models.VendorModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
+import com.appsinventiv.toolsbazzaradmin.Utils.SwipeControllerActions;
+import com.appsinventiv.toolsbazzaradmin.Utils.SwipeToDeleteCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +40,7 @@ public class SellerListFragment extends Fragment {
     SellerListAdapter adapter;
     DatabaseReference mDatabase;
     String type;
+    private SwipeToDeleteCallback swipeController;
 
     public SellerListFragment() {
         // Required empty public constructor
@@ -76,12 +81,38 @@ public class SellerListFragment extends Fragment {
         });
 
         recyclerView.setAdapter(adapter);
+        swipeController = new SwipeToDeleteCallback(new SwipeControllerActions() {
+            @Override
+            public void onRightClicked(final int position) {
+
+                deleteUser(itemList.get(position).getUsername());
+
+            }
+        });
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        itemTouchhelper.attachToRecyclerView(recyclerView);
+
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                swipeController.onDraw(c);
+            }
+        });
 
 
         return rootView;
 
     }
 
+    private void deleteUser(String username) {
+        mDatabase.child("Sellers").child(username).child("isDeleted").setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                CommonUtils.showToast("User deleted");
+            }
+        });
+    }
 
     private void changeSellerStatus(SellerModel sellerModel, final boolean status) {
         mDatabase.child("Sellers").child(sellerModel.getUsername()).child("status").setValue(status).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -114,7 +145,10 @@ public class SellerListFragment extends Fragment {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         SellerModel model = snapshot.getValue(SellerModel.class);
                         if (model != null) {
-                            itemList.add(model);
+                            if (!model.isDeleted()) {
+                                itemList.add(model);
+
+                            }
                         }
 
                     }

@@ -34,7 +34,7 @@ public class Transportation extends AppCompatActivity {
         this.setTitle("Transportation");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         Intent i =getIntent();
         path=i.getStringExtra("path");

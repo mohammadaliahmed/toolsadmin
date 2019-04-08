@@ -3,12 +3,14 @@ package com.appsinventiv.toolsbazzaradmin.Activities.Customers;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import com.appsinventiv.toolsbazzaradmin.Models.Customer;
 import com.appsinventiv.toolsbazzaradmin.Models.OrderModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.appsinventiv.toolsbazzaradmin.Utils.CommonUtils;
+import com.appsinventiv.toolsbazzaradmin.Utils.SwipeControllerActions;
+import com.appsinventiv.toolsbazzaradmin.Utils.SwipeToDeleteCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -40,6 +44,7 @@ public class CustomerFragment extends Fragment {
     ProgressBar progress;
     DatabaseReference mDatabase;
     String type;
+    private SwipeToDeleteCallback swipeController;
 
 
     public CustomerFragment() {
@@ -77,10 +82,37 @@ public class CustomerFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(adapter);
+        swipeController = new SwipeToDeleteCallback(new SwipeControllerActions() {
+            @Override
+            public void onRightClicked(final int position) {
+
+                deleteUser(arrayList.get(position).getUsername());
+
+            }
+        });
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        itemTouchhelper.attachToRecyclerView(recyclerView);
+
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                swipeController.onDraw(c);
+            }
+        });
 
 
         return rootView;
 
+    }
+
+    private void deleteUser(String username) {
+        mDatabase.child("Customers").child(username).child("isDeleted").setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                CommonUtils.showToast("User deleted");
+            }
+        });
     }
 
     private void changeCustomerStatus(Customer customers, final boolean status) {
@@ -115,7 +147,10 @@ public class CustomerFragment extends Fragment {
                         Customer customer = snapshot.getValue(Customer.class);
                         if (customer != null) {
                             if (customer.getCustomerType().equalsIgnoreCase(type)) {
-                                arrayList.add(customer);
+                                if (!customer.isDeleted()) {
+                                    arrayList.add(customer);
+
+                                }
                             }
 
                         }

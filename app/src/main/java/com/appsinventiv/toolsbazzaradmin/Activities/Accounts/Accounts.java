@@ -29,7 +29,7 @@ public class Accounts extends AppCompatActivity implements WhichKey{
         getSupportActionBar().setElevation(0);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("Accounts");
         ViewPager viewPager = findViewById(R.id.viewpager);

@@ -74,7 +74,7 @@ public class ViewDeliveryShippedOrder extends AppCompatActivity {
         setContentView(R.layout.activity_view_delivery_shipped_order);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Intent intent = getIntent();

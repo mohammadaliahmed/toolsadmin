@@ -42,7 +42,7 @@ public class AddSubCategories extends AppCompatActivity {
         this.setTitle("Add Categories");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         setContentView(R.layout.activity_categories);
         mDatabase = FirebaseDatabase.getInstance().getReference();

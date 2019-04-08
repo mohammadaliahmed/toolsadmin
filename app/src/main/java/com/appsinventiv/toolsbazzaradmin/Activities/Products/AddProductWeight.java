@@ -28,7 +28,7 @@ public class AddProductWeight extends AppCompatActivity {
         setContentView(R.layout.activity_add_product_weight);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("Add product weight");
 

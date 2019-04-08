@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -82,6 +83,14 @@ public class ProductsListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.product_list_fragment_layout, container, false);
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        FloatingActionButton addProduct =  rootView.findViewById(R.id.addProduct);
+        addProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(context,AddProduct.class);
+                startActivity(i);
+            }
+        });
         layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.setAdapter(adapter);

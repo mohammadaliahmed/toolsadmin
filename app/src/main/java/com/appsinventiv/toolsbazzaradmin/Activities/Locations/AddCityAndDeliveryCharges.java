@@ -46,7 +46,7 @@ public class AddCityAndDeliveryCharges extends AppCompatActivity {
         setContentView(R.layout.activity_add_city_and_delivery_charges);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("City and delivery charges");
 

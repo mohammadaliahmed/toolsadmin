@@ -24,7 +24,7 @@
             android:layout_centerHorizontal="true"
             android:inputType="text"
             android:layout_marginTop="10dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorRed"
             android:text="Transfer to accounts"
             android:textColor="#fff" />
 

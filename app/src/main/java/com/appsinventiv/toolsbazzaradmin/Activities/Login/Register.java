@@ -39,15 +39,42 @@ public class Register extends AppCompatActivity {
     EditText e_fullname, e_username, e_email, e_password, e_phone;
     String fullname, username, email, password, phone, address, city;
     long time;
+    TextView viewTerms;
+    private View systemUIView;
+
+    public void hideSystemUI() {
+        systemUIView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//        }
+        systemUIView = getWindow().getDecorView();
+        hideSystemUI();
+
+        if (android.os.Build.VERSION.SDK_INT >= 19) {
+            getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(
+                    new View.OnSystemUiVisibilityChangeListener() {
+                        @Override
+                        public void onSystemUiVisibilityChange(int visibility) {
+                            if (visibility == 0) {
+                                hideSystemUI();
+                            }
+                        }
+                    });
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.BLACK);
+            window.setStatusBarColor(Color.TRANSPARENT);
         }
         this.setTitle("Register");
 
@@ -86,6 +113,7 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        viewTerms = findViewById(R.id.viewTerms);
         e_fullname = findViewById(R.id.name);
         e_username = findViewById(R.id.username);
         e_email = findViewById(R.id.email);
@@ -161,6 +189,7 @@ public class Register extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
+        prefManager.setIsFirstTimeLaunchWelcome(false);
 
         startActivity(new Intent(Register.this, Login.class));
 

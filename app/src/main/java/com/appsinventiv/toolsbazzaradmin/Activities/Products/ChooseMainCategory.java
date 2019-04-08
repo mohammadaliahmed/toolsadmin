@@ -40,7 +40,7 @@ public class ChooseMainCategory extends AppCompatActivity {
         this.setTitle("Choose Categories");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         mDatabase = FirebaseDatabase.getInstance().getReference();
         recycler = findViewById(R.id.recycler);

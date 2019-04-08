@@ -40,7 +40,7 @@ public class AddDistricts extends AppCompatActivity {
         this.setTitle("Add Country");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         recyclerView = findViewById(R.id.recyclerView);
         districts = findViewById(R.id.districts);

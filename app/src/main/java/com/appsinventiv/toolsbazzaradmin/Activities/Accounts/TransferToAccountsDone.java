@@ -19,7 +19,7 @@ public class TransferToAccountsDone extends AppCompatActivity {
         setContentView(R.layout.activity_transfer_to_accounts_done);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         orderId = getIntent().getStringExtra("orderId");
         this.setTitle("Order# "+orderId);

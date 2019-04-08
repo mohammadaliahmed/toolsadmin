@@ -41,7 +41,7 @@ public class Chats extends AppCompatActivity {
         this.setTitle("Chats");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
 
         this.setTitle("Chats");

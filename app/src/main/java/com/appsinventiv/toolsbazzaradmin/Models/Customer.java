@@ -14,6 +14,24 @@ public class Customer {
     String currencySymbol;
     float currencyRate;
     boolean status;
+    boolean isDeleted;
+    boolean isOnline;
+
+    public boolean isOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(boolean isOnline) {
+        isOnline = isOnline;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 
     public Customer() {
     }

@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="#fff"
     tools:context="com.appsinventiv.toolsbazzaradmin.Activities.Invoicing.ViewInvoice">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/abc"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/abc"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp">
 
         <RelativeLayout
             android:id="@+id/ll_linear"
@@ -40,7 +34,7 @@
                 android:layout_height="70dp"
                 android:layout_alignParentRight="true"
                 android:layout_margin="10dp"
-                android:src="@drawable/app_icon" />
+                android:src="@drawable/admin_logo" />
 
             <TextView
                 android:id="@+id/companyName"
@@ -48,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:text="Fort City"
+                android:text="FortCity"
                 android:textSize="15sp" />
 
             <TextView
@@ -86,8 +80,8 @@
 
                 android:layout_below="@id/date"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="45dp"
+                android:layout_marginRight="20dp"
                 android:background="#aaa" />
 
             <RelativeLayout
@@ -105,24 +99,24 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="10dp"
                         android:text="1. Basic Salary"
                         android:textColor="#000" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="10dp"
                         android:text="2. Over Time"
                         android:textColor="#000" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="10dp"
                         android:text="3. Bonus"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -137,26 +131,26 @@
                         android:id="@+id/salary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginRight="20dp"
-                        android:text="Rs 500"
+                        android:layout_marginBottom="10dp"
+                        android:text="Rs "
                         android:textColor="#000" />
 
                     <TextView
                         android:id="@+id/overTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginRight="20dp"
-                        android:text="Rs 50"
+                        android:layout_marginBottom="10dp"
+                        android:text="Rs "
                         android:textColor="#000" />
 
                     <TextView
                         android:id="@+id/bonus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
                         android:text="Rs 0"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -168,8 +162,8 @@
                     android:layout_height="1dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
                     android:background="#aaa" />
 
 
@@ -189,9 +183,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/topRelative"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
+                android:layout_marginBottom="10dp"
                 android:text="4. ETF &amp; EPF"
                 android:textColor="@color/colorRed" />
 
@@ -199,29 +193,29 @@
                 android:id="@+id/etfepf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/topRelative"
-                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="40dp"
+                android:layout_marginRight="20dp"
                 android:text=""
                 android:textColor="@color/colorRed" />
 
             <TextView
+                android:id="@+id/reason"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etf"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"
                 android:text="5. Sick"
-                android:id="@+id/reason"
                 android:textColor="@color/colorRed" />
 
             <TextView
                 android:id="@+id/deduction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/etf"
+                android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:text=""
                 android:textColor="@color/colorRed" />
@@ -240,11 +234,11 @@
                 android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/deduction"
-                android:layout_marginRight="15dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="30dp"
-                android:hint="Total Rs 100"
+                android:layout_marginRight="15dp"
+                android:hint="Total Rs "
                 android:textColor="#000"
                 android:textStyle="bold" />
 
@@ -254,11 +248,11 @@
                 android:id="@+id/storeAddress"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_below="@id/total"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text=""
                 android:textSize="10sp" />
@@ -280,4 +274,4 @@
 
     </RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

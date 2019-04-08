@@ -35,7 +35,7 @@ public class ListOfLocationAndCharges extends AppCompatActivity {
         setContentView(R.layout.activity_list_of_location_and_charges);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("List of Location and Charges");
         fab=findViewById(R.id.fab);

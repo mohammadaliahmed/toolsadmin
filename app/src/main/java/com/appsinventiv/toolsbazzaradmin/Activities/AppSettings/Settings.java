@@ -22,7 +22,7 @@ public class Settings extends AppCompatActivity {
         this.setTitle("Settings");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
 
         aboutUs = findViewById(R.id.aboutUs);

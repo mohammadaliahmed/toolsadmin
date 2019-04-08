@@ -105,7 +105,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
         setContentView(R.layout.activity_edit_product);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("Edit Product");
         Intent i = getIntent();
@@ -299,7 +299,7 @@ public class EditProduct extends AppCompatActivity implements ProductObserver {
                             whichWarranty,
                             productWeight,
                             dimens,
-                            product.getUploadedBy() == null ? "admin" : "seller",
+                            product.getUploadedBy() == null ? "admin" : product.getUploadedBy(),
                             product.getSellerProductStatus()
 
 

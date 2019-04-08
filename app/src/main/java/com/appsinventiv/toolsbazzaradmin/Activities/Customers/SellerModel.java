@@ -11,6 +11,24 @@ public class SellerModel {
     String province;
 
     boolean status;
+    boolean isDeleted;
+    boolean approved;
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 
     public boolean isStatus() {
         return status;

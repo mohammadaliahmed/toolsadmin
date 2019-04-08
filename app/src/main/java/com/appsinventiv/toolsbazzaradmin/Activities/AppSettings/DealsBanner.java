@@ -67,7 +67,7 @@ public class DealsBanner extends AppCompatActivity {
         this.setTitle("Edit Deals Banners");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         getPermissions();
         mDatabase = FirebaseDatabase.getInstance().getReference();

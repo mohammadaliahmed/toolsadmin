@@ -32,7 +32,7 @@ public class Commissions extends AppCompatActivity {
         setContentView(R.layout.activity_commissions);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
         }
         this.setTitle("Manage Commissions");
         mDatabase = FirebaseDatabase.getInstance().getReference();

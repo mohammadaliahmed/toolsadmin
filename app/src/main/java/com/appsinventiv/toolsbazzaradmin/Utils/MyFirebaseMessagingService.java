@@ -15,6 +15,7 @@ import com.appsinventiv.toolsbazzaradmin.Activities.Chat.LiveChat;
 import com.appsinventiv.toolsbazzaradmin.Activities.Chat.SellerChat;
 import com.appsinventiv.toolsbazzaradmin.Activities.Chat.WholesaleChat;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
+import com.appsinventiv.toolsbazzaradmin.Activities.Products.ListOfProducts;
 import com.appsinventiv.toolsbazzaradmin.Models.NotificationModel;
 import com.appsinventiv.toolsbazzaradmin.R;
 import com.google.firebase.database.DatabaseReference;
@@ -95,6 +96,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //            mDatabase = FirebaseDatabase.getInstance().getReference();
 //            mDatabase.child("Notifications").push().setValue(new NotificationModel(username, title, message, type, System.currentTimeMillis()));
             resultIntent = new Intent(this, Orders.class);
+        } else if (type.equalsIgnoreCase("NewSellerProduct")) {
+            SharedPrefs.setSellerProductCount("" + 1);
+            DatabaseReference mDatabase;
+            resultIntent = new Intent(this, ListOfProducts.class);
         }
 
 
