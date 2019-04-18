@@ -2,6 +2,7 @@ package com.appsinventiv.toolsbazzaradmin.Activities.Login;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.ViewTerms;
 import com.appsinventiv.toolsbazzaradmin.Activities.MainActivity;
 import com.appsinventiv.toolsbazzaradmin.Models.Customer;
 import com.appsinventiv.toolsbazzaradmin.Models.Employee;
@@ -114,6 +116,8 @@ public class Register extends AppCompatActivity {
         });
 
         viewTerms = findViewById(R.id.viewTerms);
+        viewTerms.setPaintFlags(viewTerms.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         e_fullname = findViewById(R.id.name);
         e_username = findViewById(R.id.username);
         e_email = findViewById(R.id.email);
@@ -128,6 +132,15 @@ public class Register extends AppCompatActivity {
                 Intent i = new Intent(Register.this, Login.class);
                 startActivity(i);
                 finish();
+            }
+        });
+
+
+        viewTerms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(Register.this,ViewTerms.class);
+                startActivity(i);
             }
         });
 

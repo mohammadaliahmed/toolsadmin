@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.appsinventiv.toolsbazzaradmin.Activities.Customers.SellerModel;
 import com.appsinventiv.toolsbazzaradmin.Adapters.ChatAdapter;
 import com.appsinventiv.toolsbazzaradmin.Adapters.ChatListAdapter;
 import com.appsinventiv.toolsbazzaradmin.Adapters.OrdersAdapter;
@@ -128,7 +129,8 @@ public class ChatFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         final String chatName = chatWith + "Chats";
 
-                        mDatabase.child("Chats").child(chatName).child(idd).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        mDatabase.child("Chats").child(chatName).child(idd).removeValue()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 CommonUtils.showToast("Chat deleted");
@@ -219,8 +221,23 @@ public class ChatFragment extends Fragment {
     }
 
     private void getUserStatus(String userId, String key) {
-        if (key.equalsIgnoreCase("sellers")) {
+        if (key.equalsIgnoreCase("Seller")) {
+            mDatabase.child("Sellers").child(userId).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    SellerModel seller = dataSnapshot.getValue(SellerModel.class);
+                    if (seller != null) {
 
+                        map.put(seller.getUsername(), seller.isOnline());
+                        adapter.setUserStatus(map);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         } else {
             mDatabase.child("Customers").child(userId).addValueEventListener(new ValueEventListener() {
                 @Override

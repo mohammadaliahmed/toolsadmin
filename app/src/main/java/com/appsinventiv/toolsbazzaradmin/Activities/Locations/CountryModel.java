@@ -6,16 +6,26 @@ import java.util.List;
 public class CountryModel {
     String countryName,currencySymbol;
     float currencyRate;
+    String mobileCode;
     List<String> provinces;
 
-    public CountryModel(String countryName, String currencySymbol, float currencyRate, List<String> provinces) {
+    public CountryModel(String countryName, String currencySymbol, float currencyRate,String mobileCode, List<String> provinces) {
         this.countryName = countryName;
         this.currencySymbol = currencySymbol;
         this.currencyRate = currencyRate;
         this.provinces = provinces;
+        this.mobileCode=mobileCode;
     }
 
     public CountryModel() {
+    }
+
+    public String getMobileCode() {
+        return mobileCode;
+    }
+
+    public void setMobileCode(String mobileCode) {
+        this.mobileCode = mobileCode;
     }
 
     public String getCountryName() {

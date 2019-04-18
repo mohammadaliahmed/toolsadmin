@@ -14,6 +14,16 @@ public class SellerModel {
     boolean isDeleted;
     boolean approved;
 
+    boolean isOnline;
+
+    public boolean isOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(boolean isOnline) {
+        this.isOnline = isOnline;
+    }
+
     public boolean isApproved() {
         return approved;
     }

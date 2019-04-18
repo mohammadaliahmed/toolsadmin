@@ -53,6 +53,7 @@
             android:name=".Activities.AppSettings.AboutUs"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Activities.AppSettings.Terms" />
+        <activity android:name=".Activities.AppSettings.AdminTerms" />
         <activity
             android:name=".Activities.Invoicing.ViewInvoice"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -142,7 +143,10 @@
         <activity
             android:name=".Activities.Orders.NewOrderScreen"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.AppSettings.ViewTerms"></activity>
+        <activity android:name=".Activities.AppSettings.ViewTerms"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Activities.AppSettings.ViewAboutUs"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

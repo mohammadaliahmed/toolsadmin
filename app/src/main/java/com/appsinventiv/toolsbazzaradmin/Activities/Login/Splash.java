@@ -32,6 +32,7 @@ public class Splash extends AppCompatActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
 
+
         ImageView myImageView= (ImageView)findViewById(R.id.logo);
         Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
         myImageView.startAnimation(myFadeInAnimation);

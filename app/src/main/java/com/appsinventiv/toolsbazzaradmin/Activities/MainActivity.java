@@ -2,6 +2,7 @@ package com.appsinventiv.toolsbazzaradmin.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,10 +23,13 @@ import android.widget.Toast;
 import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.Accounts;
 import com.appsinventiv.toolsbazzaradmin.Activities.Accounts.NewAccountsScreen;
 import com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.Settings;
+import com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.ViewAboutUs;
+import com.appsinventiv.toolsbazzaradmin.Activities.AppSettings.ViewTerms;
 import com.appsinventiv.toolsbazzaradmin.Activities.Chat.Chats;
 import com.appsinventiv.toolsbazzaradmin.Activities.Customers.Customers;
 import com.appsinventiv.toolsbazzaradmin.Activities.Employees.ListOfEmployees;
 import com.appsinventiv.toolsbazzaradmin.Activities.Login.Login;
+import com.appsinventiv.toolsbazzaradmin.Activities.Login.Register;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.NewOrderScreen;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.Orders;
 import com.appsinventiv.toolsbazzaradmin.Activities.Orders.OrdersCourier;
@@ -319,13 +323,26 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.contactUs) {
-
+            Intent i = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "+94 775292313"));
+            startActivity(i);
         } else if (id == R.id.aboutUs) {
+            Intent i=new Intent(MainActivity.this,ViewAboutUs.class);
+            startActivity(i);
 
         } else if (id == R.id.terms) {
+            Intent i=new Intent(MainActivity.this,ViewTerms.class);
+            startActivity(i);
 
         } else if (id == R.id.signout) {
+            try {
+                // clearing app data
+                String packageName = getApplicationContext().getPackageName();
+                Runtime runtime = Runtime.getRuntime();
+                runtime.exec("pm clear " + packageName);
 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

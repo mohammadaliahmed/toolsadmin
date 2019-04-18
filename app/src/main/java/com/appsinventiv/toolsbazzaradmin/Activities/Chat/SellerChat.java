@@ -55,7 +55,6 @@ public class SellerChat extends AppCompatActivity implements NotificationObserve
 
         Intent i = getIntent();
         username = i.getStringExtra("username");
-        this.setTitle(username);
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -84,6 +83,7 @@ public class SellerChat extends AppCompatActivity implements NotificationObserve
                     Customer model = dataSnapshot.getValue(Customer.class);
                     if (model != null) {
                         userFcmKey = model.getFcmKey();
+                        SellerChat.this.setTitle(model.getStoreName());
                     }
                 }
             }

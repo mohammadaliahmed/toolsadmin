@@ -13,7 +13,7 @@ import com.appsinventiv.toolsbazzaradmin.Activities.Locations.ListOfCountries;
 import com.appsinventiv.toolsbazzaradmin.R;
 
 public class Settings extends AppCompatActivity {
-    RelativeLayout aboutUs, terms, banner, dealsBanner, deliveryCharges, company, cod, commissions;
+    RelativeLayout aboutUs, terms, banner, dealsBanner, deliveryCharges, company, cod, commissions, adminTerms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +22,29 @@ public class Settings extends AppCompatActivity {
         this.setTitle("Settings");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true); getSupportActionBar().setElevation(0);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setElevation(0);
         }
 
         aboutUs = findViewById(R.id.aboutUs);
         banner = findViewById(R.id.banner);
         dealsBanner = findViewById(R.id.dealsBanner);
         terms = findViewById(R.id.terms);
+        adminTerms = findViewById(R.id.adminTerms);
         company = findViewById(R.id.company);
         deliveryCharges = findViewById(R.id.deliveryCharges);
         commissions = findViewById(R.id.commissions);
         cod = findViewById(R.id.cod);
+
+
+        adminTerms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(Settings.this, AdminTerms.class);
+                startActivity(i);
+            }
+        });
         cod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

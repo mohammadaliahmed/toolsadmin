@@ -128,6 +128,7 @@ public class AddCountry extends AppCompatActivity {
                         countryName.getText().toString(),
                         currency.getText().toString(),
                         Float.parseFloat(currencyRate.getText().toString()),
+                        "",
                         provincesList
                 )).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
